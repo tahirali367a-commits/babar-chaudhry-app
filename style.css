@@ -1,0 +1,276 @@
+/* File Name: style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Nastaliq Urdu', sans-serif;
+}
+
+body {
+    background-color: #0d1117;
+    color: #f0f6fc;
+    direction: rtl;
+    text-align: right;
+    line-height: 1.8;
+}
+
+.main-header {
+    background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+    border-bottom: 2px solid #d4af37;
+    padding: 20px 15px;
+    text-align: center;
+}
+
+.logo-area h1 {
+    color: #d4af37;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.logo-area p {
+    color: #8b949e;
+    font-size: 13px;
+}
+
+/* Weather Card */
+.weather-section {
+    padding: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.weather-card {
+    background: #161b22;
+    border: 1px solid #2ea44f;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 12px rgba(46, 164, 79, 0.2);
+}
+
+.weather-icon {
+    font-size: 35px;
+    color: #2ea44f;
+}
+
+.weather-info h3 {
+    color: #d4af37;
+    font-size: 15px;
+}
+
+.weather-info p {
+    font-size: 12px;
+    color: #c9d1d9;
+}
+
+/* Profile Card */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+
+.profile-card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.photo-frame {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(45deg, #d4af37, #2ea44f);
+}
+
+.photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.voice-btn {
+    background: linear-gradient(135deg, #d4af37 0%, #aa8625 100%);
+    color: #000;
+    border: none;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.about-text-box {
+    background: #21262d;
+    border-right: 4px solid #d4af37;
+    padding: 14px;
+    margin-top: 15px;
+    border-radius: 8px;
+    max-width: 400px;
+    font-size: 13px;
+    line-height: 2;
+}
+
+/* AI Camera Card */
+.camera-section {
+    padding: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.camera-card {
+    background: #161b22;
+    border: 1px solid #d4af37;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+.camera-icon {
+    font-size: 40px;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+.cam-btn {
+    display: inline-block;
+    background: #2ea44f;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Slider */
+.poster-slider-section {
+    padding: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.slider-container {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #30363d;
+}
+
+.slide { display: none; }
+.slide.active { display: block; }
+
+.slide img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.slide-caption {
+    background: rgba(13, 17, 23, 0.9);
+    color: #fff;
+    padding: 8px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.whatsapp-btn {
+    display: inline-block;
+    background-color: #25d366;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 25px;
+}
+
+.app-footer {
+    background: #161b22;
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #30363d;
+    font-size: 12px;
+}
+
+.developer-tag a {
+    color: #d4af37;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-btn {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ==========================================
+   ہالی ووڈ کلاسک سٹائل - طاہر نذیر پیج
+   ========================================== */
+
+.hollywood-theme {
+    background: radial-gradient(circle, #1a1e24 0%, #080a0c 100%);
+}
+
+.hollywood-header {
+    border-bottom: 2px solid #ffd700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+}
+
+.hollywood-title {
+    color: #ffd700 !important;
+    letter-spacing: 2px;
+    font-size: 28px !important;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.hollywood-card {
+    background: rgba(22, 27, 34, 0.9);
+    border: 1px solid #ffd700 !important;
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0.2) !important;
+    animation: hollywoodFade 1.2s ease-in-out;
+}
+
+.hollywood-frame {
+    background: linear-gradient(135deg, #ffd700, #ff4500, #2ea44f) !important;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8) !important;
+}
+
+.dev-name-glow {
+    color: #ffffff;
+    font-size: 26px !important;
+    text-shadow: 0 0 10px #ffd700;
+    margin-top: 10px;
+}
+
+.hollywood-tagline {
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.hollywood-btn {
+    background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%) !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5) !important;
+}
+
+@keyframes hollywoodFade {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}
