@@ -1,39 +1,39 @@
 // File Name: script.js
 
-// ۱. براؤزر کے ذریعے اٹو وائس پلے (Auto Play on Open)
-function speakAboutText() {
-    let textToRead = document.getElementById("aboutText").innerText;
-    
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-
-        let speech = new SpeechSynthesisUtterance();
-        speech.text = textToRead;
-        speech.lang = 'ur-PK';
-        speech.rate = 0.85;
-        speech.pitch = 1.0;
-
-        window.speechSynthesis.speak(speech);
-    }
-}
-
-// پیج اوپن ہوتے ہی اٹو پلے کرنے کی کوشش
+// Page Load Voice Speech (اوپن ہوتے ہی بولے گا)
 function autoPlaySpeech() {
-    setTimeout(function() {
-        speakAboutText();
-    }, 1000); // ۱ سیکنڈ کی تاخیر کے بعد
+    speakAboutText();
 }
 
-// ۲. خودکار پوسٹر سلائیڈر
-let currentSlideIndex = 0;
+function speakAboutText() {
+    var text = "السلام علیکم! بابر چوہدری زراعت پر آپ کو دلی خوش آمدید کہتے ہیں۔ ہمارا مرکز آپ کی تمام فصلوں کی نگہداشت کے لیے بہترین ادویات فراہم کرتا ہے۔";
+    var speech = new SpeechSynthesisUtterance();
+    speech.lang = "ur-PK";
+    speech.text = text;
+    speech.rate = 0.9;
+    window.speechSynthesis.speak(speech);
+}
+
+// Toggle Babar About
+function toggleBabarAbout() {
+    var box = document.getElementById("babarAbout");
+    box.classList.toggle("hidden");
+}
+
+// Toggle Tahir Nazeer About
+function toggleTahirAbout() {
+    var box = document.getElementById("tahirAbout");
+    box.classList.toggle("hidden");
+}
+
+// Auto Slider Function
+let currentSlide = 0;
 const slides = document.querySelectorAll('.slide');
 
-function showNextSlide() {
-    if (slides.length === 0) return;
-
-    slides[currentSlideIndex].classList.remove('active');
-    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-    slides[currentSlideIndex].classList.add('active');
+function nextSlide() {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].classList.add('active');
 }
 
-setInterval(showNextSlide, 3000);
+setInterval(nextSlide, 3500);

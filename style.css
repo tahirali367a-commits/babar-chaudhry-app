@@ -1,276 +1,219 @@
-/* File Name: style.css */
-
+/* File Name: style.css - 2027 Glassmorphism Ultra Theme */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+:root {
+    --bg-dark: #060913;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --neon-green: #00ff87;
+    --neon-blue: #3b82f6;
+    --neon-purple: #a855f7;
+    --text-light: #f3f4f6;
+}
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Noto Nastaliq Urdu', sans-serif;
+    font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
 }
 
 body {
-    background-color: #0d1117;
-    color: #f0f6fc;
+    background: linear-gradient(135deg, #050811 0%, #0a1329 50%, #03140e 100%);
+    background-attachment: fixed;
+    color: var(--text-light);
     direction: rtl;
-    text-align: right;
-    line-height: 1.8;
+    padding: 12px;
 }
 
-.main-header {
-    background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
-    border-bottom: 2px solid #d4af37;
-    padding: 20px 15px;
-    text-align: center;
+/* Glass Card 3D Effect */
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.logo-area h1 {
-    color: #d4af37;
-    font-size: 26px;
-    font-weight: bold;
+.border-neon {
+    border: 1px solid var(--neon-green);
+    box-shadow: 0 0 15px rgba(0, 255, 135, 0.2);
 }
 
-.logo-area p {
-    color: #8b949e;
-    font-size: 13px;
+.border-glow {
+    border: 1px solid var(--neon-blue);
 }
 
-/* Weather Card */
-.weather-section {
-    padding: 15px;
-    max-width: 400px;
-    margin: 0 auto;
+.section-title {
+    font-size: 1.1rem;
+    color: var(--neon-green);
+    margin-bottom: 12px;
+}
+
+/* Weather Grid */
+.weather-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
 }
 
 .weather-card {
-    background: #161b22;
-    border: 1px solid #2ea44f;
-    border-radius: 12px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    box-shadow: 0 4px 12px rgba(46, 164, 79, 0.2);
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 0;
+}
+
+.span-2 {
+    grid-column: span 2;
 }
 
 .weather-icon {
-    font-size: 35px;
-    color: #2ea44f;
+    font-size: 1.8rem;
+    color: var(--neon-blue);
+    margin-bottom: 5px;
 }
 
-.weather-info h3 {
-    color: #d4af37;
-    font-size: 15px;
-}
-
-.weather-info p {
-    font-size: 12px;
-    color: #c9d1d9;
-}
-
-/* Profile Card */
-.hero-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-}
-
-.profile-card {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-}
-
-.photo-frame {
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 10px auto;
+/* Profile Photo Frame */
+.photo-frame, .dev-photo-frame {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 12px;
     border-radius: 50%;
-    padding: 4px;
-    background: linear-gradient(45deg, #d4af37, #2ea44f);
+    border: 3px solid var(--neon-green);
+    box-shadow: 0 0 20px rgba(0, 255, 135, 0.4);
+    overflow: hidden;
 }
 
-.photo-frame img {
+.dev-photo-frame {
+    width: 80px;
+    height: 80px;
+    border-color: var(--neon-blue);
+}
+
+.photo-frame img, .dev-photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
 }
 
-.voice-btn {
-    background: linear-gradient(135deg, #d4af37 0%, #aa8625 100%);
-    color: #000;
-    border: none;
-    padding: 8px 18px;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 20px;
-    cursor: pointer;
-}
+.profile-card { text-align: center; }
+.tagline { color: var(--neon-blue); margin-bottom: 12px; }
 
-.about-text-box {
-    background: #21262d;
-    border-right: 4px solid #d4af37;
-    padding: 14px;
-    margin-top: 15px;
-    border-radius: 8px;
-    max-width: 400px;
-    font-size: 13px;
-    line-height: 2;
-}
-
-/* AI Camera Card */
-.camera-section {
-    padding: 15px;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.camera-card {
-    background: #161b22;
-    border: 1px solid #d4af37;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-}
-
-.camera-icon {
-    font-size: 40px;
-    color: #d4af37;
-    margin-bottom: 10px;
-}
-
-.cam-btn {
-    display: inline-block;
-    background: #2ea44f;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: bold;
+/* Buttons */
+.btn-group, .dev-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
     margin-top: 10px;
 }
 
-/* Slider */
-.poster-slider-section {
-    padding: 15px;
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.slider-container {
+.glass-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--neon-green);
+    color: #fff;
+    padding: 8px 15px;
     border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #30363d;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
 }
 
+.glass-btn:hover {
+    background: var(--neon-green);
+    color: #000;
+}
+
+/* Hidden Box */
+.hidden { display: none; }
+
+.about-text-box {
+    margin-top: 15px;
+    line-height: 2;
+    background: rgba(0, 0, 0, 0.4);
+    border-right: 4px solid var(--neon-green);
+    font-size: 0.95rem;
+}
+
+/* 3D Camera Section */
+.camera-card { text-align: center; }
+.scanner-ring {
+    font-size: 2.8rem;
+    color: var(--neon-blue);
+    animation: pulse 2s infinite;
+}
+
+.cam-btn-neon {
+    display: inline-block;
+    margin-top: 12px;
+    background: linear-gradient(45deg, #00ff87, #3b82f6);
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+/* Slider Section */
+.slider-container { overflow: hidden; position: relative; }
 .slide { display: none; }
 .slide.active { display: block; }
-
 .slide img {
     width: 100%;
-    height: 220px;
+    height: 200px;
     object-fit: cover;
+    border-radius: 12px;
 }
-
 .slide-caption {
-    background: rgba(13, 17, 23, 0.9);
-    color: #fff;
-    padding: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 6px;
     text-align: center;
-    font-size: 12px;
+    color: var(--neon-green);
+    font-size: 0.85rem;
 }
 
-.whatsapp-btn {
-    display: inline-block;
-    background-color: #25d366;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    font-size: 15px;
+/* Dev Profile Header */
+.dev-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.dev-badge {
+    background: var(--neon-blue);
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.75rem;
     font-weight: bold;
-    border-radius: 25px;
+}
+
+/* Order Section */
+.whatsapp-btn {
+    display: block;
+    text-align: center;
+    background: #25D366;
+    color: #fff;
+    padding: 14px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
 }
 
 .app-footer {
-    background: #161b22;
     text-align: center;
-    padding: 15px;
-    border-top: 1px solid #30363d;
-    font-size: 12px;
+    margin-top: 15px;
+    font-size: 0.8rem;
+    opacity: 0.7;
 }
 
-.developer-tag a {
-    color: #d4af37;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.back-btn {
-    color: #d4af37;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-/* ==========================================
-   ہالی ووڈ کلاسک سٹائل - طاہر نذیر پیج
-   ========================================== */
-
-.hollywood-theme {
-    background: radial-gradient(circle, #1a1e24 0%, #080a0c 100%);
-}
-
-.hollywood-header {
-    border-bottom: 2px solid #ffd700;
-    box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
-}
-
-.hollywood-title {
-    color: #ffd700 !important;
-    letter-spacing: 2px;
-    font-size: 28px !important;
-    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
-}
-
-.hollywood-card {
-    background: rgba(22, 27, 34, 0.9);
-    border: 1px solid #ffd700 !important;
-    box-shadow: 0 0 35px rgba(255, 215, 0, 0.2) !important;
-    animation: hollywoodFade 1.2s ease-in-out;
-}
-
-.hollywood-frame {
-    background: linear-gradient(135deg, #ffd700, #ff4500, #2ea44f) !important;
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8) !important;
-}
-
-.dev-name-glow {
-    color: #ffffff;
-    font-size: 26px !important;
-    text-shadow: 0 0 10px #ffd700;
-    margin-top: 10px;
-}
-
-.hollywood-tagline {
-    color: #ffd700;
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.hollywood-btn {
-    background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%) !important;
-    color: #000 !important;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5) !important;
-}
-
-@keyframes hollywoodFade {
-    0% { opacity: 0; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1); }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
