@@ -1,18 +1,18 @@
-/* File Name: style.css - 2029 Ultra Cyber Commercial Elite Theme */
+/* File Name: style.css - 2029 Ultra Cyber Elite Commercial Theme */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
 
 :root {
     --bg-dark: #020617;
-    --glass-bg: rgba(15, 23, 42, 0.75);
-    --glass-card: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-bg: rgba(15, 23, 42, 0.85);
+    --glass-card: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.15);
     --neon-green: #00ff87;
     --neon-blue: #00f0ff;
     --neon-pink: #ff007f;
     --neon-yellow: #ffb703;
     --neon-purple: #a855f7;
     --text-light: #f8fafc;
-    --card-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+    --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
 }
 
 * {
@@ -24,7 +24,7 @@
 }
 
 body {
-    background: radial-gradient(circle at top center, #0f172a 0%, #020617 50%, #000000 100%);
+    background: radial-gradient(circle at top center, #0f172a 0%, #020617 60%, #000000 100%);
     background-attachment: fixed;
     color: var(--text-light);
     direction: rtl;
@@ -32,7 +32,7 @@ body {
     line-height: 1.8;
 }
 
-/* Glassmorphism VIP Base Cards */
+/* Glassmorphism VIP Base Cards with Babar Watermark Frame */
 .glass-card {
     background: var(--glass-card);
     backdrop-filter: blur(25px);
@@ -47,53 +47,70 @@ body {
     overflow: hidden;
 }
 
+/* Watermark Photo Overlay on Every Card Background */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    background-image: url('babar-profile.jpg');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    border: 1px solid var(--neon-green);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
 .glass-card:hover {
     border-color: var(--neon-green);
-    box-shadow: 0 0 25px rgba(0, 255, 135, 0.25);
-    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 255, 135, 0.35);
+    transform: translateY(-3px);
 }
 
 /* Main Header */
 .main-header {
     text-align: center;
-    background: linear-gradient(135deg, rgba(0,255,135,0.1), rgba(0,240,255,0.05));
+    background: linear-gradient(135deg, rgba(0,255,135,0.15), rgba(0,240,255,0.08));
     border: 1px solid var(--neon-green);
-    box-shadow: 0 0 20px rgba(0, 255, 135, 0.2);
+    box-shadow: 0 0 25px rgba(0, 255, 135, 0.3);
 }
 
 .main-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: #ffffff;
-    text-shadow: 0 0 10px var(--neon-green);
+    text-shadow: 0 0 12px var(--neon-green);
 }
 
 .main-header p {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     color: var(--neon-blue);
 }
 
 /* Neon Borders & Glows */
 .border-neon-glow {
     border: 2px solid var(--neon-green);
-    box-shadow: 0 0 30px rgba(0, 255, 135, 0.3);
+    box-shadow: 0 0 35px rgba(0, 255, 135, 0.4);
 }
 
 .border-glow-small {
     border: 1px solid var(--neon-blue);
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
 }
 
 .section-title {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     color: var(--neon-green);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
     gap: 8px;
-    text-shadow: 0 0 8px rgba(0, 255, 135, 0.4);
+    text-shadow: 0 0 10px rgba(0, 255, 135, 0.5);
 }
 
-/* Profile Photo Frames Fix */
+/* Profile Photo Frame Fix */
 .photo-frame-main {
     width: 140px;
     height: 140px;
@@ -116,32 +133,51 @@ body {
 .profile-card { text-align: center; }
 .tagline { color: var(--neon-blue); font-weight: bold; margin-bottom: 10px; font-size: 0.95rem; }
 
-/* Grid Weather System */
+/* Grid Weather System with Profile Icon Header */
 .weather-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
 
-.color-card-1 { border-top: 4px solid var(--neon-pink); background: linear-gradient(180deg, rgba(255,0,127,0.08), transparent); }
-.color-card-2 { border-top: 4px solid var(--neon-blue); background: linear-gradient(180deg, rgba(0,240,255,0.08), transparent); }
-.color-card-3 { border-top: 4px solid var(--neon-yellow); background: linear-gradient(180deg, rgba(255,183,3,0.08), transparent); }
-.color-card-4 { border-top: 4px solid var(--neon-green); background: linear-gradient(180deg, rgba(0,255,135,0.08), transparent); }
+.weather-card { 
+    text-align: center; 
+    padding: 14px; 
+    position: relative;
+}
 
-.weather-card { text-align: center; padding: 14px; }
+.weather-card::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    background-image: url('babar-profile.jpg');
+    background-size: cover;
+    border-radius: 50%;
+    border: 1px solid var(--neon-blue);
+    opacity: 0.6;
+}
+
+.color-card-1 { border-top: 4px solid var(--neon-pink); background: linear-gradient(180deg, rgba(255,0,127,0.12), transparent); }
+.color-card-2 { border-top: 4px solid var(--neon-blue); background: linear-gradient(180deg, rgba(0,240,255,0.12), transparent); }
+.color-card-3 { border-top: 4px solid var(--neon-yellow); background: linear-gradient(180deg, rgba(255,183,3,0.12), transparent); }
+.color-card-4 { border-top: 4px solid var(--neon-green); background: linear-gradient(180deg, rgba(0,255,135,0.12), transparent); }
+
 .weather-card h4 { font-size: 0.9rem; color: #94a3b8; }
 .weather-card p { font-size: 1.1rem; font-weight: bold; color: #fff; margin-top: 4px; }
 .weather-icon { font-size: 1.8rem; color: var(--neon-blue); margin-bottom: 6px; }
 
 .span-2 { grid-column: span 2; }
 
-/* 100 Images Scrollable Commercial Showcase Box */
+/* 100 Images Scrollable Showcase Box */
 .slider-container {
     display: flex;
     gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 12px;
+    padding-bottom: 14px;
     scrollbar-width: thin;
     scrollbar-color: var(--neon-green) var(--bg-dark);
 }
@@ -151,7 +187,7 @@ body {
 }
 
 .slider-container::-webkit-scrollbar-thumb {
-    background: var(--neon-green);
+    background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
     border-radius: 10px;
 }
 
@@ -159,21 +195,23 @@ body {
     flex: 0 0 280px;
     min-width: 280px;
     scroll-snap-align: start;
-    border-radius: 16px;
+    border-radius: 18px;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.7);
     border: 1px solid var(--glass-border);
     transition: transform 0.3s ease;
+    position: relative;
 }
 
 .slide:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
     border-color: var(--neon-blue);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
 }
 
 .slide img {
     width: 100%;
-    height: 180px;
+    height: 185px;
     object-fit: cover;
     display: block;
 }
@@ -185,41 +223,41 @@ body {
     color: var(--neon-green);
     font-size: 0.85rem;
     font-weight: bold;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* AI Camera & Scanner Box */
+/* Scanner Box */
 .neon-box-cyber {
     border: 2px dashed var(--neon-blue);
     text-align: center;
-    background: linear-gradient(135deg, rgba(0,240,255,0.05), rgba(168,85,247,0.05));
+    background: linear-gradient(135deg, rgba(0,240,255,0.08), rgba(168,85,247,0.08));
 }
 
 .scanner-ring {
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     margin: 0 auto 10px;
     border-radius: 50%;
     border: 2px solid var(--neon-blue);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
 }
 
-.camera-icon { font-size: 2rem; color: var(--neon-blue); }
+.camera-icon { font-size: 2.2rem; color: var(--neon-blue); }
 
 .cam-btn-neon {
     display: inline-block;
     margin-top: 12px;
     background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
     color: #fff;
-    padding: 10px 22px;
+    padding: 12px 24px;
     border-radius: 25px;
     text-decoration: none;
     font-weight: bold;
     font-size: 0.95rem;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
 }
 
 /* Catalog Cards */
@@ -232,12 +270,12 @@ body {
 .catalog-card { 
     text-align: center; 
     border-left: 4px solid var(--neon-yellow);
-    background: linear-gradient(90deg, rgba(255,183,3,0.05), transparent);
+    background: linear-gradient(90deg, rgba(255,183,3,0.08), transparent);
 }
 
 .cat-icon { font-size: 2.2rem; color: var(--neon-yellow); margin-bottom: 6px; }
 
-/* Developer Card Section */
+/* Developer Section */
 .dev-photo-frame {
     width: 65px;
     height: 65px;

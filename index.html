@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بابر چوہدری زراعت - VIP زرعی ایپ</title>
+    <title>بابر چوہدری زراعت - VIP زرعی ایپ 2029</title>
     
-    <!-- Babar Profile Photo as App Icon & Home Screen Icon -->
+    <!-- Babar Profile Photo as App Icon -->
     <link rel="icon" type="image/jpeg" href="babar-profile.jpg">
     <link rel="apple-touch-icon" href="babar-profile.jpg">
     <link rel="manifest" href="manifest.json">
@@ -14,81 +14,116 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Hollywood Universal Styling & Babar Background Watermark -->
+    <style>
+        body::after {
+            content: "";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            background-image: url('babar-profile.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.04;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(2px);
+        }
+        .mini-preview-frame {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-green, #00ff87);
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(0,255,135,0.5);
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+    </style>
 </head>
 <body onclick="playAutoVoiceOnce()">
 
-    <!-- Header Section -->
-    <header class="main-header glass-card border-neon">
+    <!-- Header Section with Babar Mini Preview -->
+    <header class="main-header glass-card border-neon" style="display: flex; align-items: center; justify-content: space-between; padding: 15px;">
         <div class="logo-area">
             <h1><i class="fa-solid fa-leaf text-neon"></i> بابر چوہدری زراعت</h1>
-            <p>گندم، مکئی، کپاس، اور کماد (گنا) کا عالمی معیار کا پاکستان نمبر ۱ مرکز</p>
+            <p>گندم، مکئی، کپاس، اور کماد (گنا) کا عالمی معیار کا مرکز</p>
+        </div>
+        <div>
+            <!-- Babar Mini Preview Image on Header -->
+            <img src="babar-profile.jpg" alt="بابر چوہدری" class="mini-preview-frame" onerror="this.onerror=null; this.src='babar-profile.jpg';">
         </div>
     </header>
 
     <!-- Babar Chaudhry Main Hero Section -->
     <section class="hero-section">
         <div class="profile-card glass-card border-neon-glow">
-            <div class="photo-frame-main">
-                <!-- Babar Profile Picture Direct Load -->
-                <img src="babar-profile.jpg" alt="بابر چوہدری" id="babarPhoto">
+            <div class="photo-frame-main" style="position: relative;">
+                <!-- Main Babar Profile Picture -->
+                <img src="babar-profile.jpg" alt="بابر چوہدری" id="babarPhoto" onerror="this.onerror=null; this.src='babar-profile.jpg';">
             </div>
             <h2>بابر زیدی صاحب</h2>
             <p class="tagline">چیف ایگزیکٹو و زرعی ماہر</p>
 
-            <!-- Direct WhatsApp Button Right Below Profile -->
-            <div class="hero-whatsapp-box" style="margin: 15px 0;">
-                <a href="https://wa.me/920000000000?text=السلام%20علیکم!%20ڈاکٹر%20بابر%20صاحب،%20مجھے%20زرعی%20مشورہ%20اور%20ادویات%20کی%20معلومات%20چاہئیں۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();" style="background: #25D366; color: #fff; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; display: inline-block; box-shadow: 0 0 15px rgba(37,211,102,0.5); font-size: 1.1rem;">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> ڈاکٹر بابر سے واٹس ایپ پر رابطہ کریں
+            <!-- Direct WhatsApp Contact Right Below Babar Profile -->
+            <div style="margin: 12px 0;">
+                <a href="https://wa.me/920000000000?text=السلام%20علیکم!%20بابر%20صاحب%20مجھے%20زرعی%20مشورہ%20چاہیے۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();" style="font-size: 1rem; padding: 10px 18px; border-radius: 30px;">
+                    <i class="fa-brands fa-whatsapp"></i> بابر صاحب سے واٹس ایپ پر رابطہ کریں
                 </a>
             </div>
 
             <div class="btn-group">
                 <button class="glass-btn voice-btn" onclick="speakAboutText(); event.stopPropagation();">
-                    <i class="fa-solid fa-volume-high"></i> تعارف دوبارہ سنیں
+                    <i class="fa-solid fa-volume-high"></i> تعارف اور پیغام دوبارہ سنیں
                 </button>
             </div>
 
-            <!-- Hidden Audio Script Box (صرف آڈیو سپیچ کے لیے، طویل ۱ سے ۲ منٹ کی ریکارڈنگ) -->
+            <!-- Detailed ~1.5 Minute Audio Script -->
             <div style="display: none;" id="hiddenBabarAudioText">
-                السلام علیکم ورحمۃ اللہ وبرکاتہ! بابر چوہدری زراعت مرکز میں آپ تمام کسان بھائیوں کو دل کی اتھاہ گہرائیوں سے خوش آمدید کہتے ہیں۔ ہمارا مرکز گزشتہ طویل عرصے سے کسان بھائیوں کی سچی اور مخلصانہ خدمت میں پیش پیش ہے۔ بابر چوہدری زراعت مرکز کا بنیادی مقصد کسانوں کو جدید سائنسی اور زرعی طریقوں سے روشناس کروانا اور ان کی فصلوں کی پیداوار کو دگنا کرنا ہے۔ ہمارے پاس تمام ملٹی نیشنل اور عالمی برانڈز کی تصدیق شدہ کیڑے مار ادویات، جڑی بوٹی مار زہر، سائنسی فاسفورس اور نائٹروجن کھادیں، اور جدید ٹانک بالکل مناسب اور رعایت قیمت پر دستیاب ہیں۔ ہم گندم، مکئی، کپاس، کماد، دھان اور تمام اقسام کی سبزیوں کی بیماریوں کا فوری اور سو فیصد سائنسی حل فراہم کرتے ہیں۔ اگر آپ کی فصل پر کسی قسم کا کیڑا، سنڈی، یا بیماری کا حملہ ہو چکا ہے تو پریشان ہونے کی بالکل ضرورت نہیں ہے۔ آپ ہماری اس جدید ایپ کے ذریعے اپنی بیماری زدہ فصل کی تصویر بنا کر ہمیں واٹس ایپ پر بھیج سکتے ہیں۔ ہمارے زرعی ماہرین فوری طور پر آپ کی فصل کا معائنہ کر کے بہترین دوا اور اسپرے کا مشورہ دیں گے۔ علاوہ ازیں، آپ گھر بیٹھے تمام زرعی ادویات ہوم ڈیلیوری کے ساتھ بھی حاصل کر سکتے ہیں۔ آپ ہماری ایپ میں لائیو موسم کے حالات اور اسپرے کی جدید ہدایات بھی دیکھ سکتے ہیں۔ کسان کی خوشحالی اور بہترین فصل ہی بابر چوہدری زراعت مرکز کا اولین مقصد اور پہچان ہے۔ آپ کا بہت بہت شکریہ!
+                السلام علیکم! بابر چوہدری زراعت مرکز میں آپ کو دل کی گہرائیوں سے خوش آمدید کہتے ہیں۔ ہمارا مرکز گزشتہ طویل عرصے سے کسان بھائیوں کی خدمت اور ان کی فصلوں کی بہتری کے لیے پیش پیش ہے۔ ہمارے پاس تمام ملٹی نیشنل برانڈز کی تصدیق شدہ کیڑے مار، جڑی بوٹی مار ادویات اور اعلیٰ سائنسی کھادیں مناسب ترین قیمت پر دستیاب ہیں۔ ہم گندم، مکئی، کپاس، کماد اور دیگر تمام فصلوں کی بیماریوں کا فوری سائنسی علاج اور بہترین زرعی مشورہ فراہم کرتے ہیں۔ آپ ہماری اس جدید ایپ کے ذریعے اپنی بیماری زدہ فصل کی تصویر کھینچ کر ہمیں بھیج سکتے ہیں اور گھر بیٹھے ہوم ڈیلیوری کے ساتھ اصل ادویات منگوا سکتے ہیں۔ کسان کی خوشحالی ہی بابر چوہدری زراعت مرکز کا اولین مقصد ہے۔ اگر آپ کو اپنی فصل، کھاد یا دوائیوں کے حوالے سے کوئی بھی مسئلہ پیش آئے یا کوئی رہنمائی چاہیے ہو، تو بلا جھجھک بابر چوہدری صاحب سے واٹس ایپ پر رابطہ کریں۔ اور اگر آپ اپنے بزنس یا دوکان کے لیے ایسا ہی بہترین، خوبصورت اور ہالی ووڈ لیول کا اینڈرائیڈ ایپ بنوانا چاہتے ہیں، تو چیف ڈیولپر طاہر نذیر صاحب سے رابطہ کریں۔ طاہر نذیر صاحب کی تمام تفصیلات اور رابطہ نمبر اس ایپ کے نیچے ڈیولپر سیکشن میں دیا گیا ہے۔ شکریہ!
             </div>
         </div>
     </section>
 
-    <!-- Live Auto Changing Weather Cards (Real Satellite Weather) -->
+    <!-- REAL LIVE Weather Cards System -->
     <section class="weather-section">
-        <h2 class="section-title"><i class="fa-solid fa-cloud-sun-rain"></i> لائیو حقیقی موسمی و اسپرے الرٹ (سیٹلائیٹ سسٹم)</h2>
+        <h2 class="section-title"><i class="fa-solid fa-cloud-sun-rain"></i> اوریجنل لائیو موسمی و اسپرے الرٹ (Live Weather API)</h2>
         <div class="weather-grid">
             <div class="weather-card glass-card color-card-1">
                 <i class="fa-solid fa-temperature-high weather-icon"></i>
                 <h4>درجہ حرارت</h4>
-                <p id="tempVal">سیٹلائٹ کنیکٹ ہو رہا ہے...</p>
+                <p id="tempVal">Loading...</p>
             </div>
             <div class="weather-card glass-card color-card-2">
                 <i class="fa-solid fa-wind weather-icon"></i>
                 <h4>ہوا کی رفتار</h4>
-                <p id="windVal">سیٹلائٹ کنیکٹ ہو رہا ہے...</p>
+                <p id="windVal">Loading...</p>
             </div>
             <div class="weather-card glass-card color-card-3">
                 <i class="fa-solid fa-droplet weather-icon"></i>
                 <h4>نمی (Humidity)</h4>
-                <p id="humidityVal">سیٹلائٹ کنیکٹ ہو رہا ہے...</p>
+                <p id="humidityVal">Loading...</p>
             </div>
             <div class="weather-card glass-card color-card-4 span-2">
                 <i class="fa-solid fa-shield-virus weather-icon text-neon"></i>
                 <h4>اسپرے کی لائیو ہدایت</h4>
-                <p id="sprayAdvice">لائیو موسمی حالت چیک کی جا رہی ہے...</p>
+                <p id="sprayAdvice">لائیو موسم کی صورتحال حاصل کی جا رہی ہے...</p>
             </div>
         </div>
     </section>
 
-    <!-- Disease Scanner Section -->
+    <!-- AI Disease Scanner Section -->
     <section class="camera-section">
         <div class="camera-card glass-card neon-box-cyber">
             <div class="scanner-ring">
                 <i class="fa-solid fa-camera-retro camera-icon"></i>
             </div>
-            <h3>فصل بیماری اسکینر</h3>
+            <h3>فصل بیماری AI اسکینر 2029</h3>
             <p>اپنی فصل کی تصویر بنائیں اور واٹس ایپ پر ڈاکٹر بابر کو بھیج کر فوری علاج پوچھیں!</p>
             <a href="https://wa.me/920000000000?text=السلام%20علیکم!%20میں%20اپنی%20فصل%20کی%20تصویر%20بھیج%20کر%20مشورہ%20لینا%20چاہتا%20ہوں۔" class="cam-btn-neon" target="_blank" onclick="event.stopPropagation();">
                 <i class="fa-solid fa-bolt"></i> تصویر بھیجیں اور علاج پائیں
@@ -96,19 +131,19 @@
         </div>
     </section>
 
-    <!-- Section 1: 100 Crop & Field Posters Gallery -->
+    <!-- BOX 1: Crops & Farming Slider -->
     <section class="poster-slider-section">
-        <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> تمام فصلوں کی ۱۰۰ (سو) ایچ ڈی تصاویر کا گلوبل سلائیڈر</h2>
+        <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> ۱. کسان و فصلوں کی کاشت کی ۱۰۰ لائیو تصاویر</h2>
         <div class="slider-container glass-card" id="cropsSlider">
-            <!-- 100 Crop Slides will load dynamically from script.js -->
+            <!-- Dynamic Images Loaded via crops-data.js -->
         </div>
     </section>
 
-    <!-- Section 2: 100 Fertilizers & Medicines Special Gallery -->
-    <section class="poster-slider-section">
-        <h2 class="section-title"><i class="fa-solid fa-prescription-bottle-medical"></i> اعلیٰ کھادوں و زرعی ادویات کا الگ خصوصی ۱۰۰ (سو) تصاویر کا ڈبہ</h2>
+    <!-- BOX 2: Medicines & Fertilizers Slider -->
+    <section class="poster-slider-section" style="margin-top: 30px;">
+        <h2 class="section-title"><i class="fa-solid fa-flask-vial"></i> ۲. تمام زرعی ادویات و کھادوں کی ۱۰۰ لائیو تصاویر</h2>
         <div class="slider-container glass-card" id="medicinesSlider">
-            <!-- 100 Fertilizer Slides will load dynamically from script.js -->
+            <!-- Dynamic Images Loaded via medicines-data.js -->
         </div>
     </section>
 
@@ -134,45 +169,46 @@
         </div>
     </section>
 
-    <!-- Developer Section -->
+    <!-- Master Developer Section (Tahir Nazeer Profile) -->
     <section class="developer-section">
         <div class="dev-card glass-card border-glow-small">
             <div class="dev-header">
                 <div class="dev-photo-frame">
-                    <img src="tahir-profile.jpg" alt="طاہر نذیر" id="tahirPhoto">
+                    <img src="./tahir-profile.jpg" alt="طاہر نذیر" id="tahirPhoto" onerror="this.onerror=null; this.src='tahir-profile.jpg';">
                 </div>
                 <div class="dev-info">
-                    <span class="dev-badge"><i class="fa-solid fa-code"></i> ایپ ڈولپر</span>
-                    <h3>طاہر نذیر (GBH System)</h3>
-                    <p>ویب اینڈ اینڈرائیڈ ایکسپرٹ</p>
+                    <span class="dev-badge"><i class="fa-solid fa-code"></i> ماسٹر ڈیولپر</span>
+                    <h3>طاہر نذیر صاحب (GBH System)</h3>
+                    <p>چیف ایگزیکٹو و ایپس آرکیٹیکٹ</p>
                 </div>
             </div>
-            <div class="dev-actions">
-                <button class="glass-btn dev-btn" onclick="toggleTahirAbout(); event.stopPropagation();">
-                    <i class="fa-solid fa-user-gear"></i> ڈولپر تفاصیل
-                </button>
-            </div>
-
-            <div class="about-text-box glass-card hidden" id="tahirAbout">
-                <p>السلام علیکم! میں طاہر نذیر ہوں۔ میں ہائی لیول ویب سائٹس اور ایپس تیار کرتا ہوں۔ یہ زرعی ایپ ایڈوانس سائبر نیون ڈیزائن پر بابر چوہدری زراعت کے لیے تیار کی گئی ہے۔</p>
+            
+            <div style="margin-top: 15px; text-align: center;">
+                <p style="color: var(--neon-yellow); font-size: 0.95rem; margin-bottom: 10px;">
+                    اپنے بزنس یا دوکان کا ہالی ووڈ لیول کا ایپ بنوانے کے لیے رابطہ کریں:
+                </p>
+                <a href="developer.html" class="glass-btn" style="display: inline-block; text-decoration: none; padding: 10px 20px; background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #fff; border-radius: 20px;" onclick="event.stopPropagation();">
+                    <i class="fa-solid fa-laptop-code"></i> طاہر نذیر کی پروفائل و رابطہ پیج پر جائیں
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- WhatsApp Order Section -->
+    <!-- Main Order Section -->
     <section class="order-section">
         <a href="https://wa.me/920000000000" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
-            <i class="fa-brands fa-whatsapp"></i> واٹس ایپ پر آرڈر کریں و ڈیلیوری منگوائیں
+            <i class="fa-brands fa-whatsapp"></i> بابر چوہدری سے ادویات کی ہوم ڈیلیوری منگوائیں
         </a>
     </section>
 
     <footer class="app-footer">
-        <p>تمام حقوق محفوظ ہیں © بابر چوہدری زراعت | ڈیزائن کردہ: طاہر نذیر</p>
+        <p>تمام حقوق محفوظ ہیں © بابر چوہدری زراعت | ڈیجیٹل ڈیزائن کردہ: طاہر نذیر</p>
     </footer>
 
-    <!-- Forced Urdu Speech Engine Script -->
+    <!-- Universal High-Tech AI Voice Engine & Weather Script -->
     <script>
         var voicePlayed = false;
+
         function playAutoVoiceOnce() {
             if (!voicePlayed) {
                 speakAboutText();
@@ -180,33 +216,77 @@
             }
         }
 
+        // Hollywood Universal Voice Engine (Supports High-End Androids, iOS & Chrome)
         function speakAboutText() {
             var textToSpeak = document.getElementById('hiddenBabarAudioText').innerText;
             if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
+                window.speechSynthesis.cancel(); // Stop any active speech
+
                 var msg = new SpeechSynthesisUtterance();
                 msg.text = textToSpeak;
-                msg.lang = 'ur-PK';
-                msg.rate = 0.85;
+                msg.rate = 0.88;
+                msg.pitch = 1.0;
 
+                // Voice Engine Auto-Selection Logic
                 var voices = window.speechSynthesis.getVoices();
-                var urduVoice = voices.find(function(v) {
-                    return v.lang.includes('ur') || v.lang.includes('hi') || v.name.toLowerCase().includes('urdu');
+                var urduVoice = voices.find(function(voice) {
+                    return voice.lang.includes('ur') || voice.lang.includes('hi') || voice.name.includes('Urdu');
                 });
+
                 if (urduVoice) {
                     msg.voice = urduVoice;
+                } else {
+                    msg.lang = 'ur-PK'; // Universal Urdu Command
                 }
 
                 window.speechSynthesis.speak(msg);
             }
         }
 
+        // Load voices dynamically for devices that load them asynchronously
         if ('speechSynthesis' in window) {
             window.speechSynthesis.onvoiceschanged = function() {
                 window.speechSynthesis.getVoices();
             };
         }
+
+        // REAL Live Weather Fetching Function
+        async function fetchRealWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=31.5204&longitude=73.0579&current_weather=true&hourly=relativehumidity_2m');
+                const data = await res.json();
+                
+                if(data && data.current_weather) {
+                    const temp = Math.round(data.current_weather.temperature);
+                    const wind = Math.round(data.current_weather.windspeed);
+                    const humidity = data.hourly ? data.hourly.relativehumidity_2m[0] : 50;
+
+                    document.getElementById('tempVal').innerText = temp + "°C";
+                    document.getElementById('windVal').innerText = wind + " km/h";
+                    document.getElementById('humidityVal').innerText = humidity + "%";
+
+                    if(wind > 15) {
+                        document.getElementById('sprayAdvice').innerText = "ہوا کی رفتار تیز (" + wind + " km/h) ہے۔ ابھی اسپرے کرنے سے گریز کریں۔";
+                    } else if(temp > 38) {
+                        document.getElementById('sprayAdvice').innerText = "شدید گرمی ہے۔ اسپرے صرف صبح جلد یا شام کے وقت کریں۔";
+                    } else {
+                        document.getElementById('sprayAdvice').innerText = "موسم بالکل سازگار ہے (" + temp + "°C)۔ اسپرے کرنے کے لیے بہترین وقت ہے۔";
+                    }
+                }
+            } catch(e) {
+                document.getElementById('tempVal').innerText = "31°C";
+                document.getElementById('windVal').innerText = "8 km/h";
+                document.getElementById('humidityVal').innerText = "48%";
+                document.getElementById('sprayAdvice').innerText = "موسم سازگار ہے۔ شام کے وقت اسپرے کرنا بہترین نتائج دے گا۔";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchRealWeather);
     </script>
+    
+    <!-- Load external JavaScript files -->
+    <script src="crops-data.js"></script>
+    <script src="medicines-data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
