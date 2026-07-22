@@ -1,130 +1,142 @@
-// File Name: crops-data.js - Crops & Farming Operations (100 Unique Actions)
-const cropsArray = [
-    { id: 1, name: "کھیت میں بیج بائی کا کام", img: "https://picsum.photos/id/10/600/400" },
-    { id: 2, name: "ٹریکٹر سے زمین کی تیاری", img: "https://picsum.photos/id/11/600/400" },
-    { id: 3, name: "سرسبز گندم کی کٹائی", img: "https://picsum.photos/id/12/600/400" },
-    { id: 4, name: "دھان کی پنیری منتقل کرنا", img: "https://picsum.photos/id/13/600/400" },
-    { id: 5, name: "کھیت کو پانی لگانے کا منظر", img: "https://picsum.photos/id/14/600/400" },
-    { id: 6, name: "کپاس کی چنائی کرتے کسان", img: "https://picsum.photos/id/15/600/400" },
-    { id: 7, name: "مکئی کی فصل میں کام کاج", img: "https://picsum.photos/id/16/600/400" },
-    { id: 8, name: "سبزیوں کی برائی اور گوڈی", img: "https://picsum.photos/id/17/600/400" },
-    { id: 9, name: "ٹرالی پر مال منڈی لے جانا", img: "https://picsum.photos/id/18/600/400" },
-    { id: 10, name: "کماد کی چھلائی اور کٹائی", img: "https://picsum.photos/id/19/600/400" },
-    { id: 11, name: "باغات سے پھل توڑنے کا کام", img: "https://picsum.photos/id/20/600/400" },
-    { id: 12, name: "سورج مکھی کی چنائی", img: "https://picsum.photos/id/21/600/400" },
-    { id: 13, name: "دیسی حل چلانے کا منظر", img: "https://picsum.photos/id/22/600/400" },
-    { id: 14, name: "لیزر لیولنگ سے کھیت برابر کرنا", img: "https://picsum.photos/id/23/600/400" },
-    { id: 15, name: "ٹنل فارمنگ میں سبزی لگانا", img: "https://picsum.photos/id/24/600/400" },
-    { id: 16, name: "آلو کی برداشت اور صفائی", img: "https://picsum.photos/id/25/600/400" },
-    { id: 17, name: "پیاز کی گنڈی لگانا", img: "https://picsum.photos/id/26/600/400" },
-    { id: 18, name: "سرسوں کے کھیت میں کسان", img: "https://picsum.photos/id/27/600/400" },
-    { id: 19, name: "ٹوکروں میں ٹماٹر پیک کرنا", img: "https://picsum.photos/id/28/600/400" },
-    { id: 20, name: "چارہ کاٹنے والی مشین کا کام", img: "https://picsum.photos/id/29/600/400" },
-    { id: 21, name: "گندم کی گاہائی (تھریشر)", img: "https://picsum.photos/id/30/600/400" },
-    { id: 22, name: "دھان کی ڈرپ آبپاشی", img: "https://picsum.photos/id/31/600/400" },
-    { id: 23, name: "باغ کی پیوند کاری (گرافٹنگ)", img: "https://picsum.photos/id/32/600/400" },
-    { id: 24, name: "سبزیوں کی چھٹائی اور لوڈنگ", img: "https://picsum.photos/id/33/600/400" },
-    { id: 25, name: "چنے کی فصل کی صفائی", img: "https://picsum.photos/id/34/600/400" },
-    { id: 26, name: "مونگ پھلی کی کھدائی", img: "https://picsum.photos/id/35/600/400" },
-    { id: 27, name: "کھیتوں میں گوڈی کرنا", img: "https://picsum.photos/id/36/600/400" },
-    { id: 28, name: "لہسن اور ادرک کی کاشت", img: "https://picsum.photos/id/37/600/400" },
-    { id: 29, name: "کھیت کی حدود سنبھالنا", img: "https://picsum.photos/id/38/600/400" },
-    { id: 30, name: "چقندر کی برداشت", img: "https://picsum.photos/id/39/600/400" },
-    { id: 31, name: "گاجر اور مولی کی دھوائی", img: "https://picsum.photos/id/40/600/400" },
-    { id: 32, name: "کیلے کے گھاٹے اتارے جانا", img: "https://picsum.photos/id/41/600/400" },
-    { id: 33, name: "انار اور امپائرفارمنگ", img: "https://picsum.photos/id/42/600/400" },
-    { id: 34, name: "انگور کی بیلوں کی کٹائی", img: "https://picsum.photos/id/43/600/400" },
-    { id: 35, name: "کھجور کے درخت پر چڑھنا", img: "https://picsum.photos/id/44/600/400" },
-    { id: 36, name: "سٹرابیری کی چنائی", img: "https://picsum.photos/id/45/600/400" },
-    { id: 37, name: "نرسری سے پودے شفٹ کرنا", img: "https://picsum.photos/id/46/600/400" },
-    { id: 38, name: "چائے کی پتیاں چننا", img: "https://picsum.photos/id/47/600/400" },
-    { id: 39, name: "زعفران کے پھول اکٹھا کرنا", img: "https://picsum.photos/id/48/600/400" },
-    { id: 40, name: "کالی مرچ اور مصالحہ جات", img: "https://picsum.photos/id/49/600/400" },
-    { id: 41, name: "زیتون کی کٹائی کا کام", img: "https://picsum.photos/id/50/600/400" },
-    { id: 42, name: "کینولا کی بالیاں سنبھالنا", img: "https://picsum.photos/id/51/600/400" },
-    { id: 43, name: "برسیم چارہ کاٹنا", img: "https://picsum.photos/id/52/600/400" },
-    { id: 44, name: "جوار اور باجرہ بائی", img: "https://picsum.photos/id/53/600/400" },
-    { id: 45, name: "سائلیج بنانے کا عمل", img: "https://picsum.photos/id/54/600/400" },
-    { id: 46, name: "گرین ہاؤس میں وینٹیلیشن", img: "https://picsum.photos/id/55/600/400" },
-    { id: 47, name: "ہائیڈروپونک سیٹ اپ کام", img: "https://picsum.photos/id/56/600/400" },
-    { id: 48, name: "سپرنکلر چلانے کا نظارہ", img: "https://picsum.photos/id/57/600/400" },
-    { id: 49, name: "ایلوویرا کی پتیوں کی کٹائی", img: "https://picsum.photos/id/58/600/400" },
-    { id: 50, name: "گلاب کی چنائی منڈی کے لیے", img: "https://picsum.photos/id/59/600/400" },
-    { id: 51, name: "گیندے کے پھولوں کے ہار", img: "https://picsum.photos/id/60/600/400" },
-    { id: 52, name: "نرسری بیج بائی کا کام", img: "https://picsum.photos/id/61/600/400" },
-    { id: 53, name: "مشروم فارم میں چنائی", img: "https://picsum.photos/id/62/600/400" },
-    { id: 54, name: "شہد کی مکھیاں پالنا", img: "https://picsum.photos/id/63/600/400" },
-    { id: 55, name: "ریشم کے کیڑوں کا فارم", img: "https://picsum.photos/id/64/600/400" },
-    { id: 56, name: "ہائی برڈ بیج کی پروسیسنگ", img: "https://picsum.photos/id/65/600/400" },
-    { id: 57, name: "کھیت کی نالیوں کی صفائی", img: "https://picsum.photos/id/66/600/400" },
-    { id: 58, name: "کھاد بکھیرنے کا روایتی انداز", img: "https://picsum.photos/id/67/600/400" },
-    { id: 59, name: "مٹی کے نمونے اکٹھا کرنا", img: "https://picsum.photos/id/68/600/400" },
-    { id: 60, name: "فصل کی پیمائش اور معائنہ", img: "https://picsum.photos/id/69/600/400" },
-    { id: 61, name: "فصل کو بیماری سے بچانا", img: "https://picsum.photos/id/70/600/400" },
-    { id: 62, name: "کھیت میں ڈیروں کا منظر", img: "https://picsum.photos/id/71/600/400" },
-    { id: 63, name: "ٹیوب ویل سے پانی کا بہاؤ", img: "https://picsum.photos/id/72/600/400" },
-    { id: 64, name: "سولر پمپ سے آبپاشی", img: "https://picsum.photos/id/73/600/400" },
-    { id: 65, name: "کاہ اور گھاس کی صفائی", img: "https://picsum.photos/id/74/600/400" },
-    { id: 66, name: "گندم کے بچھونے لگانا", img: "https://picsum.photos/id/75/600/400" },
-    { id: 67, name: "تھریشر کے ساتھ کام", img: "https://picsum.photos/id/76/600/400" },
-    { id: 68, name: "کمپائن ہارویسٹر کا کام", img: "https://picsum.photos/id/77/600/400" },
-    { id: 69, name: "روٹا ویٹر چلانے کا منظر", img: "https://picsum.photos/id/78/600/400" },
-    { id: 70, name: "ڈسک ہیعرو سے حل چلانا", img: "https://picsum.photos/id/79/600/400" },
-    { id: 71, name: "سیڈ ڈرل سے بیج ڈالنا", img: "https://picsum.photos/id/80/600/400" },
-    { id: 72, name: "رزق کی منڈی میں منتقلی", img: "https://picsum.photos/id/81/600/400" },
-    { id: 73, name: "کپاس کی گانٹھیں بنانا", img: "https://picsum.photos/id/82/600/400" },
-    { id: 74, name: "گنے کی ملوں میں سپلائی", img: "https://picsum.photos/id/83/600/400" },
-    { id: 75, name: "چاول کی مل میں عمل", img: "https://picsum.photos/id/84/600/400" },
-    { id: 76, name: "آلو کولڈ اسٹوریج پیکنگ", img: "https://picsum.photos/id/85/600/400" },
-    { id: 77, name: "پیاز و لہسن خشک کرنا", img: "https://picsum.photos/id/86/600/400" },
-    { id: 78, name: "مرچوں کو دھوپ میں سکھانا", img: "https://picsum.photos/id/87/600/400" },
-    { id: 79, name: "ٹوکریوں کی بfilter سازی", img: "https://picsum.photos/id/88/600/400" },
-    { id: 80, name: "کھیت میں لکڑی اکٹھا کرنا", img: "https://picsum.photos/id/89/600/400" },
-    { id: 81, name: "شام کے وقت کھیت کا لک", img: "https://picsum.photos/id/90/600/400" },
-    { id: 82, name: "صبح کا دلکش زرعی منظر", img: "https://picsum.photos/id/91/600/400" },
-    { id: 83, name: "کسان کا محنت بھرا دن", img: "https://picsum.photos/id/92/600/400" },
-    { id: 84, name: "کھیت میں آرام کی گھڑی", img: "https://picsum.photos/id/93/600/400" },
-    { id: 85, name: "دیسی طریقہ آبپاشی", img: "https://picsum.photos/id/94/600/400" },
-    { id: 86, name: "بارش کے بعد کھیت لک", img: "https://picsum.photos/id/95/600/400" },
-    { id: 87, name: "جدید ملچنگ تکنیک", img: "https://picsum.photos/id/96/600/400" },
-    { id: 88, name: "پلاسٹک کور ٹنل فارم", img: "https://picsum.photos/id/97/600/400" },
-    { id: 89, name: "سبزی منڈی کی تیاریاں", img: "https://picsum.photos/id/98/600/400" },
-    { id: 90, name: "غلہ منڈی بوریوں کی لوڈنگ", img: "https://picsum.photos/id/99/600/400" },
-    { id: 91, name: "مال مویشی اور چارہ", img: "https://picsum.photos/id/100/600/400" },
-    { id: 92, name: "زرعی نمائش کا منظر", img: "https://picsum.photos/id/101/600/400" },
-    { id: 93, name: "ماڈل ایگری فارم ورک", img: "https://picsum.photos/id/102/600/400" },
-    { id: 94, name: "فصل کی پیداوار کا جائزہ", img: "https://picsum.photos/id/103/600/400" },
-    { id: 95, name: "کسان بھائیوں کی میٹنگ", img: "https://picsum.photos/id/104/600/400" },
-    { id: 96, name: "زرعی جدید آلات کا استعمال", img: "https://picsum.photos/id/106/600/400" },
-    { id: 97, name: "بیج کی معیار ٹیسٹنگ", img: "https://picsum.photos/id/107/600/400" },
-    { id: 98, name: "پودوں کی دیکھ بھال", img: "https://picsum.photos/id/108/600/400" },
-    { id: 99, name: "کھیتوں کی حفاظت و باڑ", img: "https://picsum.photos/id/109/600/400" },
-    { id: 100, name: "سرسبز و شاداب پاکستان", img: "https://picsum.photos/id/110/600/400" }
+// crops-data.js - 100 Real & Distinct Agricultural Crops & Fields Slider
+
+const cropsData = [
+    { id: 1, title: "گندم کے سنہرے کھیت", tag: "غلہ جات", desc: "پنجاب کے سرسبز اور زرخیز میدانی علاقوں میں تیار گندم کی فصل۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" },
+    { id: 2, title: "چاول و دھان کے شاداب کھیت", tag: "غلہ جات", desc: "بہترین معیار کے باسپتی چاول کے لیے پانی سے بھرپور خوبصورت کھیت۔", image: "https://images.unsplash.com/photo-1536657464919-892534f60d6e?auto=format&fit=crop&w=800&q=80" },
+    { id: 3, title: "کپاس کے روئی سے بھرے کھیت", tag: "نقد آور فصل", desc: "سفید سونے یعنی کپاس کی کھلی ہوئی ڈوڈیاں اور شاداب فصل۔", image: "https://images.unsplash.com/photo-1605001011157-26f607f0f423?auto=format&fit=crop&w=800&q=80" },
+    { id: 4, title: "کماد اور گنے کے وسیع فارم", tag: "نقد آور فصل", desc: "میٹھے اور رس دار گنے کی لمبی اور گھنی فصل کے مناظر۔", image: "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=800&q=80" },
+    { id: 5, title: "مکئی کے بلند و بالا فارم", tag: "چارہ و غلہ", desc: "طاقتور چھلیوں سے بھرپور مکئی کی جدید کاشتکاری۔", image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=800&q=80" },
+    { id: 6, title: "سرسیوں کے پیلے پھولوں کے کھیت", tag: "روغنی اجناس", desc: "سردیوں کے موسم میں سرسوں اور رایا کی منموہنی قدرتی رنگت۔", image: "https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?auto=format&fit=crop&w=800&q=80" },
+    { id: 7, title: "آلو کے وسیع و عریض فارم", tag: "سبزیاں", desc: "زمین کے اندر لذیذ آلوؤں کی جدید مکینائزڈ کاشت۔", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80" },
+    { id: 8, title: "سرخ ٹماٹروں کے شاداب کھیت", tag: "سبزیاں", desc: "پکے ہوئے لال سرخ ٹماٹروں کی فارم ٹنل فارمنگ۔", image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=800&q=80" },
+    { id: 9, title: "سرخ و ہری مرچوں کی کاشت", tag: "مصالحہ جات", desc: "تیکھی مرچوں کے سرسبز پودے اور فصل کی رنگت۔", image: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=800&q=80" },
+    { id: 10, title: "پیاز کے کسان فارم", tag: "سبزیاں", desc: "زمین پر تر و تازہ پیاز کی بھرپور پیداوار۔", image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80" },
+    { id: 11, title: "سیب کے حسین باغات", tag: "پھل و باغات", desc: "پہاڑی و بالائی علاقوں کے لال سیبوں سے لدے درخت۔", image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=800&q=80" },
+    { id: 12, title: "آم کے قدیم و وسیع باغات", tag: "پھل و باغات", desc: "ملتانی اور سندھڑی آم کے خوشبودار اور رس دار پھل۔", image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80" },
+    { id: 13, title: "ترشاوہ پھل کینو اور مالٹے", tag: "پھل و باغات", desc: "سرگودھا کے مشہور و معروف کینو کے چمکدار باغات۔", image: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=800&q=80" },
+    { id: 14, title: "چنے کی فصل اور دالیں", tag: "دالیں", desc: "تھل کے صحرائی اور بارانی علاقوں میں چنے کی قدرتی کاشت۔", image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e2?auto=format&fit=crop&w=800&q=80" },
+    { id: 15, title: "سورج مکھی کے سنہرے کھیت", tag: "روغنی اجناس", desc: "سورج کی طرف منہ کیے ہوئے زرد اور خوبصورت پھول۔", image: "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80" },
+    { id: 16, title: "مٹر کی شاداب فصل", tag: "سبزیاں", desc: "سبز مٹر کی پھلیوں سے بھرے ہوئے سرسبز کھیت۔", image: "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=800&q=80" },
+    { id: 17, title: "گوبھی اور بند گوبھی فارم", tag: "سبزیاں", desc: "تازہ اور نامیاتی گوبھی کی وسیع پیمانے پر کاشت۔", image: "https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=800&q=80" },
+    { id: 18, title: "گاذر کی تازہ فصل", tag: "سبزیاں", desc: "زمین سے نکلنے والی رس دار اور میٹھی لال گاجر۔", image: "https://images.unsplash.com/photo-1447175008436-084170927932?auto=format&fit=crop&w=800&q=80" },
+    { id: 19, title: "لہسن کے سبز کھیت", tag: "مصالحہ جات", desc: "دیسی اور چائنیز لہسن کی منافع بخش کاشت کاری۔", image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80" },
+    { id: 20, title: "سبز دھنیا اور پودینہ", tag: "مصالحہ جات", desc: "خوشبودار اور تازہ سبزیوں کے چھوٹے قطعات۔", image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" },
+    { id: 21, title: "جامن کے گھنے باغات", tag: "پھل و باغات", desc: "گرمیوں کے موسم کا خاص اور صحت بخش سیاہ پھل۔", image: "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80" },
+    { id: 22, title: "زیتون کی سائنسی کاشت", tag: "پھل و باغات", desc: "پوٹھوہار میں زیتون کے جدید اور وسیع فارمز۔", image: "https://images.unsplash.com/photo-1541344999736-83eca272f6fc?auto=format&fit=crop&w=800&q=80" },
+    { id: 23, title: "انگور کی بیلوں کے باغات", tag: "پھل و باغات", desc: "میٹھے اور خوبصورت انگوروں سے لٹکتی ہوئی بیلیں۔", image: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=800&q=80" },
+    { id: 24, title: "امرود کے سرسبز باغات", tag: "پھل و باغات", desc: "شریف آباد اور شیخوپورہ کے مشہور میٹھے امرود۔", image: "https://images.unsplash.com/photo-1536511154848-f1261d51c762?auto=format&fit=crop&w=800&q=80" },
+    { id: 25, title: "انار کے خوبصورت درخت", tag: "پھل و باغات", desc: "قندھاری اور دیسی انار کے لال دانوں والے باغات۔", image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80" },
+    { id: 26, title: "جوار کا چارہ اور کھیت", tag: "چارہ و غلہ", desc: "مویشیوں کے لیے غذائیت سے بھرپور لمبا سبز چارہ۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" },
+    { id: 27, title: "باجرے کی فارمنگ", tag: "چارہ و غلہ", desc: "پرندوں کی خوراک اور طاقتور دانوں کی بہترین فصل۔", image: "https://images.unsplash.com/photo-1536657464919-892534f60d6e?auto=format&fit=crop&w=800&q=80" },
+    { id: 28, title: "برسیم اور لوسرن کا چارہ", tag: "چارہ و غلہ", desc: "سردیوں کا ترو تازہ اور غذائیت بخش سبز چارہ۔", image: "https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=800&q=80" },
+    { id: 29, title: "تربوز اور خربوزے کی بیلیں", tag: "پھل و باغات", desc: "گرمی کے موسم کے میٹھے اور پانی سے بھرپور پھل۔", image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80" },
+    { id: 30, title: "کھیرا اور ککڑی فارمنگ", tag: "سبزیاں", desc: "ٹنل فارمنگ میں تیار ہونے والے تازہ اور لذیذ کھیرے Alignment۔", image: "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?auto=format&fit=crop&w=800&q=80" },
+    { id: 31, title: "مونگ پھلی کے زیرِ زمین کھیت", tag: "روغنی اجناس", desc: "پوٹھوہار کی بارانی زمین کی بہترین مونگ پھلی۔", image: "https://images.unsplash.com/photo-1567113463300-102a7eb3cb26?auto=format&fit=crop&w=800&q=80" },
+    { id: 32, title: "تِل کی نقد آور فصل", tag: "روغنی اجناس", desc: "کم پانی میں زیادہ منافع دینے والی سفید اور سیاہ تل کی کاشت۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" },
+    { id: 33, title: "بینگن کے سبز و جامنی فارم", tag: "سبزیاں", desc: "مختلف اقسام اور سائز کے بینگن کی بھرپور پیداوار۔", image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80" },
+    { id: 34, title: "بھنڈی کی تازہ کاشت", tag: "سبزیاں", desc: "گرمیوں کی مقبول ترین اور بار بار چنائی والی سبزی۔", image: "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=800&q=80" },
+    { id: 35, title: "کدو اور توری کی لمبی بیلیں", tag: "سبزیاں", desc: "نامیاتی طریقے سے اگائی گئی گھریلو اور تجارتی سبزیاں۔", image: "https://images.unsplash.com/photo-1568584711075-3d021a7c3ca3?auto=format&fit=crop&w=800&q=80" },
+    { id: 36, title: "کریلا فارمنگ ٹنل", tag: "سبزیاں", desc: "صحت کے لیے مفید کڑوے کریلے کی محفوظ کاشت۔", image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=800&q=80" },
+    { id: 37, title: "پالک اور میتھی کے کھیت", tag: "سبزیاں", desc: "آئرن سے بھرپور پتوں والی ترو تازہ سبزیاں۔", image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" },
+    { id: 38, title: "شلجم اور مولی فارمز", tag: "سبزیاں", desc: "سردیوں کی تازہ اور کرکری زیرِ زمین سبزیاں۔", image: "https://images.unsplash.com/photo-1447175008436-084170927932?auto=format&fit=crop&w=800&q=80" },
+    { id: 39, title: "چقندر کی زراعت", tag: "سبزیاں", desc: "سرخ رنگت اور وافر شوگر والی قیمتی فصل۔", image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80" },
+    { id: 40, title: "شکرقندی کے کھیت", tag: "سبزیاں", desc: "میٹھے اور توانائی سے بھرپور کاربوہائیڈریٹ کی کاشت۔", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80" },
+    { id: 41, title: "کھجور کے نخلستان", tag: "پھل و باغات", desc: "سندھ اور بلوچستان کے لمبے اور کھجوروں سے بھرے درخت۔", image: "https://images.unsplash.com/photo-1541344999736-83eca272f6fc?auto=format&fit=crop&w=800&q=80" },
+    { id: 42, title: "شفتالو اور آڑو کے باغات", tag: "پھل و باغات", desc: "سوات اور سوات وادی کے لذیذ و میٹھے آڑو۔", image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=800&q=80" },
+    { id: 43, title: "خوبانی کے دلکش باغات", tag: "پھل و باغات", desc: "گلگت بلتستان کی مشہور زرد اور میٹھی خوبانی۔", image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80" },
+    { id: 44, title: "بادام کے سفید و گلابی باغات", tag: "خشک میوہ جات", desc: "بہار کے موسم میں بادام کے درختوں پر کھلے خوبصورت پھول۔", image: "https://images.unsplash.com/photo-1536511154848-f1261d51c762?auto=format&fit=crop&w=800&q=80" },
+    { id: 45, title: "اخروٹ کے قد آور درخت", tag: "خشک میوہ جات", desc: "شمالی علاقہ جات میں قدرتی طور پر اگنے والے اخروٹ۔", image: "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80" },
+    { id: 46, title: "پستہ کے مخصوص فارمز", tag: "خشک میوہ جات", desc: "بلوچستان کی خشک اور پہاڑی زمین میں پستے کی کاشت۔", image: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=800&q=80" },
+    { id: 47, title: "چائے کے سبز اور اونچے باغات", tag: "نقد آور فصل", desc: "مانسہرہ اور بالائی علاقوں میں چائے کی پتیوں کی کاشت۔", image: "https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?auto=format&fit=crop&w=800&q=80" },
+    { id: 48, title: "زعفران کے قیمتی پھول", tag: "مصالحہ جات", desc: "سرخ و جامنی پھولوں سے ملنے والی دنیا کی مہنگی ترین بوٹی۔", image: "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80" },
+    { id: 49, title: "ادرک کی زیرِ زمین کاشت", tag: "مصالحہ جات", desc: "جدید شیڈ نیٹ فارمنگ کے ذریعے ترو تازہ ادرک کی فصل۔", image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=800&q=80" },
+    { id: 50, title: "ہلدی کے سرسبز پودے", tag: "مصالحہ جات", desc: "طبی اور کچن کی ملکہ ہلدی کی نامیاتی کاشت۔", image: "https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=800&q=80" },
+    { id: 51, title: "زیرہ اور سونف کی زراعت", tag: "مصالحہ جات", desc: "خوشبودار بیجوں والی نقد آور اور منافع بخش فصلیں۔", image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e2?auto=format&fit=crop&w=800&q=80" },
+    { id: 52, title: "اجوائن کے باریک فارم", tag: "مصالحہ جات", desc: "کم لاگت میں زیادہ سے زیادہ منافع فراہم کرنے والی جڑی بوٹی۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" },
+    { id: 53, title: "کلونجی کی مبارک کاشت", tag: "مصالحہ جات", desc: "سیاہ دانوں سے لیس شفابخش پودوں کی فارمنگ۔", image: "https://images.unsplash.com/photo-1536657464919-892534f60d6e?auto=format&fit=crop&w=800&q=80" },
+    { id: 54, title: "اسپغول کی بارانی فصل", tag: "طبی اجناس", desc: "طبی و ادویاتی اہمیت کا حامل سفید اسپغول۔", image: "https://images.unsplash.com/photo-1605001011157-26f607f0f423?auto=format&fit=crop&w=800&q=80" },
+    { id: 55, title: "کینولا اور رائیا کے کھیت", tag: "روغنی اجناس", desc: "خالص اور صحت بخش برانڈڈ کھانے کے تیل کا ذریعہ۔", image: "https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?auto=format&fit=crop&w=800&q=80" },
+    { id: 56, title: "سویا بین کی سائنسی زراعت", tag: "روغنی اجناس", desc: "پروٹین سے بھرپور دانوں کی بین الاقوامی سطح پر کاشت۔", image: "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=800&q=80" },
+    { id: 57, title: "زیتون کا نیا باغ", tag: "پھل و باغات", desc: "ڈرپ اریگیشن کے ذریعے لگائے گئے چھوٹے زیتون کے پودے۔", image: "https://images.unsplash.com/photo-1541344999736-83eca272f6fc?auto=format&fit=crop&w=800&q=80" },
+    { id: 58, title: "انجیر کے قدیمی باغات", tag: "پھل و باغات", desc: "مقدس اور میٹھے انجیر کے درختوں کی دیکھ بھال۔", image: "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80" },
+    { id: 59, title: "لیچی کے سرسبز باغات", tag: "پھل و باغات", desc: "سرخ چھلکے اور سفید رس والے لذیذ پھل۔", image: "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=800&q=80" },
+    { id: 60, title: "چیکو اور لوکاٹ کے فارم", tag: "پھل و باغات", desc: "سندھ اور ساحلی علاقوں کی نرم اور میٹھی پیداوار۔", image: "https://images.unsplash.com/photo-1536511154848-f1261d51c762?auto=format&fit=crop&w=800&q=80" },
+    { id: 61, title: "پپیتا (Papaya) ٹنل فارمنگ", tag: "پھل و باغات", desc: "ریڈ لیڈی ورائٹی کے پھلوں سے بھرے چھوٹے پودے۔", image: "https://images.unsplash.com/photo-1611080626919-7cf5a9dbab5b?auto=format&fit=crop&w=800&q=80" },
+    { id: 62, title: "کیلے کے وسیع و عریض فارمز", tag: "پھل و باغات", desc: "سندھ کے ہرے بھرے اور گھنے کیلے کے باغات۔", image: "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80" },
+    { id: 63, title: "اسٹرا بیری کے لال کھیت", tag: "پھل و باغات", desc: "ملچنگ شیٹ پر اگنے والی لذیذ اور چمکدار اسٹرا بیری۔", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=800&q=80" },
+    { id: 64, title: "شملہ مرچ کے ہائی ٹیک فارم", tag: "سبزیاں", desc: "سرخ، سبز اور پیلی شملہ مرچ کی ڈرپ اریگیشن کاشت۔", image: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=800&q=80" },
+    { id: 65, title: "اروی اور کچالو کی زراعت", tag: "سبزیاں", desc: "نمی اور پانی پسند جڑوں والی لذیذ سبزی۔", image: "https://images.unsplash.com/photo-1447175008436-084170927932?auto=format&fit=crop&w=800&q=80" },
+    { id: 66, title: "تندوری اور سلاطی کھیرا", tag: "سبزیاں", desc: "گرین ہاؤس میں تیار شدہ بیج لیس ککڑی۔", image: "https://images.unsplash.com/photo-1449300079323-02e209d9d3a6?auto=format&fit=crop&w=800&q=80" },
+    { id: 67, title: "کریلا ٹنل سسٹم", tag: "سبزیاں", desc: "بانس اور تاروں کی مدد سے لٹکتی ہوئی لمبی کریلے کی بیلیں۔", image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=800&q=80" },
+    { id: 68, title: "سرخ لوبیا اور راجما", tag: "دالیں", desc: "طاقتور اور پروٹین سے بھرپور نقد آور دالیں۔", image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e2?auto=format&fit=crop&w=800&q=80" },
+    { id: 69, title: "مونگ کی دال کے سبز کھیت", tag: "دالیں", desc: "کم وقت میں تیار ہونے والی برسات کے موسم کی فصل۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" },
+    { id: 70, title: "ماش کی دال کی کاشتکاری", tag: "دالیں", desc: "زرخیز زمین کی اہم اور اعلیٰ قیمت والی دال۔", image: "https://images.unsplash.com/photo-1536657464919-892534f60d6e?auto=format&fit=crop&w=800&q=80" },
+    { id: 71, title: "مسور کی دال کے فارم", tag: "دالیں", desc: "سردیوں کی بہترین اور منافع بخش پھلی دار فصل۔", image: "https://images.unsplash.com/photo-1605001011157-26f607f0f423?auto=format&fit=crop&w=800&q=80" },
+    { id: 72, title: "دیسی چنا اور کالا چنا", tag: "دالیں", desc: "خشک سالی برداشت کرنے والی تھل کی مرکزی فصل۔", image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e2?auto=format&fit=crop&w=800&q=80" },
+    { id: 73, title: "کابلی چنا (سفید چنا)", tag: "دالیں", desc: "بڑے سائز کے چنوں کی تجارتی کاشت۔", image: "https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=800&q=80" },
+    { id: 74, title: "موتھ دال اور گوارہ", tag: "دالیں", desc: "زمین کی زرخیزی بڑھانے اور طاقت دینے والی فصل۔", image: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=800&q=80" },
+    { id: 75, title: "السی (Flaxseed) کی زراعت", tag: "روغنی اجناس", desc: "نیلے پھولوں والی اومیگا تھری سے بھرپور السی۔", image: "https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?auto=format&fit=crop&w=800&q=80" },
+    { id: 76, title: "کاستر آئل (ارنڈی) کے پودے", tag: "روغنی اجناس", desc: "صنعتی تیل فراہم کرنے والا مضبوط اور طویل القامت پودا۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" },
+    { id: 77, title: "بمبر نیپیئر گراس (چارہ)", tag: "چارہ و غلہ", desc: "تیزی سے بڑھنے والا اور بار بار کٹائی دینے والا ہائبرڈ چارہ۔", image: "https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=800&q=80" },
+    { id: 78, title: "روڈس گراس ایکسپورٹ کوالٹی", tag: "چارہ و غلہ", desc: "پریس ہائے بنانے اور برآمد کے لیے بہترین چارہ۔", image: "https://images.unsplash.com/photo-1536657464919-892534f60d6e?auto=format&fit=crop&w=800&q=80" },
+    { id: 79, title: "جنتر اور سنگل چارہ", tag: "چارہ و غلہ", desc: "زمین میں نائٹروجن کی قدرتی مقدار میں اضافہ۔", image: "https://images.unsplash.com/photo-1605001011157-26f607f0f423?auto=format&fit=crop&w=800&q=80" },
+    { id: 80, title: "سلویا اور سٹرس کی نرسریاں", tag: "نرسری و پودے", desc: "فصلوں اور باغات کے لیے صحت مند قلمیں اور پودے۔", image: "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&w=800&q=80" },
+    { id: 81, title: "گلاب کی تجارتی پھول فارمنگ", tag: "پھول و تزئین", desc: "عرقِ گلاب اور منڈی کی برآمد کے لیے سرخ گلاب۔", image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" },
+    { id: 82, title: "گیندا (Marigold) کے پیلے کھیت", tag: "پھول و تزئین", desc: "زرد اور نارنجی خوبصورت پھولوں کا وسیع رقبہ۔", image: "https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=80" },
+    { id: 83, title: "موتیا اور چنبیلی کے باغات", tag: "پھول و تزئین", desc: "رات کو معطر کرنے والے خوشبودار سفید پھول۔", image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" },
+    { id: 84, title: "گلیڈیولس کی کٹ فلاور کاشت", tag: "پھول و تزئین", desc: "لمبی ڈنڈیوں والے رنگ برنگے سجاSeries پھول۔", image: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=800&q=80" },
+    { id: 85, title: "ٹیوبروز (مستقبل پھول)", tag: "پھول و تزئین", desc: "دلہن کے ہار اور عطر کی تیاری کے لیے خاص پھول۔", image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80" },
+    { id: 86, title: "ایلوویرا (گھیکوار) کے فارم", tag: "طبی اجناس", desc: "کاسمیک اور ادویات کی انڈسٹری کا خام مال۔", image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921?auto=format&fit=crop&w=800&q=80" },
+    { id: 87, title: "اسٹیویا (میٹھی تلسی)", tag: "طبی اجناس", desc: "شوگر کے مریضوں کے لیے قدرتی میٹھے پودے۔", image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" },
+    { id: 88, title: "مورنگا (سہانجنا) کا جنگل", tag: "طبی اجناس", desc: "سپر فوڈ اور غذائیت کا ملٹی وٹامن قدرتی خزانہ۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" },
+    { id: 89, title: "لیمن گراس اور سبز چائے", tag: "طبی اجناس", desc: "خوشبودار قہوہ اور ہربل چائے کے سرسبز پودے۔", image: "https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?auto=format&fit=crop&w=800&q=80" },
+    { id: 90, title: "تخم ملنگا کی نقد فصل", tag: "طبی اجناس", desc: "مشروبات میں استعمال ہونے والے افادیت بخش بیج۔", image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e2?auto=format&fit=crop&w=800&q=80" },
+    { id: 91, title: "لوبیا سبزی اور دال فارمنگ", tag: "سبزیاں", desc: "سبز پھلیوں کی شکل میں تازہ غذائیت سے بھرپور۔", image: "https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=800&q=80" },
+    { id: 92, title: "سفید زیرہ خضدار و بلوچستان", tag: "مصالحہ جات", desc: "اعلیٰ خوشبو اور کوالٹی والا دیسی زیرہ۔", image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e2?auto=format&fit=crop&w=800&q=80" },
+    { id: 93, title: "دھنیا بیج و ہرا دھنیا", tag: "مصالحہ جات", desc: "گھریلو استعمال اور تجارتی بیج دونوں مقصد کے لیے۔", image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" },
+    { id: 94, title: "شملہ سرخ و لال مرچ بائیو", tag: "سبزیاں", desc: "اعلیٰ برآمدی کوالٹی کی نامیاتی کاشت۔", image: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=800&q=80" },
+    { id: 95, title: "چیری ٹماٹر (Cherry Tomatoes)", tag: "سبزیاں", desc: "چھوٹے سائز کے قیمتی اور خوبصورت سرخ ٹماٹر۔", image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=800&q=80" },
+    { id: 96, title: "بیج لیس خربوزہ و تربوز", tag: "پھل و باغات", desc: "جدید ملچنگ ٹیکنالوجی سے تیار شدہ جدید پھل۔", image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=800&q=80" },
+    { id: 97, title: "ڈریگن فروٹ (Dragon Fruit)", tag: "پھل و باغات", desc: "جدید زرعی انقلاب کے تحت پاکستان میں جدید کاشت۔", image: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80" },
+    { id: 98, title: "پستے کے رنگین درخت", tag: "خشک میوہ جات", desc: "بلوچستان و سرحدی خطے کے قیمتی خشک میوے۔", image: "https://images.unsplash.com/photo-1537640538966-79f369143f8f?auto=format&fit=crop&w=800&q=80" },
+    { id: 99, title: "کاجو کی آزمائشی فارمنگ", tag: "خشک میوہ جات", desc: "ساحلی علاقوں میں کاجو کے نایاب درخت۔", image: "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=800&q=80" },
+    { id: 100, title: "سرسبز پاکستان جدید کھیت", tag: "ماڈل فارمنگ", desc: "100% اوریجنل ڈیٹا - پاکستان کی زرعی خوشحالی کی علامت۔", image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" }
 ];
 
-function loadCrops100() {
-    const slider = document.getElementById('cropsSlider');
-    if (!slider) return;
+// Auto Slider Execution Script
+function loadCropsSlider() {
+    const container = document.getElementById('cropsSlider');
+    if (!container) return;
 
-    let html = "";
-    cropsArray.forEach(item => {
-        html += `
-            <div class="slide">
-                <img src="${item.img}" alt="${item.name}" loading="lazy">
-                <div class="slide-caption">تصویر ${item.id}: ${item.name}</div>
+    let htmlContent = `<div class="slider-wrapper" id="cropSlideWrapper" style="display: flex; transition: transform 0.6s ease-in-out;">`;
+    
+    cropsData.forEach((item) => {
+        htmlContent += `
+            <div class="slide-item" style="min-width: 100%; box-sizing: border-box; padding: 10px; text-align: center;">
+                <div style="position: relative; overflow: hidden; border-radius: 15px; border: 2px solid #00ff87; box-shadow: 0 0 15px rgba(0,255,135,0.3);">
+                    <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 240px; object-fit: cover; display: block;">
+                    <span style="position: absolute; top: 10px; right: 10px; background: #00ff87; color: #000; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem;">${item.tag} #${item.id}</span>
+                </div>
+                <h3 style="color: #00ff87; margin-top: 12px; font-size: 1.15rem;">${item.title}</h3>
+                <p style="color: #ddd; font-size: 0.88rem; margin-top: 4px;">${item.desc}</p>
             </div>
         `;
     });
-    slider.innerHTML = html;
 
-    // Auto Engine Scroll
+    htmlContent += `</div>`;
+    container.innerHTML = htmlContent;
+
+    // Auto Loop Engine (ہر 3 سیکنڈ بعد سلائیڈ آٹو تبدیل ہو گی)
+    let currentIndex = 0;
+    const totalSlides = cropsData.length;
+    const wrapper = document.getElementById('cropSlideWrapper');
+
     setInterval(() => {
-        if (slider.scrollLeft <= -(slider.scrollWidth - slider.clientWidth - 5)) {
-            slider.scrollLeft = 0;
-        } else {
-            slider.scrollBy({ left: -290, behavior: 'smooth' });
+        currentIndex = (currentIndex + 1) % totalSlides;
+        if(wrapper) {
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
         }
-    }, 2500);
+    }, 3000);
 }
 
-document.addEventListener("DOMContentLoaded", loadCrops100);
+document.addEventListener('DOMContentLoaded', loadCropsSlider);
