@@ -108,14 +108,12 @@
         <h2 class="section-title"><i class="fa-solid fa-cloud-sun-rain"></i> لائیو موسمی حالات و گوجرہ ویدر الرٹ</h2>
         <div class="weather-grid">
             
-            <!-- NEW CARD 1: Replaced 29°C Fake Card -->
             <div class="weather-card glass-card color-card-1">
                 <i class="fa-solid fa-shield-halved weather-icon" style="color: #00ff87;"></i>
                 <h4>صداقت و اعتماد</h4>
                 <p style="font-weight: bold; color: #00ff87; font-size: 0.9rem;">۱۰۰٪ اوریجنل ملٹی نیشنل زرعی ادویات</p>
             </div>
 
-            <!-- NEW CARD 2: Replaced 10 km/h Fake Card -->
             <div class="weather-card glass-card color-card-2">
                 <i class="fa-solid fa-user-doctor weather-icon" style="color: #00f0ff;"></i>
                 <h4>مفت زرعی مشورہ</h4>
@@ -134,7 +132,7 @@
         </div>
     </section>
 
-    <!-- Dedicated Original Crop Scanner Camera Section (scanner.html Link Added) -->
+    <!-- Dedicated Original Crop Scanner Camera Section -->
     <section class="camera-section">
         <div class="camera-card glass-card neon-box-cyber" style="padding: 22px; text-align: center;">
             <div class="scanner-ring" style="margin-bottom: 12px;">
@@ -143,31 +141,22 @@
             <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">اورجینل فصل بیماری اسکینر کیمرہ</h3>
             <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">اپنے موبائل کیمرے سے لائیو فصل اسکین کریں — بیماری اور اس کا علاج دیکھیں۔</p>
             
-            <!-- Updated Scanner File Link -->
             <a href="scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
                 <i class="fa-solid fa-camera"></i> ڈائریکٹ لائیو اسکینر کیمرہ کھولیں
             </a>
         </div>
     </section>
 
-    <!-- BOX 1: Crops & Farming Auto-Play Slider -->
+    <!-- Crops & Farming Auto-Play Slider Section -->
     <section class="poster-slider-section">
-        <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> ۱. کسان و فصلوں کی کاشت کی لائیو تصاویر</h2>
+        <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> کسان و فصلوں کی کاشت کی لائیو تصاویر</h2>
         <div class="slider-container glass-card" id="cropsSlider">
-            <!-- Dynamic Crops Images -->
-        </div>
-    </section>
-
-    <!-- BOX 2: Medicines & Fertilizers Auto-Play Slider -->
-    <section class="poster-slider-section" style="margin-top: 25px;">
-        <h2 class="section-title"><i class="fa-solid fa-flask-vial"></i> ۲. تمام زرعی ادویات و کھادوں کی لائیو تصاویر</h2>
-        <div class="slider-container glass-card" id="medicinesSlider">
-            <!-- Dynamic Medicines & Fertilizers Images Engine Loaded Below -->
+            <!-- Dynamic Crops Images Loaded via JS -->
         </div>
     </section>
 
     <!-- Medicine Categories Section -->
-    <section class="catalog-section">
+    <section class="catalog-section" style="margin-top: 25px;">
         <h2 class="section-title"><i class="fa-solid fa-boxes-packing"></i> دستیاب زرعی ادویات کی قسمیں</h2>
         <div class="catalog-grid">
             <div class="catalog-card glass-card">
@@ -266,19 +255,12 @@
             };
         }
 
-        // Render Online Images for Medicines & Crops Sliders
+        // Render Online Images for Crops Slider
         function loadSliderImages() {
             const cropsData = [
                 { title: "گندم کی بہترین فصل", desc: "اعلیٰ پیداوار اور شادابی", img: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80" },
                 { title: "مکئی کی کاشت", desc: "طاقتور دانہ اور شاندار رنگت", img: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80" },
                 { title: "کپاس کی فصل", desc: "بیماریوں سے محفوظ فصل", img: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80" }
-            ];
-
-            const medicinesData = [
-                { title: "کیڑے مار اسپرے (Pesticides)", desc: "سنڈی اور سفید مکھی کا مکمل خاتمہ", img: "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&w=600&q=80" },
-                { title: "طاقتور این پی کے کھاد (NPK Fertilizer)", desc: "پودوں کی تیز رفتار بڑھوتری کے لیے", img: "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=600&q=80" },
-                { title: "جڑی بوٹی مار دوا (Herbicides)", desc: "فصل کو جڑی بوٹیوں سے پاک کریں", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80" },
-                { title: "فاسٹ گروتھ ٹانک (Growth Booster)", desc: "ریکارڈ پیداوار اور مظبوط جڑیں", img: "https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=600&q=80" }
             ];
 
             const cropsSlider = document.getElementById('cropsSlider');
@@ -291,33 +273,20 @@
                     </div>
                 `).join('');
             }
-
-            const medicinesSlider = document.getElementById('medicinesSlider');
-            if(medicinesSlider) {
-                medicinesSlider.innerHTML = medicinesData.map(item => `
-                    <div class="slider-card">
-                        <img src="${item.img}" alt="${item.title}">
-                        <h4>${item.title}</h4>
-                        <p>${item.desc}</p>
-                    </div>
-                `).join('');
-            }
         }
 
-        // Auto Scroll Engine for Both Sliders
+        // Auto Scroll Engine for Slider
         function startAutoSliders() {
-            const sliders = [document.getElementById('cropsSlider'), document.getElementById('medicinesSlider')];
-            sliders.forEach(slider => {
-                if(slider) {
-                    setInterval(() => {
-                        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
-                            slider.scrollLeft = 0;
-                        } else {
-                            slider.scrollLeft += 220;
-                        }
-                    }, 3000);
-                }
-            });
+            const slider = document.getElementById('cropsSlider');
+            if(slider) {
+                setInterval(() => {
+                    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
+                        slider.scrollLeft = 0;
+                    } else {
+                        slider.scrollLeft += 220;
+                    }
+                }, 3000);
+            }
         }
 
         document.addEventListener("DOMContentLoaded", () => {
