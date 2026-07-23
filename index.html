@@ -22,6 +22,43 @@
             display: none !important;
             content: none !important;
         }
+
+        /* Slider Image & Card Styles */
+        .slider-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 15px;
+            border-radius: 15px;
+        }
+        .slider-card {
+            min-width: 250px;
+            max-width: 280px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #00ff87;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .slider-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 135, 0.5);
+        }
+        .slider-card h4 {
+            color: #00ff87;
+            margin: 8px 0 4px 0;
+            font-size: 1rem;
+        }
+        .slider-card p {
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            margin: 0;
+        }
     </style>
 </head>
 <body onclick="playAutoVoiceEverywhere()">
@@ -48,7 +85,7 @@
 
             <!-- Direct Home Delivery WhatsApp Contact Button -->
             <div style="margin: 15px 0;">
-                <a href="https://wa.me/920000000000?text=السلام%20علیکم!%20ظفر%20صاحب%20مجھے%20اصل%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
+                <a href="https://wa.me/923051801367?text=السلام%20علیکم!%20ظفر%20صاحب%20مجھے%20اصل%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
                     <i class="fa-brands fa-whatsapp"></i> ادویات کی اوریجنل ہوم ڈیلیوری کے لیے واٹس ایپ کریں
                 </a>
             </div>
@@ -59,9 +96,9 @@
                 </button>
             </div>
 
-            <!-- Hidden Audio Script Text -->
+            <!-- Hidden Audio Script Text (Extended ~2 Minutes Detailed Script) -->
             <div style="display: none;" id="hiddenBabarAudioText">
-                السلام علیکم! ظفر چوہدری زراعت مرکز میں آپ کو خوش آمدید کہتے ہیں۔ آپ ہمارے محترم رہنما ظفر عرف بابر صاحب سے براہ راست مل سکتے ہیں اور اپنی فصل کا بہترین مشورہ حاصل کر سکتے ہیں۔ ہمارے پاس تمام ملٹی نیشنل برانڈز کی تصدیق شدہ کیڑے مار ادویات اور اعلیٰ کھادیں مناسب قیمت پر دستیاب ہیں۔ آپ ہماری ایپ کے ذریعے فصل بیماری اسکینر کیمرہ کھول کر پتے کا لائیو جائزہ لے سکتے ہیں اور اصلی ادویات ڈیلیور کروا سکتے ہیں۔ اگر آپ اپنے بزنس کے لیے ایپ بنوانا چاہتے ہیں تو ڈیولپر طاہر نذیر صاحب سے رابطہ کریں۔ شکریہ!
+                السلام علیکم ورحمتہ اللہ وبرکاتہ! ظفر چوہدری زراعت کے آفیشل ڈیجیٹل پلیٹ فارم پر آپ کا پرخلوص استقبال ہے۔ بااعتماد زرعی مشورے اور اعلیٰ معیار کی ادویات کے لیے ہماری دکان پر تشریف لائیں۔ ہماری دکان پر تمام ملٹی نیشنل کمپنیاں اور مستند برانڈز کی تصدیق شدہ کیڑے مار ادویات، جڑی بوٹی مار اسپرے، معیاری کھادیں اور طاقتور گروتھ ٹانک دستیاب ہیں۔ چاہے آپ کی گندم کی فصل ہو، کپاس، مکئی، دھان یا کماد اور باغات ہوں، ہر فصل کی بیماری کے خاتمے اور ریکارڈ پیداوار کے لیے ہمارے پاس جدید اور حل موجود ہیں۔ اگر آپ کی فصل کو سنڈی، سست تیلا، سفید مکھی یا فنگس کا مسئلہ ہے تو آپ ہماری ایپ میں دیے گئے اوریجنل فصل اسکینر کیمرہ کے ذریعے بیماری چیک کر سکتے ہیں اور براہِ راست اصل زرعی ادویات اپنے گھر منگوا سکتے ہیں۔ آپ ہمارے محترم رہنما ظفر عرف بابر صاحب سے اپنی فصل کا بہترین علاج جاننے کے لیے دکان پر تشریف لائیں اور بروقت مشورہ حاصل کریں۔ اور اگر آپ بھی اپنے بزنس، دکان یا پراڈکٹس کے لیے ایسی ہی خوبصورت اور VIP اینڈرائیڈ ایپ بنوانا چاہتے ہیں، تو نیچے دیے گئے ایپس ڈیولپر طاہر نذیر صاحب کی پروفائل اور واٹس ایپ بٹن پر رابطہ کریں۔ طاہر نذیر صاحب آپ کی بزنس ایپ مکمل ڈیزائن اور تیار کر کے دیں گے۔ شکریہ!
             </div>
         </div>
     </section>
@@ -91,16 +128,16 @@
         </div>
     </section>
 
-    <!-- Dedicated Original Crop Scanner Camera Link Section -->
+    <!-- Dedicated Original Crop Scanner Camera Section (Direct App Launch) -->
     <section class="camera-section">
         <div class="camera-card glass-card neon-box-cyber" style="padding: 22px; text-align: center;">
             <div class="scanner-ring" style="margin-bottom: 12px;">
                 <i class="fa-solid fa-camera-retro camera-icon" style="font-size: 2.5rem; color: #00ff87;"></i>
             </div>
             <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">اورجینل فصل بیماری اسکینر کیمرہ</h3>
-            <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">براؤزر سے ڈائریکٹ کیمرہ آن کریں — بیماری اور اس کا علاج دیکھیں۔</p>
+            <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">ڈائریکٹ باخبر کسان اسکینر آن کریں — بیماری اور اس کا علاج دیکھیں۔</p>
             
-            <a href="crop-scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
+            <a href="bakhabarkisaan://" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
                 <i class="fa-solid fa-camera"></i> ڈائریکٹ لائیو اسکینر کیمرہ کھولیں
             </a>
         </div>
@@ -110,7 +147,7 @@
     <section class="poster-slider-section">
         <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> ۱. کسان و فصلوں کی کاشت کی لائیو تصاویر</h2>
         <div class="slider-container glass-card" id="cropsSlider">
-            <!-- Images Loaded via crops-data.js -->
+            <!-- Dynamic Crops Images -->
         </div>
     </section>
 
@@ -118,7 +155,7 @@
     <section class="poster-slider-section" style="margin-top: 25px;">
         <h2 class="section-title"><i class="fa-solid fa-flask-vial"></i> ۲. تمام زرعی ادویات و کھادوں کی لائیو تصاویر</h2>
         <div class="slider-container glass-card" id="medicinesSlider">
-            <!-- Images Loaded via medicines-data.js -->
+            <!-- Dynamic Medicines & Fertilizers Images Engine Loaded Below -->
         </div>
     </section>
 
@@ -171,7 +208,7 @@
 
     <!-- Main Order Section -->
     <section class="order-section" style="margin: 25px 0;">
-        <a href="https://wa.me/920000000000?text=السلام%20علیکم!%20ظفر%20صاحب%20مجھے%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
+        <a href="https://wa.me/923051801367?text=السلام%20علیکم!%20ظفر%20صاحب%20مجھے%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
             <i class="fa-brands fa-whatsapp"></i> ظفر چوہدری سے ادویات کی ہوم ڈیلیوری منگوائیں
         </a>
     </section>
@@ -180,7 +217,7 @@
         <p>تمام حقوق محفوظ ہیں © ظفر چوہدری زراعت | ڈیجیٹل ڈیزائن کردہ: طاہر نذیر</p>
     </footer>
 
-    <!-- Audio, Weather & Auto-Play Script -->
+    <!-- Audio, Weather & Auto-Play Script Engine -->
     <script>
         var voicePlayed = false;
 
@@ -248,6 +285,44 @@
             }
         }
 
+        // Render Online Images for Medicines & Crops Sliders
+        function loadSliderImages() {
+            const cropsData = [
+                { title: "گندم کی بہترین فصل", desc: "اعلیٰ پیداوار اور شادابی", img: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80" },
+                { title: "مکئی کی کاشت", desc: "طاقتور دانہ اور شاندار رنگت", img: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80" },
+                { title: "کپاس کی فصل", desc: "بیماریوں سے محفوظ فصل", img: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80" }
+            ];
+
+            const medicinesData = [
+                { title: "کیڑے مار اسپرے (Pesticides)", desc: "سنڈی اور سفید مکھی کا مکمل خاتمہ", img: "https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?auto=format&fit=crop&w=600&q=80" },
+                { title: "طاقتور این پی کے کھاد (NPK Fertilizer)", desc: "پودوں کی تیز رفتار بڑھوتری کے لیے", img: "https://images.unsplash.com/photo-1628352081506-83c43123ed6d?auto=format&fit=crop&w=600&q=80" },
+                { title: "جڑی بوٹی مار دوا (Herbicides)", desc: "فصل کو جڑی بوٹیوں سے پاک کریں", img: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=600&q=80" },
+                { title: "فاسٹ گروتھ ٹانک (Growth Booster)", desc: "ریکارڈ پیداوار اور مظبوط جڑیں", img: "https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=600&q=80" }
+            ];
+
+            const cropsSlider = document.getElementById('cropsSlider');
+            if(cropsSlider) {
+                cropsSlider.innerHTML = cropsData.map(item => `
+                    <div class="slider-card">
+                        <img src="${item.img}" alt="${item.title}">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            const medicinesSlider = document.getElementById('medicinesSlider');
+            if(medicinesSlider) {
+                medicinesSlider.innerHTML = medicinesData.map(item => `
+                    <div class="slider-card">
+                        <img src="${item.img}" alt="${item.title}">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
         // Auto Scroll Engine for Both Sliders
         function startAutoSliders() {
             const sliders = [document.getElementById('cropsSlider'), document.getElementById('medicinesSlider')];
@@ -257,7 +332,7 @@
                         if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
                             slider.scrollLeft = 0;
                         } else {
-                            slider.scrollLeft += 200;
+                            slider.scrollLeft += 220;
                         }
                     }, 3000);
                 }
@@ -266,6 +341,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             fetchRealWeather();
+            loadSliderImages();
             startAutoSliders();
         });
     </script>
