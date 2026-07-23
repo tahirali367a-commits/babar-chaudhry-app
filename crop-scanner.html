@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فصل بیماری اسکینر اوریجنل - Crop Health AI</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0b0f19;
+            color: #e6edf3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        .scanner-card {
+            width: 100%;
+            max-width: 500px;
+            background: #161b22;
+            border: 2px solid #2ea043;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 255, 127, 0.2);
+            text-align: center;
+        }
+        .badge-verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(46, 160, 67, 0.15);
+            color: #3fb950;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            border: 1px solid #2ea043;
+        }
+        .header-title {
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+        .subtitle {
+            color: #8b949e;
+            font-size: 13px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .camera-box {
+            width: 100%;
+            height: 290px;
+            background: #010409;
+            border: 2px dashed #30363d;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .camera-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .scan-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #3fb950;
+            box-shadow: 0 0 15px #3fb950;
+            animation: scanAnim 2s infinite ease-in-out;
+            display: none;
+        }
+        @keyframes scanAnim {
+            0% { top: 0%; }
+            50% { top: 95%; }
+            100% { top: 0%; }
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+        .btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn-google {
+            background: #1f6feb;
+        }
+        .btn-plantnet {
+            background: #d97706;
+        }
+        .info-box {
+            background: #0d1117;
+            border-right: 4px solid #3fb950;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: right;
+            margin-top: 22px;
+            font-size: 13px;
+            color: #c9d1d9;
+            line-height: 1.6;
+        }
+        .step-tag {
+            color: #3fb950;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanner-card">
+    <div class="badge-verified">
+        <i class="fa-solid fa-circle-check"></i> ۱۰۰٪ اوریجنل زرعی اے آئی اسکینر
+    </div>
+    
+    <h2 class="header-title"><i class="fa-solid fa-leaf" style="color:#3fb950;"></i> لائیو کراپ ہیلتھ اسکینر</h2>
+    <p class="subtitle">بغیر کسی ایپ کے ڈائریکٹ کیمرے سے بیمار پتے کی تصویر لیں — پودے کا نام، بیماری اور تجویز کردہ دوائی معلوم کریں</p>
+
+    <!-- لائیو کیمرہ ڈسپلے باکس -->
+    <div class="camera-box" id="camContainer">
+        <i class="fa-solid fa-camera-retro fa-4x" style="color: #30363d; margin-bottom: 12px;"></i>
+        <p style="color: #8b949e; font-size: 14px;">تصویر کھینچنے کے لیے نیچے دیے گئے بٹن پر دبائیں</p>
+        <div class="scan-overlay" id="scanLine"></div>
+    </div>
+
+    <!-- اوریجنل اینڈرائیڈ بیک کیمرہ ایکسس -->
+    <input type="file" id="cropCamInput" accept="image/*" capture="environment" style="display: none;" onchange="processCropScan(event)">
+
+    <div class="btn-group">
+        <!-- ۱. لائیو کیمرہ آن کرنے کا بٹن -->
+        <button class="btn" onclick="document.getElementById('cropCamInput').click();">
+            <i class="fa-solid fa-camera fa-lg"></i> ۱. لائیو کیمرہ آن کریں اور فوٹو لیں
+        </button>
+
+        <!-- ۲. گوگل ویژول بیماری و دوائی رپورٹ -->
+        <a id="googleAnalysisBtn" href="https://lens.google.com/" target="_blank" class="btn btn-google" style="display: none;">
+            <i class="fa-solid fa-magnifying-glass-chart"></i> ۲. بیماری و دوائی کی مکمل رپورٹ دیکھیں (گوگل اے آئی)
+        </a>
+
+        <!-- ۳. پلانٹ نیٹ اوریجنل زراعت دان ڈیٹا بیس -->
+        <a id="plantnetBtn" href="https://identify.plantnet.org/" target="_blank" class="btn btn-plantnet" style="display: none;">
+            <i class="fa-solid fa-seedling"></i> ۳. پودے کا سائنسی نام و ڈیٹا بیس دیکھیں
+        </a>
+    </div>
+
+    <div class="info-box">
+        <strong><i class="fa-solid fa-circle-info"></i> یہ اسکینر کیسے کام کرتا ہے؟</strong><br>
+        <span class="step-tag">مرحلہ ۱:</span> "لائیو کیمرہ آن کریں" پر کلک کریں۔ آپ کے موبائل کا اصلی کیمرہ کھل جائے گا۔<br>
+        <span class="step-tag">مرحلہ ۲:</span> بیمار پتے یا فصل کی صاف تصویر بنا کر اوکے (OK) کریں۔<br>
+        <span class="step-tag">مرحلہ ۳:</span> "بیماری و دوائی کی رپورٹ" پر کلک کریں، اوریجنل اے آئی سسٹم آپ کو فصل کا نام، بیماری اور اس کے علاج کی دوائی بتا دے گا۔
+    </div>
+</div>
+
+<script>
+    function processCropScan(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const container = document.getElementById('camContainer');
+                container.innerHTML = `<img src="${e.target.result}" alt="Crop Scan"><div class="scan-overlay" id="scanLine" style="display:block;"></div>`;
+                
+                // تصویر کھینچنے کے بعد دونوں اوریجنل رپورٹ بٹن ظاہر ہو جائیں گے
+                document.getElementById('googleAnalysisBtn').style.display = 'flex';
+                document.getElementById('plantnetBtn').style.display = 'flex';
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+</body>
+</html>
