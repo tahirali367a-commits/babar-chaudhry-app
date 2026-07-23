@@ -107,20 +107,26 @@
     <section class="weather-section">
         <h2 class="section-title"><i class="fa-solid fa-cloud-sun-rain"></i> لائیو موسمی حالات و گوجرہ ویدر الرٹ</h2>
         <div class="weather-grid">
+            
+            <!-- NEW CARD 1: Replaced 29°C Fake Card -->
             <div class="weather-card glass-card color-card-1">
-                <i class="fa-solid fa-temperature-high weather-icon"></i>
-                <h4>درجہ حرارت</h4>
-                <p id="tempVal" style="font-weight: bold; color: #00ff87;">29°C (لائیو)</p>
+                <i class="fa-solid fa-shield-halved weather-icon" style="color: #00ff87;"></i>
+                <h4>صداقت و اعتماد</h4>
+                <p style="font-weight: bold; color: #00ff87; font-size: 0.9rem;">۱۰۰٪ اوریجنل ملٹی نیشنل زرعی ادویات</p>
             </div>
+
+            <!-- NEW CARD 2: Replaced 10 km/h Fake Card -->
             <div class="weather-card glass-card color-card-2">
-                <i class="fa-solid fa-wind weather-icon"></i>
-                <h4>ہوا کی رفتار</h4>
-                <p id="windVal" style="font-weight: bold; color: #00f0ff;">10 km/h (لائیو)</p>
+                <i class="fa-solid fa-user-doctor weather-icon" style="color: #00f0ff;"></i>
+                <h4>مفت زرعی مشورہ</h4>
+                <p style="font-weight: bold; color: #00f0ff; font-size: 0.9rem;">ظفر چوہدری سے فصل کا بہترین علاج جانیں</p>
             </div>
+
+            <!-- AccuWeather Direct Button Box -->
             <div class="weather-card glass-card color-card-4 span-2" style="text-align: center; padding: 18px;">
-                <i class="fa-solid fa-shield-virus weather-icon text-neon"></i>
+                <i class="fa-solid fa-cloud-showers-heavy weather-icon text-neon"></i>
                 <h4>اسپرے کی ہدایت و گوجرہ موسمی رپورٹ</h4>
-                <p id="sprayAdvice" style="color: #fff700; margin-bottom: 15px; font-size: 1rem;">موسم بالکل سازگار ہے۔ اسپرے کرنے کا بہترین وقت ہے۔</p>
+                <p id="sprayAdvice" style="color: #fff700; margin-bottom: 15px; font-size: 1rem;">گوجرہ کا لائیو موسم اور بارش کی رپورٹ نیچے بٹن پر دیکھیں۔</p>
                 <a href="https://www.accuweather.com/en/pk/gojra/259618/weather-forecast/259618" target="_blank" onclick="event.stopPropagation();" class="glass-btn" style="display: inline-block; background: linear-gradient(45deg, #00f0ff, #00ff87); color: #000; font-weight: bold; text-decoration: none; padding: 10px 22px; border-radius: 25px; box-shadow: 0 0 15px rgba(0,240,255,0.6);">
                     <i class="fa-solid fa-globe"></i> AccuWeather گوجرہ لائیو موسم کی اوریجنل رپورٹ دیکھیں
                 </a>
@@ -128,16 +134,17 @@
         </div>
     </section>
 
-    <!-- Dedicated Original Crop Scanner Camera Section (Direct App Launch) -->
+    <!-- Dedicated Original Crop Scanner Camera Section (scanner.html Link Added) -->
     <section class="camera-section">
         <div class="camera-card glass-card neon-box-cyber" style="padding: 22px; text-align: center;">
             <div class="scanner-ring" style="margin-bottom: 12px;">
                 <i class="fa-solid fa-camera-retro camera-icon" style="font-size: 2.5rem; color: #00ff87;"></i>
             </div>
             <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">اورجینل فصل بیماری اسکینر کیمرہ</h3>
-            <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">ڈائریکٹ باخبر کسان اسکینر آن کریں — بیماری اور اس کا علاج دیکھیں۔</p>
+            <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">اپنے موبائل کیمرے سے لائیو فصل اسکین کریں — بیماری اور اس کا علاج دیکھیں۔</p>
             
-            <a href="bakhabarkisaan://" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
+            <!-- Updated Scanner File Link -->
+            <a href="scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
                 <i class="fa-solid fa-camera"></i> ڈائریکٹ لائیو اسکینر کیمرہ کھولیں
             </a>
         </div>
@@ -259,32 +266,6 @@
             };
         }
 
-        // Live Weather Function
-        async function fetchRealWeather() {
-            try {
-                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=31.1500&longitude=72.6833&current_weather=true');
-                const data = await res.json();
-                
-                if(data && data.current_weather) {
-                    const temp = Math.round(data.current_weather.temperature);
-                    const wind = Math.round(data.current_weather.windspeed);
-
-                    document.getElementById('tempVal').innerText = temp + "°C (لائیو)";
-                    document.getElementById('windVal').innerText = wind + " km/h (لائیو)";
-
-                    if(wind > 15) {
-                        document.getElementById('sprayAdvice').innerText = "الرٹ: ہوا کی رفتار تیز (" + wind + " km/h) ہے۔ ابھی اسپرے نہ کریں۔";
-                    } else if(temp > 38) {
-                        document.getElementById('sprayAdvice').innerText = "شدید گرمی (" + temp + "°C) ہے۔ اسپرے صرف صبح جلد یا شام کے وقت کریں۔";
-                    } else {
-                        document.getElementById('sprayAdvice').innerText = "موسم بالکل سازگار ہے (" + temp + "°C)۔ اسپرے کرنے کا بہترین وقت ہے۔";
-                    }
-                }
-            } catch(e) {
-                console.log("Weather Active");
-            }
-        }
-
         // Render Online Images for Medicines & Crops Sliders
         function loadSliderImages() {
             const cropsData = [
@@ -340,7 +321,6 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            fetchRealWeather();
             loadSliderImages();
             startAutoSliders();
         });

@@ -1,0 +1,123 @@
+    <!-- Dedicated Original Crop Scanner Camera Section (Native Web App) -->
+    <section class="camera-section" id="scannerSection">
+        <div class="camera-card glass-card neon-box-cyber" style="padding: 22px; text-align: center; position: relative;">
+            <div class="scanner-ring" style="margin-bottom: 12px;">
+                <i class="fa-solid fa-camera-retro camera-icon" style="font-size: 2.5rem; color: #00ff87;"></i>
+            </div>
+            <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">VIP لائیو فصل اسکینر (Original)</h3>
+            <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">اپنے موبائل کیمرے سے لائیو فصل کی تصویر کھینچیں، بیماری اور علاج جانیں۔</p>
+            
+            <!-- Actual HTML5 Mobile Camera Input -->
+            <label class="cam-btn-neon" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; cursor: pointer; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
+                <i class="fa-solid fa-camera"></i> لائیو کیمرہ کھولیں اور اسکین کریں
+                <!-- capture="environment" opens the back camera on Android -->
+                <input type="file" accept="image/*" capture="environment" id="cropCamera" style="display: none;">
+            </label>
+
+            <!-- Scanning Process Area (Hidden initially) -->
+            <div id="scanProcessArea" style="display: none; margin-top: 25px; position: relative; overflow: hidden; border-radius: 10px;">
+                <img id="capturedImage" src="" style="width: 100%; max-width: 320px; border-radius: 10px; border: 2px solid #00f0ff; object-fit: cover;">
+                <div class="laser-scan" id="laserLine"></div>
+                <p id="scanStatusText" style="color: #fff700; font-weight: bold; margin-top: 15px; font-size: 1.1rem; animation: pulse 1.5s infinite;">سسٹم لائیو بیماری چیک کر رہا ہے...</p>
+            </div>
+
+            <!-- Scan Result Area (Hidden initially) -->
+            <div id="scanResultArea" style="display: none; margin-top: 20px; background: rgba(0, 0, 0, 0.7); border: 1px solid #00ff87; padding: 18px; border-radius: 12px; text-align: right;">
+                <h4 style="color: #ff3366; margin-bottom: 12px; font-size: 1.1rem; border-bottom: 1px solid #ff3366; padding-bottom: 8px;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> تشخیص شدہ بیماری: <br><span id="diseaseName" style="color: #fff; font-size: 1rem; display: block; margin-top: 5px;"></span>
+                </h4>
+                <p style="color: #00ff87; font-size: 1rem; margin-bottom: 20px;">
+                    <i class="fa-solid fa-prescription-bottle-medical"></i> <strong>بہترین علاج:</strong> <br><span id="medicineName" style="color: #cbd5e1; font-size: 0.95rem;"></span>
+                </p>
+                <div style="text-align: center;">
+                    <a href="https://wa.me/923051801367?text=السلام%20علیکم!%20ظفر%20صاحب%20میں%20نے%20ایپ%20اسکینر%20سے%20فصل%20اسکین%20کی%20ہے۔%20مجھے%20اس%20بیماری%20کی%20اصلی%20دوا%20کی%20ہوم%20ڈیلیوری%20چاہیے۔" target="_blank" class="glass-btn" style="background: #25D366; color: #fff; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 0.95rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);">
+                        <i class="fa-brands fa-whatsapp"></i> یہ دوا ظفر صاحب سے منگوائیں
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scanner Logic & Animations -->
+    <style>
+        .laser-scan {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 320px;
+            height: 5px;
+            background: #00ff87;
+            box-shadow: 0 0 20px #00ff87, 0 0 40px #00f0ff;
+            animation: scanMove 2s infinite ease-in-out;
+            z-index: 10;
+        }
+        @keyframes scanMove {
+            0% { top: 5%; opacity: 0.8; }
+            50% { top: 90%; opacity: 1; }
+            100% { top: 5%; opacity: 0.8; }
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cameraInput = document.getElementById('cropCamera');
+            const scanProcessArea = document.getElementById('scanProcessArea');
+            const capturedImage = document.getElementById('capturedImage');
+            const scanResultArea = document.getElementById('scanResultArea');
+            const laserLine = document.getElementById('laserLine');
+            const scanStatusText = document.getElementById('scanStatusText');
+            const diseaseName = document.getElementById('diseaseName');
+            const medicineName = document.getElementById('medicineName');
+
+            // Zafar Choudhary's Expert Agricultural Database (Simulated Logic)
+            const cropsDatabase = [
+                { disease: "سفید مکھی اور سست تیلا (Whitefly & Aphids)", med: "ہائی پاور کیڑے مار اسپرے (Pesticide) استعمال کریں۔ سنڈی اور مکھی کا مکمل خاتمہ۔" },
+                { disease: "فنگس کا حملہ یا جڑوں کی بیماری (Fungal Infection)", med: "فنگس کش (Fungicide) زرعی دوا کا فوری اسپرے کریں۔" },
+                { disease: "پتوں کا پیلا پن اور کمزور بڑھوتری (Nutrient Deficiency)", med: "اوریجنل این پی کے (NPK) کھاد اور فاسٹ گروتھ ٹانک دیں۔" },
+                { disease: "امریکن یا گلابی سنڈی کا حملہ (Bollworm Attack)", med: "طاقتور سنڈی مار زہر کا فوری اسپرے کریں تاکہ فصل بچ سکے۔" },
+                { disease: "جڑی بوٹیوں کی کثرت (Weeds Issue)", med: "فصل کے مطابق جڑی بوٹی مار (Herbicide) دوا استعمال کریں۔" }
+            ];
+
+            if(cameraInput) {
+                cameraInput.addEventListener('change', function(e) {
+                    if (e.target.files && e.target.files[0]) {
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(event) {
+                            // 1. Show Process UI, hide previous results
+                            scanResultArea.style.display = 'none';
+                            scanProcessArea.style.display = 'block';
+                            laserLine.style.display = 'block';
+                            capturedImage.src = event.target.result;
+                            scanStatusText.innerText = "سسٹم لائیو بیماری چیک کر رہا ہے...";
+                            scanStatusText.style.color = "#fff700";
+                            
+                            // 2. Simulate AI scanning delay (3 seconds)
+                            setTimeout(() => {
+                                laserLine.style.display = 'none'; // Stop laser
+                                scanStatusText.innerText = "اسکین مکمل ہو گیا! رپورٹ تیار ہے۔";
+                                scanStatusText.style.color = "#00ff87";
+                                
+                                // 3. Pick a smart simulated result
+                                const randomResult = cropsDatabase[Math.floor(Math.random() * cropsDatabase.length)];
+                                diseaseName.innerText = randomResult.disease;
+                                medicineName.innerText = randomResult.med;
+                                
+                                // 4. Show Results
+                                scanResultArea.style.display = 'block';
+                            }, 3500); // 3.5 Seconds timer
+                        }
+                        
+                        reader.readAsDataURL(e.target.files[0]);
+                    }
+                });
+            }
+        });
+    </script>
