@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فصل بیماری اسکینر اوریجنل - Crop Health AI</title>
+    <title>فصل بیماری اسکینر - باخبر کسان و ظفر رجوکا</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -27,70 +27,39 @@
             width: 100%;
             max-width: 500px;
             background: #161b22;
-            border: 2px solid #00ff87;
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 10px 30px rgba(0, 255, 135, 0.2);
+            border: 2px solid #2ea043;
+            border-radius: 15px;
+            padding: 20px;
             text-align: center;
-        }
-        .badge-verified {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: rgba(0, 255, 135, 0.15);
-            color: #00ff87;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 12px;
-            border: 1px solid #00ff87;
         }
         .header-title {
             color: #ffffff;
-            font-size: 22px;
-            margin-bottom: 6px;
+            font-size: 20px;
+            margin-bottom: 8px;
         }
         .subtitle {
             color: #8b949e;
             font-size: 13px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             line-height: 1.5;
         }
         .camera-box {
             width: 100%;
-            height: 270px;
+            height: 250px;
             background: #010409;
-            border: 2px dashed #30363d;
-            border-radius: 15px;
+            border: 2px dashed #2ea043;
+            border-radius: 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .camera-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        .scan-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: #00ff87;
-            box-shadow: 0 0 15px #00ff87;
-            animation: scanAnim 1.8s infinite ease-in-out;
-            display: none;
-        }
-        @keyframes scanAnim {
-            0% { top: 0%; }
-            50% { top: 95%; }
-            100% { top: 0%; }
         }
         .btn-group {
             display: flex;
@@ -98,11 +67,11 @@
             flex-direction: column;
         }
         .btn {
-            background: linear-gradient(45deg, #00ff87, #00f0ff);
-            color: #000;
+            background: #238636;
+            color: white;
             border: none;
-            padding: 15px;
-            border-radius: 30px;
+            padding: 14px;
+            border-radius: 8px;
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
@@ -111,45 +80,20 @@
             justify-content: center;
             gap: 10px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 255, 135, 0.3);
         }
-        .btn:active {
-            transform: scale(0.97);
+        .btn-bkk {
+            background: #0284c7;
         }
-        .btn-plantix {
-            background: linear-gradient(45deg, #ff9900, #ff5500);
-            color: #fff;
-        }
-        .result-box {
-            display: none;
-            background: #0d1117;
-            border: 1px solid #00ff87;
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
-            text-align: right;
-        }
-        .result-title {
-            color: #00ff87;
-            font-size: 16px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 5px;
-        }
-        .medicine-item {
-            color: #fff700;
-            font-weight: bold;
-            margin-top: 5px;
+        .btn-whatsapp {
+            background: #25D366;
         }
         .info-box {
             background: #0d1117;
-            border-right: 4px solid #00ff87;
-            padding: 14px;
-            border-radius: 8px;
+            border-right: 4px solid #2ea043;
+            padding: 12px;
+            border-radius: 6px;
             text-align: right;
-            margin-top: 22px;
+            margin-top: 18px;
             font-size: 13px;
             color: #c9d1d9;
             line-height: 1.6;
@@ -159,98 +103,71 @@
             margin-top: 15px;
             color: #8b949e;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 
 <div class="scanner-card">
-    <div class="badge-verified">
-        <i class="fa-solid fa-circle-check"></i> ۱۰۰٪ اوریجنل زرعی اسکینر
-    </div>
-    
-    <h2 class="header-title"><i class="fa-solid fa-leaf" style="color:#00ff87;"></i> لائیو کراپ ہیلتھ اسکینر</h2>
-    <p class="subtitle">بیمار پتے کی تصویر لیں — بیماری کی تشخیص اور علاج کی فوری رپورٹ دیکھیں</p>
+    <h2 class="header-title"><i class="fa-solid fa-leaf" style="color:#2ea043;"></i> لائیو فصل بیماری اسکینر</h2>
+    <p class="subtitle">تصویر لیں اور براہ راست **باخبر کسان آفیشل پورٹل** یا **ظفر رجوکا واٹس ایپ** پر مکمل رپورٹ حاصل کریں</p>
 
-    <!-- لائیو کیمرہ ڈسپلے باکس -->
+    <!-- کیمرہ باکس -->
     <div class="camera-box" id="camContainer">
-        <i class="fa-solid fa-camera-retro fa-4x" style="color: #30363d; margin-bottom: 12px;"></i>
-        <p style="color: #8b949e; font-size: 14px;" id="camStatusText">تصویر کھینچنے کے لیے نیچے دیے گئے بٹن پر دبائیں</p>
-        <div class="scan-overlay" id="scanLine"></div>
+        <i class="fa-solid fa-camera fa-3x" style="color: #30363d; margin-bottom: 10px;"></i>
+        <p style="color: #8b949e; font-size: 13px;">بیمار پتے کی تصویر لینے کے لیے نیچے بٹن دبائیں</p>
     </div>
 
-    <!-- اوریجنل اینڈرائیڈ بیک کیمرہ ایکسس -->
-    <input type="file" id="cropCamInput" accept="image/*" capture="environment" style="display: none;" onchange="processCropScan(event)">
+    <!-- موبائل بیک کیمرہ -->
+    <input type="file" id="cropCamInput" accept="image/*" capture="environment" style="display: none;" onchange="processScan(event)">
 
     <div class="btn-group">
-        <!-- ۱. لائیو کیمرہ آن کرنے کا بٹن -->
+        <!-- ۱. لائیو کیمرہ -->
         <button class="btn" onclick="document.getElementById('cropCamInput').click();">
-            <i class="fa-solid fa-camera fa-lg"></i> ۱. لائیو کیمرہ آن کریں اور فوٹو لیں
+            <i class="fa-solid fa-camera"></i> ۱. کیمرہ آن کریں اور فوٹو لیں
         </button>
 
-        <!-- ۲. پلانٹکس (Plantix) ڈائریکٹ آن لائن اسکینر -->
-        <a id="plantixBtn" href="https://plantix.net/ur/community/" target="_blank" class="btn btn-plantix">
-            <i class="fa-solid fa-virus-slash"></i> ۲. پلانٹکس زرعی نیٹ ورک پر بیماری تلاش کریں
+        <!-- ۲. باخبر کسان آفیشل پورٹل -->
+        <a id="bkkPortalBtn" href="https://bkk.ag/" target="_blank" class="btn btn-bkk" style="display: none;">
+            <i class="fa-solid fa-globe"></i> ۲. باخبر کسان آفیشل پورٹل پر جائیں
         </a>
-    </div>
 
-    <!-- لائیو اسکیننگ رزلٹ کارڈ -->
-    <div class="result-box" id="resultBox">
-        <div class="result-title"><i class="fa-solid fa-microscope"></i> اے آئی تشخیص و علاج رپورٹ</div>
-        <p style="font-size: 14px; color: #fff;"><strong>فصل / پودا:</strong> <span id="cropName">گندم / مکئی / کپاس</span></p>
-        <p style="font-size: 14px; color: #ff4d4d; margin-top: 5px;"><strong>احتمالی بیماری:</strong> <span id="diseaseName">پتوں کا جھلساؤ / تیلا اثر</span></p>
-        
-        <div style="margin-top: 10px; background: rgba(0,255,135,0.1); padding: 10px; border-radius: 8px;">
-            <p style="color: #00ff87; font-weight: bold; font-size: 13px;"><i class="fa-solid fa-prescription-bottle-medical"></i> تجویز کردہ علاج (ظفر چوہدری زراعت):</p>
-            <p class="medicine-item" id="medAdvise">• ایمامیکٹن + بائیفینتھرین اسپرے کریں (۱۰۰ ملی لیٹر فی ٹینکی)</p>
-        </div>
-
-        <a id="orderWaBtn" href="https://wa.me/920000000000?text=السلام%20علیکم!%20میں%20نے%20اسکینر%20سے%20تصویر%20لی%20ہے%20مجھے%20اس%20بیماری%20کی%20دوائی%20چاہیے۔" target="_blank" class="btn" style="margin-top: 12px; background: #25D366; color: white;">
-            <i class="fa-brands fa-whatsapp"></i> یہ دوائی واٹس ایپ پر آرڈر کریں
+        <!-- ۳. ظفر رجوکا واٹس ایپ -->
+        <a id="waBtn" href="#" target="_blank" class="btn btn-whatsapp" style="display: none;">
+            <i class="fa-brands fa-whatsapp"></i> ۳. ظفر رجوکا کو تصویر اور میسج بھیجیں
         </a>
     </div>
 
     <div class="info-box">
-        <strong><i class="fa-solid fa-circle-info"></i> اسکینر استعمال کرنے کا طریقہ:</strong><br>
-        ۱. "لائیو کیمرہ آن کریں" پر کلک کر کے بیمار پتے کی صاف تصویر لیں۔<br>
-        ۲. تصویر اپ لوڈ ہوتے ہی اسکینر خود بخود علاج اور دوائی دکھا دے گا۔<br>
-        ۳. مزید تفصیلی عالمی ڈیٹا کے لیے "پلانٹکس زرعی نیٹ ورک" بٹن کا استعمال کر سکتے ہیں۔
+        <strong>طریقہ کار:</strong><br>
+        ۱. "کیمرہ آن کریں" پر کلک کر کے پتے کی تصویر لیں۔<br>
+        ۲. تصویر آنے کے بعد "باخبر کسان آفیشل پورٹل" پر کلک کریں، کسان ڈائریکٹ ان کی ہوم ویب سائٹ پر پہنچ جائے گا۔<br>
+        ۳. یا پھر واٹس ایپ بٹن سے ظفر رجوکا کو تصویر بھیج کر فوری مشورہ لیں۔
     </div>
 
-    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-right"></i> مین ہوم پیج پر واپس جائیں</a>
+    <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-right"></i> ہوم پیج پر واپس جائیں</a>
 </div>
 
 <script>
-    function processCropScan(event) {
+    const ZAFAR_NUMBER = "923051801367";
+
+    function processScan(event) {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                const container = document.getElementById('camContainer');
-                container.innerHTML = `<img src="${e.target.result}" alt="Crop Scan"><div class="scan-overlay" id="scanLine" style="display:block;"></div>`;
+                document.getElementById('camContainer').innerHTML = `<img src="${e.target.result}" alt="Crop Photo">`;
                 
-                document.getElementById('camStatusText').innerText = "اسکیننگ جاری ہے...";
+                // بٹنز ظاہر کرنا
+                document.getElementById('bkkPortalBtn').style.display = 'flex';
+                const waBtn = document.getElementById('waBtn');
+                waBtn.style.display = 'flex';
 
-                // ۳ سیکنڈ کی اسکیننگ کے بعد زبردست رزلٹ ظاہر ہوگا
-                setTimeout(function() {
-                    document.getElementById('scanLine').style.display = 'none';
-                    document.getElementById('resultBox').style.display = 'block';
-
-                    // ڈائنامک رینڈم رزلٹس (کسان کو بہترین مشورہ دینے کے لیے)
-                    const diagnoses = [
-                        { crop: "گندم / مکئی", disease: "پتوں کا جُھلساؤ (Fungal Blight)", med: "• ٹیبوکونا زول + ایزوسٹی روبن ۲۵۰ ملی لیٹر فی ایکڑ اسپرے کریں۔" },
-                        { crop: "کپاس / سبزیاں", disease: "سفید مکھی و سُست تیلا (Aphids / Whitefly)", med: "• پائری پروکسیفن + بائیفینتھرین کا ملا جلا اسپرے کریں۔" },
-                        { crop: "کماد / فصلی پودے", disease: "سنڈی و پتے کی چِتکبری بیماری", med: "• ایمامیکٹن بینزوایٹ + کلورفینا پیر اسپرے کریں۔" }
-                    ];
-
-                    const randomResult = diagnoses[Math.floor(Math.random() * diagnoses.length)];
-                    document.getElementById('cropName').innerText = randomResult.crop;
-                    document.getElementById('diseaseName').innerText = randomResult.disease;
-                    document.getElementById('medAdvise').innerText = randomResult.med;
-
-                }, 2000);
-            }
+                const msg = `السلام علیکم ظفر رجوکا صاحب!
+میں نے کراپ اسکینر سے بیمار فصل کی تصویر لی ہے۔ براہ کرم اس کی تشخیص اور دوا تجویز کر دیں۔`;
+                waBtn.href = `https://wa.me/${ZAFAR_NUMBER}?text=${encodeURIComponent(msg)}`;
+            };
             reader.readAsDataURL(file);
         }
     }

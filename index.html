@@ -61,7 +61,7 @@
         }
     </style>
 </head>
-<body onclick="playAutoVoiceEverywhere()">
+<body>
 
     <!-- Header Section -->
     <header class="main-header glass-card border-neon" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px;">
@@ -155,7 +155,8 @@
             <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">اورجینل فصل بیماری اسکینر کیمرہ</h3>
             <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">اپنے موبائل کیمرے سے لائیو فصل اسکین کریں — بیماری اور اس کا علاج دیکھیں۔</p>
             
-            <a href="scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
+            <!-- Exact Crop Scanner File Link Included Below -->
+            <a href="crop-scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
                 <i class="fa-solid fa-camera"></i> ڈائریکٹ لائیو اسکینر کیمرہ کھولیں
             </a>
         </div>
@@ -227,16 +228,22 @@
         <p>تمام حقوق محفوظ ہیں © ظفر چوہدری زراعت | ڈیجیٹل ڈیزائن کردہ: طاہر نذیر</p>
     </footer>
 
-    <!-- Audio, Weather & Auto-Play Script Engine -->
+    <!-- Audio, Weather & Universal Auto-Play Script Engine -->
     <script>
         var voicePlayed = false;
 
-        function playAutoVoiceEverywhere() {
+        // Universal Auto Play Trigger for All Mobile Devices & Browsers
+        function initUniversalAudioEngine() {
             if (!voicePlayed) {
                 speakAboutText();
                 voicePlayed = true;
             }
         }
+
+        // Attach event listeners for any tap/touch anywhere on the screen
+        document.addEventListener('click', initUniversalAudioEngine, { once: true });
+        document.addEventListener('touchstart', initUniversalAudioEngine, { once: true });
+        document.addEventListener('scroll', initUniversalAudioEngine, { once: true });
 
         function speakAboutText() {
             var textToSpeak = document.getElementById('hiddenBabarAudioText').innerText;
@@ -250,7 +257,7 @@
 
                 var voices = window.speechSynthesis.getVoices();
                 var urduVoice = voices.find(function(voice) {
-                    return voice.lang.includes('ur') || voice.lang.includes('hi') || voice.name.includes('Urdu');
+                    return voice.lang.includes('ur') || voice.lang.includes('hi') || voice.name.includes('Urdu') || voice.name.includes('Hindi');
                 });
 
                 if (urduVoice) {
@@ -309,7 +316,7 @@
         });
     </script>
     
-    <!-- External Modular Database & Scripts (Fully Connected & Allowed) -->
+    <!-- External Modular Database & Scripts -->
     <script src="crop-database.js"></script>
     <script src="medicines-data.js"></script>
     <script src="scanner-engine.js"></script>
