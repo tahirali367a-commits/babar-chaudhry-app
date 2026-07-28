@@ -272,6 +272,20 @@
         </div>
     </section>
 
+    <!-- Adnan Bhai Field Manager VIP WhatsApp Card -->
+    <section class="field-manager-section" style="margin: 20px 0;">
+        <div class="glass-card neon-box-cyber" style="padding: 20px; text-align: center; border: 1px solid #00ff87; border-radius: 15px; background: rgba(0, 30, 20, 0.6);">
+            <div style="margin-bottom: 8px;">
+                <i class="fa-solid fa-user-tie" style="font-size: 2.2rem; color: #00ff87; text-shadow: 0 0 15px rgba(0,255,135,0.8);"></i>
+            </div>
+            <h3 style="color: #00ff87; font-size: 1.2rem; margin-bottom: 4px; font-weight: bold;">عدنان بھائی (فیلڈ مینیجر و مین ہیلپر)</h3>
+            <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 12px;">زمیندار بھائیوں کے فیلڈ وزٹ اور فصلوں کے معائنے کے لیے براہِ راست رابطہ کریں</p>
+            <a href="https://wa.me/923450985363?text=السلام%20علیکم%20عدنان%20بھائی!%20مجھے%20فصلوں%20کے%20معائنے%20اور%20زرعی%20مشورے%20کے%20سلسلے%20میں%20اپنے%20کھیتوں%20پر%20بلانا%20ہے،%20برائے%20مہربانی%20رہنمائی%20فرمائیں۔" target="_blank" onclick="event.stopPropagation();" class="whatsapp-btn-large" style="background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; padding: 12px 22px; font-size: 0.95rem; border-radius: 25px; text-decoration: none; display: inline-block; font-weight: bold; box-shadow: 0 0 15px rgba(0,255,135,0.4);">
+                <i class="fa-brands fa-whatsapp"></i> عدنان بھائی سے واٹس ایپ پر رابطہ کریں
+            </a>
+        </div>
+    </section>
+
     <!-- Crops & Farming Auto-Play Slider Section -->
     <section class="poster-slider-section">
         <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> کسان و فصلوں کی کاشت کی لائیو تصاویر</h2>
@@ -333,7 +347,7 @@
         </a>
     </section>
 
-    <!-- FULL SCREEN VIDEO AD MODAL (Pure Full Screen TikTok/Reels Display) -->
+    <!-- FULL SCREEN VIDEO AD MODAL (Pure Full Screen TikTok/Reels Display - Plays Full 1 Min 29 Sec) -->
     <div id="videoAdModal" class="ad-modal-overlay">
         <div class="ad-full-video-container">
             <!-- Small Clean Close Button -->
@@ -341,8 +355,8 @@
                 بند کریں ✕
             </button>
 
-            <!-- Full Screen Video Tag Optimized for Smooth Fast Playback -->
-            <video id="adVideoElement" playsinline muted preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
+            <!-- Full Screen Video Tag Optimized for Full Playback -->
+            <video id="adVideoElement" playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
                 <source id="videoSource" src="zafar-profile.mp4" type="video/mp4">
                 آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
             </video>
@@ -401,7 +415,7 @@
             };
         }
 
-        // Full Screen Pure Video Ad Engine Optimized
+        // Full Screen Pure Video Ad Engine (Plays full video without cutting)
         function showVideoAd() {
             var modal = document.getElementById('videoAdModal');
             var video = document.getElementById('adVideoElement');
@@ -409,19 +423,18 @@
             if(modal && video) {
                 modal.style.display = 'flex';
                 video.currentTime = 0;
+                video.muted = false; // Ensure sound is fully active
 
-                // Instant play optimization
                 var playPromise = video.play();
                 if (playPromise !== undefined) {
-                    playPromise.then(function() {
-                        video.muted = false; // Turn sound back on seamlessly after play starts
-                    }).catch(function(e){ 
+                    playPromise.catch(function(e){ 
                         console.log("Auto-play handling", e);
+                        video.muted = true;
                         video.play();
                     });
                 }
 
-                // Close automatically when video ends
+                // Close automatically when video ends completely (Full 1 min 29 sec)
                 video.onended = function() {
                     closeVideoAd();
                 };
@@ -438,7 +451,7 @@
             }
         }
 
-        // Timing: Starts in 8 seconds, repeats every 60 seconds (1 minute)
+        // Timing: Starts in 8 seconds after opening, repeats every 60 seconds (1 minute)
         setTimeout(function() {
             showVideoAd();
 
