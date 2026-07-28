@@ -1,315 +1,501 @@
+<!-- File Name: index.html -->
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اوریجنل اسکینر طاہر نظیر - Original Scanner Tahir Nazeer</title>
+    <title>ظفر چوہدری زراعت - VIP زرعی ایپ</title>
+    
+    <!-- Babar Profile Photo as App Icon -->
+    <link rel="icon" type="image/jpeg" href="babar-profile.jpg">
+    <link rel="apple-touch-icon" href="babar-profile.jpg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00ff87">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Override to remove watermark avatars on cards -->
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #0d1b2a; color: #ffffff; direction: rtl; text-align: right; padding-bottom: 40px; }
-        header { background: linear-gradient(135deg, #1b263b, #415a77); padding: 20px; text-align: center; border-bottom: 3px solid #00b4d8; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-        header h1 { color: #00f5d4; font-size: 26px; margin-bottom: 5px; }
-        header p { color: #e0e1dd; font-size: 14px; }
-        .container { max-width: 600px; margin: 15px auto; padding: 0 15px; }
-        .scanner-card { background: #1b263b; border-radius: 15px; padding: 15px; text-align: center; border: 2px solid #00b4d8; box-shadow: 0 8px 20px rgba(0,0,0,0.6); margin-bottom: 20px; }
-        .camera-box { width: 100%; height: 280px; background: #000; border-radius: 10px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 2px dashed #00f5d4; }
-        video, img#previewImg { width: 100%; height: 100%; object-fit: cover; }
-        .scan-laser { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: #00f5d4; box-shadow: 0 0 15px #00f5d4, 0 0 30px #00f5d4; animation: scanning 2.5s infinite linear; display: none; }
-        @keyframes scanning { 0% { top: 0%; } 50% { top: 95%; } 100% { top: 0%; } }
-        .btn-scan { background: linear-gradient(90deg, #00f5d4, #00b4d8); color: #0d1b2a; font-weight: bold; font-size: 18px; border: none; padding: 12px 25px; border-radius: 25px; margin-top: 15px; cursor: pointer; width: 100%; box-shadow: 0 4px 12px rgba(0,245,212,0.4); transition: 0.3s; }
-        .btn-camera-upload { background: #ffb703; color: #0d1b2a; font-weight: bold; font-size: 15px; border: none; padding: 10px 15px; border-radius: 20px; margin-top: 10px; cursor: pointer; width: 100%; }
-        .result-box { background: #0d1b2a; border: 1px solid #415a77; border-radius: 10px; padding: 15px; margin-top: 15px; display: none; text-align: right; line-height: 1.8; font-size: 15px; }
-        .result-header { font-weight: bold; color: #00f5d4; margin-bottom: 8px; font-size: 16px; border-bottom: 1px solid #415a77; padding-bottom: 5px; }
-        .auto-wa-alert { background: rgba(37, 211, 102, 0.15); border: 1px solid #25d366; color: #25d366; padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 13px; display: none; text-align: center; }
-        .dev-section-toggle { background: #1b263b; border: 1px solid #415a77; border-radius: 10px; padding: 12px; text-align: center; cursor: pointer; margin-top: 30px; color: #778da9; font-size: 14px; }
-        .dev-box { display: none; background: linear-gradient(145deg, #1b263b, #0d1b2a); border: 2px solid #ffb703; border-radius: 12px; padding: 15px; margin-top: 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.5); }
-        .dev-profile { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
-        .dev-info h3 { color: #ffb703; font-size: 18px; }
-        .dev-info p { font-size: 12px; color: #e0e1dd; }
-        .btn-dev-wa { display: inline-block; background: #25d366; color: #fff; text-decoration: none; font-weight: bold; padding: 10px 15px; border-radius: 8px; width: 100%; text-align: center; margin-top: 10px; font-size: 14px; }
-        .data-tag { display: inline-block; background: #415a77; color: #00f5d4; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 3px; }
-        .timer-box { font-size: 14px; color: #ffb703; margin-top: 8px; font-weight: bold; }
+        .glass-card::before, 
+        .weather-card::after {
+            display: none !important;
+            content: none !important;
+        }
+
+        /* Slider Image & Card Styles */
+        .slider-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 15px;
+            border-radius: 15px;
+        }
+        .slider-card {
+            min-width: 250px;
+            max-width: 280px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #00ff87;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .slider-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 255, 135, 0.5);
+        }
+        .slider-card h4 {
+            color: #00ff87;
+            margin: 8px 0 4px 0;
+            font-size: 1rem;
+        }
+        .slider-card p {
+            color: #cbd5e1;
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        /* Dual Profile Section Styles */
+        .dual-profiles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .profile-item {
+            text-align: center;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #00ff87;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.5);
+        }
+        .profile-name-small {
+            color: #00ff87;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        /* Visiting Card Style */
+        .card-banner-img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid #00f0ff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            margin: 10px auto 15px auto;
+            display: block;
+        }
+
+        /* VIP High-Level Video Ad Frame Design */
+        .ad-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 5, 15, 0.92);
+            backdrop-filter: blur(8px);
+            z-index: 999999;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        .ad-card-cyber {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            background: linear-gradient(145deg, rgba(0, 20, 35, 0.98), rgba(0, 40, 20, 0.95));
+            border: 2px solid #00ff87;
+            border-radius: 20px;
+            padding: 18px;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(0, 255, 135, 0.6), inset 0 0 15px rgba(0, 240, 255, 0.3);
+            animation: popIn 0.4s ease-out;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>اوریجنل اسکینر طاہر نظیر</h1>
-        <p>زراعت، مٹی، پودوں، درختوں اور مصنوعی سامان کا مکمل اے آئی اسکینر</p>
+
+    <!-- Header Section -->
+    <header class="main-header glass-card border-neon" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px;">
+        <div class="logo-area">
+            <h1 style="font-size: 1.4rem;"><i class="fa-solid fa-leaf text-neon"></i> ظفر چوہدری زراعت</h1>
+            <p style="font-size: 0.85rem;">گندم، مکئی، کپاس اور کماد کا بااعتماد مرکز</p>
+        </div>
+        <div>
+            <img src="babar-profile.jpg" alt="ظفر چوہدری" class="header-avatar" style="width:50px; height:50px; border-radius:50%; border:2px solid #00ff87; object-fit:cover;" onerror="this.onerror=null; this.src='babar-profile.jpg';">
+        </div>
     </header>
 
-    <div class="container">
-        <div class="scanner-card">
-            <div class="camera-box">
-                <video id="webcam" autoplay playsinline></video>
-                <img id="previewImg" style="display:none;" />
-                <div class="scan-laser" id="laser"></div>
-                <span id="cam-status" style="position: absolute; color: #aaa; font-size: 13px;">کیمرہ فعال ہو رہا ہے...</span>
+    <!-- Main Hero Profile Section -->
+    <section class="hero-section">
+        <div class="profile-card glass-card border-neon-glow" style="text-align: center; padding: 20px;">
+            
+            <!-- Dual Profile Circles (Choudhary Zafar & Choudhary Qasim) -->
+            <div class="dual-profiles">
+                <div class="profile-item">
+                    <img src="babar-profile.jpg" alt="چوہدری ظفر" class="profile-avatar" onerror="this.onerror=null; this.src='babar-profile.jpg';">
+                    <div class="profile-name-small">چوہدری ظفر</div>
+                </div>
+                <div class="profile-item">
+                    <img src="qasim-profile.jpg" alt="چوہدری قاسم" class="profile-avatar" onerror="this.onerror=null; this.src='qasim-profile.jpg';">
+                    <div class="profile-name-small">چوہدری قاسم</div>
+                </div>
             </div>
 
-            <input type="file" id="cameraFileInput" accept="image/*" capture="environment" style="display:none;" onchange="handleFileSelect(event)">
-            <button class="btn-camera-upload" onclick="document.getElementById('cameraFileInput').click()">📸 تصویر کھینچیں یا فائل اپلوڈ کریں</button>
-            <button class="btn-scan" onclick="startAIScan()">عملی اسکین شروع کریں</button>
+            <!-- Visiting Card Display Box -->
+            <div style="margin: 10px 0;">
+                <img src="visiting-card.png" alt="القاسم ایگرو سروسز وزٹنگ کارڈ" class="card-banner-img" onerror="this.onerror=null; this.src='1785080287776.png';">
+            </div>
+            
+            <h2 style="font-size: 1.8rem; color: #00ff87; margin-bottom: 15px; font-weight: bold;">ظفر چوہدری زراعت</h2>
 
-            <div class="result-box" id="resultCard">
-                <div class="result-header" id="resultTitle">تجزیہ جاری ہے...</div>
-                <div id="resultBody"></div>
+            <!-- Direct Home Delivery WhatsApp Contact Button -->
+            <div style="margin: 15px 0;">
+                <a href="https://wa.me/923051801367?text=السلام%20علیکم%20ظفر%20صاحب!%20مجھے%20اپنی%20فصلوں%20کی%20حفاظت%20کے%20لیے%20۱۰۰٪%20اصل%20اور%20معیاری%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے،%20برائے%20مہربانی%20رہنماٸی%20فرمائیں۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
+                    <i class="fa-brands fa-whatsapp"></i> ادویات کی اوریجنل ہوم ڈیلیوری کے لیے واٹس ایپ کریں
+                </a>
             </div>
 
-            <div class="auto-wa-alert" id="autoWaAlert">
-                📲 ظفر صاحب (زرعی مرکزی زکوۃ) کو مکمل اسکیننگ رپورٹ ۴۹ سیکنڈ کے بعد خودکار واٹس ایپ کی جائے گی...
-                <div class="timer-box" id="timerCount">وقت باقی: 49 سیکنڈ</div>
+            <div class="btn-group">
+                <button class="glass-btn voice-btn" onclick="speakAboutText(); event.stopPropagation();">
+                    <i class="fa-solid fa-volume-high"></i> تعارف اور پیغام سنیں
+                </button>
+            </div>
+
+            <!-- Hidden Audio Script Text (Updated with Choudhary Qasim Name) -->
+            <div style="display: none;" id="hiddenBabarAudioText">
+                السلام علیکم ورحمتہ اللہ وبرکاتہ! ظفر چوہدری زراعت کے آفیشل ڈیجیٹل پلیٹ فارم پر آپ کا پرخلوص استقبال ہے۔ بااعتماد زرعی مشورے اور اعلیٰ معیار کی ادویات کے لیے ہماری دکان پر تشریف لائیں۔ ہماری دکان پر تمام ملٹی نیشنل کمپنیاں اور مستند برانڈز کی تصدیق شدہ کیڑے مار ادویات، جڑی بوٹی مار اسپرے، معیاری کھادیں اور طاقتور گروتھ ٹانک دستیاب ہیں۔ چاہے آپ کی گندم کی فصل ہو، کپاس، مکئی، دھان یا کماد اور باغات ہوں، ہر فصل کی بیماری کے خاتمے اور ریکارڈ پیداوار کے لیے ہمارے پاس جدید اور حل موجود ہیں۔ اگر آپ کی فصل کو سنڈی، سست تیلا، سفید مکھی یا فنگس کا مسئلہ ہے تو آپ ہماری ایپ میں دیے گئے اوریجنل فصل اسکینر کیمرہ کے ذریعے بیماری چیک کر سکتے ہیں اور براہِ راست اصل زرعی ادویات اپنے گھر منگوا سکتے ہیں۔ آپ ہمارے محترم رہنما ظفر عرف بابر صاحب اور چوہدری قاسم صاحب سے اپنی فصل کا بہترین علاج جاننے کے لیے دکان پر تشریف لائیں اور بروقت مشورہ حاصل کریں۔ اور اگر آپ بھی اپنے بزنس، دکان یا پراڈکٹس کے لیے ایسی ہی خوبصورت اور VIP اینڈرائیڈ ایپ بنوانا چاہتے ہیں، تو نیچے دیے گئے ایپس ڈیولپر طاہر نذیر صاحب کی پروفائل اور واٹس ایپ بٹن پر رابطہ کریں۔ طاہر نذیر صاحب آپ کی بزنس ایپ مکمل ڈیزائن اور تیار کر کے دیں گے۔ شکریہ!
             </div>
         </div>
+    </section>
 
-        <div class="dev-section-toggle" onclick="toggleDevBox()">
-            🔽 ایپ بنوانے یا ڈویلپر سے رابطے کے لیے یہاں کلک کریں
+    <!-- Original AccuWeather & Satellite Live Weather System -->
+    <section class="weather-section">
+        <h2 class="section-title"><i class="fa-solid fa-cloud-sun-rain"></i> لائیو موسمی حالات و گوجرہ ویدر الرٹ</h2>
+        <div class="weather-grid">
+            
+            <div class="weather-card glass-card color-card-1">
+                <i class="fa-solid fa-shield-halved weather-icon" style="color: #00ff87;"></i>
+                <h4>صداقت و اعتماد</h4>
+                <p style="font-weight: bold; color: #00ff87; font-size: 0.9rem;">۱۰۰٪ اوریجنل ملٹی نیشنل زرعی ادویات</p>
+            </div>
+
+            <div class="weather-card glass-card color-card-2">
+                <i class="fa-solid fa-user-doctor weather-icon" style="color: #00f0ff;"></i>
+                <h4>مفت زرعی مشورہ</h4>
+                <p style="font-weight: bold; color: #00f0ff; font-size: 0.9rem;">ظفر چوہدری سے فصل کا بہترین علاج جانیں</p>
+            </div>
+
+            <!-- AccuWeather Direct Button Box -->
+            <div class="weather-card glass-card color-card-4 span-2" style="text-align: center; padding: 18px;">
+                <i class="fa-solid fa-cloud-showers-heavy weather-icon text-neon"></i>
+                <h4>اسپرے کی ہدایت و گوجرہ موسمی رپورٹ</h4>
+                <p id="sprayAdvice" style="color: #fff700; margin-bottom: 15px; font-size: 1rem;">گوجرہ کا لائیو موسم اور بارش کی رپورٹ نیچے بٹن پر دیکھیں۔</p>
+                <a href="https://www.accuweather.com/en/pk/gojra/259618/weather-forecast/259618" target="_blank" onclick="event.stopPropagation();" class="glass-btn" style="display: inline-block; background: linear-gradient(45deg, #00f0ff, #00ff87); color: #000; font-weight: bold; text-decoration: none; padding: 10px 22px; border-radius: 25px; box-shadow: 0 0 15px rgba(0,240,255,0.6);">
+                    <i class="fa-solid fa-globe"></i> AccuWeather گوجرہ لائیو موسم کی اوریجنل رپورٹ دیکھیں
+                </a>
+            </div>
         </div>
+    </section>
 
-        <div class="dev-box" id="devCard">
-            <div class="dev-profile">
-                <div style="width: 60px; height: 60px; border-radius: 50%; background: #000; border: 2px solid #ffb703; display: flex; align-items: center; justify-content: center; color: #ffb703; font-weight: bold; font-size: 12px; text-align: center;">
-                    یا علی مولا علی
+    <!-- ZAFAR CHOUDHARY STORE LOCATION VIP CARD -->
+    <section class="location-section" style="margin: 20px 0;">
+        <div class="glass-card neon-box-cyber" style="padding: 22px; text-align: center; border: 1px solid #00f0ff; border-radius: 15px; background: rgba(0, 20, 40, 0.6);">
+            <div style="margin-bottom: 10px;">
+                <i class="fa-solid fa-map-location-dot" style="font-size: 2.3rem; color: #00f0ff; text-shadow: 0 0 15px rgba(0,240,255,0.8);"></i>
+            </div>
+            <h3 style="color: #00f0ff; font-size: 1.25rem; margin-bottom: 6px; font-weight: bold;">ظفر چوہدری زراعت - دکان کی لائیو لوکیشن</h3>
+            <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 15px;">چک 363 گ ب جھوک سمیٹلی (نزد پی ایس او پٹرول پمپ، گوجرہ) — دکان پر تشریف لانے کے لیے نقشہ کھولیں۔</p>
+            <a href="https://maps.app.goo.gl/Uzh3DJUvPSWTe73s9" target="_blank" onclick="event.stopPropagation();" class="glass-btn" style="display: inline-block; background: linear-gradient(45deg, #00f0ff, #00ff87); color: #000; font-weight: bold; text-decoration: none; padding: 12px 26px; border-radius: 30px; box-shadow: 0 0 20px rgba(0,240,255,0.5); font-size: 0.95rem;">
+                <i class="fa-solid fa-location-arrow"></i> گوگل میپس پر دکان کا راستہ دیکھیں (Live Map)
+            </a>
+        </div>
+    </section>
+
+    <!-- Dedicated Original Crop Scanner Camera Section -->
+    <section class="camera-section">
+        <div class="camera-card glass-card neon-box-cyber" style="padding: 22px; text-align: center;">
+            <div class="scanner-ring" style="margin-bottom: 12px;">
+                <i class="fa-solid fa-camera-retro camera-icon" style="font-size: 2.5rem; color: #00ff87;"></i>
+            </div>
+            <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">اورجینل فصل بیماری اسکینر کیمرہ</h3>
+            <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">اپنے موبائل کیمرے سے لائیو فصل اسکین کریں — بیماری اور اس کا علاج دیکھیں۔</p>
+            
+            <!-- Exact Crop Scanner File Link Included Below -->
+            <a href="crop-scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
+                <i class="fa-solid fa-camera"></i> ڈائریکٹ لائیو اسکینر کیمرہ کھولیں
+            </a>
+        </div>
+    </section>
+
+    <!-- Crops & Farming Auto-Play Slider Section -->
+    <section class="poster-slider-section">
+        <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> کسان و فصلوں کی کاشت کی لائیو تصاویر</h2>
+        <div class="slider-container glass-card" id="cropsSlider">
+            <!-- Dynamic Crops Images Loaded via JS -->
+        </div>
+    </section>
+
+    <!-- Medicine Categories Section -->
+    <section class="catalog-section" style="margin-top: 25px;">
+        <h2 class="section-title"><i class="fa-solid fa-boxes-packing"></i> دستیاب زرعی ادویات کی قسمیں</h2>
+        <div class="catalog-grid">
+            <div class="catalog-card glass-card">
+                <i class="fa-solid fa-bug-slash cat-icon"></i>
+                <h4>کیڑے مار ادویات</h4>
+                <p>سنڈی، سست تیلا اور سفید مکھی کا مکمل خاتمہ۔</p>
+            </div>
+            <div class="catalog-card glass-card">
+                <i class="fa-solid fa-plant-wilt cat-icon"></i>
+                <h4>جڑی بوٹی مار</h4>
+                <p>گندم، مکئی اور کپاس کی تمام جڑی بوٹیوں کی تلفی۔</p>
+            </div>
+            <div class="catalog-card glass-card">
+                <i class="fa-solid fa-seedling cat-icon"></i>
+                <h4>طاقتور ٹانک و کھاد</h4>
+                <p>پودوں کی تیز رفتار بڑھوتری اور رنگت کے لیے۔</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Master Developer Section (Tahir Nazeer Profile) -->
+    <section class="developer-section">
+        <div class="dev-card glass-card border-glow-small">
+            <div class="dev-header">
+                <div class="dev-photo-frame">
+                    <img src="./tahir-profile.jpg" alt="طاہر نذیر" id="tahirPhoto" onerror="this.onerror=null; this.src='tahir-profile.jpg';">
                 </div>
                 <div class="dev-info">
-                    <h3>طاہر عباس (عرف طاہر نظیر)</h3>
-                    <p>ایپ ڈویلپر و بزنس سسٹمز کریئیٹر</p>
+                    <span class="dev-badge"><i class="fa-solid fa-code"></i> ایپس ڈیولپر</span>
+                    <h3>طاہر نذیر صاحب</h3>
+                    <p>چیف ایگزیکٹو و ایپس آرکیٹیکٹ</p>
                 </div>
             </div>
-            <p style="font-size: 13px; color: #e0e1dd; line-height: 1.6;">
-                اگر آپ اپنے بزنس، دکان، زراعت یا کسی بھی کام کے لیے ایسی ہی زبردست اور مکمل کنٹرول والی اینڈرائیڈ یا ویب ایپ بنوانا چاہتے ہیں تو طاہر بھائی سے براہِ راست رابطہ کریں۔
-            </p>
-            <a href="https://wa.me/923437688367?text=السلام%20علیکم%20طاہر%20بھائی!%20مجھے%20اپنے%20بزنس%20کے%20لیے%20ایپ%20بنوانے%20کے%20بارے%20میں%20معلومات%20چاہئیں۔" target="_blank" class="btn-dev-wa">
-                💬 طاہر بھائی سے واٹس ایپ پر ایپ بنوانے کے لیے رابطہ کریں (+92 343 7688367)
-            </a>
+            
+            <div style="margin-top: 15px; text-align: center;">
+                <p style="color: var(--neon-yellow, #fff700); font-size: 0.95rem; margin-bottom: 10px;">
+                    اپنے بزنس کا شاندار اینڈرائیڈ ایپ بنوانے کے لیے رابطہ کریں:
+                </p>
+                <a href="developer.html" class="glass-btn" style="display: inline-block; text-decoration: none; padding: 10px 20px; background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #fff; border-radius: 20px;" onclick="event.stopPropagation();">
+                    <i class="fa-solid fa-laptop-code"></i> طاہر نذیر کی پروفائل و رابطہ پیج
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Order Section -->
+    <section class="order-section" style="margin: 25px 0;">
+        <a href="https://wa.me/923051801367?text=السلام%20علیکم%20ظفر%20صاحب!%20مجھے%20اپنی%20فصلوں%20کی%20حفاظت%20کے%20لیے%20۱۰۰٪%20اصل%20اور%20معیاری%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے،%20برائے%20مہربانی%20رہنماٸی%20فرمائیں۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
+            <i class="fa-brands fa-whatsapp"></i> ظفر چوہدری سے ادویات کی ہوم ڈیلیوری منگوائیں
+        </a>
+    </section>
+
+    <!-- HIGH-LEVEL CYBER VIDEO AD POPUP MODAL -->
+    <div id="videoAdModal" class="ad-modal-overlay">
+        <div class="ad-card-cyber">
+            
+            <!-- Top Header & Live Badge -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span style="background: linear-gradient(45deg, #ff0055, #ff5500); color: #fff; font-size: 0.75rem; font-weight: bold; padding: 5px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(255,0,85,0.5);">
+                    <i class="fa-solid fa-circle-play"></i> اسپیشل زرعی HD ایڈ
+                </span>
+                <button onclick="closeVideoAd()" style="background: #ff0055; color: #fff; border: none; padding: 6px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.85rem; box-shadow: 0 0 10px rgba(255,0,85,0.5);">
+                    بند کریں ✕
+                </button>
+            </div>
+
+            <!-- Video Player Frame -->
+            <div style="position: relative; width: 100%; border-radius: 14px; overflow: hidden; border: 2px solid #00f0ff; box-shadow: 0 0 20px rgba(0,240,255,0.4);">
+                <video id="adVideoElement" width="100%" height="240" playsinline style="object-fit: cover; display: block;">
+                    <source id="videoSource" src="certificate-diploma.mp4" type="video/mp4">
+                    آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
+                </video>
+            </div>
+
+            <!-- Ad Bottom Title Banner -->
+            <div style="margin-top: 12px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 10px; border-top: 1px solid rgba(0,255,135,0.3);">
+                <h4 id="adVideoTitle" style="color: #00ff87; font-size: 1.05rem; font-weight: bold; margin: 0;">
+                    تصدیق شدہ زرعی سند و اعلیٰ تعلیم یافتہ رہنمائی
+                </h4>
+                <p style="color: #00f0ff; font-size: 0.8rem; margin: 4px 0 0 0;">
+                    ظفر چوہدری زراعت - بااعتماد و معیاری زرعی مرکز
+                </p>
+            </div>
         </div>
     </div>
 
+    <footer class="app-footer">
+        <p>تمام حقوق محفوظ ہیں © ظفر چوہدری زراعت | ڈیجیٹل ڈیزائن کردہ: طاہر نذیر</p>
+    </footer>
+
+    <!-- Audio, Weather & Universal Auto-Play Script Engine -->
     <script>
-        const DB_FILES = [
-            'punjab_ai_smart_responses_db.json',
-            'punjab_synthetic_plastic_flora_db.json',
-            'punjab_soil_analysis_db.json',
-            'punjab_trees_plants_db_v2.json',
-            'agri_medicines_db.json',
-            'diseases_solutions_db.json',
-            'datacrops_database.json'
-        ];
+        var voicePlayed = false;
 
-        let loadedDatabases = {};
-        const zafarWhatsAppNumber = "923051801367";
-        let currentImageName = "";
-        let countdownTimer = null;
-
-        async function loadAllDatabases() {
-            for (let fileName of DB_FILES) {
-                try {
-                    let response = await fetch('./' + fileName);
-                    if (response.ok) {
-                        loadedDatabases[fileName] = await response.json();
-                        console.log("فائل کامیابی سے کھلی: " + fileName);
-                    }
-                } catch (e) {
-                    console.log("فائل کھولنے میں مسئلہ: " + fileName);
-                }
+        // Universal Auto Play Trigger for All Mobile Devices & Browsers
+        function initUniversalAudioEngine() {
+            if (!voicePlayed) {
+                speakAboutText();
+                voicePlayed = true;
             }
         }
 
-        async function initCamera() {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } });
-                document.getElementById('webcam').srcObject = stream;
-                document.getElementById('cam-status').style.display = 'none';
-            } catch (err) {
-                try {
-                    const fallbackStream = await navigator.mediaDevices.getUserMedia({ video: true });
-                    document.getElementById('webcam').srcObject = fallbackStream;
-                    document.getElementById('cam-status').style.display = 'none';
-                } catch(e) {
-                    document.getElementById('cam-status').innerText = "کیمرہ آن کرنے کے لیے 'تصویر کھینچیں' والا بٹن استعمال کریں۔";
-                }
-            }
-        }
+        // Attach event listeners for any tap/touch anywhere on the screen
+        document.addEventListener('click', initUniversalAudioEngine, { passive: true });
+        document.addEventListener('touchstart', initUniversalAudioEngine, { passive: true });
+        document.addEventListener('touchend', initUniversalAudioEngine, { passive: true });
+        document.addEventListener('scroll', initUniversalAudioEngine, { passive: true });
+        window.addEventListener('load', initUniversalAudioEngine, { passive: true });
 
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (file) {
-                currentImageName = file.name.toLowerCase();
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.getElementById('previewImg');
-                    img.src = e.target.result;
-                    img.style.display = 'block';
-                    document.getElementById('webcam').style.display = 'none';
-                    document.getElementById('cam-status').style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function speakUrduText(text) {
+        function speakAboutText() {
+            var textToSpeak = document.getElementById('hiddenBabarAudioText').innerText;
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
-                let utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ur-PK';
-                utterance.rate = 0.9;
-                window.speechSynthesis.speak(utterance);
-            }
-        }
 
-        function toggleDevBox() {
-            let devCard = document.getElementById('devCard');
-            devCard.style.display = devCard.style.display === 'block' ? 'none' : 'block';
-        }
+                var msg = new SpeechSynthesisUtterance();
+                msg.text = textToSpeak;
+                msg.rate = 0.88;
+                msg.pitch = 1.0;
 
-        // تمام فائلوں میں سے صحیح معلومات ڈھونڈنے کا انجن
-        function getSmartExactMatch() {
-            let matchedCategory = "crop";
-            
-            if (currentImageName.includes("soil") || currentImageName.includes("mitti") || currentImageName.includes("مٹی")) {
-                matchedCategory = "soil";
-            } else if (currentImageName.includes("tree") || currentImageName.includes("darakht") || currentImageName.includes("درخت") || currentImageName.includes("plant")) {
-                matchedCategory = "tree";
-            } else if (currentImageName.includes("plastic") || currentImageName.includes("synthetic") || currentImageName.includes("flora") || currentImageName.includes("پلاسٹک")) {
-                matchedCategory = "plastic";
-            }
+                var voices = window.speechSynthesis.getVoices();
+                var urduVoice = voices.find(function(voice) {
+                    return voice.lang.includes('ur') || voice.lang.includes('hi') || voice.name.includes('Urdu') || voice.name.includes('Hindi');
+                });
 
-            let cropInfo = "";
-            let diseaseInfo = "";
-            let medicineInfo = "";
-            let soilInfo = "";
-            let fileUsed = "";
-
-            // 1. مٹی کی فائل
-            if (matchedCategory === "soil" && loadedDatabases['punjab_soil_analysis_db.json']) {
-                let db = loadedDatabases['punjab_soil_analysis_db.json'];
-                let item = Array.isArray(db) ? db[Math.floor(Math.random() * db.length)] : db;
-                soilInfo = item.soil_type || item.soil_condition || item.name || "پنجاب کی زرخیز مٹی (پی ایچ نارمل)";
-                diseaseInfo = item.problem || item.deficiency || "نائٹروجن کی معمولی کمی اور نمی کا مسئلہ";
-                medicineInfo = item.solution || item.fertilizer || "گوبر کی کھاد + جپسم کا استعمال";
-                cropInfo = "مٹی کا نمونہ";
-                fileUsed = 'punjab_soil_analysis_db.json';
-            } 
-            // 2. درختوں اور پودوں کی فائل
-            else if (matchedCategory === "tree" && loadedDatabases['punjab_trees_plants_db_v2.json']) {
-                let db = loadedDatabases['punjab_trees_plants_db_v2.json'];
-                let item = Array.isArray(db) ? db[Math.floor(Math.random() * db.length)] : db;
-                cropInfo = item.tree_name || item.plant_name || item.name || "پنجاب کا دیسی درخت / پودا";
-                diseaseInfo = item.disease || item.symptoms || "تنے کی سسٹمک بیماری اور پتوں پر دھبے";
-                medicineInfo = item.treatment || item.medicine || "کوپر آکسی کلورائڈ + امینو ایسڈ اسپرے";
-                soilInfo = "درخت کے لیے مناسب مٹی";
-                fileUsed = 'punjab_trees_plants_db_v2.json';
-            }
-            // 3. پلاسٹک اور سنتھیٹک سامان کی فائل
-            else if (matchedCategory === "plastic" && loadedDatabases['punjab_synthetic_plastic_flora_db.json']) {
-                let db = loadedDatabases['punjab_synthetic_plastic_flora_db.json'];
-                let item = Array.isArray(db) ? db[Math.floor(Math.random() * db.length)] : db;
-                cropInfo = item.item_name || item.material || "مصنوعی / پلاسٹک پودا یا پھول";
-                diseaseInfo = item.status || "غیر جاندار / پلاسٹک مٹیریل (کوئی بیماری نہیں)";
-                medicineInfo = "کسی دوا یا اسپرے کی ضرورت نہیں (صرف صفائی کریں)";
-                soilInfo = "غیر زراعی مٹیریل";
-                fileUsed = 'punjab_synthetic_plastic_flora_db.json';
-            }
-            // 4. عام فصلوں، دواؤں اور بیماریوں کی فائلیں
-            else {
-                for (let fileName in loadedDatabases) {
-                    let db = loadedDatabases[fileName];
-                    if (Array.isArray(db) && db.length > 0) {
-                        let sample = db[Math.floor(Math.random() * db.length)];
-                        if (!cropInfo && (sample.crop || sample.plant_name || sample.name)) {
-                            cropInfo = sample.crop || sample.plant_name || sample.name;
-                            fileUsed = fileName;
-                        }
-                        if (!diseaseInfo && (sample.disease || sample.symptoms || sample.problem)) {
-                            diseaseInfo = sample.disease || sample.symptoms || sample.problem;
-                        }
-                        if (!medicineInfo && (sample.medicine || sample.spray || sample.treatment || sample.solution)) {
-                            medicineInfo = sample.medicine || sample.spray || sample.treatment || sample.solution;
-                        }
-                        if (!soilInfo && (sample.soil_type || sample.soil_condition)) {
-                            soilInfo = sample.soil_type || sample.soil_condition;
-                        }
-                    }
+                if (urduVoice) {
+                    msg.voice = urduVoice;
+                } else {
+                    msg.lang = 'ur-PK';
                 }
-            }
 
-            return {
-                crop: cropInfo || "پنجاب زراعی فصل / پودا",
-                disease: diseaseInfo || "پتوں پر کیڑے کا حملہ اور فنگس",
-                medicine: medicineInfo || "امیڈا کلوپرڈ اسپرے + معیاری فنگی سائیڈ",
-                soil: soilInfo || "زرخیز مٹی (پی ایچ موزوں)",
-                file: fileUsed || "datacrops_database.json"
+                window.speechSynthesis.speak(msg);
+            }
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = function() {
+                window.speechSynthesis.getVoices();
             };
         }
 
-        function startAIScan() {
-            let laser = document.getElementById('laser');
-            let resultCard = document.getElementById('resultCard');
-            let resultTitle = document.getElementById('resultTitle');
-            let resultBody = document.getElementById('resultBody');
-            let autoWaAlert = document.getElementById('autoWaAlert');
-            let timerCount = document.getElementById('timerCount');
+        // VIP Video Ads Sequence Engine
+        var videoList = [
+            { src: "certificate-diploma.mp4", title: "تصدیق شدہ زرعی سند و اعلیٰ تعلیم یافتہ رہنمائی" },
+            { src: "qasim-intro.mp4", title: "چوہدری قاسم صاحب - القاسم ایگرو سروسز" },
+            { src: "zafar-intro.mp4", title: "محترم ظفر عرف بابر صاحب - بااعتماد زرعی رہنما" },
+            { src: "medicines-shelf.mp4", title: "ملٹی نیشنل کمپنیز اور اوریجنل زرعی ادویات کا اسٹاک" },
+            { src: "fertilizer-stock.mp4", title: "اعلیٰ معیار کی تصدیق شدہ کھاد و ٹانک کا ڈائریکٹ اسٹاک" }
+        ];
+        var currentVideoIndex = 0;
 
-            if (countdownTimer) clearInterval(countdownTimer);
+        function showVideoAd() {
+            var modal = document.getElementById('videoAdModal');
+            var video = document.getElementById('adVideoElement');
+            var source = document.getElementById('videoSource');
+            var title = document.getElementById('adVideoTitle');
 
-            laser.style.display = 'block';
-            resultCard.style.display = 'none';
-            autoWaAlert.style.display = 'none';
+            if(modal && video && source) {
+                var currentVid = videoList[currentVideoIndex];
+                source.src = currentVid.src;
+                title.innerText = currentVid.title;
+                video.load();
 
-            // اسکیننگ کا 3 سیکنڈ اینیمیشن
-            setTimeout(() => {
-                laser.style.display = 'none';
-                resultCard.style.display = 'block';
-
-                let match = getSmartExactMatch();
-                let loadedCount = Object.keys(loadedDatabases).length;
-
-                let finalDataMsg = `
-                    <b>🔍 طاہر نظیر اسکینر نتائج (درست میچ):</b><br>
-                    <span class="data-tag">ایکٹیو فائلیں: ${loadedCount} / 7</span>
-                    <span class="data-tag">استعمال شدہ فائل: ${match.file}</span><br><br>
-                    🌱 <b>شناخت (پودا / درخت / مٹی / سامان):</b> ${match.crop}<br>
-                    🌾 <b>مٹی کا تجزیہ:</b> ${match.soil}<br>
-                    🐛 <b>شناخت شدہ بیماری / علامات:</b> ${match.disease}<br>
-                    💊 <b>تجویز کردہ علاج / فارمولا دوائی:</b> ${match.medicine}<br>
-                `;
-
-                resultTitle.innerText = "✅ اسکیننگ مکمل! تمام 7 فائلوں سے ڈیٹا میچ ہو گیا";
-                resultTitle.style.color = "#00f5d4";
-                resultBody.innerHTML = finalDataMsg;
-
-                speakUrduText("اسکیننگ مکمل ہو گئی ہے۔ نتائج اسکرین پر دکھا دیے گئے ہیں۔ 49 سیکنڈ بعد ظفر صاحب کو خودکار پیغام بھیجا جا رہا ہے۔");
+                modal.style.display = 'flex';
+                video.currentTime = 0;
                 
-                autoWaAlert.style.display = 'block';
+                // Play video sound along with original recorded video audio
+                video.play().catch(function(e){ console.log("Auto-play wait for user touch", e); });
 
-                // 49 سیکنڈز کا کاؤنٹ ڈاؤن ٹائمر
-                let timeLeft = 49;
-                timerCount.innerText = "وقت باقی: " + timeLeft + " سیکنڈ";
+                video.onended = function() {
+                    closeVideoAd();
+                };
 
-                countdownTimer = setInterval(() => {
-                    timeLeft--;
-                    timerCount.innerText = "وقت باقی: " + timeLeft + " سیکنڈ";
-
-                    if (timeLeft <= 0) {
-                        clearInterval(countdownTimer);
-
-                        let waMsgText = `السلام علیکم ظفر صاحب! طاہر نظیر اسکینر کے ذریعے معائنہ مکمل ہوا ہے۔
-📌  شناخت: ${match.crop}
-📌 مسئلہ / بیماری: ${match.disease}
-📌 تجویز کردہ علاج: ${match.medicine}
-برائے مہربانی اس ہوم ڈیلیوری آرڈر کے لیے رہنمائی فرمائیں۔`;
-
-                        let waText = encodeURIComponent(waMsgText);
-                        window.open(`https://wa.me/${zafarWhatsAppNumber}?text=${waText}`, '_blank');
-                    }
-                }, 1000);
-
-            }, 3000);
+                currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
+            }
         }
 
-        window.onload = () => {
-            initCamera();
-            loadAllDatabases();
-        };
+        function closeVideoAd() {
+            var modal = document.getElementById('videoAdModal');
+            var video = document.getElementById('adVideoElement');
+            if(modal && video) {
+                video.pause();
+                modal.style.display = 'none';
+            }
+        }
+
+        // Timing Engine: Starts 8 seconds after app load, then runs every 60 seconds
+        setTimeout(function() {
+            showVideoAd();
+
+            setInterval(function() {
+                showVideoAd();
+            }, 60000); // 60000 ms = 1 Minute
+
+        }, 8000); // 8000 ms = 8 Seconds
+
+        // Render Online Images for Crops Slider
+        function loadSliderImages() {
+            const cropsData = [
+                { title: "گندم کی بہترین فصل", desc: "اعلیٰ پیداوار اور شادابی", img: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80" },
+                { title: "مکئی کی کاشت", desc: "طاقتور دانہ اور شاندار رنگت", img: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80" },
+                { title: "کپاس کی فصل", desc: "بیماریوں سے محفوظ فصل", img: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80" }
+            ];
+
+            const cropsSlider = document.getElementById('cropsSlider');
+            if(cropsSlider) {
+                cropsSlider.innerHTML = cropsData.map(item => `
+                    <div class="slider-card">
+                        <img src="${item.img}" alt="${item.title}">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Auto Scroll Engine for Slider
+        function startAutoSliders() {
+            const slider = document.getElementById('cropsSlider');
+            if(slider) {
+                setInterval(() => {
+                    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
+                        slider.scrollLeft = 0;
+                    } else {
+                        slider.scrollLeft += 220;
+                    }
+                }, 3000);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadSliderImages();
+            startAutoSliders();
+        });
     </script>
+    
+    <!-- External Modular Database & Scripts -->
+    <script src="crop-database.js"></script>
+    <script src="medicines-data.js"></script>
+    <script src="scanner-engine.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
