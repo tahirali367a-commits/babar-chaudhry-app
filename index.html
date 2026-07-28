@@ -159,13 +159,10 @@
 </head>
 <body>
 
-    <!-- Hidden Gemini Key Storage Container -->
+    <!-- Fitted Gemini Key Storage Container for Scanner Engine -->
     <script>
-        window.GEMINI_CONFIG = {
-            k1: "AQ.Ab8RN6I5oXnpHz-",
-            k2: "__Elc6CwPAhCR8sg_",
-            k3: "WSYBHou25sK7Mj2c9g",
-            getKey: function() { return this.k1 + this.k2 + this.k3; }
+        window.GEMINI_CO",
+            getKey: function() { return this.apiKey; }
         };
     </script>
 
@@ -341,7 +338,7 @@
         </a>
     </section>
 
-    <!-- HIGH-LEVEL CYBER VIDEO AD POPUP MODAL (TikTok Vertical Style + Audio) -->
+    <!-- HIGH-LEVEL CYBER VIDEO AD POPUP MODAL (TikTok Vertical Style - Clean Original Audio) -->
     <div id="videoAdModal" class="ad-modal-overlay">
         <div class="ad-card-cyber">
             
@@ -362,9 +359,6 @@
                     آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
                 </video>
             </div>
-
-            <!-- YouTube Audio Container -->
-            <div id="ytAudioPlayerContainer" style="display:none;"></div>
 
             <!-- Scrolling News Ticker Bar -->
             <div class="ticker-wrap">
@@ -434,12 +428,11 @@
             };
         }
 
-        // VIP Video Ad & YouTube Music Sync Engine
+        // Clean Video Ad Engine (Plays VN Editor Rap Song directly from the Video)
         function showVideoAd() {
             var modal = document.getElementById('videoAdModal');
             var video = document.getElementById('adVideoElement');
             var source = document.getElementById('videoSource');
-            var ytContainer = document.getElementById('ytAudioPlayerContainer');
 
             if(modal && video && source) {
                 source.src = "zafar-agri-ad.mp4";
@@ -448,15 +441,10 @@
                 modal.style.display = 'flex';
                 video.currentTime = 0;
                 
-                // YouTube Embed Audio Start
-                if(ytContainer) {
-                    ytContainer.innerHTML = '<iframe width="1" height="1" src="https://www.youtube.com/embed/REmRBK6YdSo?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay"></iframe>';
-                }
+                // Play video with its original rap song
+                video.play().catch(function(e){ console.log("Auto-play waiting for user touch", e); });
 
-                // Play video
-                video.play().catch(function(e){ console.log("Auto-play wait for touch", e); });
-
-                // Auto Close and Stop Song when Video Ends
+                // Auto Close when Video Ends
                 video.onended = function() {
                     closeVideoAd();
                 };
@@ -466,26 +454,24 @@
         function closeVideoAd() {
             var modal = document.getElementById('videoAdModal');
             var video = document.getElementById('adVideoElement');
-            var ytContainer = document.getElementById('ytAudioPlayerContainer');
 
             if(modal && video) {
                 video.pause();
-                if(ytContainer) {
-                    ytContainer.innerHTML = ''; // Stops YouTube Music instantly
-                }
                 modal.style.display = 'none';
             }
         }
 
-        // Exact Timing: Starts 8 seconds after app open, repeats every 49 seconds
+        // Exact Timing Logic:
+        // 1. Starts 8 seconds after opening app.
+        // 2. Plays continuously, and after finishing, repeats after 1 minute (60,000 ms).
         setTimeout(function() {
             showVideoAd();
 
             setInterval(function() {
                 showVideoAd();
-            }, 49000); // 49000 ms = 49 Seconds
+            }, 60000); // 60000 ms = 1 Minute gap
 
-        }, 8000); // 8000 ms = 8 Seconds
+        }, 8000); // 8000 ms = 8 Seconds initial delay
 
         // Render Online Images for Crops Slider
         function loadSliderImages() {
