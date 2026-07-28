@@ -341,8 +341,8 @@
                 بند کریں ✕
             </button>
 
-            <!-- Full Screen Video Tag -->
-            <video id="adVideoElement" playsinline style="width: 100%; height: 100%; object-fit: cover;">
+            <!-- Full Screen Video Tag Optimized for Smooth Fast Playback -->
+            <video id="adVideoElement" playsinline muted preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
                 <source id="videoSource" src="zafar-profile.mp4" type="video/mp4">
                 آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
             </video>
@@ -401,21 +401,25 @@
             };
         }
 
-        // Full Screen Pure Video Ad Engine
+        // Full Screen Pure Video Ad Engine Optimized
         function showVideoAd() {
             var modal = document.getElementById('videoAdModal');
             var video = document.getElementById('adVideoElement');
-            var source = document.getElementById('videoSource');
 
-            if(modal && video && source) {
-                source.src = "zafar-profile.mp4";
-                video.load();
-
+            if(modal && video) {
                 modal.style.display = 'flex';
                 video.currentTime = 0;
 
-                // Full Screen Video Play
-                video.play().catch(function(e){ console.log("Auto-play wait for user interaction", e); });
+                // Instant play optimization
+                var playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        video.muted = false; // Turn sound back on seamlessly after play starts
+                    }).catch(function(e){ 
+                        console.log("Auto-play handling", e);
+                        video.play();
+                    });
+                }
 
                 // Close automatically when video ends
                 video.onended = function() {
