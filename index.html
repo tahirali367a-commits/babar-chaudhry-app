@@ -59,9 +59,115 @@
             font-size: 0.8rem;
             margin: 0;
         }
+
+        /* Dual Profile Section Styles */
+        .dual-profiles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .profile-item {
+            text-align: center;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #00ff87;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(0, 255, 135, 0.5);
+        }
+        .profile-name-small {
+            color: #00ff87;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        /* Visiting Card Style */
+        .card-banner-img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            border-radius: 12px;
+            border: 2px solid #00f0ff;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            margin: 10px auto 15px auto;
+            display: block;
+        }
+
+        /* VIP High-Level Video Ad Frame Design (TikTok/Reels Aspect Ratio) */
+        .ad-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 5, 15, 0.94);
+            backdrop-filter: blur(10px);
+            z-index: 999999;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        .ad-card-cyber {
+            position: relative;
+            width: 100%;
+            max-width: 360px;
+            background: linear-gradient(145deg, rgba(0, 15, 30, 0.98), rgba(0, 35, 15, 0.98));
+            border: 2px solid #00ff87;
+            border-radius: 22px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 0 40px rgba(0, 255, 135, 0.7), inset 0 0 15px rgba(0, 240, 255, 0.4);
+            animation: popIn 0.4s ease-out;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Continuous Running Ticker Animation */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00f0ff;
+            border-radius: 8px;
+            padding: 6px 0;
+            margin-top: 10px;
+            white-space: nowrap;
+        }
+        .ticker-move {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker 14s linear infinite;
+            color: #fff700;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(100%, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Hidden Gemini Key Storage Container -->
+    <script>
+        window.GEMINI_CONFIG = {
+            k1: "AQ.Ab8RN6I5oXnpHz-",
+            k2: "__Elc6CwPAhCR8sg_",
+            k3: "WSYBHou25sK7Mj2c9g",
+            getKey: function() { return this.k1 + this.k2 + this.k3; }
+        };
+    </script>
 
     <!-- Header Section -->
     <header class="main-header glass-card border-neon" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px;">
@@ -77,15 +183,29 @@
     <!-- Main Hero Profile Section -->
     <section class="hero-section">
         <div class="profile-card glass-card border-neon-glow" style="text-align: center; padding: 20px;">
-            <div class="photo-frame-main" style="margin: 0 auto 15px auto;">
-                <img src="babar-profile.jpg" alt="ظفر چوہدری" id="babarPhoto" onerror="this.onerror=null; this.src='babar-profile.jpg';">
+            
+            <!-- Dual Profile Circles -->
+            <div class="dual-profiles">
+                <div class="profile-item">
+                    <img src="babar-profile.jpg" alt="چوہدری ظفر" class="profile-avatar" onerror="this.onerror=null; this.src='babar-profile.jpg';">
+                    <div class="profile-name-small">چوہدری ظفر</div>
+                </div>
+                <div class="profile-item">
+                    <img src="qasim-profile.jpg" alt="چوہدری قاسم" class="profile-avatar" onerror="this.onerror=null; this.src='qasim-profile.jpg';">
+                    <div class="profile-name-small">چوہدری قاسم</div>
+                </div>
+            </div>
+
+            <!-- Visiting Card Display Box -->
+            <div style="margin: 10px 0;">
+                <img src="visiting-card.png" alt="القاسم ایگرو سروسز وزٹنگ کارڈ" class="card-banner-img" onerror="this.onerror=null; this.src='1785080287776.png';">
             </div>
             
             <h2 style="font-size: 1.8rem; color: #00ff87; margin-bottom: 15px; font-weight: bold;">ظفر چوہدری زراعت</h2>
 
             <!-- Direct Home Delivery WhatsApp Contact Button -->
             <div style="margin: 15px 0;">
-                <a href="https://wa.me/923051801367?text=السلام%20علیکم!%20ظفر%20صاحب%20मुझे%20اصل%20زرعی%20ادویات%20की%20ہوم%20ڈیلیوری%20چاہیے۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
+                <a href="https://wa.me/923051801367?text=السلام%20علیکم%20ظفر%20صاحب!%20مجھے%20اپنی%20فصلوں%20کی%20حفاظت%20کے%20لیے%20۱۰۰٪%20اصل%20اور%20معیاری%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے،%20برائے%20مہربانی%20رہنماٸی%20فرمائیں۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
                     <i class="fa-brands fa-whatsapp"></i> ادویات کی اوریجنل ہوم ڈیلیوری کے لیے واٹس ایپ کریں
                 </a>
             </div>
@@ -98,12 +218,12 @@
 
             <!-- Hidden Audio Script Text -->
             <div style="display: none;" id="hiddenBabarAudioText">
-                السلام علیکم ورحمتہ اللہ وبرکاتہ! ظفر چوہدری زراعت کے آفیشل ڈیجیٹل پلیٹ فارم پر آپ کا پرخلوص استقبال ہے۔ بااعتماد زرعی مشورے اور اعلیٰ معیار کی ادویات کے لیے ہماری دکان پر تشریف لائیں۔ ہماری دکان پر تمام ملٹی نیشنل کمپنیاں اور مستند برانڈز کی تصدیق شدہ کیڑے مار ادویات، جڑی بوٹی مار اسپرے، معیاری کھادیں اور طاقتور گروتھ ٹانک دستیاب ہیں۔ چاہے آپ کی گندم کی فصل ہو، کپاس، مکئی، دھان یا کماد اور باغات ہوں، ہر فصل کی بیماری کے خاتمے اور ریکارڈ پیداوار کے لیے ہمارے پاس جدید اور حل موجود ہیں۔ اگر آپ کی فصل کو سنڈی، سست تیلا، سفید مکھی یا فنگس کا مسئلہ ہے تو آپ ہماری ایپ میں دیے گئے اوریجنل فصل اسکینر کیمرہ کے ذریعے بیماری چیک کر سکتے ہیں اور براہِ راست اصل زرعی ادویات اپنے گھر منگوا سکتے ہیں۔ آپ ہمارے محترم رہنما ظفر عرف بابر صاحب سے اپنی فصل کا بہترین علاج جاننے کے لیے دکان پر تشریف لائیں اور بروقت مشورہ حاصل کریں۔ اور اگر آپ بھی اپنے بزنس، دکان یا پراڈکٹس کے لیے ایسی ہی خوبصورت اور VIP اینڈرائیڈ ایپ بنوانا چاہتے ہیں، تو نیچے دیے گئے ایپس ڈیولپر طاہر نذیر صاحب کی پروفائل اور واٹس ایپ بٹن پر رابطہ کریں۔ طاہر نذیر صاحب آپ کی بزنس ایپ مکمل ڈیزائن اور تیار کر کے دیں گے۔ شکریہ!
+                السلام علیکم ورحمتہ اللہ وبرکاتہ! ظفر چوہدری زراعت کے آفیشل ڈیجیٹل پلیٹ فارم پر آپ کا پرخلوص استقبال ہے۔ بااعتماد زرعی مشورے اور اعلیٰ معیار کی ادویات کے لیے ہماری دکان پر تشریف لائیں۔ ہماری دکان پر تمام ملٹی نیشنل کمپنیاں اور مستند برانڈز کی تصدیق شدہ کیڑے مار ادویات، جڑی بوٹی مار اسپرے، معیاری کھادیں اور طاقتور گروتھ ٹانک دستیاب ہیں۔ چاہے آپ کی گندم کی فصل ہو، کپاس، مکئی، دھان یا کماد اور باغات ہوں، ہر فصل کی بیماری کے خاتمے اور ریکارڈ پیداوار کے لیے ہمارے پاس جدید اور حل موجود ہیں۔ اگر آپ کی فصل کو سنڈی، سست تیلا، سفید مکھی یا فنگس کا مسئلہ ہے تو آپ ہماری ایپ میں دیے گئے اوریجنل فصل اسکینر کیمرہ کے ذریعے بیماری چیک کر سکتے ہیں اور براہِ راست اصل زرعی ادویات اپنے گھر منگوا سکتے ہیں۔ آپ ہمارے محترم رہنما ظفر عرف بابر صاحب اور چوہدری قاسم صاحب سے اپنی فصل کا بہترین علاج جاننے کے لیے دکان پر تشریف لائیں اور بروقت مشورہ حاصل کریں۔ اور اگر آپ بھی اپنے بزنس، دکان یا پراڈکٹس کے لیے ایسی ہی خوبصورت اور VIP اینڈرائیڈ ایپ بنوانا چاہتے ہیں، تو نیچے دیے گئے ایپس ڈیولپر طاہر نذیر صاحب کی پروفائل اور واٹس ایپ بٹن پر رابطہ کریں۔ طاہر نذیر صاحب آپ کی بزنس ایپ مکمل ڈیزائن اور تیار کر کے دیں گے۔ شکریہ!
             </div>
         </div>
     </section>
 
-    <!-- Original AccuWeather & Satellite Live Weather System -->
+    <!-- AccuWeather & Satellite Live Weather System -->
     <section class="weather-section">
         <h2 class="section-title"><i class="fa-solid fa-cloud-sun-rain"></i> لائیو موسمی حالات و گوجرہ ویدر الرٹ</h2>
         <div class="weather-grid">
@@ -146,7 +266,7 @@
         </div>
     </section>
 
-    <!-- Dedicated Original Crop Scanner Camera Section -->
+    <!-- Crop Scanner Section -->
     <section class="camera-section">
         <div class="camera-card glass-card neon-box-cyber" style="padding: 22px; text-align: center;">
             <div class="scanner-ring" style="margin-bottom: 12px;">
@@ -154,8 +274,6 @@
             </div>
             <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">اورجینل فصل بیماری اسکینر کیمرہ</h3>
             <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">اپنے موبائل کیمرے سے لائیو فصل اسکین کریں — بیماری اور اس کا علاج دیکھیں۔</p>
-            
-            <!-- Exact Crop Scanner File Link Included Below -->
             <a href="crop-scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
                 <i class="fa-solid fa-camera"></i> ڈائریکٹ لائیو اسکینر کیمرہ کھولیں
             </a>
@@ -166,7 +284,6 @@
     <section class="poster-slider-section">
         <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> کسان و فصلوں کی کاشت کی لائیو تصاویر</h2>
         <div class="slider-container glass-card" id="cropsSlider">
-            <!-- Dynamic Crops Images Loaded via JS -->
         </div>
     </section>
 
@@ -192,7 +309,7 @@
         </div>
     </section>
 
-    <!-- Master Developer Section (Tahir Nazeer Profile) -->
+    <!-- Developer Section (Tahir Nazeer Profile) -->
     <section class="developer-section">
         <div class="dev-card glass-card border-glow-small">
             <div class="dev-header">
@@ -217,22 +334,62 @@
         </div>
     </section>
 
-    <!-- Main Order Section -->
+    <!-- Order Section -->
     <section class="order-section" style="margin: 25px 0;">
-        <a href="https://wa.me/923051801367?text=السلام%20علیکم!%20ظفر%20صاحب%20मुझे%20ادویات%20की%20ہوم%20ڈیلیوری%20چاہیے۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
+        <a href="https://wa.me/923051801367?text=السلام%20علیکم%20ظفر%20صاحب!%20مجھے%20اپنی%20فصلوں%20کی%20حفاظت%20کے%20لیے%20۱۰۰٪%20اصل%20اور%20معیاری%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے،%20برائے%20مہربانی%20رہنماٸی%20فرمائیں۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
             <i class="fa-brands fa-whatsapp"></i> ظفر چوہدری سے ادویات کی ہوم ڈیلیوری منگوائیں
         </a>
     </section>
+
+    <!-- HIGH-LEVEL CYBER VIDEO AD POPUP MODAL (TikTok Vertical Style + Audio) -->
+    <div id="videoAdModal" class="ad-modal-overlay">
+        <div class="ad-card-cyber">
+            
+            <!-- Top Header & Live Badge -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span style="background: linear-gradient(45deg, #ff0055, #ff5500); color: #fff; font-size: 0.75rem; font-weight: bold; padding: 5px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(255,0,85,0.5);">
+                    <i class="fa-solid fa-circle-play"></i> اسپیشل زرعی HD ایڈ
+                </span>
+                <button onclick="closeVideoAd()" style="background: #ff0055; color: #fff; border: none; padding: 6px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.85rem; box-shadow: 0 0 10px rgba(255,0,85,0.5);">
+                    بند کریں ✕
+                </button>
+            </div>
+
+            <!-- TikTok Vertical Video Player Frame -->
+            <div style="position: relative; width: 100%; height: 350px; border-radius: 16px; overflow: hidden; border: 2px solid #00f0ff; box-shadow: 0 0 25px rgba(0,240,255,0.5);">
+                <video id="adVideoElement" width="100%" height="100%" playsinline style="object-fit: cover; display: block;">
+                    <source id="videoSource" src="zafar-agri-ad.mp4" type="video/mp4">
+                    آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
+                </video>
+            </div>
+
+            <!-- YouTube Audio Container -->
+            <div id="ytAudioPlayerContainer" style="display:none;"></div>
+
+            <!-- Scrolling News Ticker Bar -->
+            <div class="ticker-wrap">
+                <div class="ticker-move">
+                    ★ طاہر نذیر (پروفیشنل ایپس ڈیولپر) ★ چوہدری ظفر زراعت ★ چوہدری قاسم زراعت ★
+                </div>
+            </div>
+
+            <!-- Ad Bottom Title Banner -->
+            <div style="margin-top: 8px; background: rgba(0,0,0,0.5); padding: 8px; border-radius: 10px;">
+                <h4 id="adVideoTitle" style="color: #00ff87; font-size: 1rem; font-weight: bold; margin: 0;">
+                    ظفر چوہدری زراعت - بااعتماد و اوریجنل زرعی مرکز
+                </h4>
+            </div>
+        </div>
+    </div>
 
     <footer class="app-footer">
         <p>تمام حقوق محفوظ ہیں © ظفر چوہدری زراعت | ڈیجیٹل ڈیزائن کردہ: طاہر نذیر</p>
     </footer>
 
-    <!-- Audio, Weather & Universal Auto-Play Script Engine -->
+    <!-- Universal Scripts & Engine -->
     <script>
         var voicePlayed = false;
 
-        // Universal Auto Play Trigger for All Mobile Devices & Browsers
         function initUniversalAudioEngine() {
             if (!voicePlayed) {
                 speakAboutText();
@@ -240,10 +397,11 @@
             }
         }
 
-        // Attach event listeners for any tap/touch anywhere on the screen
-        document.addEventListener('click', initUniversalAudioEngine, { once: true });
-        document.addEventListener('touchstart', initUniversalAudioEngine, { once: true });
-        document.addEventListener('scroll', initUniversalAudioEngine, { once: true });
+        document.addEventListener('click', initUniversalAudioEngine, { passive: true });
+        document.addEventListener('touchstart', initUniversalAudioEngine, { passive: true });
+        document.addEventListener('touchend', initUniversalAudioEngine, { passive: true });
+        document.addEventListener('scroll', initUniversalAudioEngine, { passive: true });
+        window.addEventListener('load', initUniversalAudioEngine, { passive: true });
 
         function speakAboutText() {
             var textToSpeak = document.getElementById('hiddenBabarAudioText').innerText;
@@ -276,6 +434,59 @@
             };
         }
 
+        // VIP Video Ad & YouTube Music Sync Engine
+        function showVideoAd() {
+            var modal = document.getElementById('videoAdModal');
+            var video = document.getElementById('adVideoElement');
+            var source = document.getElementById('videoSource');
+            var ytContainer = document.getElementById('ytAudioPlayerContainer');
+
+            if(modal && video && source) {
+                source.src = "zafar-agri-ad.mp4";
+                video.load();
+
+                modal.style.display = 'flex';
+                video.currentTime = 0;
+                
+                // YouTube Embed Audio Start
+                if(ytContainer) {
+                    ytContainer.innerHTML = '<iframe width="1" height="1" src="https://www.youtube.com/embed/REmRBK6YdSo?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay"></iframe>';
+                }
+
+                // Play video
+                video.play().catch(function(e){ console.log("Auto-play wait for touch", e); });
+
+                // Auto Close and Stop Song when Video Ends
+                video.onended = function() {
+                    closeVideoAd();
+                };
+            }
+        }
+
+        function closeVideoAd() {
+            var modal = document.getElementById('videoAdModal');
+            var video = document.getElementById('adVideoElement');
+            var ytContainer = document.getElementById('ytAudioPlayerContainer');
+
+            if(modal && video) {
+                video.pause();
+                if(ytContainer) {
+                    ytContainer.innerHTML = ''; // Stops YouTube Music instantly
+                }
+                modal.style.display = 'none';
+            }
+        }
+
+        // Exact Timing: Starts 8 seconds after app open, repeats every 49 seconds
+        setTimeout(function() {
+            showVideoAd();
+
+            setInterval(function() {
+                showVideoAd();
+            }, 49000); // 49000 ms = 49 Seconds
+
+        }, 8000); // 8000 ms = 8 Seconds
+
         // Render Online Images for Crops Slider
         function loadSliderImages() {
             const cropsData = [
@@ -296,7 +507,6 @@
             }
         }
 
-        // Auto Scroll Engine for Slider
         function startAutoSliders() {
             const slider = document.getElementById('cropsSlider');
             if(slider) {
@@ -316,7 +526,6 @@
         });
     </script>
     
-    <!-- External Modular Database & Scripts -->
     <script src="crop-database.js"></script>
     <script src="medicines-data.js"></script>
     <script src="scanner-engine.js"></script>
