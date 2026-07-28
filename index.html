@@ -99,61 +99,53 @@
             display: block;
         }
 
-        /* VIP High-Level Video Ad Frame Design (TikTok/Reels Aspect Ratio) */
+        /* Full Screen Video Ad Overlay (No Box, Full Display) */
         .ad-modal-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 5, 15, 0.94);
-            backdrop-filter: blur(10px);
+            width: 100vw;
+            height: 100vh;
+            background: #000;
             z-index: 999999;
             justify-content: center;
             align-items: center;
-            padding: 10px;
         }
-        .ad-card-cyber {
+        
+        .ad-full-video-container {
             position: relative;
             width: 100%;
-            max-width: 360px;
-            background: linear-gradient(145deg, rgba(0, 15, 30, 0.98), rgba(0, 35, 15, 0.98));
-            border: 2px solid #00ff87;
-            border-radius: 22px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(0, 255, 135, 0.7), inset 0 0 15px rgba(0, 240, 255, 0.4);
-            animation: popIn 0.4s ease-out;
-        }
-        @keyframes popIn {
-            0% { transform: scale(0.85); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;
         }
 
-        /* Continuous Running Ticker Animation */
-        .ticker-wrap {
+        .ad-full-video-container video {
             width: 100%;
-            overflow: hidden;
+            height: 100%;
+            object-fit: cover; /* TikTok / Reels style full screen */
+            display: block;
+        }
+
+        /* Small Clean Close Button on Top Right */
+        .ad-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #00f0ff;
-            border-radius: 8px;
-            padding: 6px 0;
-            margin-top: 10px;
-            white-space: nowrap;
-        }
-        .ticker-move {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 100%;
-            animation: ticker 14s linear infinite;
-            color: #fff700;
-            font-size: 0.85rem;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: bold;
-        }
-        @keyframes ticker {
-            0% { transform: translate3d(100%, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
+            cursor: pointer;
+            z-index: 1000000;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -341,44 +333,19 @@
         </a>
     </section>
 
-    <!-- HIGH-LEVEL CYBER VIDEO AD POPUP MODAL (TikTok Vertical Style + Audio) -->
+    <!-- FULL SCREEN VIDEO AD MODAL (Pure Full Screen TikTok/Reels Display) -->
     <div id="videoAdModal" class="ad-modal-overlay">
-        <div class="ad-card-cyber">
-            
-            <!-- Top Header & Live Badge -->
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <span style="background: linear-gradient(45deg, #ff0055, #ff5500); color: #fff; font-size: 0.75rem; font-weight: bold; padding: 5px 12px; border-radius: 20px; box-shadow: 0 0 10px rgba(255,0,85,0.5);">
-                    <i class="fa-solid fa-circle-play"></i> اسپیشل زرعی HD ایڈ
-                </span>
-                <button onclick="closeVideoAd()" style="background: #ff0055; color: #fff; border: none; padding: 6px 14px; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 0.85rem; box-shadow: 0 0 10px rgba(255,0,85,0.5);">
-                    بند کریں ✕
-                </button>
-            </div>
+        <div class="ad-full-video-container">
+            <!-- Small Clean Close Button -->
+            <button onclick="closeVideoAd()" class="ad-close-btn">
+                بند کریں ✕
+            </button>
 
-            <!-- TikTok Vertical Video Player Frame -->
-            <div style="position: relative; width: 100%; height: 350px; border-radius: 16px; overflow: hidden; border: 2px solid #00f0ff; box-shadow: 0 0 25px rgba(0,240,255,0.5);">
-                <video id="adVideoElement" width="100%" height="100%" playsinline style="object-fit: cover; display: block;">
-                    <source id="videoSource" src="zafar-profile.mp4" type="video/mp4">
-                    آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
-                </video>
-            </div>
-
-            <!-- YouTube Audio Container -->
-            <div id="ytAudioPlayerContainer" style="display:none;"></div>
-
-            <!-- Scrolling News Ticker Bar -->
-            <div class="ticker-wrap">
-                <div class="ticker-move">
-                    ★ طاہر نذیر (پروفیشنل ایپس ڈیولپر) ★ چوہدری ظفر زراعت ★ چوہدری قاسم زراعت ★
-                </div>
-            </div>
-
-            <!-- Ad Bottom Title Banner -->
-            <div style="margin-top: 8px; background: rgba(0,0,0,0.5); padding: 8px; border-radius: 10px;">
-                <h4 id="adVideoTitle" style="color: #00ff87; font-size: 1rem; font-weight: bold; margin: 0;">
-                    ظفر چوہدری زراعت - بااعتماد و اوریجنل زرعی مرکز
-                </h4>
-            </div>
+            <!-- Full Screen Video Tag -->
+            <video id="adVideoElement" playsinline style="width: 100%; height: 100%; object-fit: cover;">
+                <source id="videoSource" src="zafar-profile.mp4" type="video/mp4">
+                آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
+            </video>
         </div>
     </div>
 
@@ -434,12 +401,11 @@
             };
         }
 
-        // VIP Video Ad & YouTube Music Sync Engine
+        // Full Screen Pure Video Ad Engine
         function showVideoAd() {
             var modal = document.getElementById('videoAdModal');
             var video = document.getElementById('adVideoElement');
             var source = document.getElementById('videoSource');
-            var ytContainer = document.getElementById('ytAudioPlayerContainer');
 
             if(modal && video && source) {
                 source.src = "zafar-profile.mp4";
@@ -447,16 +413,11 @@
 
                 modal.style.display = 'flex';
                 video.currentTime = 0;
-                
-                // YouTube Embed Audio Start
-                if(ytContainer) {
-                    ytContainer.innerHTML = '<iframe width="1" height="1" src="https://www.youtube.com/embed/REmRBK6YdSo?autoplay=1&enablejsapi=1" frameborder="0" allow="autoplay"></iframe>';
-                }
 
-                // Play video
-                video.play().catch(function(e){ console.log("Auto-play wait for touch", e); });
+                // Full Screen Video Play
+                video.play().catch(function(e){ console.log("Auto-play wait for user interaction", e); });
 
-                // Auto Close and Stop Song when Video Ends
+                // Close automatically when video ends
                 video.onended = function() {
                     closeVideoAd();
                 };
@@ -466,24 +427,20 @@
         function closeVideoAd() {
             var modal = document.getElementById('videoAdModal');
             var video = document.getElementById('adVideoElement');
-            var ytContainer = document.getElementById('ytAudioPlayerContainer');
 
             if(modal && video) {
                 video.pause();
-                if(ytContainer) {
-                    ytContainer.innerHTML = ''; // Stops YouTube Music instantly
-                }
                 modal.style.display = 'none';
             }
         }
 
-        // Exact Timing: Starts 8 seconds after app open, repeats every 49 seconds
+        // Timing: Starts in 8 seconds, repeats every 60 seconds (1 minute)
         setTimeout(function() {
             showVideoAd();
 
             setInterval(function() {
                 showVideoAd();
-            }, 49000); // 49000 ms = 49 Seconds
+            }, 60000); // 60000 ms = 1 Minute
 
         }, 8000); // 8000 ms = 8 Seconds
 
