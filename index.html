@@ -347,7 +347,7 @@
         </a>
     </section>
 
-    <!-- FULL SCREEN VIDEO AD MODAL (Pure Full Screen TikTok/Reels Display - Plays Full 1 Min 29 Sec) -->
+    <!-- FULL SCREEN VIDEO AD MODAL (Pure Full Screen TikTok/Reels Display) -->
     <div id="videoAdModal" class="ad-modal-overlay">
         <div class="ad-full-video-container">
             <!-- Small Clean Close Button -->
@@ -423,7 +423,7 @@
             if(modal && video) {
                 modal.style.display = 'flex';
                 video.currentTime = 0;
-                video.muted = false; // Ensure sound is fully active
+                video.muted = false;
 
                 var playPromise = video.play();
                 if (playPromise !== undefined) {
@@ -434,9 +434,11 @@
                     });
                 }
 
-                // Close automatically when video ends completely (Full 1 min 29 sec)
+                // Close automatically ONLY when video ends completely (Full 1 min 29 sec)
                 video.onended = function() {
                     closeVideoAd();
+                    // Schedule next ad 60 seconds after current video finishes
+                    setTimeout(showVideoAd, 60000);
                 };
             }
         }
@@ -451,15 +453,10 @@
             }
         }
 
-        // Timing: Starts in 8 seconds after opening, repeats every 60 seconds (1 minute)
+        // Timing: Starts in 8 seconds after opening app
         setTimeout(function() {
             showVideoAd();
-
-            setInterval(function() {
-                showVideoAd();
-            }, 60000); // 60000 ms = 1 Minute
-
-        }, 8000); // 8000 ms = 8 Seconds
+        }, 8000);
 
         // Render Online Images for Crops Slider
         function loadSliderImages() {
