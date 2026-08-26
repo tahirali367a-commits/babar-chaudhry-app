@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<meta name="theme-color" content="#0f172a">
+
+<title>Tahir Nazeer — Creative Studio</title>
+
+<link rel="icon"
+      type="image/png"
+      href="tn-game-icon.png">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fa;
+    color:#111827;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+button{
+    border:0;
+    font:inherit;
+    cursor:pointer;
+}
+
+.app{
+    min-height:100vh;
+    padding-bottom:85px;
+}
+
+/* HEADER */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:64px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:8px 14px;
+
+    background:rgba(255,255,255,.94);
+
+    border-bottom:1px solid #e5e7eb;
+
+    backdrop-filter:blur(18px);
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.back{
+    width:40px;
+    height:40px;
+
+    border-radius:13px;
+
+    background:#f1f5f9;
+
+    color:#111827;
+
+    font-size:18px;
+}
+
+.brand-photo{
+    width:40px;
+    height:40px;
+
+    object-fit:cover;
+
+    border-radius:13px;
+}
+
+.header-title{
+    font-size:14px;
+    font-weight:950;
+}
+
+.header-sub{
+    margin-top:2px;
+
+    color:#94a3b8;
+
+    font-size:9px;
+}
+
+/* MAIN */
+
+.main{
+    width:100%;
+    max-width:1050px;
+
+    margin:auto;
+
+    padding:18px 14px;
+}
+
+/* HERO */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+
+    padding:23px;
+
+    border-radius:27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b,
+            #334155
+        );
+
+    color:#fff;
+
+    box-shadow:
+        0 25px 60px
+        rgba(15,23,42,.17);
+}
+
+.hero:after{
+    content:"";
+
+    position:absolute;
+
+    width:210px;
+    height:210px;
+
+    right:-100px;
+    top:-110px;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+.hero-label{
+    position:relative;
+    z-index:2;
+
+    color:rgba(255,255,255,.55);
+
+    font-size:9px;
+
+    letter-spacing:1.7px;
+
+    font-weight:800;
+}
+
+.hero-title{
+    position:relative;
+    z-index:2;
+
+    margin-top:7px;
+
+    font-size:26px;
+
+    font-weight:950;
+}
+
+.hero-text{
+    position:relative;
+    z-index:2;
+
+    margin-top:7px;
+
+    max-width:600px;
+
+    color:rgba(255,255,255,.65);
+
+    font-size:10px;
+
+    line-height:1.6;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+    display:flex;
+
+    gap:8px;
+
+    margin-top:15px;
+
+    overflow-x:auto;
+
+    padding-bottom:3px;
+}
+
+.tool{
+    flex:0 0 auto;
+
+    min-width:72px;
+
+    padding:10px 12px;
+
+    border-radius:13px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    color:#475569;
+
+    font-size:9px;
+
+    font-weight:900;
+}
+
+.tool.active{
+    background:#111827;
+
+    color:#fff;
+
+    border-color:#111827;
+}
+
+/* STUDIO */
+
+.studio{
+    margin-top:15px;
+
+    padding:14px;
+
+    border-radius:25px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 9px 28px
+        rgba(15,23,42,.045);
+}
+
+/* CANVAS */
+
+.canvas-area{
+    position:relative;
+
+    width:100%;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#eef2f7;
+
+    border:1px solid #dce3eb;
+}
+
+#creativeCanvas{
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    touch-action:none;
+
+    background:#ffffff;
+}
+
+.canvas-message{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:75%;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    line-height:1.6;
+
+    pointer-events:none;
+}
+
+/* CONTROLS */
+
+.controls{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:9px;
+
+    margin-top:12px;
+}
+
+.control{
+    min-height:45px;
+
+    border-radius:14px;
+
+    background:#f1f5f9;
+
+    color:#334155;
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+.control.dark{
+    background:#111827;
+
+    color:#fff;
+}
+
+/* COLORS */
+
+.color-title{
+    margin-top:16px;
+
+    margin-bottom:8px;
+
+    font-size:12px;
+
+    font-weight:950;
+}
+
+.colors{
+    display:grid;
+
+    grid-template-columns:
+        repeat(10,1fr);
+
+    gap:6px;
+}
+
+.color{
+    width:100%;
+
+    aspect-ratio:1;
+
+    border-radius:8px;
+
+    border:2px solid #fff;
+
+    box-shadow:
+        0 0 0 1px #dbe2ea;
+
+    cursor:pointer;
+}
+
+.color.selected{
+    box-shadow:
+        0 0 0 2px #111827;
+}
+
+/* SIZE */
+
+.size-row{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:13px;
+}
+
+.size-label{
+    min-width:55px;
+
+    color:#64748b;
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+#brushSize{
+    width:100%;
+}
+
+/* CREATION INFO */
+
+.creation-info{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:8px;
+
+    margin-top:15px;
+}
+
+.info{
+    padding:11px 7px;
+
+    text-align:center;
+
+    border-radius:13px;
+
+    background:#f8fafc;
+}
+
+.info-value{
+    font-size:13px;
+
+    font-weight:950;
+}
+
+.info-label{
+    margin-top:3px;
+
+    color:#94a3b8;
+
+    font-size:8px;
+}
+
+/* MISSION */
+
+.mission{
+    margin-top:15px;
+
+    padding:18px;
+
+    border-radius:22px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+}
+
+.mission-title{
+    font-size:14px;
+
+    font-weight:950;
+}
+
+.mission-text{
+    margin-top:5px;
+
+    color:#94a3b8;
+
+    font-size:9px;
+
+    line-height:1.6;
+}
+
+.progress{
+    width:100%;
+
+    height:8px;
+
+    margin-top:13px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#e5e7eb;
+}
+
+.progress-fill{
+    width:0%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111827,
+            #64748b
+        );
+
+    transition:width .25s ease;
+}
+
+/* FOOTER */
+
+.footer{
+    padding:25px 14px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:9px;
+
+    line-height:1.7;
+}
+
+.footer strong{
+    color:#475569;
+}
+
+/* BOTTOM */
+
+.bottom{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:2000;
+
+    height:70px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    padding:
+        7px 5px
+        env(safe-area-inset-bottom);
+
+    background:rgba(255,255,255,.95);
+
+    border-top:1px solid #e5e7eb;
+
+    backdrop-filter:blur(18px);
+}
+
+.bottom button{
+    background:transparent;
+
+    color:#94a3b8;
+
+    font-size:9px;
+
+    font-weight:800;
+}
+
+.bottom button:nth-child(2){
+    color:#111827;
+}
+
+.bottom-icon{
+    display:block;
+
+    margin-bottom:4px;
+
+    font-size:18px;
+}
+
+@media(min-width:700px){
+
+    .controls{
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="header-left">
+
+        <button
+            class="back"
+            onclick="goDashboard()">
+            ←
+        </button>
+
+        <img
+            src="profile.jpg"
+            class="brand-photo"
+            alt="Tahir Nazeer">
+
+        <div>
+
+            <div class="header-title">
+                Creative Studio
+            </div>
+
+            <div class="header-sub">
+                Tahir Nazeer Game
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="main">
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-label">
+        TN CREATIVE WORLD
+    </div>
+
+    <div class="hero-title">
+        Create With Your Own Hands
+    </div>
+
+    <div class="hero-text">
+        Choose a color, choose your brush,
+        draw your own creation and complete
+        the creative mission.
+    </div>
+
+</section>
+
+
+<!-- TOOLS -->
+
+<div class="toolbar">
+
+    <button
+        id="brushTool"
+        class="tool active"
+        onclick="setTool('brush')">
+
+        ✏️ Brush
+
+    </button>
+
+    <button
+        class="tool"
+        onclick="setTool('eraser')">
+
+        🧽 Eraser
+
+    </button>
+
+    <button
+        class="tool"
+        onclick="clearArtwork()">
+
+        🗑 Clear
+
+    </button>
+
+    <button
+        class="tool"
+        onclick="undoArtwork()">
+
+        ↩ Undo
+
+    </button>
+
+    <button
+        class="tool"
+        onclick="downloadArtwork()">
+
+        💾 Save
+
+    </button>
+
+</div>
+
+
+<!-- STUDIO -->
+
+<section class="studio">
+
+    <div class="canvas-area">
+
+        <canvas
+            id="creativeCanvas"
+            width="1000"
+            height="650">
+        </canvas>
+
+        <div
+            id="canvasMessage"
+            class="canvas-message">
+
+            Start creating your own design.
+
+        </div>
+
+    </div>
+
+
+    <!-- COLORS -->
+
+    <div class="color-title">
+        Choose Your Color
+    </div>
+
+    <div
+        id="colors"
+        class="colors">
+    </div>
+
+
+    <!-- BRUSH SIZE -->
+
+    <div class="size-row">
+
+        <div class="size-label">
+            Brush Size
+        </div>
+
+        <input
+            id="brushSize"
+            type="range"
+            min="2"
+            max="45"
+            value="7">
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="controls">
+
+        <button
+            class="control dark"
+            onclick="startCreation()">
+
+            🎨 START CREATION
+
+        </button>
+
+        <button
+            class="control"
+            onclick="clearArtwork()">
+
+            🗑 CLEAR
+
+        </button>
+
+        <button
+            class="control"
+            onclick="undoArtwork()">
+
+            ↩ UNDO
+
+        </button>
+
+        <button
+            class="control"
+            onclick="completeCreation()">
+
+            ✓ COMPLETE
+
+        </button>
+
+    </div>
+
+
+    <!-- INFO -->
+
+    <div class="creation-info">
+
+        <div class="info">
+
+            <div
+                id="strokeCount"
+                class="info-value">
+                0
+            </div>
+
+            <div class="info-label">
+                STROKES
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div
+                id="coinReward"
+                class="info-value">
+                0
+            </div>
+
+            <div class="info-label">
+                COINS
+            </div>
+
+        </div>
+
+
+        <div class="info">
+
+            <div
+                id="creationLevel"
+                class="info-value">
+                1
+            </div>
+
+            <div class="info-label">
+                LEVEL
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MISSION -->
+
+<section class="mission">
+
+    <div class="mission-title">
+        🎯 Creative Mission
+    </div>
+
+    <div class="mission-text">
+        Make at least 30 strokes to complete
+        today's creative challenge.
+    </div>
+
+    <div class="progress">
+
+        <div
+            id="progressFill"
+            class="progress-fill">
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="footer">
+
+    <strong>
+        TN Creative World
+    </strong>
+
+    <br>
+
+    Created & Developed by
+    <strong>Tahir Nazeer</strong>
+
+    <br>
+
+    © 2026 Tahir Nazeer Game
+
+</footer>
+
+</main>
+
+
+<nav class="bottom">
+
+    <button onclick="goDashboard()">
+
+        <span class="bottom-icon">
+            🏠
+        </span>
+
+        Home
+
+    </button>
+
+
+    <button>
+
+        <span class="bottom-icon">
+            🎨
+        </span>
+
+        Create
+
+    </button>
+
+
+    <button onclick="goGameRoom()">
+
+        <span class="bottom-icon">
+            🎮
+        </span>
+
+        Game
+
+    </button>
+
+
+    <button onclick="goProfile()">
+
+        <span class="bottom-icon">
+            👤
+        </span>
+
+        Profile
+
+    </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   PLAYER CHECK
+===================================== */
+
+(function(){
+
+    const player =
+        localStorage.getItem(
+            "TN_Player"
+        );
+
+    if(!player){
+
+        window.location.href =
+            "login.html";
+
+    }
+
+})();
+
+
+/* =====================================
+   CANVAS
+===================================== */
+
+const canvas =
+    document.getElementById(
+        "creativeCanvas"
+    );
+
+const ctx =
+    canvas.getContext("2d");
+
+let drawing = false;
+
+let tool = "brush";
+
+let selectedColor = "#111827";
+
+let strokes = 0;
+
+let history = [];
+
+
+/* =====================================
+   INITIAL CANVAS
+===================================== */
+
+function resetCanvasBackground(){
+
+    ctx.fillStyle =
+        "#ffffff";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+}
+
+
+resetCanvasBackground();
+
+
+/* =====================================
+   COLORS — 100 COLORS
+===================================== */
+
+const colors = [
+
+"#000000","#111827","#1f2937","#374151","#4b5563",
+"#6b7280","#9ca3af","#d1d5db","#e5e7eb","#ffffff",
+
+"#7f1d1d","#991b1b","#b91c1c","#dc2626","#ef4444",
+"#f87171","#fca5a5","#fecaca","#fee2e2","#450a0a",
+
+"#7c2d12","#9a3412","#c2410c","#ea580c","#f97316",
+"#fb923c","#fdba74","#fed7aa","#ffedd5","#431407",
+
+"#78350f","#92400e","#b45309","#d97706","#f59e0b",
+"#fbbf24","#fcd34d","#fde68a","#fef3c7","#451a03",
+
+"#365314","#3f6212","#4d7c0f","#65a30d","#84cc16",
+"#a3e635","#bef264","#d9f99d","#ecfccb","#1a2e05",
+
+"#064e3b","#065f46","#047857","#059669","#10b981",
+"#34d399","#6ee7b7","#a7f3d0","#d1fae5","#022c22",
+
+"#164e63","#155e75","#0e7490","#0891b2","#06b6d4",
+"#22d3ee","#67e8f9","#a5f3fc","#cffafe","#083344",
+
+"#1e3a8a","#1d4ed8","#2563eb","#3b82f6","#60a5fa",
+"#93c5fd","#bfdbfe","#dbeafe","#eff6ff","#172554",
+
+"#312e81","#4338ca","#4f46e5","#6366f1","#818cf8",
+"#a5b4fc","#c7d2fe","#e0e7ff","#eef2ff","#1e1b4b",
+
+"#581c87","#6b21a8","#7e22ce","#9333ea","#a855f7",
+"#c084fc","#d8b4fe","#e9d5ff","#f3e8ff","#3b0764"
+
+];
+
+
+const colorContainer =
+    document.getElementById(
+        "colors"
+    );
+
+
+colors.forEach(
+    function(color,index){
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.className =
+            "color";
+
+        button.style.background =
+            color;
+
+        button.title =
+            "Color " + (index + 1);
+
+        if(index === 1){
+
+            button.classList.add(
+                "selected"
+            );
+
+        }
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                selectedColor =
+                    color;
+
+                document
+                    .querySelectorAll(
+                        ".color"
+                    )
+                    .forEach(
+                        item =>
+                        item.classList
+                            .remove(
+                                "selected"
+                            )
+                    );
+
+                button.classList.add(
+                    "selected"
+                );
+
+                setTool("brush");
+
+            }
+        );
+
+        colorContainer
+            .appendChild(
+                button
+            );
+
+    }
+);
+
+
+/* =====================================
+   TOOL
+===================================== */
+
+function setTool(newTool){
+
+    tool =
+        newTool;
+
+    document
+        .querySelectorAll(
+            ".tool"
+        )
+        .forEach(
+            button =>
+            button.classList
+                .remove(
+                    "active"
+                )
+        );
+
+    if(newTool === "brush"){
+
+        document
+            .getElementById(
+                "brushTool"
+            )
+            .classList
+            .add("active");
+
+    }
+
+}
+
+
+/* =====================================
+   POINT
+===================================== */
+
+function getPoint(event){
+
+    const rect =
+        canvas
+            .getBoundingClientRect();
+
+    let x;
+    let y;
+
+
+    if(
+        event.touches &&
+        event.touches.length
+    ){
+
+        x =
+            event.touches[0].clientX;
+
+        y =
+            event.touches[0].clientY;
+
+    }else{
+
+        x =
+            event.clientX;
+
+        y =
+            event.clientY;
+
+    }
+
+
+    return {
+
+        x:
+            (x - rect.left)
+            *
+            canvas.width
+            /
+            rect.width,
+
+        y:
+            (y - rect.top)
+            *
+            canvas.height
+            /
+            rect.height
+
+    };
+
+}
+
+
+/* =====================================
+   DRAW
+===================================== */
+
+function startDrawing(event){
+
+    if(!drawing){
+
+        saveHistory();
+
+    }
+
+    drawing = true;
+
+    const p =
+        getPoint(event);
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        p.x,
+        p.y
+    );
+
+    event.preventDefault();
+
+}
+
+
+function draw(event){
+
+    if(!drawing)
+        return;
+
+
+    const p =
+        getPoint(event);
+
+
+    ctx.lineTo(
+        p.x,
+        p.y
+    );
+
+
+    if(tool === "eraser"){
+
+        ctx.strokeStyle =
+            "#ffffff";
+
+    }else{
+
+        ctx.strokeStyle =
+            selectedColor;
+
+    }
+
+
+    ctx.lineWidth =
+        Number(
+            document
+                .getElementById(
+                    "brushSize"
+                )
+                .value
+        );
+
+
+    ctx.lineCap =
+        "round";
+
+    ctx.lineJoin =
+        "round";
+
+    ctx.stroke();
+
+
+    strokes++;
+
+    updateStats();
+
+    event.preventDefault();
+
+}
+
+
+function stopDrawing(){
+
+    if(!drawing)
+        return;
+
+    drawing = false;
+
+    ctx.closePath();
+
+}
+
+
+canvas.addEventListener(
+    "mousedown",
+    startDrawing
+);
+
+canvas.addEventListener(
+    "mousemove",
+    draw
+);
+
+canvas.addEventListener(
+    "mouseup",
+    stopDrawing
+);
+
+canvas.addEventListener(
+    "mouseleave",
+    stopDrawing
+);
+
+
+canvas.addEventListener(
+    "touchstart",
+    startDrawing,
+    {passive:false}
+);
+
+canvas.addEventListener(
+    "touchmove",
+    draw,
+    {passive:false}
+);
+
+canvas.addEventListener(
+    "touchend",
+    stopDrawing
+);
+
+
+/* =====================================
+   HISTORY / UNDO
+===================================== */
+
+function saveHistory(){
+
+    if(history.length >= 20){
+
+        history.shift();
+
+    }
+
+    history.push(
+        canvas.toDataURL()
+    );
+
+}
+
+
+function undoArtwork(){
+
+    if(history.length === 0){
+
+        return;
+
+    }
+
+
+    const image =
+        new Image();
+
+
+    image.onload =
+        function(){
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+            ctx.drawImage(
+                image,
+                0,
+                0
+            );
+
+            history.pop();
+
+            strokes =
+                Math.max(
+                    0,
+                    strokes - 1
+                );
+
+            updateStats();
+
+        };
+
+
+    image.src =
+        history[
+            history.length - 1
+        ];
+
+}
+
+
+/* =====================================
+   CLEAR
+===================================== */
+
+function clearArtwork(){
+
+    saveHistory();
+
+    resetCanvasBackground();
+
+    strokes = 0;
+
+    updateStats();
+
+    document
+        .getElementById(
+            "canvasMessage"
+        )
+        .style.display =
+        "block";
+
+}
+
+
+/* =====================================
+   START
+===================================== */
+
+function startCreation(){
+
+    document
+        .getElementById(
+            "canvasMessage"
+        )
+        .style.display =
+        "none";
+
+    strokes = 0;
+
+    updateStats();
+
+}
+
+
+/* =====================================
+   STATS
+===================================== */
+
+function updateStats(){
+
+    document
+        .getElementById(
+            "strokeCount"
+        )
+        .textContent =
+        strokes;
+
+
+    let percent =
+        Math.min(
+            100,
+            Math.floor(
+                strokes / 30 * 100
+            )
+        );
+
+
+    document
+        .getElementById(
+            "progressFill"
+        )
+        .style.width =
+        percent + "%";
+
+
+    document
+        .getElementById(
+            "coinReward"
+        )
+        .textContent =
+        Math.floor(
+            strokes / 30 * 100
+        );
+
+
+}
+
+
+/* =====================================
+   COMPLETE CREATION
+===================================== */
+
+function completeCreation(){
+
+    if(strokes < 30){
+
+        alert(
+            "Create a little more. You need at least 30 strokes to complete this mission."
+        );
+
+        return;
+
+    }
+
+
+    let data;
+
+    try{
+
+        data =
+            JSON.parse(
+                localStorage.getItem(
+                    "TN_GameData"
+                )
+            ) || {
+
+                coins:0,
+                missions:0,
+                level:1,
+                progress:0
+
+            };
+
+    }catch(error){
+
+        data = {
+
+            coins:0,
+            missions:0,
+            level:1,
+            progress:0
+
+        };
+
+    }
+
+
+    data.coins =
+        Number(data.coins || 0)
+        + 100;
+
+
+    data.missions =
+        Number(data.missions || 0)
+        + 1;
+
+
+    data.progress =
+        100;
+
+
+    localStorage.setItem(
+        "TN_GameData",
+        JSON.stringify(data)
+    );
+
+
+    document
+        .getElementById(
+            "coinReward"
+        )
+        .textContent =
+        "100";
+
+
+    alert(
+        "Mission Complete!\n\n+100 Coins\n\nCreated by Tahir Nazeer"
+    );
+
+}
+
+
+/* =====================================
+   SAVE IMAGE
+===================================== */
+
+function downloadArtwork(){
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+    link.download =
+        "Tahir-Nazeer-Creation.png";
+
+    link.href =
+        canvas.toDataURL(
+            "image/png"
+        );
+
+    link.click();
+
+}
+
+
+/* =====================================
+   NAVIGATION
+===================================== */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+function goGameRoom(){
+
+    window.location.href =
+        "game-room.html";
+
+}
+
+
+function goProfile(){
+
+    window.location.href =
+        "profile-page.html";
+
+}
+
+
+console.log(
+    "Tahir Nazeer Creative Studio — 100 Color Creative Engine"
+);
+
+</script>
+
+</body>
+</html>

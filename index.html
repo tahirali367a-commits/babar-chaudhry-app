@@ -1,505 +1,1775 @@
-<!-- File Name: index.html -->
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ظفر چوہدری زراعت - VIP زرعی ایپ</title>
-    
-    <!-- Babar Profile Photo as App Icon -->
-    <link rel="icon" type="image/jpeg" href="babar-profile.jpg">
-    <link rel="apple-touch-icon" href="babar-profile.jpg">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#00ff87">
 
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <meta name="theme-color" content="#ffffff">
+
+    <meta name="description"
+          content="Tahir Nazeer Game - TN Creative World">
+
+    <title>Tahir Nazeer Game</title>
+
+    <!-- Game Icon -->
+    <link rel="icon"
+          type="image/png"
+          href="tn-game-icon.png">
+
+    <!-- Main Styles -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="brand.css">
+    <link rel="stylesheet" href="splash.css">
 
-    <!-- CSS Override to remove watermark avatars on cards -->
     <style>
-        .glass-card::before, 
-        .weather-card::after {
-            display: none !important;
-            content: none !important;
-        }
 
-        /* Slider Image & Card Styles */
-        .slider-container {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            padding: 15px;
-            border-radius: 15px;
-        }
-        .slider-card {
-            min-width: 250px;
-            max-width: 280px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid #00ff87;
-            border-radius: 12px;
-            padding: 10px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-        .slider-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 255, 135, 0.5);
-        }
-        .slider-card h4 {
-            color: #00ff87;
-            margin: 8px 0 4px 0;
-            font-size: 1rem;
-        }
-        .slider-card p {
-            color: #cbd5e1;
-            font-size: 0.8rem;
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        /* Dual Profile Section Styles */
-        .dual-profiles {
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff 0%,
+                    #f7f9fc 50%,
+                    #eef3f8 100%
+                );
+            color: #111827;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        button {
+            border: 0;
+            cursor: pointer;
+        }
+
+        .tn-app {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           SPLASH SCREEN
+        ========================== */
+
+        #tnSplash {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+
             display: flex;
-            justify-content: center;
             align-items: center;
-            gap: 20px;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 20%,
+                    #ffffff,
+                    #f1f5f9 70%
+                );
+
+            transition:
+                opacity .5s ease,
+                visibility .5s ease;
+        }
+
+        #tnSplash.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .splash-content {
+            text-align: center;
+            width: 90%;
+            max-width: 380px;
+        }
+
+        .splash-logo {
+            width: 105px;
+            height: 105px;
+
+            object-fit: cover;
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(15, 23, 42, .15);
+
+            margin-bottom: 20px;
+        }
+
+        .splash-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -.7px;
+        }
+
+        .splash-subtitle {
+            margin-top: 8px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .splash-loader {
+            width: 46px;
+            height: 46px;
+            margin: 25px auto 0;
+
+            border-radius: 50%;
+
+            border:
+                4px solid #e5e7eb;
+
+            border-top-color: #111827;
+
+            animation:
+                tnSpin 1s linear infinite;
+        }
+
+        @keyframes tnSpin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================
+           LOGIN
+        ========================== */
+
+        #loginPage {
+            display: none;
+
+            min-height: 100vh;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+
+            padding: 32px 24px;
+
+            background:
+                rgba(255,255,255,.88);
+
+            border:
+                1px solid
+                rgba(15,23,42,.08);
+
+            border-radius: 30px;
+
+            box-shadow:
+                0 25px 80px
+                rgba(15,23,42,.10);
+
+            text-align: center;
+
+            backdrop-filter: blur(20px);
+        }
+
+        .login-photo {
+            width: 105px;
+            height: 105px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border:
+                4px solid
+                #ffffff;
+
+            box-shadow:
+                0 12px 35px
+                rgba(15,23,42,.16);
+
+            margin-bottom: 18px;
+        }
+
+        .login-title {
+            font-size: 28px;
+            font-weight: 900;
+        }
+
+        .login-creator {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 7px;
+            margin-bottom: 26px;
+        }
+
+        .login-input {
+            width: 100%;
+
+            padding: 16px 18px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid
+                #e2e8f0;
+
+            outline: none;
+
+            background: #f8fafc;
+
+            text-align: center;
+
+            transition:
+                .2s ease;
+        }
+
+        .login-input:focus {
+            background: #ffffff;
+
+            border-color:
+                #111827;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(15,23,42,.06);
+        }
+
+        .enter-button {
+            width: 100%;
+
+            margin-top: 14px;
+
+            padding: 16px;
+
+            border-radius: 16px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #334155
+                );
+
+            font-weight: 800;
+
+            box-shadow:
+                0 12px 28px
+                rgba(15,23,42,.18);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .enter-button:active {
+            transform: scale(.97);
+        }
+
+        .login-note {
+            margin-top: 18px;
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        /* =========================
+           MAIN APP
+        ========================== */
+
+        #mainApp {
+            display: none;
+
+            min-height: 100vh;
+
+            padding-bottom: 35px;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding:
+                14px 18px;
+
+            background:
+                rgba(255,255,255,.84);
+
+            border-bottom:
+                1px solid
+                rgba(15,23,42,.06);
+
+            backdrop-filter:
+                blur(18px);
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-photo {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 14px;
+
+            object-fit: cover;
+
+            box-shadow:
+                0 6px 18px
+                rgba(15,23,42,.12);
+        }
+
+        .brand-name {
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        .brand-small {
+            display: block;
+
+            color: #94a3b8;
+
+            font-size: 10px;
+
+            margin-top: 2px;
+        }
+
+        .menu-button {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 14px;
+
+            background: #f1f5f9;
+
+            font-size: 20px;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            padding:
+                28px 18px 15px;
+        }
+
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 27px 23px;
+
+            border-radius: 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1e293b 55%,
+                    #475569
+                );
+
+            color: white;
+
+            box-shadow:
+                0 25px 55px
+                rgba(15,23,42,.18);
+        }
+
+        .hero-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            right: -60px;
+            top: -80px;
+
+            background:
+                rgba(255,255,255,.08);
+        }
+
+        .hero-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 50%;
+
+            left: -50px;
+            bottom: -70px;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .hero-kicker {
+            position: relative;
+            z-index: 2;
+
+            font-size: 11px;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            opacity: .65;
+        }
+
+        .hero-title {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 8px;
+
+            font-size:
+                clamp(28px, 8vw, 45px);
+
+            line-height: 1.02;
+
+            font-weight: 950;
+
+            letter-spacing: -1.5px;
+        }
+
+        .hero-description {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 13px;
+
+            max-width: 560px;
+
+            color:
+                rgba(255,255,255,.72);
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+        .hero-button {
+            position: relative;
+            z-index: 2;
+
+            margin-top: 21px;
+
+            padding:
+                14px 20px;
+
+            border-radius: 15px;
+
+            background: #ffffff;
+
+            color: #111827;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 10px 25px
+                rgba(0,0,0,.15);
+        }
+
+        /* =========================
+           CREATOR CARD
+        ========================== */
+
+        .creator-card {
+            margin:
+                5px 18px 20px;
+
+            padding: 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            border-radius: 22px;
+
+            background:
+                rgba(255,255,255,.8);
+
+            border:
+                1px solid
+                #e8edf3;
+
+            box-shadow:
+                0 12px 35px
+                rgba(15,23,42,.06);
+        }
+
+        .creator-image {
+            width: 55px;
+            height: 55px;
+
+            object-fit: cover;
+
+            border-radius: 18px;
+        }
+
+        .creator-label {
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        .creator-name {
+            font-size: 16px;
+            font-weight: 900;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           GAME MENU
+        ========================== */
+
+        .section {
+            padding:
+                0 18px 20px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 19px;
+            font-weight: 900;
+        }
+
+        .section-subtitle {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .menu-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+        }
+
+        .menu-card {
+            min-height: 125px;
+
+            padding: 18px;
+
+            border-radius: 22px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e8edf3;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15,23,42,.055);
+
+            text-align: left;
+
+            transition:
+                transform .18s ease,
+                box-shadow .18s ease;
+        }
+
+        .menu-card:active {
+            transform:
+                scale(.97);
+        }
+
+        .menu-icon {
+            width: 43px;
+            height: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: #f1f5f9;
+
+            font-size: 21px;
+
             margin-bottom: 15px;
         }
-        .profile-item {
-            text-align: center;
+
+        .menu-card strong {
+            display: block;
+
+            font-size: 14px;
         }
-        .profile-avatar {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid #00ff87;
-            object-fit: cover;
-            box-shadow: 0 0 15px rgba(0, 255, 135, 0.5);
+
+        .menu-card span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #94a3b8;
+
+            font-size: 10px;
+
+            line-height: 1.4;
         }
-        .profile-name-small {
-            color: #00ff87;
-            font-size: 0.85rem;
+
+        /* =========================
+           PLAYER
+        ========================== */
+
+        .player-card {
+            margin:
+                0 18px 20px;
+
+            padding: 18px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafc,
+                    #ffffff
+                );
+
+            border:
+                1px solid
+                #e2e8f0;
+        }
+
+        .player-title {
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .player-status {
             margin-top: 6px;
-            font-weight: 600;
-            letter-spacing: 0.3px;
+
+            font-size: 11px;
+
+            color: #64748b;
         }
 
-        /* Visiting Card Style */
-        .card-banner-img {
-            width: 100%;
-            max-width: 450px;
-            height: auto;
-            border-radius: 12px;
-            border: 2px solid #00f0ff;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
-            margin: 10px auto 15px auto;
-            display: block;
-        }
-
-        /* Full Screen Video Ad Overlay (No Box, Full Display) */
-        .ad-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            z-index: 999999;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .ad-full-video-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
+        .player-controls {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000;
+
+            gap: 9px;
+
+            margin-top: 14px;
         }
 
-        .ad-full-video-container video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* TikTok / Reels style full screen */
+        .player-controls button {
+            flex: 1;
+
+            padding: 11px;
+
+            border-radius: 13px;
+
+            background: #111827;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+            padding:
+                25px 18px;
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 10px;
+        }
+
+        .footer strong {
+            color: #475569;
+        }
+
+        /* =========================
+           HIDDEN ROUTES
+        ========================== */
+
+        .tn-page {
+            display: none;
+
+            min-height: 100vh;
+
+            padding: 80px 18px 30px;
+        }
+
+        .tn-page.active {
             display: block;
         }
 
-        /* Small Clean Close Button on Top Right */
-        .ad-close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1000000;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (min-width: 700px) {
+
+            .menu-grid {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+            .hero,
+            .section {
+                max-width: 1100px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .creator-card,
+            .player-card {
+                max-width: 1100px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
         }
+
     </style>
 </head>
+
 <body>
 
-    <!-- Hidden Gemini Key Storage Container -->
-    <script>
-        window.GEMINI_CONFIG = {
-            k1: "AQ.Ab8RN6I5oXnpHz-",
-            k2: "__Elc6CwPAhCR8sg_",
-            k3: "WSYBHou25sK7Mj2c9g",
-            getKey: function() { return this.k1 + this.k2 + this.k3; }
-        };
-    </script>
+<div class="tn-app">
 
-    <!-- Header Section -->
-    <header class="main-header glass-card border-neon" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px;">
-        <div class="logo-area">
-            <h1 style="font-size: 1.4rem;"><i class="fa-solid fa-leaf text-neon"></i> ظفر چوہدری زراعت</h1>
-            <p style="font-size: 0.85rem;">گندم، مکئی، کپاس اور کماد کا بااعتماد مرکز</p>
+    <!-- =========================
+         SPLASH
+    ========================== -->
+
+    <div id="tnSplash">
+
+        <div class="splash-content">
+
+            <img
+                class="splash-logo"
+                src="tn-game-icon.png"
+                alt="Tahir Nazeer Game">
+
+            <div class="splash-title">
+                Tahir Nazeer Game
+            </div>
+
+            <div class="splash-subtitle">
+                TN Creative World
+            </div>
+
+            <div class="splash-loader"></div>
+
         </div>
-        <div>
-            <img src="babar-profile.jpg" alt="ظفر چوہدری" class="header-avatar" style="width:50px; height:50px; border-radius:50%; border:2px solid #00ff87; object-fit:cover;" onerror="this.onerror=null; this.src='babar-profile.jpg';">
-        </div>
-    </header>
 
-    <!-- Main Hero Profile Section -->
-    <section class="hero-section">
-        <div class="profile-card glass-card border-neon-glow" style="text-align: center; padding: 20px;">
-            
-            <!-- Dual Profile Circles -->
-            <div class="dual-profiles">
-                <div class="profile-item">
-                    <img src="babar-profile.jpg" alt="چوہدری ظفر" class="profile-avatar" onerror="this.onerror=null; this.src='babar-profile.jpg';">
-                    <div class="profile-name-small">چوہدری ظفر</div>
-                </div>
-                <div class="profile-item">
-                    <img src="qasim-profile.jpg" alt="چوہدری قاسم" class="profile-avatar" onerror="this.onerror=null; this.src='qasim-profile.jpg';">
-                    <div class="profile-name-small">چوہدری قاسم</div>
-                </div>
-            </div>
-
-            <!-- Visiting Card Display Box -->
-            <div style="margin: 10px 0;">
-                <img src="visiting-card.png" alt="القاسم ایگرو سروسز وزٹنگ کارڈ" class="card-banner-img" onerror="this.onerror=null; this.src='1785080287776.png';">
-            </div>
-            
-            <h2 style="font-size: 1.8rem; color: #00ff87; margin-bottom: 15px; font-weight: bold;">ظفر چوہدری زراعت</h2>
-
-            <!-- Direct Home Delivery WhatsApp Contact Button -->
-            <div style="margin: 15px 0;">
-                <a href="https://wa.me/923051801367?text=السلام%20علیکم%20ظفر%20صاحب!%20مجھے%20اپنی%20فصلوں%20کی%20حفاظت%20کے%20لیے%20۱۰۰٪%20اصل%20اور%20معیاری%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے،%20برائے%20مہربانی%20رہنماٸی%20فرمائیں۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
-                    <i class="fa-brands fa-whatsapp"></i> ادویات کی اوریجنل ہوم ڈیلیوری کے لیے واٹس ایپ کریں
-                </a>
-            </div>
-
-            <div class="btn-group">
-                <button class="glass-btn voice-btn" onclick="speakAboutText(); event.stopPropagation();">
-                    <i class="fa-solid fa-volume-high"></i> تعارف اور پیغام سنیں
-                </button>
-            </div>
-
-            <!-- Hidden Audio Script Text -->
-            <div style="display: none;" id="hiddenBabarAudioText">
-                السلام علیکم ورحمتہ اللہ وبرکاتہ! ظفر چوہدری زراعت کے آفیشل ڈیجیٹل پلیٹ فارم پر آپ کا پرخلوص استقبال ہے۔ بااعتماد زرعی مشورے اور اعلیٰ معیار کی ادویات کے لیے ہماری دکان پر تشریف لائیں۔ ہماری دکان پر تمام ملٹی نیشنل کمپنیاں اور مستند برانڈز کی تصدیق شدہ کیڑے مار ادویات، جڑی بوٹی مار اسپرے، معیاری کھادیں اور طاقتور گروتھ ٹانک دستیاب ہیں۔ چاہے آپ کی گندم کی فصل ہو، کپاس، مکئی، دھان یا کماد اور باغات ہوں، ہر فصل کی بیماری کے خاتمے اور ریکارڈ پیداوار کے لیے ہمارے پاس جدید اور حل موجود ہیں۔ اگر آپ کی فصل کو سنڈی، سست تیلا، سفید مکھی یا فنگس کا مسئلہ ہے تو آپ ہماری ایپ میں دیے گئے اوریجنل فصل اسکینر کیمرہ کے ذریعے بیماری چیک کر سکتے ہیں اور براہِ راست اصل زرعی ادویات اپنے گھر منگوا سکتے ہیں۔ آپ ہمارے محترم رہنما ظفر عرف بابر صاحب اور چوہدری قاسم صاحب سے اپنی فصل کا بہترین علاج جاننے کے لیے دکان پر تشریف لائیں اور بروقت مشورہ حاصل کریں۔ اور اگر آپ بھی اپنے بزنس، دکان یا پراڈکٹس کے لیے ایسی ہی خوبصورت اور VIP اینڈرائیڈ ایپ بنوانا چاہتے ہیں، تو نیچے دیے گئے ایپس ڈیولپر طاہر نذیر صاحب کی پروفائل اور واٹس ایپ بٹن پر رابطہ کریں۔ طاہر نذیر صاحب آپ کی بزنس ایپ مکمل ڈیزائن اور تیار کر کے دیں گے۔ شکریہ!
-            </div>
-        </div>
-    </section>
-
-    <!-- AccuWeather & Satellite Live Weather System -->
-    <section class="weather-section">
-        <h2 class="section-title"><i class="fa-solid fa-cloud-sun-rain"></i> لائیو موسمی حالات و گوجرہ ویدر الرٹ</h2>
-        <div class="weather-grid">
-            
-            <div class="weather-card glass-card color-card-1">
-                <i class="fa-solid fa-shield-halved weather-icon" style="color: #00ff87;"></i>
-                <h4>صداقت و اعتماد</h4>
-                <p style="font-weight: bold; color: #00ff87; font-size: 0.9rem;">۱۰۰٪ اوریجنل ملٹی نیشنل زرعی ادویات</p>
-            </div>
-
-            <div class="weather-card glass-card color-card-2">
-                <i class="fa-solid fa-user-doctor weather-icon" style="color: #00f0ff;"></i>
-                <h4>مفت زرعی مشورہ</h4>
-                <p style="font-weight: bold; color: #00f0ff; font-size: 0.9rem;">ظفر چوہدری سے فصل کا بہترین علاج جانیں</p>
-            </div>
-
-            <!-- AccuWeather Direct Button Box -->
-            <div class="weather-card glass-card color-card-4 span-2" style="text-align: center; padding: 18px;">
-                <i class="fa-solid fa-cloud-showers-heavy weather-icon text-neon"></i>
-                <h4>اسپرے کی ہدایت و گوجرہ موسمی رپورٹ</h4>
-                <p id="sprayAdvice" style="color: #fff700; margin-bottom: 15px; font-size: 1rem;">گوجرہ کا لائیو موسم اور بارش کی رپورٹ نیچے بٹن پر دیکھیں۔</p>
-                <a href="https://www.accuweather.com/en/pk/gojra/259618/weather-forecast/259618" target="_blank" onclick="event.stopPropagation();" class="glass-btn" style="display: inline-block; background: linear-gradient(45deg, #00f0ff, #00ff87); color: #000; font-weight: bold; text-decoration: none; padding: 10px 22px; border-radius: 25px; box-shadow: 0 0 15px rgba(0,240,255,0.6);">
-                    <i class="fa-solid fa-globe"></i> AccuWeather گوجرہ لائیو موسم کی اوریجنل رپورٹ دیکھیں
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ZAFAR CHOUDHARY STORE LOCATION VIP CARD -->
-    <section class="location-section" style="margin: 20px 0;">
-        <div class="glass-card neon-box-cyber" style="padding: 22px; text-align: center; border: 1px solid #00f0ff; border-radius: 15px; background: rgba(0, 20, 40, 0.6);">
-            <div style="margin-bottom: 10px;">
-                <i class="fa-solid fa-map-location-dot" style="font-size: 2.3rem; color: #00f0ff; text-shadow: 0 0 15px rgba(0,240,255,0.8);"></i>
-            </div>
-            <h3 style="color: #00f0ff; font-size: 1.25rem; margin-bottom: 6px; font-weight: bold;">ظفر چوہدری زراعت - دکان کی لائیو لوکیشن</h3>
-            <p style="color: #cbd5e1; font-size: 0.9rem; margin-bottom: 15px;">چک 363 گ ب جھوک سمیٹلی (نزد پی ایس او پٹرول پمپ، گوجرہ) — دکان پر تشریف لانے کے لیے نقشہ کھولیں۔</p>
-            <a href="https://maps.app.goo.gl/Uzh3DJUvPSWTe73s9" target="_blank" onclick="event.stopPropagation();" class="glass-btn" style="display: inline-block; background: linear-gradient(45deg, #00f0ff, #00ff87); color: #000; font-weight: bold; text-decoration: none; padding: 12px 26px; border-radius: 30px; box-shadow: 0 0 20px rgba(0,240,255,0.5); font-size: 0.95rem;">
-                <i class="fa-solid fa-location-arrow"></i> گوگل میپس پر دکان کا راستہ دیکھیں (Live Map)
-            </a>
-        </div>
-    </section>
-
-    <!-- Crop Scanner Section -->
-    <section class="camera-section">
-        <div class="camera-card glass-card neon-box-cyber" style="padding: 22px; text-align: center;">
-            <div class="scanner-ring" style="margin-bottom: 12px;">
-                <i class="fa-solid fa-camera-retro camera-icon" style="font-size: 2.5rem; color: #00ff87;"></i>
-            </div>
-            <h3 style="color: #00ff87; font-size: 1.3rem; margin-bottom: 6px;">اورجینل فصل بیماری اسکینر کیمرہ</h3>
-            <p style="margin-bottom: 18px; font-size: 0.9rem; color: #cbd5e1;">اپنے موبائل کیمرے سے لائیو فصل اسکین کریں — بیماری اور اس کا علاج دیکھیں۔</p>
-            <a href="crop-scanner.html" class="cam-btn-neon" onclick="event.stopPropagation();" style="display: inline-block; font-size: 1rem; padding: 14px 28px; border-radius: 30px; background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; border: none; font-weight: bold; text-decoration: none; box-shadow: 0 0 20px rgba(0,255,135,0.5);">
-                <i class="fa-solid fa-camera"></i> ڈائریکٹ لائیو اسکینر کیمرہ کھولیں
-            </a>
-        </div>
-    </section>
-
-    <!-- Adnan Bhai Field Manager VIP WhatsApp Card -->
-    <section class="field-manager-section" style="margin: 20px 0;">
-        <div class="glass-card neon-box-cyber" style="padding: 20px; text-align: center; border: 1px solid #00ff87; border-radius: 15px; background: rgba(0, 30, 20, 0.6);">
-            <div style="margin-bottom: 8px;">
-                <i class="fa-solid fa-user-tie" style="font-size: 2.2rem; color: #00ff87; text-shadow: 0 0 15px rgba(0,255,135,0.8);"></i>
-            </div>
-            <h3 style="color: #00ff87; font-size: 1.2rem; margin-bottom: 4px; font-weight: bold;">عدنان بھائی (فیلڈ مینیجر و مین ہیلپر)</h3>
-            <p style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 12px;">زمیندار بھائیوں کے فیلڈ وزٹ اور فصلوں کے معائنے کے لیے براہِ راست رابطہ کریں</p>
-            <a href="https://wa.me/923450985363?text=السلام%20علیکم%20عدنان%20بھائی!%20مجھے%20فصلوں%20کے%20معائنے%20اور%20زرعی%20مشورے%20کے%20سلسلے%20میں%20اپنے%20کھیتوں%20پر%20بلانا%20ہے،%20برائے%20مہربانی%20رہنمائی%20فرمائیں۔" target="_blank" onclick="event.stopPropagation();" class="whatsapp-btn-large" style="background: linear-gradient(45deg, #00ff87, #00f0ff); color: #000; padding: 12px 22px; font-size: 0.95rem; border-radius: 25px; text-decoration: none; display: inline-block; font-weight: bold; box-shadow: 0 0 15px rgba(0,255,135,0.4);">
-                <i class="fa-brands fa-whatsapp"></i> عدنان بھائی سے واٹس ایپ پر رابطہ کریں
-            </a>
-        </div>
-    </section>
-
-    <!-- Crops & Farming Auto-Play Slider Section -->
-    <section class="poster-slider-section">
-        <h2 class="section-title"><i class="fa-solid fa-wheat-awn"></i> کسان و فصلوں کی کاشت کی لائیو تصاویر</h2>
-        <div class="slider-container glass-card" id="cropsSlider">
-        </div>
-    </section>
-
-    <!-- Medicine Categories Section -->
-    <section class="catalog-section" style="margin-top: 25px;">
-        <h2 class="section-title"><i class="fa-solid fa-boxes-packing"></i> دستیاب زرعی ادویات کی قسمیں</h2>
-        <div class="catalog-grid">
-            <div class="catalog-card glass-card">
-                <i class="fa-solid fa-bug-slash cat-icon"></i>
-                <h4>کیڑے مار ادویات</h4>
-                <p>سنڈی، سست تیلا اور سفید مکھی کا مکمل خاتمہ۔</p>
-            </div>
-            <div class="catalog-card glass-card">
-                <i class="fa-solid fa-plant-wilt cat-icon"></i>
-                <h4>جڑی بوٹی مار</h4>
-                <p>گندم، مکئی اور کپاس کی تمام جڑی بوٹیوں کی تلفی۔</p>
-            </div>
-            <div class="catalog-card glass-card">
-                <i class="fa-solid fa-seedling cat-icon"></i>
-                <h4>طاقتور ٹانک و کھاد</h4>
-                <p>پودوں کی تیز رفتار بڑھوتری اور رنگت کے لیے۔</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Developer Section (Tahir Nazeer Profile) -->
-    <section class="developer-section">
-        <div class="dev-card glass-card border-glow-small">
-            <div class="dev-header">
-                <div class="dev-photo-frame">
-                    <img src="./tahir-profile.jpg" alt="طاہر نذیر" id="tahirPhoto" onerror="this.onerror=null; this.src='tahir-profile.jpg';">
-                </div>
-                <div class="dev-info">
-                    <span class="dev-badge"><i class="fa-solid fa-code"></i> ایپس ڈیولپر</span>
-                    <h3>طاہر نذیر صاحب</h3>
-                    <p>چیف ایگزیکٹو و ایپس آرکیٹیکٹ</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 15px; text-align: center;">
-                <p style="color: var(--neon-yellow, #fff700); font-size: 0.95rem; margin-bottom: 10px;">
-                    اپنے بزنس کا شاندار اینڈرائیڈ ایپ بنوانے کے لیے رابطہ کریں:
-                </p>
-                <a href="developer.html" class="glass-btn" style="display: inline-block; text-decoration: none; padding: 10px 20px; background: rgba(0, 240, 255, 0.2); border: 1px solid #00f0ff; color: #fff; border-radius: 20px;" onclick="event.stopPropagation();">
-                    <i class="fa-solid fa-laptop-code"></i> طاہر نذیر کی پروفائل و رابطہ پیج
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Order Section -->
-    <section class="order-section" style="margin: 25px 0;">
-        <a href="https://wa.me/923051801367?text=السلام%20علیکم%20ظفر%20صاحب!%20مجھے%20اپنی%20فصلوں%20کی%20حفاظت%20کے%20لیے%20۱۰۰٪%20اصل%20اور%20معیاری%20زرعی%20ادویات%20کی%20ہوم%20ڈیلیوری%20چاہیے،%20برائے%20مہربانی%20رہنماٸی%20فرمائیں۔" class="whatsapp-btn-large" target="_blank" onclick="event.stopPropagation();">
-            <i class="fa-brands fa-whatsapp"></i> ظفر چوہدری سے ادویات کی ہوم ڈیلیوری منگوائیں
-        </a>
-    </section>
-
-    <!-- FULL SCREEN VIDEO AD MODAL (Pure Full Screen TikTok/Reels Display) -->
-    <div id="videoAdModal" class="ad-modal-overlay">
-        <div class="ad-full-video-container">
-            <!-- Small Clean Close Button -->
-            <button onclick="closeVideoAd()" class="ad-close-btn">
-                بند کریں ✕
-            </button>
-
-            <!-- Full Screen Video Tag Optimized for Full Playback -->
-            <video id="adVideoElement" playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover;">
-                <source id="videoSource" src="zafar-profile.mp4" type="video/mp4">
-                آپ کا موبائل ویڈیو سپورٹ نہیں کر رہا۔
-            </video>
-        </div>
     </div>
 
-    <footer class="app-footer">
-        <p>تمام حقوق محفوظ ہیں © ظفر چوہدری زراعت | ڈیجیٹل ڈیزائن کردہ: طاہر نذیر</p>
-    </footer>
 
-    <!-- Universal Scripts & Engine -->
-    <script>
-        var voicePlayed = false;
+    <!-- =========================
+         LOGIN PAGE
+    ========================== -->
 
-        function initUniversalAudioEngine() {
-            if (!voicePlayed) {
-                speakAboutText();
-                voicePlayed = true;
-            }
+    <section id="loginPage">
+
+        <div class="login-card">
+
+            <img
+                class="login-photo"
+                src="login-profile.jpg"
+                alt="Tahir Nazeer">
+
+            <h1 class="login-title">
+                Welcome
+            </h1>
+
+            <p class="login-creator">
+                TN Creative World<br>
+                Created & Developed by
+                <strong>Tahir Nazeer</strong>
+            </p>
+
+            <input
+                id="playerName"
+                class="login-input"
+                type="text"
+                maxlength="30"
+                autocomplete="name"
+                placeholder="Enter Your Name">
+
+            <button
+                id="enterGameButton"
+                class="enter-button"
+                type="button">
+
+                ENTER GAME
+
+            </button>
+
+            <p class="login-note">
+                Your name will be used for your game profile.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN HOME
+    ========================== -->
+
+    <main id="mainApp">
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div class="brand-area">
+
+                <img
+                    class="brand-photo"
+                    src="profile.jpg"
+                    alt="Tahir Nazeer">
+
+                <div>
+
+                    <div class="brand-name">
+                        TN Creative World
+                    </div>
+
+                    <span class="brand-small">
+                        Tahir Nazeer Game
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                class="menu-button"
+                type="button"
+                onclick="openSettings()">
+
+                ☰
+
+            </button>
+
+        </header>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-card">
+
+                <div class="hero-kicker">
+                    Tahir Nazeer Project
+                </div>
+
+                <h1 class="hero-title">
+                    Create.<br>
+                    Play.<br>
+                    Discover.
+                </h1>
+
+                <p class="hero-description">
+                    Welcome to TN Creative World —
+                    a creative gaming experience
+                    built around imagination,
+                    missions and your own creations.
+                </p>
+
+                <button
+                    class="hero-button"
+                    type="button"
+                    onclick="startMainGame()">
+
+                    🎮 START GAME
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- CREATOR -->
+
+        <section class="creator-card">
+
+            <img
+                class="creator-image"
+                src="profile.jpg"
+                alt="Tahir Nazeer">
+
+            <div>
+
+                <div class="creator-label">
+                    CREATED & DEVELOPED BY
+                </div>
+
+                <div class="creator-name">
+                    Tahir Nazeer
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME MENU -->
+
+        <section class="section">
+
+            <div class="section-heading">
+
+                <div>
+                    <div class="section-title">
+                        Creative World
+                    </div>
+
+                    <div class="section-subtitle">
+                        Choose your experience
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="menu-grid">
+
+                <button
+                    class="menu-card"
+                    onclick="startMainGame()">
+
+                    <div class="menu-icon">
+                        🎮
+                    </div>
+
+                    <strong>
+                        Start Game
+                    </strong>
+
+                    <span>
+                        Enter your creative world.
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-card"
+                    onclick="openCreativeStudio()">
+
+                    <div class="menu-icon">
+                        🎨
+                    </div>
+
+                    <strong>
+                        Creative Studio
+                    </strong>
+
+                    <span>
+                        Create your own designs.
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-card"
+                    onclick="openMissions()">
+
+                    <div class="menu-icon">
+                        🎯
+                    </div>
+
+                    <strong>
+                        Missions
+                    </strong>
+
+                    <span>
+                        Complete missions and earn rewards.
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-card"
+                    onclick="openAchievements()">
+
+                    <div class="menu-icon">
+                        🏆
+                    </div>
+
+                    <strong>
+                        Achievements
+                    </strong>
+
+                    <span>
+                        Track your progress.
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-card"
+                    onclick="openLeaderboard()">
+
+                    <div class="menu-icon">
+                        👑
+                    </div>
+
+                    <strong>
+                        Leaderboard
+                    </strong>
+
+                    <span>
+                        See the top creators.
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-card"
+                    onclick="openCommunity()">
+
+                    <div class="menu-icon">
+                        👥
+                    </div>
+
+                    <strong>
+                        Community
+                    </strong>
+
+                    <span>
+                        Connect with other players.
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-card"
+                    onclick="openGallery()">
+
+                    <div class="menu-icon">
+                        🖼️
+                    </div>
+
+                    <strong>
+                        Gallery
+                    </strong>
+
+                    <span>
+                        Explore creative work.
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="menu-card"
+                    onclick="openStore()">
+
+                    <div class="menu-icon">
+                        💎
+                    </div>
+
+                    <strong>
+                        Creative Store
+                    </strong>
+
+                    <span>
+                        Explore brushes, colors and items.
+                    </span>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- MUSIC -->
+
+        <section class="player-card">
+
+            <div class="player-title">
+                🎵 Tahir Nazeer Music
+            </div>
+
+            <div
+                id="musicStatus"
+                class="player-status">
+
+                Ready for your journey.
+
+            </div>
+
+            <div class="player-controls">
+
+                <button
+                    type="button"
+                    onclick="startIntroMusic()">
+
+                    ▶ Intro
+
+                </button>
+
+                <button
+                    type="button"
+                    onclick="openMusic()">
+
+                    🎵 Music
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="footer">
+
+            <strong>
+                TN Creative World
+            </strong>
+
+            <br>
+
+            Created & Developed by
+            <strong>Tahir Nazeer</strong>
+
+            <br><br>
+
+            © 2026 Tahir Nazeer
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================================
+     EXISTING PROJECT JAVASCRIPT FILES
+====================================================== -->
+
+<script src="brand.js"></script>
+<script src="app.js"></script>
+<script src="navigation.js"></script>
+<script src="home.js"></script>
+<script src="game.js"></script>
+<script src="gameRoom.js"></script>
+
+<script src="creativeEngine.js"></script>
+<script src="gallery.js"></script>
+
+<script src="missionSystem.js"></script>
+<script src="achievement.js"></script>
+<script src="dashboard.js"></script>
+
+<script src="leaderboard.js"></script>
+<script src="store.js"></script>
+
+<script src="profile.js"></script>
+<script src="avatarSystem.js"></script>
+<script src="creatorBadge.js"></script>
+
+<script src="community.js"></script>
+<script src="friends.js"></script>
+<script src="chatSystem.js"></script>
+<script src="notification.js"></script>
+<script src="voice.js"></script>
+
+<script src="theme.js"></script>
+<script src="premiumUI.js"></script>
+<script src="uiButtons.js"></script>
+<script src="settings.js"></script>
+
+<script src="loginSystem.js"></script>
+<script src="loginPage.js"></script>
+
+<script src="iconSystem.js"></script>
+
+<script src="musicSystem.js"></script>
+
+<script src="splash.js"></script>
+
+
+<!-- =====================================================
+     MAIN CONNECTION ENGINE
+====================================================== -->
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    const splash =
+        document.getElementById("tnSplash");
+
+    const login =
+        document.getElementById("loginPage");
+
+    const main =
+        document.getElementById("mainApp");
+
+    const nameInput =
+        document.getElementById("playerName");
+
+    const enterButton =
+        document.getElementById("enterGameButton");
+
+
+    /*
+     * Prevent older placeholder loginPage.js
+     * from replacing the complete interface.
+     */
+
+
+    function getPlayer() {
+
+        try {
+
+            const saved =
+                localStorage.getItem("TN_Player");
+
+            return saved
+                ? JSON.parse(saved)
+                : null;
+
+        } catch (error) {
+
+            return null;
+
         }
 
-        document.addEventListener('click', initUniversalAudioEngine, { passive: true });
-        document.addEventListener('touchstart', initUniversalAudioEngine, { passive: true });
-        document.addEventListener('touchend', initUniversalAudioEngine, { passive: true });
-        document.addEventListener('scroll', initUniversalAudioEngine, { passive: true });
-        window.addEventListener('load', initUniversalAudioEngine, { passive: true });
+    }
 
-        function speakAboutText() {
-            var textToSpeak = document.getElementById('hiddenBabarAudioText').innerText;
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
 
-                var msg = new SpeechSynthesisUtterance();
-                msg.text = textToSpeak;
-                msg.rate = 0.88;
-                msg.pitch = 1.0;
+    function savePlayer(name) {
 
-                var voices = window.speechSynthesis.getVoices();
-                var urduVoice = voices.find(function(voice) {
-                    return voice.lang.includes('ur') || voice.lang.includes('hi') || voice.name.includes('Urdu') || voice.name.includes('Hindi');
-                });
+        const player = {
 
-                if (urduVoice) {
-                    msg.voice = urduVoice;
-                } else {
-                    msg.lang = 'ur-PK';
-                }
+            name: name,
 
-                window.speechSynthesis.speak(msg);
-            }
+            login: true,
+
+            brand: "TN Creative World",
+
+            creator: "Tahir Nazeer",
+
+            joined:
+                new Date().toISOString()
+
+        };
+
+        localStorage.setItem(
+            "TN_Player",
+            JSON.stringify(player)
+        );
+
+        return player;
+
+    }
+
+
+    function showLogin() {
+
+        splash.classList.add("hide");
+
+        login.style.display =
+            "flex";
+
+        main.style.display =
+            "none";
+
+    }
+
+
+    function showHome(player) {
+
+        splash.classList.add("hide");
+
+        login.style.display =
+            "none";
+
+        main.style.display =
+            "block";
+
+        const status =
+            document.getElementById(
+                "musicStatus"
+            );
+
+        if (status && player) {
+
+            status.textContent =
+                "Welcome " +
+                player.name +
+                " — TN Creative World";
+
         }
 
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.onvoiceschanged = function() {
-                window.speechSynthesis.getVoices();
+    }
+
+
+    async function startIntro() {
+
+        const audio =
+            new Audio(
+                "tahir-nazeer-game-intro.mp3"
+            );
+
+        audio.preload = "auto";
+
+        try {
+
+            await audio.play();
+
+        } catch (error) {
+
+            /*
+             * Browser autoplay protection:
+             * The login button itself provides
+             * the user interaction required
+             * to start audio.
+             */
+
+        }
+
+
+        audio.onended =
+            function () {
+
+                speakWelcome();
+
             };
+
+    }
+
+
+    function speakWelcome() {
+
+        if (
+            "speechSynthesis"
+            in window
+        ) {
+
+            window.speechSynthesis.cancel();
+
+            const voice =
+                new SpeechSynthesisUtterance(
+                    "Welcome to TN Creative World. Tahir Nazeer Project."
+                );
+
+            voice.rate = 0.92;
+
+            voice.pitch = 1;
+
+            voice.volume = 1;
+
+            window.speechSynthesis
+                .speak(voice);
+
         }
 
-        // Full Screen Pure Video Ad Engine (Plays full video without cutting)
-        function showVideoAd() {
-            var modal = document.getElementById('videoAdModal');
-            var video = document.getElementById('adVideoElement');
+    }
 
-            if(modal && video) {
-                modal.style.display = 'flex';
-                video.currentTime = 0;
-                video.muted = false;
 
-                var playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(function(e){ 
-                        console.log("Auto-play handling", e);
-                        video.muted = true;
-                        video.play();
-                    });
+    function loginPlayer() {
+
+        const name =
+            nameInput.value.trim();
+
+
+        if (!name) {
+
+            nameInput.focus();
+
+            nameInput.placeholder =
+                "Please enter your name";
+
+            return;
+
+        }
+
+
+        const player =
+            savePlayer(name);
+
+
+        showHome(player);
+
+
+        /*
+         * The intro song starts only after
+         * the player's button interaction.
+         */
+
+        startIntro();
+
+    }
+
+
+    enterButton
+        .addEventListener(
+            "click",
+            loginPlayer
+        );
+
+
+    nameInput
+        .addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    loginPlayer();
+
                 }
 
-                // Close automatically ONLY when video ends completely (Full 1 min 29 sec)
-                video.onended = function() {
-                    closeVideoAd();
-                    // Schedule next ad 60 seconds after current video finishes
-                    setTimeout(showVideoAd, 60000);
-                };
             }
-        }
+        );
 
-        function closeVideoAd() {
-            var modal = document.getElementById('videoAdModal');
-            var video = document.getElementById('adVideoElement');
 
-            if(modal && video) {
-                video.pause();
-                modal.style.display = 'none';
+    window.startMainGame =
+        function () {
+
+            if (
+                typeof window.startGame
+                === "function"
+            ) {
+
+                window.startGame();
+
+                return;
+
             }
-        }
 
-        // Timing: Starts in 8 seconds after opening app
-        setTimeout(function() {
-            showVideoAd();
-        }, 8000);
 
-        // Render Online Images for Crops Slider
-        function loadSliderImages() {
-            const cropsData = [
-                { title: "گندم کی بہترین فصل", desc: "اعلیٰ پیداوار اور شادابی", img: "https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=80" },
-                { title: "مکئی کی کاشت", desc: "طاقتور دانہ اور شاندار رنگت", img: "https://images.unsplash.com/photo-1551754655-cd27e38d2076?auto=format&fit=crop&w=600&q=80" },
-                { title: "کپاس کی فصل", desc: "بیماریوں سے محفوظ فصل", img: "https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=600&q=80" }
+            alert(
+                "Game Room is ready to connect."
+            );
+
+        };
+
+
+    window.openCreativeStudio =
+        function () {
+
+            if (
+                typeof window.openGallery
+                === "function"
+            ) {
+
+                window.openGallery();
+
+                return;
+
+            }
+
+
+            alert(
+                "Creative Studio is ready."
+            );
+
+        };
+
+
+    window.openMissions =
+        function () {
+
+            if (
+                typeof window.showMissions
+                === "function"
+            ) {
+
+                window.showMissions();
+
+                return;
+
+            }
+
+
+            alert(
+                "Mission System is ready."
+            );
+
+        };
+
+
+    window.openAchievements =
+        function () {
+
+            if (
+                typeof window.showAchievements
+                === "function"
+            ) {
+
+                window.showAchievements();
+
+                return;
+
+            }
+
+
+            alert(
+                "Achievement System is ready."
+            );
+
+        };
+
+
+    window.openLeaderboard =
+        function () {
+
+            if (
+                typeof window.showLeaderboard
+                === "function"
+            ) {
+
+                window.showLeaderboard();
+
+                return;
+
+            }
+
+
+            alert(
+                "Leaderboard is ready."
+            );
+
+        };
+
+
+    window.openCommunity =
+        function () {
+
+            if (
+                typeof window.openCommunityPage
+                === "function"
+            ) {
+
+                window.openCommunityPage();
+
+                return;
+
+            }
+
+
+            alert(
+                "Community is ready."
+            );
+
+        };
+
+
+    window.openGallery =
+        function () {
+
+            if (
+                typeof window.showGallery
+                === "function"
+            ) {
+
+                window.showGallery();
+
+                return;
+
+            }
+
+
+            alert(
+                "Gallery is ready."
+            );
+
+        };
+
+
+    window.openStore =
+        function () {
+
+            if (
+                typeof window.showStore
+                === "function"
+            ) {
+
+                window.showStore();
+
+                return;
+
+            }
+
+
+            alert(
+                "Creative Store is ready."
+            );
+
+        };
+
+
+    window.openSettings =
+        function () {
+
+            if (
+                typeof window.openSettingsPage
+                === "function"
+            ) {
+
+                window.openSettingsPage();
+
+                return;
+
+            }
+
+
+            alert(
+                "Settings"
+            );
+
+        };
+
+
+    window.startIntroMusic =
+        function () {
+
+            startIntro();
+
+        };
+
+
+    window.openMusic =
+        function () {
+
+            const songs = [
+
+                "https://www.youtube.com/watch?v=REmRBK6YdSo",
+
+                "https://www.youtube.com/watch?v=jn0V1JBxNGU",
+
+                "https://www.youtube.com/watch?v=68ZEOOvEcds",
+
+                "https://www.youtube.com/watch?v=pThESjSD5TM",
+
+                "https://www.youtube.com/watch?v=pi_E8CyAWXA"
+
             ];
 
-            const cropsSlider = document.getElementById('cropsSlider');
-            if(cropsSlider) {
-                cropsSlider.innerHTML = cropsData.map(item => `
-                    <div class="slider-card">
-                        <img src="${item.img}" alt="${item.title}">
-                        <h4>${item.title}</h4>
-                        <p>${item.desc}</p>
-                    </div>
-                `).join('');
-            }
-        }
 
-        function startAutoSliders() {
-            const slider = document.getElementById('cropsSlider');
-            if(slider) {
-                setInterval(() => {
-                    if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 5) {
-                        slider.scrollLeft = 0;
-                    } else {
-                        slider.scrollLeft += 220;
-                    }
-                }, 3000);
-            }
-        }
+            /*
+             * Opening the first video.
+             * Automatic sequential YouTube playback
+             * is controlled by YouTube/browser policies,
+             * so we do not falsely promise autoplay.
+             */
 
-        document.addEventListener("DOMContentLoaded", () => {
-            loadSliderImages();
-            startAutoSliders();
-        });
-    </script>
-    
-    <script src="crop-database.js"></script>
-    <script src="medicines-data.js"></script>
-    <script src="scanner-engine.js"></script>
-    <script src="script.js"></script>
+            window.open(
+                songs[0],
+                "_blank"
+            );
+
+        };
+
+
+    /*
+     * INITIAL APP STATE
+     */
+
+    setTimeout(
+        function () {
+
+            const player =
+                getPlayer();
+
+
+            if (player && player.login) {
+
+                showHome(player);
+
+            } else {
+
+                showLogin();
+
+            }
+
+        },
+        900
+    );
+
+
+})();
+
+</script>
+
 </body>
 </html>

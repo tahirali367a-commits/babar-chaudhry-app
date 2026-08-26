@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<meta name="theme-color" content="#0f172a">
+
+<title>Tahir Nazeer Game — Game Room</title>
+
+<link rel="icon"
+      type="image/png"
+      href="tn-game-icon.png">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fa;
+    color:#111827;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+button{
+    border:0;
+    font:inherit;
+    cursor:pointer;
+}
+
+.app{
+    min-height:100vh;
+    padding-bottom:90px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:64px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:8px 14px;
+
+    background:rgba(255,255,255,.94);
+
+    border-bottom:1px solid #e5e7eb;
+
+    backdrop-filter:blur(18px);
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.back{
+    width:40px;
+    height:40px;
+
+    border-radius:13px;
+
+    background:#f1f5f9;
+
+    font-size:18px;
+}
+
+.header-title{
+    font-size:15px;
+    font-weight:950;
+}
+
+.header-sub{
+    margin-top:2px;
+    color:#94a3b8;
+    font-size:9px;
+}
+
+/* =========================
+   ROOM
+========================= */
+
+.room{
+    width:100%;
+    max-width:1050px;
+
+    margin:auto;
+
+    padding:17px 14px;
+}
+
+.room-banner{
+    position:relative;
+    overflow:hidden;
+
+    padding:20px;
+
+    border-radius:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0f172a,
+            #1e293b,
+            #334155
+        );
+
+    color:#fff;
+
+    box-shadow:
+        0 22px 55px
+        rgba(15,23,42,.16);
+}
+
+.room-banner:after{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    right:-80px;
+    top:-100px;
+
+    background:rgba(255,255,255,.06);
+}
+
+.room-label{
+    position:relative;
+    z-index:2;
+
+    color:rgba(255,255,255,.55);
+
+    font-size:9px;
+    letter-spacing:1.7px;
+    font-weight:800;
+}
+
+.room-title{
+    position:relative;
+    z-index:2;
+
+    margin-top:6px;
+
+    font-size:25px;
+    font-weight:950;
+}
+
+.room-info{
+    position:relative;
+    z-index:2;
+
+    margin-top:7px;
+
+    color:rgba(255,255,255,.65);
+
+    font-size:10px;
+}
+
+.room-id{
+    position:relative;
+    z-index:2;
+
+    display:inline-block;
+
+    margin-top:14px;
+
+    padding:7px 10px;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.10);
+
+    font-size:9px;
+}
+
+/* =========================
+   PLAYERS
+========================= */
+
+.section{
+    margin-top:17px;
+}
+
+.section-title{
+    margin-bottom:10px;
+
+    font-size:17px;
+    font-weight:950;
+}
+
+.players{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:10px;
+}
+
+.player{
+    min-height:132px;
+
+    padding:15px;
+
+    border-radius:21px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 8px 24px
+        rgba(15,23,42,.04);
+}
+
+.player-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    background:#f1f5f9;
+}
+
+.player-name{
+    font-size:12px;
+    font-weight:900;
+}
+
+.player-state{
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:8px;
+}
+
+.player-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-top:15px;
+}
+
+.ready{
+    padding:6px 8px;
+
+    border-radius:9px;
+
+    background:#f1f5f9;
+
+    color:#475569;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.mic-status{
+    font-size:16px;
+}
+
+/* =========================
+   GAME AREA
+========================= */
+
+.game-card{
+    padding:18px;
+
+    border-radius:23px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+        0 8px 24px
+        rgba(15,23,42,.04);
+}
+
+.game-title{
+    font-size:15px;
+    font-weight:950;
+}
+
+.game-description{
+    margin-top:5px;
+
+    color:#94a3b8;
+
+    font-size:10px;
+    line-height:1.6;
+}
+
+.canvas-wrap{
+    position:relative;
+
+    width:100%;
+
+    margin-top:15px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eef2f7,
+            #e2e8f0
+        );
+
+    border:1px solid #dbe2ea;
+}
+
+#gameCanvas{
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    touch-action:none;
+}
+
+.canvas-help{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:80%;
+
+    text-align:center;
+
+    pointer-events:none;
+
+    color:#64748b;
+
+    font-size:11px;
+    font-weight:700;
+
+    line-height:1.6;
+}
+
+/* =========================
+   CONTROLS
+========================= */
+
+.controls{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:9px;
+
+    margin-top:12px;
+}
+
+.control{
+    padding:13px 8px;
+
+    border-radius:14px;
+
+    background:#f1f5f9;
+
+    color:#334155;
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+.control.primary{
+    background:#111827;
+    color:#fff;
+}
+
+.control.active{
+    background:#334155;
+    color:#fff;
+}
+
+/* =========================
+   MIC
+========================= */
+
+.voice-card{
+    padding:18px;
+
+    border-radius:22px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+}
+
+.voice-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.voice-title{
+    font-size:14px;
+    font-weight:950;
+}
+
+.voice-description{
+    margin-top:4px;
+
+    color:#94a3b8;
+
+    font-size:9px;
+    line-height:1.5;
+}
+
+.mic-button{
+    min-width:58px;
+    height:48px;
+
+    border-radius:15px;
+
+    background:#111827;
+
+    color:#fff;
+
+    font-size:20px;
+}
+
+.mic-button.active{
+    background:#475569;
+}
+
+.voice-status{
+    margin-top:13px;
+
+    padding:10px;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    color:#64748b;
+
+    font-size:9px;
+}
+
+/* =========================
+   MISSION
+========================= */
+
+.mission{
+    padding:18px;
+
+    border-radius:22px;
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+}
+
+.mission-header{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.mission-name{
+    font-size:13px;
+    font-weight:900;
+}
+
+.reward{
+    padding:6px 8px;
+
+    border-radius:9px;
+
+    background:#f1f5f9;
+
+    color:#475569;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.progress{
+    width:100%;
+    height:8px;
+
+    margin-top:14px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:#e5e7eb;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #111827,
+            #64748b
+        );
+
+    transition:width .3s ease;
+}
+
+.mission-text{
+    margin-top:7px;
+
+    color:#94a3b8;
+
+    font-size:9px;
+}
+
+/* =========================
+   BRAND FOOTER
+========================= */
+
+.footer{
+    padding:25px 14px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:9px;
+
+    line-height:1.7;
+}
+
+.footer strong{
+    color:#475569;
+}
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:2000;
+
+    height:70px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    padding:
+        7px 5px
+        env(safe-area-inset-bottom);
+
+    background:rgba(255,255,255,.95);
+
+    border-top:1px solid #e5e7eb;
+
+    backdrop-filter:blur(18px);
+}
+
+.bottom button{
+    background:transparent;
+
+    color:#94a3b8;
+
+    font-size:9px;
+    font-weight:800;
+}
+
+.bottom button:first-child{
+    color:#111827;
+}
+
+.bottom-icon{
+    display:block;
+
+    margin-bottom:4px;
+
+    font-size:18px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(min-width:700px){
+
+    .players{
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+
+    .controls{
+        grid-template-columns:
+            repeat(6,1fr);
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+
+    <div class="header-left">
+
+        <button
+            class="back"
+            onclick="goDashboard()">
+            ←
+        </button>
+
+        <div>
+
+            <div class="header-title">
+                Tahir Nazeer Game Room
+            </div>
+
+            <div class="header-sub">
+                TN Creative World
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="room">
+
+<!-- ROOM BANNER -->
+
+<section class="room-banner">
+
+    <div class="room-label">
+        MULTIPLAYER CREATIVE ROOM
+    </div>
+
+    <div class="room-title">
+        Create • Play • Compete
+    </div>
+
+    <div class="room-info">
+        Up to 4 players can join this game room.
+    </div>
+
+    <div
+        id="roomId"
+        class="room-id">
+        Room: TN-0001
+    </div>
+
+</section>
+
+
+<!-- PLAYERS -->
+
+<section class="section">
+
+    <div class="section-title">
+        Players
+    </div>
+
+    <div class="players">
+
+        <div class="player">
+
+            <div class="player-top">
+
+                <img
+                    id="player1Photo"
+                    class="avatar"
+                    src="login-profile.jpg"
+                    alt="Player">
+
+                <div>
+
+                    <div
+                        id="player1Name"
+                        class="player-name">
+                        You
+                    </div>
+
+                    <div class="player-state">
+                        Player 1
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="player-bottom">
+
+                <span class="ready">
+                    READY
+                </span>
+
+                <span
+                    id="mic1"
+                    class="mic-status">
+                    🎙️
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="player">
+
+            <div class="player-top">
+
+                <div class="avatar"
+                     style="
+                     display:flex;
+                     align-items:center;
+                     justify-content:center;
+                     font-size:22px;">
+                    👤
+                </div>
+
+                <div>
+
+                    <div class="player-name">
+                        Player 2
+                    </div>
+
+                    <div class="player-state">
+                        Waiting...
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="player-bottom">
+
+                <span class="ready">
+                    EMPTY
+                </span>
+
+                <span class="mic-status">
+                    🎙️
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="player">
+
+            <div class="player-top">
+
+                <div class="avatar"
+                     style="
+                     display:flex;
+                     align-items:center;
+                     justify-content:center;
+                     font-size:22px;">
+                    👤
+                </div>
+
+                <div>
+
+                    <div class="player-name">
+                        Player 3
+                    </div>
+
+                    <div class="player-state">
+                        Waiting...
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="player-bottom">
+
+                <span class="ready">
+                    EMPTY
+                </span>
+
+                <span class="mic-status">
+                    🎙️
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="player">
+
+            <div class="player-top">
+
+                <div class="avatar"
+                     style="
+                     display:flex;
+                     align-items:center;
+                     justify-content:center;
+                     font-size:22px;">
+                    👤
+                </div>
+
+                <div>
+
+                    <div class="player-name">
+                        Player 4
+                    </div>
+
+                    <div class="player-state">
+                        Waiting...
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="player-bottom">
+
+                <span class="ready">
+                    EMPTY
+                </span>
+
+                <span class="mic-status">
+                    🎙️
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GAME -->
+
+<section class="section">
+
+    <div class="game-card">
+
+        <div class="game-title">
+            🎨 Creative Mission
+        </div>
+
+        <div class="game-description">
+            Draw your creation inside the game canvas.
+            Complete the mission and earn coins.
+        </div>
+
+
+        <div class="canvas-wrap">
+
+            <canvas
+                id="gameCanvas"
+                width="900"
+                height="520">
+            </canvas>
+
+            <div
+                id="canvasHelp"
+                class="canvas-help">
+
+                Start the mission and create
+                something with your own hands.
+
+            </div>
+
+        </div>
+
+
+        <div class="controls">
+
+            <button
+                class="control primary"
+                onclick="startMission()">
+
+                ▶ START
+
+            </button>
+
+            <button
+                class="control"
+                onclick="clearCanvas()">
+
+                🗑 CLEAR
+
+            </button>
+
+            <button
+                class="control"
+                onclick="finishMission()">
+
+                ✓ FINISH
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- VOICE -->
+
+<section class="section">
+
+    <div class="voice-card">
+
+        <div class="voice-row">
+
+            <div>
+
+                <div class="voice-title">
+                    🎙️ Voice
+                </div>
+
+                <div class="voice-description">
+                    Allow microphone access for
+                    voice features.
+                </div>
+
+            </div>
+
+            <button
+                id="micButton"
+                class="mic-button"
+                onclick="toggleMicrophone()">
+
+                🎙️
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="voiceStatus"
+            class="voice-status">
+
+            Microphone is off.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MISSION -->
+
+<section class="section">
+
+    <div class="mission">
+
+        <div class="mission-header">
+
+            <div class="mission-name">
+                Mission Progress
+            </div>
+
+            <div class="reward">
+                +100 COINS
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div
+                id="progressFill"
+                class="progress-fill">
+            </div>
+
+        </div>
+
+
+        <div
+            id="missionText"
+            class="mission-text">
+
+            Mission has not started.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer class="footer">
+
+    <strong>
+        TN Creative World
+    </strong>
+
+    <br>
+
+    Created & Developed by
+    <strong>Tahir Nazeer</strong>
+
+    <br>
+
+    © 2026 Tahir Nazeer Game
+
+</footer>
+
+</main>
+
+
+<!-- BOTTOM -->
+
+<nav class="bottom">
+
+    <button onclick="goDashboard()">
+
+        <span class="bottom-icon">
+            🏠
+        </span>
+
+        Dashboard
+
+    </button>
+
+
+    <button onclick="startMission()">
+
+        <span class="bottom-icon">
+            🎮
+        </span>
+
+        Play
+
+    </button>
+
+
+    <button onclick="toggleMicrophone()">
+
+        <span class="bottom-icon">
+            🎙️
+        </span>
+
+        Voice
+
+    </button>
+
+
+    <button onclick="goProfile()">
+
+        <span class="bottom-icon">
+            👤
+        </span>
+
+        Profile
+
+    </button>
+
+</nav>
+
+</div>
+
+
+<script>
+
+/* ======================================
+   PLAYER
+====================================== */
+
+(function(){
+
+    const raw =
+        localStorage.getItem(
+            "TN_Player"
+        );
+
+    if(!raw){
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+    try{
+
+        const player =
+            JSON.parse(raw);
+
+        if(
+            !player ||
+            !player.name
+        ){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+        document
+            .getElementById(
+                "player1Name"
+            )
+            .textContent =
+            player.name;
+
+    }catch(error){
+
+        window.location.href =
+            "login.html";
+
+    }
+
+})();
+
+
+/* ======================================
+   ROOM ID
+====================================== */
+
+(function(){
+
+    let room =
+        localStorage.getItem(
+            "TN_Room_ID"
+        );
+
+    if(!room){
+
+        room =
+            "TN-" +
+            Math.random()
+                .toString(36)
+                .substring(2,7)
+                .toUpperCase();
+
+        localStorage.setItem(
+            "TN_Room_ID",
+            room
+        );
+
+    }
+
+    document
+        .getElementById(
+            "roomId"
+        )
+        .textContent =
+        "Room: " + room;
+
+})();
+
+
+/* ======================================
+   CANVAS
+====================================== */
+
+const canvas =
+    document.getElementById(
+        "gameCanvas"
+    );
+
+const ctx =
+    canvas.getContext(
+        "2d"
+    );
+
+let drawing = false;
+
+let missionStarted = false;
+
+let points = 0;
+
+
+/* Background */
+
+ctx.fillStyle =
+    "#f8fafc";
+
+ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+);
+
+
+function getPoint(event){
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    let clientX;
+    let clientY;
+
+
+    if(
+        event.touches &&
+        event.touches.length
+    ){
+
+        clientX =
+            event.touches[0].clientX;
+
+        clientY =
+            event.touches[0].clientY;
+
+    }else{
+
+        clientX =
+            event.clientX;
+
+        clientY =
+            event.clientY;
+
+    }
+
+
+    return {
+
+        x:
+            (clientX - rect.left)
+            *
+            canvas.width
+            /
+            rect.width,
+
+        y:
+            (clientY - rect.top)
+            *
+            canvas.height
+            /
+            rect.height
+
+    };
+
+}
+
+
+function startDrawing(event){
+
+    if(!missionStarted)
+        return;
+
+    drawing = true;
+
+    const p =
+        getPoint(event);
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        p.x,
+        p.y
+    );
+
+    event.preventDefault();
+
+}
+
+
+function draw(event){
+
+    if(!drawing)
+        return;
+
+    const p =
+        getPoint(event);
+
+    ctx.lineTo(
+        p.x,
+        p.y
+    );
+
+    ctx.strokeStyle =
+        "#111827";
+
+    ctx.lineWidth =
+        7;
+
+    ctx.lineCap =
+        "round";
+
+    ctx.lineJoin =
+        "round";
+
+    ctx.stroke();
+
+    points++;
+
+    updateProgress();
+
+    event.preventDefault();
+
+}
+
+
+function stopDrawing(){
+
+    drawing = false;
+
+    ctx.closePath();
+
+}
+
+
+canvas.addEventListener(
+    "mousedown",
+    startDrawing
+);
+
+canvas.addEventListener(
+    "mousemove",
+    draw
+);
+
+canvas.addEventListener(
+    "mouseup",
+    stopDrawing
+);
+
+canvas.addEventListener(
+    "mouseleave",
+    stopDrawing
+);
+
+
+canvas.addEventListener(
+    "touchstart",
+    startDrawing,
+    {passive:false}
+);
+
+canvas.addEventListener(
+    "touchmove",
+    draw,
+    {passive:false}
+);
+
+canvas.addEventListener(
+    "touchend",
+    stopDrawing
+);
+
+
+/* ======================================
+   MISSION
+====================================== */
+
+function startMission(){
+
+    missionStarted = true;
+
+    points = 0;
+
+    document
+        .getElementById(
+            "canvasHelp"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "missionText"
+        )
+        .textContent =
+        "Mission started. Draw your creation!";
+
+
+    updateProgress();
+
+}
+
+
+function updateProgress(){
+
+    if(!missionStarted)
+        return;
+
+
+    let percent =
+        Math.min(
+            100,
+            Math.floor(
+                points / 12
+            )
+        );
+
+
+    document
+        .getElementById(
+            "progressFill"
+        )
+        .style.width =
+        percent + "%";
+
+
+    document
+        .getElementById(
+            "missionText"
+        )
+        .textContent =
+        "Creative progress: " +
+        percent +
+        "%";
+
+}
+
+
+function clearCanvas(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    ctx.fillStyle =
+        "#f8fafc";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    points = 0;
+
+    updateProgress();
+
+}
+
+
+function finishMission(){
+
+    if(!missionStarted){
+
+        alert(
+            "Please start the mission first."
+        );
+
+        return;
+
+    }
+
+
+    if(points < 12){
+
+        alert(
+            "Create a little more before finishing."
+        );
+
+        return;
+
+    }
+
+
+    const data =
+        getGameData();
+
+
+    data.coins =
+        Number(data.coins || 0)
+        + 100;
+
+
+    data.missions =
+        Number(data.missions || 0)
+        + 1;
+
+
+    data.progress =
+        100;
+
+
+    saveGameData(data);
+
+
+    document
+        .getElementById(
+            "missionText"
+        )
+        .textContent =
+        "Mission complete! +100 Coins";
+
+
+    document
+        .getElementById(
+            "progressFill"
+        )
+        .style.width =
+        "100%";
+
+
+    missionStarted = false;
+
+}
+
+
+/* ======================================
+   GAME DATA
+====================================== */
+
+function getGameData(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(
+                "TN_GameData"
+            )
+        ) || {
+
+            coins:0,
+            missions:0,
+            level:1,
+            progress:0
+
+        };
+
+    }catch(error){
+
+        return {
+
+            coins:0,
+            missions:0,
+            level:1,
+            progress:0
+
+        };
+
+    }
+
+}
+
+
+function saveGameData(data){
+
+    localStorage.setItem(
+        "TN_GameData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* ======================================
+   MICROPHONE
+====================================== */
+
+let microphoneStream =
+    null;
+
+
+async function toggleMicrophone(){
+
+    const button =
+        document.getElementById(
+            "micButton"
+        );
+
+    const status =
+        document.getElementById(
+            "voiceStatus"
+        );
+
+
+    if(microphoneStream){
+
+        microphoneStream
+            .getTracks()
+            .forEach(
+                track =>
+                track.stop()
+            );
+
+        microphoneStream =
+            null;
+
+        button.classList.remove(
+            "active"
+        );
+
+        status.textContent =
+            "Microphone is off.";
+
+        return;
+
+    }
+
+
+    if(
+        !navigator.mediaDevices ||
+        !navigator.mediaDevices.getUserMedia
+    ){
+
+        status.textContent =
+            "This browser does not support microphone access.";
+
+        return;
+
+    }
+
+
+    try{
+
+        microphoneStream =
+            await navigator
+                .mediaDevices
+                .getUserMedia({
+                    audio:true
+                });
+
+
+        button.classList.add(
+            "active"
+        );
+
+        status.textContent =
+            "Microphone is ON. Voice connection system is ready for the multiplayer server.";
+
+    }catch(error){
+
+        status.textContent =
+            "Microphone permission was denied or unavailable.";
+
+    }
+
+}
+
+
+/* ======================================
+   NAVIGATION
+====================================== */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+function goProfile(){
+
+    window.location.href =
+        "profile-page.html";
+
+}
+
+
+console.log(
+    "TN Creative World Game Room — Tahir Nazeer"
+);
+
+</script>
+
+</body>
+</html>

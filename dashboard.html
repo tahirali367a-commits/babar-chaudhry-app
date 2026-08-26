@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <meta name="theme-color" content="#0f172a">
+
+    <title>Tahir Nazeer Game — Dashboard</title>
+
+    <link rel="icon"
+          type="image/png"
+          href="tn-game-icon.png">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                #f6f8fb;
+            color: #111827;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        button {
+            font: inherit;
+            border: 0;
+            cursor: pointer;
+        }
+
+        /* =================================
+           APP
+        ================================= */
+
+        .app {
+            min-height: 100vh;
+            padding-bottom: 85px;
+        }
+
+        /* =================================
+           TOP BAR
+        ================================= */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 12px 16px;
+
+            background:
+                rgba(255,255,255,.90);
+
+            border-bottom:
+                1px solid #e7ebf0;
+
+            backdrop-filter:
+                blur(18px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-photo {
+            width: 43px;
+            height: 43px;
+
+            object-fit: cover;
+
+            border-radius: 14px;
+        }
+
+        .brand-title {
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .brand-subtitle {
+            margin-top: 2px;
+            color: #94a3b8;
+            font-size: 9px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 7px;
+        }
+
+        .top-button {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 13px;
+
+            background: #f1f5f9;
+
+            font-size: 18px;
+        }
+
+        /* =================================
+           PLAYER HEADER
+        ================================= */
+
+        .player-section {
+            padding: 22px 16px 10px;
+        }
+
+        .player-card {
+            position: relative;
+            overflow: hidden;
+
+            padding: 22px;
+
+            border-radius: 27px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #1e293b,
+                    #334155
+                );
+
+            color: white;
+
+            box-shadow:
+                0 24px 55px
+                rgba(15,23,42,.18);
+        }
+
+        .player-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 210px;
+            height: 210px;
+
+            border-radius: 50%;
+
+            right: -100px;
+            top: -100px;
+
+            background:
+                rgba(255,255,255,.06);
+        }
+
+        .player-row {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .player-photo {
+            width: 68px;
+            height: 68px;
+
+            border-radius: 21px;
+
+            object-fit: cover;
+
+            border:
+                3px solid
+                rgba(255,255,255,.25);
+        }
+
+        .player-label {
+            color:
+                rgba(255,255,255,.55);
+
+            font-size: 10px;
+        }
+
+        .player-name {
+            margin-top: 4px;
+
+            font-size: 22px;
+
+            font-weight: 950;
+        }
+
+        .creator-text {
+            margin-top: 4px;
+
+            color:
+                rgba(255,255,255,.65);
+
+            font-size: 10px;
+        }
+
+        /* =================================
+           STATS
+        ================================= */
+
+        .stats {
+            position: relative;
+            z-index: 2;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 8px;
+
+            margin-top: 21px;
+        }
+
+        .stat {
+            padding: 12px 7px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,.08);
+        }
+
+        .stat-value {
+            font-size: 17px;
+            font-weight: 900;
+        }
+
+        .stat-label {
+            margin-top: 4px;
+
+            color:
+                rgba(255,255,255,.52);
+
+            font-size: 8px;
+        }
+
+        /* =================================
+           SECTION
+        ================================= */
+
+        .section {
+            padding:
+                17px 16px 0;
+        }
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 11px;
+        }
+
+        .heading h2 {
+            font-size: 18px;
+            font-weight: 950;
+        }
+
+        .heading span {
+            color: #94a3b8;
+            font-size: 10px;
+        }
+
+        /* =================================
+           QUICK ACTIONS
+        ================================= */
+
+        .actions {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 11px;
+        }
+
+        .action {
+            min-height: 112px;
+
+            padding: 17px;
+
+            text-align: left;
+
+            border-radius: 21px;
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7ebf0;
+
+            box-shadow:
+                0 9px 25px
+                rgba(15,23,42,.045);
+
+            transition:
+                transform .15s ease;
+        }
+
+        .action:active {
+            transform: scale(.97);
+        }
+
+        .action-icon {
+            width: 41px;
+            height: 41px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #f1f5f9;
+
+            font-size: 19px;
+
+            margin-bottom: 13px;
+        }
+
+        .action-title {
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .action-description {
+            margin-top: 4px;
+
+            color: #94a3b8;
+
+            font-size: 9px;
+
+            line-height: 1.4;
+        }
+
+        /* =================================
+           MISSION
+        ================================= */
+
+        .mission-card {
+            padding: 18px;
+
+            border-radius: 22px;
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7ebf0;
+
+            box-shadow:
+                0 9px 25px
+                rgba(15,23,42,.045);
+        }
+
+        .mission-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mission-name {
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .mission-reward {
+            padding: 6px 9px;
+
+            border-radius: 10px;
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 8px;
+
+            margin-top: 15px;
+
+            border-radius: 20px;
+
+            background: #e9eef4;
+
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 35%;
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #0f172a,
+                    #64748b
+                );
+
+            transition:
+                width .4s ease;
+        }
+
+        .mission-progress {
+            margin-top: 7px;
+
+            display: flex;
+            justify-content: space-between;
+
+            color: #94a3b8;
+
+            font-size: 9px;
+        }
+
+        /* =================================
+           MUSIC
+        ================================= */
+
+        .music-card {
+            padding: 18px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #f8fafc
+                );
+
+            border:
+                1px solid #e2e8f0;
+        }
+
+        .music-title {
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .music-status {
+            margin-top: 5px;
+
+            color: #94a3b8;
+
+            font-size: 10px;
+        }
+
+        .music-buttons {
+            display: flex;
+            gap: 8px;
+
+            margin-top: 14px;
+        }
+
+        .music-buttons button {
+            flex: 1;
+
+            padding: 11px;
+
+            border-radius: 13px;
+
+            background: #111827;
+
+            color: #ffffff;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+        /* =================================
+           FOOTER
+        ================================= */
+
+        .footer {
+            padding: 28px 16px;
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 9px;
+
+            line-height: 1.7;
+        }
+
+        .footer strong {
+            color: #475569;
+        }
+
+        /* =================================
+           BOTTOM NAVIGATION
+        ================================= */
+
+        .bottom-nav {
+            position: fixed;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            z-index: 2000;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            height: 70px;
+
+            background:
+                rgba(255,255,255,.94);
+
+            border-top:
+                1px solid #e7ebf0;
+
+            backdrop-filter:
+                blur(18px);
+
+            padding:
+                7px 5px
+                env(safe-area-inset-bottom);
+        }
+
+        .nav-item {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 4px;
+
+            background: transparent;
+
+            color: #94a3b8;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+        }
+
+        .nav-item.active {
+            color: #111827;
+        }
+
+        /* =================================
+           MOBILE / TABLET
+        ================================= */
+
+        @media (min-width: 700px) {
+
+            .player-section,
+            .section {
+                max-width: 1050px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .actions {
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- ===============================
+         TOP BAR
+    ================================ -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <img
+                src="profile.jpg"
+                class="brand-photo"
+                alt="Tahir Nazeer">
+
+            <div>
+
+                <div class="brand-title">
+                    Tahir Nazeer Game
+                </div>
+
+                <div class="brand-subtitle">
+                    TN Creative World
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <button
+                class="top-button"
+                onclick="openNotifications()"
+                aria-label="Notifications">
+
+                🔔
+
+            </button>
+
+            <button
+                class="top-button"
+                onclick="openSettings()"
+                aria-label="Settings">
+
+                ⚙️
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ===============================
+         PLAYER
+    ================================ -->
+
+    <section class="player-section">
+
+        <div class="player-card">
+
+            <div class="player-row">
+
+                <img
+                    id="playerPhoto"
+                    src="login-profile.jpg"
+                    class="player-photo"
+                    alt="Player">
+
+                <div>
+
+                    <div class="player-label">
+                        PLAYER
+                    </div>
+
+                    <div
+                        id="playerName"
+                        class="player-name">
+                        Player
+                    </div>
+
+                    <div class="creator-text">
+                        Tahir Nazeer Project
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+
+                    <div
+                        id="coinCount"
+                        class="stat-value">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        COINS
+                    </div>
+
+                </div>
+
+                <div class="stat">
+
+                    <div
+                        id="missionCount"
+                        class="stat-value">
+                        0
+                    </div>
+
+                    <div class="stat-label">
+                        MISSIONS
+                    </div>
+
+                </div>
+
+                <div class="stat">
+
+                    <div
+                        id="levelCount"
+                        class="stat-value">
+                        1
+                    </div>
+
+                    <div class="stat-label">
+                        LEVEL
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===============================
+         QUICK ACTIONS
+    ================================ -->
+
+    <section class="section">
+
+        <div class="heading">
+
+            <h2>
+                Creative World
+            </h2>
+
+            <span>
+                Explore
+            </span>
+
+        </div>
+
+
+        <div class="actions">
+
+
+            <button
+                class="action"
+                onclick="openGame()">
+
+                <div class="action-icon">
+                    🎮
+                </div>
+
+                <div class="action-title">
+                    Start Game
+                </div>
+
+                <div class="action-description">
+                    Enter the main game world.
+                </div>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openCreative()">
+
+                <div class="action-icon">
+                    🎨
+                </div>
+
+                <div class="action-title">
+                    Creative Studio
+                </div>
+
+                <div class="action-description">
+                    Create and design.
+                </div>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openMissions()">
+
+                <div class="action-icon">
+                    🎯
+                </div>
+
+                <div class="action-title">
+                    Missions
+                </div>
+
+                <div class="action-description">
+                    Complete challenges.
+                </div>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openGallery()">
+
+                <div class="action-icon">
+                    🖼️
+                </div>
+
+                <div class="action-title">
+                    Gallery
+                </div>
+
+                <div class="action-description">
+                    View creative work.
+                </div>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openCommunity()">
+
+                <div class="action-icon">
+                    👥
+                </div>
+
+                <div class="action-title">
+                    Community
+                </div>
+
+                <div class="action-description">
+                    Meet other players.
+                </div>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openFriends()">
+
+                <div class="action-icon">
+                    🧑‍🤝‍🧑
+                </div>
+
+                <div class="action-title">
+                    Friends
+                </div>
+
+                <div class="action-description">
+                    Manage your friends.
+                </div>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openLeaderboard()">
+
+                <div class="action-icon">
+                    🏆
+                </div>
+
+                <div class="action-title">
+                    Leaderboard
+                </div>
+
+                <div class="action-description">
+                    Check your ranking.
+                </div>
+
+            </button>
+
+
+            <button
+                class="action"
+                onclick="openStore()">
+
+                <div class="action-icon">
+                    💎
+                </div>
+
+                <div class="action-title">
+                    Creative Store
+                </div>
+
+                <div class="action-description">
+                    Unlock creative items.
+                </div>
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===============================
+         DAILY MISSION
+    ================================ -->
+
+    <section class="section">
+
+        <div class="heading">
+
+            <h2>
+                Daily Mission
+            </h2>
+
+            <span>
+                Reward
+            </span>
+
+        </div>
+
+
+        <div class="mission-card">
+
+            <div class="mission-top">
+
+                <div class="mission-name">
+                    Create Your First Design
+                </div>
+
+                <div class="mission-reward">
+                    +100 Coins
+                </div>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div
+                    id="missionProgress"
+                    class="progress-bar">
+                </div>
+
+            </div>
+
+
+            <div class="mission-progress">
+
+                <span>
+                    Progress
+                </span>
+
+                <span id="missionPercent">
+                    35%
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===============================
+         MUSIC
+    ================================ -->
+
+    <section class="section">
+
+        <div class="heading">
+
+            <h2>
+                Tahir Nazeer Music
+            </h2>
+
+            <span>
+                Game Sound
+            </span>
+
+        </div>
+
+
+        <div class="music-card">
+
+            <div class="music-title">
+                🎵 TN Game Music
+            </div>
+
+            <div
+                id="musicStatus"
+                class="music-status">
+
+                Ready
+            </div>
+
+
+            <div class="music-buttons">
+
+                <button
+                    onclick="playIntro()">
+
+                    ▶ INTRO
+
+                </button>
+
+                <button
+                    onclick="openMusic()">
+
+                    🎵 SONGS
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ===============================
+         FOOTER
+    ================================ -->
+
+    <footer class="footer">
+
+        <strong>
+            TN Creative World
+        </strong>
+
+        <br>
+
+        Created & Developed by
+        <strong>Tahir Nazeer</strong>
+
+        <br>
+
+        © 2026 Tahir Nazeer
+
+    </footer>
+
+</div>
+
+
+<!-- ===============================
+     BOTTOM NAVIGATION
+================================ -->
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item active"
+        onclick="goHome()">
+
+        <span class="nav-icon">
+            🏠
+        </span>
+
+        Home
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="openGame()">
+
+        <span class="nav-icon">
+            🎮
+        </span>
+
+        Game
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="openCreative()">
+
+        <span class="nav-icon">
+            🎨
+        </span>
+
+        Create
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="openCommunity()">
+
+        <span class="nav-icon">
+            👥
+        </span>
+
+        Community
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="openProfile()">
+
+        <span class="nav-icon">
+            👤
+        </span>
+
+        Profile
+
+    </button>
+
+</nav>
+
+
+<script>
+
+/* =====================================
+   PLAYER
+===================================== */
+
+(function loadPlayer() {
+
+    const raw =
+        localStorage.getItem(
+            "TN_Player"
+        );
+
+    if (!raw) {
+
+        window.location.href =
+            "login.html";
+
+        return;
+
+    }
+
+
+    try {
+
+        const player =
+            JSON.parse(raw);
+
+
+        if (
+            !player ||
+            !player.name
+        ) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        document
+            .getElementById(
+                "playerName"
+            )
+            .textContent =
+            player.name;
+
+
+    } catch (error) {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+})();
+
+
+/* =====================================
+   GAME DATA
+===================================== */
+
+function getGameData() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "TN_GameData"
+            )
+        ) || {
+
+            coins: 0,
+
+            missions: 0,
+
+            level: 1,
+
+            progress: 35
+
+        };
+
+    } catch (error) {
+
+        return {
+
+            coins: 0,
+
+            missions: 0,
+
+            level: 1,
+
+            progress: 35
+
+        };
+
+    }
+
+}
+
+
+function saveGameData(data) {
+
+    localStorage.setItem(
+        "TN_GameData",
+        JSON.stringify(data)
+    );
+
+}
+
+
+/* =====================================
+   UPDATE STATS
+===================================== */
+
+function updateStats() {
+
+    const data =
+        getGameData();
+
+
+    document
+        .getElementById(
+            "coinCount"
+        )
+        .textContent =
+        data.coins;
+
+
+    document
+        .getElementById(
+            "missionCount"
+        )
+        .textContent =
+        data.missions;
+
+
+    document
+        .getElementById(
+            "levelCount"
+        )
+        .textContent =
+        data.level;
+
+
+    const progress =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                data.progress
+            )
+        );
+
+
+    document
+        .getElementById(
+            "missionProgress"
+        )
+        .style.width =
+        progress + "%";
+
+
+    document
+        .getElementById(
+            "missionPercent"
+        )
+        .textContent =
+        progress + "%";
+
+}
+
+
+updateStats();
+
+
+/* =====================================
+   NAVIGATION
+===================================== */
+
+function goHome() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+function openGame() {
+
+    window.location.href =
+        "game-room.html";
+
+}
+
+
+function openCreative() {
+
+    window.location.href =
+        "creative-studio.html";
+
+}
+
+
+function openMissions() {
+
+    window.location.href =
+        "missions.html";
+
+}
+
+
+function openGallery() {
+
+    window.location.href =
+        "gallery.html";
+
+}
+
+
+function openCommunity() {
+
+    window.location.href =
+        "community.html";
+
+}
+
+
+function openFriends() {
+
+    window.location.href =
+        "friends.html";
+
+}
+
+
+function openLeaderboard() {
+
+    window.location.href =
+        "leaderboard.html";
+
+}
+
+
+function openStore() {
+
+    window.location.href =
+        "store.html";
+
+}
+
+
+function openProfile() {
+
+    window.location.href =
+        "profile-page.html";
+
+}
+
+
+function openNotifications() {
+
+    window.location.href =
+        "notifications.html";
+
+}
+
+
+function openSettings() {
+
+    window.location.href =
+        "settings-page.html";
+
+}
+
+
+/* =====================================
+   MUSIC
+===================================== */
+
+function playIntro() {
+
+    const status =
+        document.getElementById(
+            "musicStatus"
+        );
+
+
+    const audio =
+        new Audio(
+            "tahir-nazeer-game-intro.mp3"
+        );
+
+
+    audio.play()
+        .then(function() {
+
+            status.textContent =
+                "Intro is playing...";
+
+        })
+        .catch(function() {
+
+            status.textContent =
+                "Tap again to start music.";
+
+        });
+
+
+    audio.onended =
+        function() {
+
+            status.textContent =
+                "Intro finished.";
+
+        };
+
+}
+
+
+function openMusic() {
+
+    /*
+     * The five YouTube songs supplied
+     * for the project.
+     */
+
+    const songs = [
+
+        "https://www.youtube.com/watch?v=REmRBK6YdSo",
+
+        "https://www.youtube.com/watch?v=jn0V1JBxNGU",
+
+        "https://www.youtube.com/watch?v=68ZEOOvEcds",
+
+        "https://www.youtube.com/watch?v=pThESjSD5TM",
+
+        "https://www.youtube.com/watch?v=pi_E8CyAWXA"
+
+    ];
+
+
+    window.open(
+        songs[0],
+        "_blank"
+    );
+
+}
+
+
+/* =====================================
+   CREATOR BRAND
+===================================== */
+
+console.log(
+    "TN Creative World — Created & Developed by Tahir Nazeer"
+);
+
+</script>
+
+</body>
+</html>

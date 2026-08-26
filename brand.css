@@ -1,0 +1,135 @@
+/* 
+TN Creative World
+Brand Design System
+Created & Developed by Tahir Nazeer
+*/
+
+
+.tn-brand-card{
+
+    position:fixed;
+
+    top:15px;
+
+    right:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#ffffff;
+
+    color:#111;
+
+    padding:8px 12px;
+
+    border-radius:50px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,0.25);
+
+    z-index:9999;
+
+    animation:tnFloat 3s infinite;
+
+}
+
+
+
+.tn-brand-card img{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid #00ffcc;
+
+}
+
+
+
+.tn-brand-card strong{
+
+    display:block;
+
+    font-size:14px;
+
+    color:#111;
+
+}
+
+
+
+.tn-brand-card small{
+
+    font-size:11px;
+
+    color:#555;
+
+}
+
+
+
+
+@keyframes tnFloat{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-5px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.tn-brand-card{
+
+    top:8px;
+
+    right:8px;
+
+    padding:6px;
+
+}
+
+
+
+.tn-brand-card img{
+
+    width:38px;
+
+    height:38px;
+
+}
+
+
+
+.tn-brand-card small{
+
+    display:none;
+
+}
+
+
+}
