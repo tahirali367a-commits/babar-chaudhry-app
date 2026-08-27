@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>3D HOLLYWOOD DRINK MISSION LAB | TAHIR NAZEER</title>
+    
+    <!-- Game Icon & Favicon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    
+    <!-- Existing CSS System -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+
+    <style>
+        :root {
+            --bg-cyber: #03030c;
+            --glass-card: rgba(10, 15, 30, 0.85);
+            --gold-glow: #ffd700;
+            --neon-blue: #00f0ff;
+            --neon-pink: #ff0055;
+            --warning-red: #ff2a2a;
+            --toxic-green: #00ff66;
+            --border-3d: rgba(0, 240, 255, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Orbitron', 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-cyber);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at 50% 30%, #0d122b 0%, #020208 100%);
+            overflow-x: hidden;
+        }
+
+        /* Sci-Fi Warning Bar */
+        .warning-banner {
+            background: linear-gradient(90deg, #ff2a2a, #8a0000, #ff2a2a);
+            color: #fff;
+            text-align: center;
+            padding: 6px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 42, 42, 0.8);
+            animation: pulseWarning 1.5s infinite alternate;
+        }
+
+        /* 3D Header */
+        .lab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: var(--glass-card);
+            border-bottom: 2px solid var(--neon-blue);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+        }
+
+        .brand-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .brand-profile img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold-glow);
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .brand-title-box h1 {
+            font-size: 1.2rem;
+            font-weight: 900;
+            background: linear-gradient(180deg, #fff, var(--gold-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1.5px;
+        }
+
+        .brand-title-box p {
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        /* Main Grid */
+        .lab-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            width: 100%;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 20px;
+            flex: 1;
+        }
+
+        /* Control Panel */
+        .panel-box {
+            background: var(--glass-card);
+            border: 2px solid var(--border-3d);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .panel-title {
+            font-size: 1rem;
+            color: var(--gold-glow);
+            font-weight: 900;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .mission-card {
+            background: rgba(255, 42, 42, 0.1);
+            border: 1px solid var(--warning-red);
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: inset 0 0 10px rgba(255, 42, 42, 0.2);
+        }
+
+        .mission-title {
+            color: var(--warning-red);
+            font-size: 0.85rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .mission-desc {
+            font-size: 0.78rem;
+            color: #ddd;
+            line-height: 1.3;
+        }
+
+        .ingredient-btn {
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--neon-blue);
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .ingredient-btn:hover {
+            border-color: var(--gold-glow);
+            box-shadow: 0 0 15px var(--neon-blue);
+            transform: scale(1.02);
+        }
+
+        /* 3D Stage */
+        .stage-box {
+            background: var(--glass-card);
+            border: 2px solid var(--border-3d);
+            border-radius: 20px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.15);
+        }
+
+        .flask-wrapper {
+            position: relative;
+            width: 160px;
+            height: 300px;
+            border: 4px solid rgba(255, 255, 255, 0.5);
+            border-top: none;
+            border-radius: 0 0 50px 50px;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .flask-liquid {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 30%;
+            background: var(--toxic-green);
+            box-shadow: 0 0 30px var(--toxic-green);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .action-group {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .btn-action {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+
+        .btn-mix {
+            background: linear-gradient(90deg, var(--neon-pink), var(--warning-red));
+            color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+        }
+
+        .btn-share {
+            background: linear-gradient(90deg, var(--neon-blue), var(--toxic-green));
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+        }
+
+        .btn-action:active {
+            transform: scale(0.95);
+        }
+
+        .brand-footer-wm {
+            font-size: 0.8rem;
+            color: var(--gold-glow);
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin-top: 15px;
+        }
+
+        @keyframes pulseWarning {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; filter: drop-shadow(0 0 10px #ff2a2a); }
+        }
+
+        @media (max-width: 768px) {
+            .lab-container { grid-template-columns: 1fr; }
+            .action-group { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sci-Fi Warning Header -->
+    <div class="warning-banner">
+        ⚠️ WARNING: HIGH VOLTAGE SCI-FI DRINK LAB | AUTHORIZED ACCESS ONLY
+    </div>
+
+    <!-- 3D Header -->
+    <header class="lab-header">
+        <div class="brand-profile">
+            <img src="./profile.jpg" alt="Malik Tahir Nazeer">
+            <div class="brand-title-box">
+                <h1>MALIK TAHIR NAZEER</h1>
+                <p>HOLLYWOOD MISSION DRINK LAB v7.0</p>
+            </div>
+        </div>
+        <a href="./index.html" style="color: var(--neon-blue); text-decoration: none; font-weight: bold; border: 1px solid var(--neon-blue); padding: 8px 16px; border-radius: 8px;">🏠 HOME</a>
+    </header>
+
+    <!-- Main Game Section -->
+    <div class="lab-container">
+        
+        <!-- Left Controls & Mission -->
+        <div class="panel-box">
+            <div class="mission-card">
+                <div class="mission-title">🎯 ACTIVE MISSION #07</div>
+                <div class="mission-desc">
+                    میگا سائبر فارمولا تیار کریں! ایکس کیمیکلز اور ٹاکسک نیون مکس کر کے **100 Coins** کا انعام حاصل کریں۔
+                </div>
+            </div>
+
+            <div class="panel-title">🧪 SELECT INGREDIENTS (X-ELEMENTS)</div>
+
+            <button class="ingredient-btn" onclick="addIngredient('#00ff66', 20, 'Toxic Plasma')">
+                <span>☣️ Toxic Plasma</span>
+                <span style="color: #00ff66;">+20%</span>
+            </button>
+
+            <button class="ingredient-btn" onclick="addIngredient('#ff0055', 25, 'Neon Cyber Serum')">
+                <span>⚡ Neon Cyber Serum</span>
+                <span style="color: #ff0055;">+25%</span>
+            </button>
+
+            <button class="ingredient-btn" onclick="addIngredient('#ffd700', 30, 'Golden Liquid Nitro')">
+                <span>🔥 Golden Nitro</span>
+                <span style="color: #ffd700;">+30%</span>
+            </button>
+
+            <button class="ingredient-btn" onclick="addIngredient('#00f0ff', 15, 'Quantum Ice')">
+                <span>🧊 Quantum Ice</span>
+                <span style="color: #00f0ff;">+15%</span>
+            </button>
+        </div>
+
+        <!-- Right 3D Flask Stage -->
+        <div class="stage-box">
+            <div style="color: var(--neon-blue); font-weight: 900; letter-spacing: 2px;">
+                STATUS: <span id="labStatus" style="color: var(--toxic-green);">MIXING...</span>
+            </div>
+
+            <!-- 3D Flask -->
+            <div class="flask-wrapper">
+                <div class="flask-liquid" id="flaskLiquid"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-group">
+                <button class="btn-action btn-mix" onclick="claimReward()">
+                    🏆 CLAIM MISSION REWARD
+                </button>
+                <button class="btn-action btn-share" onclick="shareToFriends()">
+                    📲 SHARE WITH FRIENDS
+                </button>
+            </div>
+
+            <div class="brand-footer-wm">
+                ⚡ POWERED BY MR. TAHIR NAZEER & TN CREATIVE WORLD ⚡
+            </div>
+        </div>
+
+    </div>
+
+    <!-- External Game Scripts -->
+    <script src="./brand.js"></script>
+    <script src="./drinkEngine.js"></script>
+
+    <script>
+        let liquidLevel = 30;
+
+        function addIngredient(color, amount, name) {
+            const liquid = document.getElementById('flaskLiquid');
+            if (liquidLevel + amount > 100) {
+                alert('⚠️ WARNING: Flask Capacity Full! Mix or Claim Reward.');
+                return;
+            }
+            liquidLevel += amount;
+            liquid.style.height = liquidLevel + '%';
+            liquid.style.backgroundColor = color;
+            liquid.style.boxShadow = `0 0 35px ${color}`;
+            document.getElementById('labStatus').innerText = `ADDED: ${name.toUpperCase()}`;
+        }
+
+        function claimReward() {
+            if (liquidLevel >= 80) {
+                alert('🎉 CONGRATULATIONS! Mission Accomplished! You earned 100 TN Coins.');
+                liquidLevel = 20;
+                document.getElementById('flaskLiquid').style.height = '20%';
+                document.getElementById('labStatus').innerText = 'READY FOR NEXT MISSION';
+            } else {
+                alert('⚠️ Mission Incomplete! Fill the flask to at least 80%.');
+            }
+        }
+
+        function shareToFriends() {
+            const shareData = {
+                title: 'Tahir Nazeer 3D Drink Lab',
+                text: 'کیا آپ میرا سائبر ڈرنک ریکارڈ توڑ سکتے ہیں؟ کھیل کر انعامات جیتیں!',
+                url: window.location.href
+            };
+            if (navigator.share) {
+                navigator.share(shareData);
+            } else {
+                alert('🔗 Link Copied! Share this page link with your friends.');
+            }
+        }
+    </script>
+</body>
+</html>

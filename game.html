@@ -1,1842 +1,429 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="ltr">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,
-               initial-scale=1.0,
-               maximum-scale=1.0,
-               user-scalable=no">
-
-<meta name="theme-color" content="#070a10">
-
-<title>Tahir Nazeer — TN Creative World</title>
-
-<link rel="icon"
-      type="image/png"
-      href="tn-game-icon.png">
-
-<link rel="stylesheet"
-      href="style.css">
-
-<link rel="stylesheet"
-      href="brand.css">
-
-
-<style>
-
-/* =====================================================
-   TN CREATIVE WORLD
-   MAIN GAME SHELL
-   CREATED & DEVELOPED BY TAHIR NAZEER
-===================================================== */
-
-:root{
-
-    --tn-bg:#06080d;
-    --tn-panel:#0c111a;
-    --tn-panel2:#111827;
-    --tn-border:rgba(255,255,255,.09);
-
-    --tn-white:#ffffff;
-    --tn-muted:#94a3b8;
-    --tn-soft:#cbd5e1;
-
-    --tn-shadow:
-        0 25px 80px rgba(0,0,0,.45);
-
-}
-
-*{
-
-    box-sizing:border-box;
-
-    margin:0;
-    padding:0;
-
-    -webkit-tap-highlight-color:transparent;
-
-}
-
-html,
-body{
-
-    width:100%;
-    min-height:100%;
-
-    background:var(--tn-bg);
-
-    color:var(--tn-white);
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-}
-
-body{
-
-    min-height:100vh;
-
-    overflow-x:hidden;
-
-}
-
-
-/* =====================================================
-   WORLD
-===================================================== */
-
-.tn-world{
-
-    min-height:100vh;
-
-    background:
-
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(148,163,184,.13),
-            transparent 32%
-        ),
-
-        radial-gradient(
-            circle at 0% 100%,
-            rgba(71,85,105,.10),
-            transparent 30%
-        ),
-
-        linear-gradient(
-            145deg,
-            #05070b,
-            #0a0f17 50%,
-            #05070b
-        );
-
-}
-
-
-/* =====================================================
-   TOP BAR
-===================================================== */
-
-.tn-topbar{
-
-    position:sticky;
-
-    top:0;
-
-    z-index:1000;
-
-    height:72px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:
-        10px
-        15px;
-
-    background:
-        rgba(5,7,12,.84);
-
-    border-bottom:
-        1px solid
-        var(--tn-border);
-
-    backdrop-filter:
-        blur(22px);
-
-}
-
-
-/* =====================================================
-   BRAND
-===================================================== */
-
-.tn-brand{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-}
-
-.tn-brand-icon{
-
-    width:42px;
-    height:42px;
-
-    border-radius:13px;
-
-    object-fit:cover;
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.35);
-
-}
-
-.tn-brand-text{
-
-    line-height:1.05;
-
-}
-
-.tn-brand-title{
-
-    font-size:14px;
-
-    font-weight:950;
-
-    letter-spacing:.2px;
-
-}
-
-.tn-brand-sub{
-
-    margin-top:4px;
-
-    color:var(--tn-muted);
-
-    font-size:8px;
-
-    letter-spacing:1.5px;
-
-}
-
-
-/* =====================================================
-   PLAYER
-===================================================== */
-
-.tn-player{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-}
-
-.tn-player-photo{
-
-    width:39px;
-    height:39px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:
-        2px solid
-        rgba(255,255,255,.75);
-
-}
-
-.tn-player-info{
-
-    max-width:115px;
-
-    overflow:hidden;
-
-}
-
-.tn-player-name{
-
-    font-size:11px;
-
-    font-weight:900;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-.tn-player-label{
-
-    margin-top:3px;
-
-    color:var(--tn-muted);
-
-    font-size:7px;
-
-    letter-spacing:1px;
-
-}
-
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-.tn-main{
-
-    width:100%;
-
-    max-width:1000px;
-
-    margin:0 auto;
-
-    padding:
-        18px
-        15px
-        105px;
-
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.tn-hero{
-
-    position:relative;
-
-    min-height:225px;
-
-    display:flex;
-
-    align-items:flex-end;
-
-    padding:25px 21px;
-
-    overflow:hidden;
-
-    border-radius:27px;
-
-    border:
-        1px solid
-        var(--tn-border);
-
-    background:
-
-        radial-gradient(
-            circle at 85% 20%,
-            rgba(255,255,255,.10),
-            transparent 30%
-        ),
-
-        linear-gradient(
-            145deg,
-            #111827,
-            #070a10
-        );
-
-    box-shadow:var(--tn-shadow);
-
-}
-
-
-/* decorative circles */
-
-.tn-hero::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:210px;
-    height:210px;
-
-    right:-90px;
-    top:-80px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-}
-
-.tn-hero::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:120px;
-    height:120px;
-
-    right:20px;
-    top:35px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        rgba(255,255,255,.06);
-
-}
-
-
-.tn-hero-content{
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-.tn-eyebrow{
-
-    color:#94a3b8;
-
-    font-size:8px;
-
-    font-weight:900;
-
-    letter-spacing:2.5px;
-
-    text-transform:uppercase;
-
-}
-
-.tn-hero-title{
-
-    margin-top:8px;
-
-    font-size:
-        clamp(28px,8vw,44px);
-
-    line-height:.98;
-
-    font-weight:950;
-
-    letter-spacing:-1.5px;
-
-}
-
-.tn-hero-title span{
-
-    color:#cbd5e1;
-
-}
-
-.tn-hero-text{
-
-    max-width:440px;
-
-    margin-top:10px;
-
-    color:#94a3b8;
-
-    font-size:10px;
-
-    line-height:1.7;
-
-}
-
-.tn-hero-button{
-
-    margin-top:15px;
-
-    padding:
-        12px
-        18px;
-
-    border:0;
-
-    border-radius:13px;
-
-    background:#ffffff;
-
-    color:#070a10;
-
-    font-size:10px;
-
-    font-weight:950;
-
-}
-
-
-/* =====================================================
-   SECTION
-===================================================== */
-
-.tn-section{
-
-    margin-top:25px;
-
-}
-
-.tn-section-head{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    margin-bottom:12px;
-
-}
-
-.tn-section-title{
-
-    font-size:14px;
-
-    font-weight:950;
-
-}
-
-.tn-section-more{
-
-    color:#94a3b8;
-
-    font-size:9px;
-
-}
-
-
-/* =====================================================
-   GRID
-===================================================== */
-
-.tn-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:11px;
-
-}
-
-@media(min-width:650px){
-
-    .tn-grid{
-
-        grid-template-columns:
-            repeat(4,1fr);
-
-    }
-
-}
-
-
-/* =====================================================
-   FEATURE CARD
-===================================================== */
-
-.tn-card{
-
-    position:relative;
-
-    min-height:125px;
-
-    padding:17px;
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    border:
-        1px solid
-        var(--tn-border);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.07),
-            rgba(255,255,255,.025)
-        );
-
-    transition:
-        transform .2s ease,
-        background .2s ease;
-
-}
-
-.tn-card:active{
-
-    transform:scale(.97);
-
-}
-
-.tn-card-icon{
-
-    width:42px;
-    height:42px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    font-size:19px;
-
-}
-
-.tn-card-title{
-
-    margin-top:13px;
-
-    font-size:11px;
-
-    font-weight:950;
-
-}
-
-.tn-card-text{
-
-    margin-top:5px;
-
-    color:#64748b;
-
-    font-size:8px;
-
-    line-height:1.5;
-
-}
-
-
-/* =====================================================
-   PLAYER PROFILE CARD
-===================================================== */
-
-.tn-profile-card{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:14px;
-
-    padding:17px;
-
-    border-radius:22px;
-
-    border:
-        1px solid
-        var(--tn-border);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.075),
-            rgba(255,255,255,.025)
-        );
-
-}
-
-.tn-profile-photo{
-
-    width:62px;
-    height:62px;
-
-    border-radius:19px;
-
-    object-fit:cover;
-
-    border:
-        1px solid
-        rgba(255,255,255,.18);
-
-}
-
-.tn-profile-name{
-
-    font-size:15px;
-
-    font-weight:950;
-
-}
-
-.tn-profile-creator{
-
-    margin-top:5px;
-
-    color:#94a3b8;
-
-    font-size:8px;
-
-}
-
-.tn-profile-badge{
-
-    display:inline-block;
-
-    margin-top:8px;
-
-    padding:
-        5px
-        8px;
-
-    border-radius:7px;
-
-    background:
-        rgba(255,255,255,.07);
-
-    color:#cbd5e1;
-
-    font-size:7px;
-
-    font-weight:900;
-
-}
-
-
-/* =====================================================
-   BOTTOM NAVIGATION
-===================================================== */
-
-.tn-nav{
-
-    position:fixed;
-
-    left:10px;
-    right:10px;
-    bottom:10px;
-
-    z-index:5000;
-
-    height:69px;
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    align-items:center;
-
-    padding:6px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    border-radius:22px;
-
-    background:
-        rgba(9,13,20,.91);
-
-    backdrop-filter:
-        blur(25px);
-
-    box-shadow:
-        0 20px 60px
-        rgba(0,0,0,.55);
-
-}
-
-.tn-nav-button{
-
-    height:56px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    gap:4px;
-
-    border:0;
-
-    border-radius:16px;
-
-    background:transparent;
-
-    color:#64748b;
-
-    font-size:8px;
-
-    font-weight:900;
-
-}
-
-.tn-nav-button.active{
-
-    background:
-        rgba(255,255,255,.09);
-
-    color:#fff;
-
-}
-
-.tn-nav-icon{
-
-    font-size:17px;
-
-}
-
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-#tnToast{
-
-    position:fixed;
-
-    left:50%;
-
-    bottom:92px;
-
-    z-index:9000;
-
-    transform:
-        translateX(-50%)
-        translateY(20px);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    padding:
-        11px
-        16px;
-
-    border-radius:12px;
-
-    background:
-        rgba(15,23,42,.95);
-
-    border:
-        1px solid
-        rgba(255,255,255,.10);
-
-    color:#fff;
-
-    font-size:9px;
-
-    transition:
-        opacity .25s ease,
-        transform .25s ease;
-
-}
-
-#tnToast.show{
-
-    opacity:1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-
-}
-
-
-/* =====================================================
-   PAGE LOADING
-===================================================== */
-
-#tnBoot{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:99999;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#06080d;
-
-    transition:
-        opacity .45s ease;
-
-}
-
-#tnBoot.hide{
-
-    opacity:0;
-
-    pointer-events:none;
-
-}
-
-.tn-boot-box{
-
-    text-align:center;
-
-}
-
-.tn-boot-icon{
-
-    width:76px;
-    height:76px;
-
-    border-radius:22px;
-
-    object-fit:cover;
-
-    animation:
-        bootPulse 1.4s ease-in-out infinite;
-
-}
-
-@keyframes bootPulse{
-
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.08);
-    }
-
-}
-
-.tn-boot-title{
-
-    margin-top:17px;
-
-    font-size:18px;
-
-    font-weight:950;
-
-}
-
-.tn-boot-text{
-
-    margin-top:7px;
-
-    color:#64748b;
-
-    font-size:9px;
-
-}
-
-
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
-
-@media(prefers-reduced-motion:reduce){
-
-    *{
-
-        animation:none !important;
-
-        transition:none !important;
-
-    }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARCADE GAME | TAHIR NAZEER GAME</title>
+    
+    <!-- Game Icon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    
+    <!-- Existing System CSS -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+
+    <style>
+        :root {
+            --bg-dark: #020205;
+            --card-bg: rgba(10, 10, 25, 0.9);
+            --primary-gold: #ffd700;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8a2be2;
+            --accent-neon: #ff0055;
+            --text-light: #ffffff;
+            --border-glow: rgba(0, 240, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at center, #08081c 0%, #000000 100%);
+            overflow-x: hidden;
+        }
+
+        /* Top Header Navigation */
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-glow);
+            backdrop-filter: blur(15px);
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 0 10px var(--primary-gold);
+        }
+
+        .brand-text h1 {
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glow);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-nav:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .creator-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-gold);
+        }
+
+        /* Main Game Arena Container */
+        .game-container {
+            max-width: 1000px;
+            margin: 15px auto;
+            width: 100%;
+            padding: 0 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+        }
+
+        /* Score Dashboard Bar */
+        .dashboard-bar {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .dash-item {
+            text-align: center;
+        }
+
+        .dash-label {
+            font-size: 0.75rem;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+
+        .dash-value {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            text-shadow: 0 0 10px var(--primary-gold);
+        }
+
+        /* Canvas Arena Frame */
+        .canvas-frame {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            background: #000;
+            border-radius: 20px;
+            border: 2px solid var(--border-glow);
+            box-shadow: 0 0 35px rgba(138, 43, 226, 0.3);
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        #arcadeCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* Game Watermark Overlay */
+        .arena-watermark {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .arena-watermark img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-gold);
+        }
+
+        .arena-watermark span {
+            font-size: 0.8rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+        }
+
+        /* Mobile Touch Controls */
+        .mobile-controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .btn-control {
+            flex: 1;
+            padding: 16px;
+            background: linear-gradient(180deg, rgba(0, 240, 255, 0.2), rgba(138, 43, 226, 0.3));
+            border: 1px solid var(--border-glow);
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            text-align: center;
+        }
+
+        .btn-control:active {
+            background: var(--accent-neon);
+            box-shadow: 0 0 25px var(--accent-neon);
+        }
+
+        @media (max-width: 768px) {
+            .canvas-frame { height: 380px; }
+            .dashboard-bar { padding: 10px 15px; }
+            .dash-value { font-size: 1.1rem; }
+        }
+    </style>
 </head>
-
-
 <body>
 
-
-<!-- =====================================================
-     BOOT SCREEN
-===================================================== -->
-
-<div id="tnBoot">
-
-    <div class="tn-boot-box">
-
-        <img
-            src="tn-game-icon.png"
-            class="tn-boot-icon"
-            alt="TN Creative World">
-
-        <div class="tn-boot-title">
-            TN CREATIVE WORLD
+    <!-- Header Navigation Bar -->
+    <header class="game-header">
+        <div class="brand-box">
+            <img src="./tn-game-icon.png" alt="TN Icon" class="brand-icon">
+            <div class="brand-text">
+                <h1>MALIK TAHIR NAZEER</h1>
+                <span>TN ARCADE ENGINE</span>
+            </div>
         </div>
 
-        <div class="tn-boot-text">
-            Created &amp; Developed by Tahir Nazeer
+        <div class="nav-actions">
+            <a href="./index.html" class="btn-nav">🏠 HOME</a>
+            <a href="./community.html" class="btn-nav">🪙 REWARDS</a>
+            <img src="./profile.jpg" alt="Tahir Nazeer" class="creator-avatar">
+        </div>
+    </header>
+
+    <!-- Game Arena Container -->
+    <div class="game-container">
+        
+        <!-- Score Dashboard -->
+        <div class="dashboard-bar">
+            <div class="dash-item">
+                <div class="dash-label">PLAYER</div>
+                <div class="dash-value" id="playerNameDisplay">Gamer</div>
+            </div>
+            <div class="dash-item">
+                <div class="dash-label">SCORE</div>
+                <div class="dash-value" id="gameScore">0</div>
+            </div>
+            <div class="dash-item">
+                <div class="dash-label">TN COINS</div>
+                <div class="dash-value" id="tnCoinsEarned">0</div>
+            </div>
         </div>
 
-    </div>
-
-</div>
-
-
-<div class="tn-world">
-
-
-<!-- =====================================================
-     TOP BAR
-===================================================== -->
-
-<header class="tn-topbar">
-
-    <div class="tn-brand">
-
-        <img
-            src="tn-game-icon.png"
-            class="tn-brand-icon"
-            alt="TN Game">
-
-        <div class="tn-brand-text">
-
-            <div class="tn-brand-title">
-                TN Creative World
+        <!-- Canvas Arcade Arena -->
+        <div class="canvas-frame" id="canvasFrame">
+            <canvas id="arcadeCanvas"></canvas>
+            
+            <div class="arena-watermark">
+                <img src="./profile.jpg" alt="TN Boss">
+                <span>TAHIR NAZEER GAME</span>
             </div>
+        </div>
 
-            <div class="tn-brand-sub">
-                TAHIR NAZEER PROJECT
-            </div>
-
+        <!-- Mobile Touch Controls -->
+        <div class="mobile-controls">
+            <button class="btn-control" id="btnLeft">◀ LEFT</button>
+            <button class="btn-control" id="btnRight">RIGHT ▶</button>
         </div>
 
     </div>
 
-
-    <div class="tn-player">
-
-        <img
-            id="topPlayerPhoto"
-            src="profile.jpg"
-            class="tn-player-photo"
-            alt="Tahir Nazeer">
-
-        <div class="tn-player-info">
-
-            <div
-                id="topPlayerName"
-                class="tn-player-name">
-
-                Tahir Nazeer
-
-            </div>
-
-            <div class="tn-player-label">
-                PLAYER
-            </div>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="tn-main">
-
-
-    <!-- HERO -->
-
-    <section class="tn-hero">
-
-        <div class="tn-hero-content">
-
-            <div class="tn-eyebrow">
-                TAHIR NAZEER PRESENTS
-            </div>
-
-            <h1 class="tn-hero-title">
-
-                TN
-                <span>Creative</span>
-                World
-
-            </h1>
-
-            <p class="tn-hero-text">
-
-                Welcome to the creative game world
-                created and developed by
-                Tahir Nazeer.
-
-            </p>
-
-            <button
-                class="tn-hero-button"
-                type="button"
-                onclick="openGame()">
-
-                ENTER WORLD
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- PLAYER -->
-
-    <section class="tn-section">
-
-        <div class="tn-section-head">
-
-            <div class="tn-section-title">
-                Your Profile
-            </div>
-
-            <div class="tn-section-more">
-                PLAYER
-            </div>
-
-        </div>
-
-
-        <div class="tn-profile-card">
-
-            <img
-                src="profile.jpg"
-                class="tn-profile-photo"
-                alt="Tahir Nazeer">
-
-            <div>
-
-                <div
-                    id="profileName"
-                    class="tn-profile-name">
-
-                    Tahir Nazeer
-
-                </div>
-
-                <div class="tn-profile-creator">
-
-                    Created &amp; Developed by
-                    Tahir Nazeer
-
-                </div>
-
-                <div class="tn-profile-badge">
-
-                    TN CREATIVE WORLD
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- GAME FEATURES -->
-
-    <section class="tn-section">
-
-        <div class="tn-section-head">
-
-            <div class="tn-section-title">
-                Creative World
-            </div>
-
-            <div class="tn-section-more">
-                EXPLORE
-            </div>
-
-        </div>
-
-
-        <div class="tn-grid">
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('game')">
-
-                <div class="tn-card-icon">
-                    🎮
-                </div>
-
-                <div class="tn-card-title">
-                    Game
-                </div>
-
-                <div class="tn-card-text">
-                    Enter the main game world.
-                </div>
-
-            </button>
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('missions')">
-
-                <div class="tn-card-icon">
-                    🎯
-                </div>
-
-                <div class="tn-card-title">
-                    Missions
-                </div>
-
-                <div class="tn-card-text">
-                    Missions and achievements.
-                </div>
-
-            </button>
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('community')">
-
-                <div class="tn-card-icon">
-                    🌐
-                </div>
-
-                <div class="tn-card-title">
-                    Community
-                </div>
-
-                <div class="tn-card-text">
-                    Connect with the world.
-                </div>
-
-            </button>
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('gallery')">
-
-                <div class="tn-card-icon">
-                    🖼️
-                </div>
-
-                <div class="tn-card-title">
-                    Gallery
-                </div>
-
-                <div class="tn-card-text">
-                    Explore your creative gallery.
-                </div>
-
-            </button>
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('leaderboard')">
-
-                <div class="tn-card-icon">
-                    🏆
-                </div>
-
-                <div class="tn-card-title">
-                    Leaderboard
-                </div>
-
-                <div class="tn-card-text">
-                    Player rankings.
-                </div>
-
-            </button>
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('friends')">
-
-                <div class="tn-card-icon">
-                    👥
-                </div>
-
-                <div class="tn-card-title">
-                    Friends
-                </div>
-
-                <div class="tn-card-text">
-                    Your player connections.
-                </div>
-
-            </button>
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('store')">
-
-                <div class="tn-card-icon">
-                    🛍️
-                </div>
-
-                <div class="tn-card-title">
-                    Store
-                </div>
-
-                <div class="tn-card-text">
-                    Creative world items.
-                </div>
-
-            </button>
-
-
-            <button
-                class="tn-card"
-                onclick="openSection('settings')">
-
-                <div class="tn-card-icon">
-                    ⚙️
-                </div>
-
-                <div class="tn-card-title">
-                    Settings
-                </div>
-
-                <div class="tn-card-text">
-                    Customize your experience.
-                </div>
-
-            </button>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- BRAND FOOTER -->
-
-    <section
-        class="tn-section"
-        style="text-align:center;padding-top:15px;">
-
-        <div
-            style="
-            color:#64748b;
-            font-size:8px;
-            line-height:1.8;
-            ">
-
-            TN CREATIVE WORLD
-
-            <br>
-
-            Created &amp; Developed by
-
-            <strong
-                style="color:#cbd5e1;">
-
-                Tahir Nazeer
-
-            </strong>
-
-            <br>
-
-            © 2026 Tahir Nazeer Game Project
-
-        </div>
-
-    </section>
-
-
-</main>
-
-
-
-<!-- =====================================================
-     BOTTOM NAV
-===================================================== -->
-
-<nav class="tn-nav">
-
-
-    <button
-        class="tn-nav-button active"
-        onclick="setActiveNav(this,'home')">
-
-        <span class="tn-nav-icon">
-            ⌂
-        </span>
-
-        Home
-
-    </button>
-
-
-    <button
-        class="tn-nav-button"
-        onclick="setActiveNav(this,'game')">
-
-        <span class="tn-nav-icon">
-            🎮
-        </span>
-
-        Game
-
-    </button>
-
-
-    <button
-        class="tn-nav-button"
-        onclick="setActiveNav(this,'community')">
-
-        <span class="tn-nav-icon">
-            ◎
-        </span>
-
-        Community
-
-    </button>
-
-
-    <button
-        class="tn-nav-button"
-        onclick="setActiveNav(this,'gallery')">
-
-        <span class="tn-nav-icon">
-            ◈
-        </span>
-
-        Gallery
-
-    </button>
-
-
-    <button
-        class="tn-nav-button"
-        onclick="setActiveNav(this,'profile')">
-
-        <span class="tn-nav-icon">
-            ●
-        </span>
-
-        Profile
-
-    </button>
-
-
-</nav>
-
-
-</div>
-
-
-<!-- TOAST -->
-
-<div id="tnToast"></div>
-
-
-
-<script>
-
-/* =====================================================
-   TN GAME CORE
-===================================================== */
-
-"use strict";
-
-
-const TN_PLAYER_KEY =
-    "TN_Player";
-
-
-/* =====================================================
-   PLAYER
-===================================================== */
-
-function getTNPlayer(){
-
-    try{
-
-        const data =
-            localStorage.getItem(
-                TN_PLAYER_KEY
-            );
-
-        if(!data){
-
-            return {
-
-                name:
-                    "Tahir Nazeer",
-
-                creator:
-                    "Tahir Nazeer"
-
-            };
-
-        }
-
-        return JSON.parse(data);
-
-    }catch(error){
-
-        return {
-
-            name:
-                "Tahir Nazeer",
-
-            creator:
-                "Tahir Nazeer"
-
+    <!-- Existing JS System Libraries -->
+    <script src="./brand.js"></script>
+    <script src="./gameEngine.js"></script>
+    <script src="./gameLoop.js"></script>
+    <script src="./gameControls.js"></script>
+
+    <script>
+        const canvas = document.getElementById('arcadeCanvas');
+        const ctx = canvas.getContext('2d');
+        const frame = document.getElementById('canvasFrame');
+
+        let score = 0;
+        let coinsEarned = 0;
+        let animationFrameId;
+
+        // Player Spacecraft / Character
+        let player = {
+            x: 0,
+            y: 0,
+            width: 50,
+            height: 50,
+            speed: 7,
+            dx: 0
         };
 
-    }
+        // Falling Coin Targets
+        let coins = [];
 
-}
-
-
-/* =====================================================
-   APPLY PLAYER
-===================================================== */
-
-function applyPlayer(){
-
-    const player =
-        getTNPlayer();
-
-
-    const name =
-        player.name ||
-        "Tahir Nazeer";
-
-
-    const topName =
-        document.getElementById(
-            "topPlayerName"
-        );
-
-
-    const profileName =
-        document.getElementById(
-            "profileName"
-        );
-
-
-    if(topName){
-
-        topName.textContent =
-            name;
-
-    }
-
-
-    if(profileName){
-
-        profileName.textContent =
-            name;
-
-    }
-
-
-    if(
-        player.picture
-    ){
-
-        const photo =
-            document.getElementById(
-                "topPlayerPhoto"
-            );
-
-        if(photo){
-
-            photo.src =
-                player.picture;
-
+        function initCanvasSize() {
+            canvas.width = frame.clientWidth;
+            canvas.height = frame.clientHeight;
+            player.x = canvas.width / 2 - player.width / 2;
+            player.y = canvas.height - player.height - 20;
         }
 
-    }
+        window.addEventListener('load', () => {
+            initCanvasSize();
+            const playerName = localStorage.getItem('tn_player_name') || 'Malik Tahir Nazeer';
+            document.getElementById('playerNameDisplay').innerText = playerName;
+            gameLoop();
+        });
 
-}
+        window.addEventListener('resize', initCanvasSize);
 
+        // Keyboard Controls
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' || e.key === 'a') player.dx = -player.speed;
+            if (e.key === 'ArrowRight' || e.key === 'd') player.dx = player.speed;
+        });
 
-/* =====================================================
-   TOAST
-===================================================== */
+        window.addEventListener('keyup', (e) => {
+            if (['ArrowLeft', 'ArrowRight', 'a', 'd'].includes(e.key)) player.dx = 0;
+        });
 
-function showToast(message){
+        // Mobile Controls Listeners
+        const btnLeft = document.getElementById('btnLeft');
+        const btnRight = document.getElementById('btnRight');
 
-    const toast =
-        document.getElementById(
-            "tnToast"
-        );
+        btnLeft.addEventListener('touchstart', (e) => { e.preventDefault(); player.dx = -player.speed; });
+        btnLeft.addEventListener('touchend', () => { player.dx = 0; });
 
+        btnRight.addEventListener('touchstart', (e) => { e.preventDefault(); player.dx = player.speed; });
+        btnRight.addEventListener('touchend', () => { player.dx = 0; });
 
-    toast.textContent =
-        message;
+        btnLeft.addEventListener('mousedown', () => { player.dx = -player.speed; });
+        btnLeft.addEventListener('mouseup', () => { player.dx = 0; });
 
+        btnRight.addEventListener('mousedown', () => { player.dx = player.speed; });
+        btnRight.addEventListener('mouseup', () => { player.dx = 0; });
 
-    toast.classList.add(
-        "show"
-    );
-
-
-    clearTimeout(
-        window.tnToastTimer
-    );
-
-
-    window.tnToastTimer =
-        setTimeout(
-            function(){
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            1800
-        );
-
-}
-
-
-/* =====================================================
-   GAME
-===================================================== */
-
-function openGame(){
-
-    showToast(
-        "Opening Game World..."
-    );
-
-
-    /*
-       یہ جگہ ہماری موجودہ
-       game.js / gameRoom.js
-       system کے ساتھ connect ہوگی۔
-    */
-
-    setTimeout(
-        function(){
-
-            if(
-                typeof window.startGame
-                === "function"
-            ){
-
-                window.startGame();
-
-            }else{
-
-                showToast(
-                    "Game Engine Loading..."
-                );
-
+        // Spawn Target Coins
+        function spawnCoin() {
+            if (Math.random() < 0.04) {
+                coins.push({
+                    x: Math.random() * (canvas.width - 30),
+                    y: -30,
+                    size: 25,
+                    speed: 3 + Math.random() * 3
+                });
             }
+        }
 
-        },
-        350
-    );
+        // Main Game Loop Engine
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-}
+            // Move Player
+            player.x += player.dx;
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
 
+            // Draw Neon Player (Tahir Nazeer Ship)
+            ctx.fillStyle = '#00f0ff';
+            ctx.shadowColor = '#00f0ff';
+            ctx.shadowBlur = 15;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
 
-/* =====================================================
-   SECTIONS
-===================================================== */
+            // Spawn and Render Coins
+            spawnCoin();
 
-function openSection(section){
+            for (let i = coins.length - 1; i >= 0; i--) {
+                let c = coins[i];
+                c.y += c.speed;
 
-    const names = {
+                // Draw Golden Coins
+                ctx.fillStyle = '#ffd700';
+                ctx.shadowColor = '#ffd700';
+                ctx.shadowBlur = 10;
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.size / 2, 0, Math.PI * 2);
+                ctx.fill();
 
-        game:
-            "Game World",
+                // Collision Detection with Player
+                if (
+                    c.x > player.x &&
+                    c.x < player.x + player.width &&
+                    c.y > player.y &&
+                    c.y < player.y + player.height
+                ) {
+                    coins.splice(i, 1);
+                    score += 10;
+                    coinsEarned += 1;
 
-        missions:
-            "Missions",
+                    document.getElementById('gameScore').innerText = score;
+                    document.getElementById('tnCoinsEarned').innerText = coinsEarned;
 
-        community:
-            "Community",
-
-        gallery:
-            "Gallery",
-
-        leaderboard:
-            "Leaderboard",
-
-        friends:
-            "Friends",
-
-        store:
-            "Store",
-
-        settings:
-            "Settings"
-
-    };
-
-
-    showToast(
-        (names[section] || "Section") +
-        " selected"
-    );
-
-
-    /*
-       Existing JavaScript systems
-       کو اگلے integration stage میں
-       ان sections سے connect کیا جائے گا۔
-    */
-
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function setActiveNav(
-    button,
-    section
-){
-
-    document
-        .querySelectorAll(
-            ".tn-nav-button"
-        )
-        .forEach(
-            function(item){
-
-                item.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    button.classList.add(
-        "active"
-    );
-
-
-    showToast(
-        section.toUpperCase()
-    );
-
-}
-
-
-/* =====================================================
-   BOOT
-===================================================== */
-
-window.addEventListener(
-    "load",
-    function(){
-
-        applyPlayer();
-
-
-        setTimeout(
-            function(){
-
-                const boot =
-                    document.getElementById(
-                        "tnBoot"
-                    );
-
-                if(boot){
-
-                    boot.classList.add(
-                        "hide"
-                    );
-
-                    setTimeout(
-                        function(){
-
-                            boot.remove();
-
-                        },
-                        500
-                    );
-
+                    // Update Global TN Coin Balance
+                    let totalCoins = parseInt(localStorage.getItem('tn_coins') || '1250') + 1;
+                    localStorage.setItem('tn_coins', totalCoins);
+                } else if (c.y > canvas.height) {
+                    coins.splice(i, 1);
                 }
+            }
 
-            },
-            750
-        );
-
-    }
-);
-
-
-/* =====================================================
-   GLOBAL TAHIR NAZEER BRAND
-===================================================== */
-
-window.TNCreativeWorld = {
-
-    creator:
-        "Tahir Nazeer",
-
-    project:
-        "TN Creative World",
-
-    year:
-        2026
-
-};
-
-</script>
-
-
-<!-- =====================================================
-     EXISTING PROJECT ENGINE FILES
-===================================================== -->
-
-<script src="brand.js"></script>
-<script src="creatorBadge.js"></script>
-<script src="theme.js"></script>
-
-<script src="app.js"></script>
-<script src="navigation.js"></script>
-<script src="home.js"></script>
-
-<script src="game.js"></script>
-<script src="gameRoom.js"></script>
-<script src="creativeEngine.js"></script>
-
-<script src="missionSystem.js"></script>
-<script src="achievement.js"></script>
-
-<script src="community.js"></script>
-<script src="chatSystem.js"></script>
-<script src="friends.js"></script>
-
-<script src="gallery.js"></script>
-<script src="profile.js"></script>
-<script src="avatarSystem.js"></script>
-
-<script src="leaderboard.js"></script>
-<script src="notification.js"></script>
-
-<script src="premiumUI.js"></script>
-<script src="dashboard.js"></script>
-
-<script src="store.js"></script>
-<script src="settings.js"></script>
-
-<script src="uiButtons.js"></script>
-<script src="iconSystem.js"></script>
-
-<script src="voice.js"></script>
-<script src="musicSystem.js"></script>
-
-
+            animationFrameId = requestAnimationFrame(gameLoop);
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HOME & APP ICON HUB | TAHIR NAZEER</title>
+    
+    <!-- App Icon & Favicon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+
+    <style>
+        :root {
+            --bg-dark: #05050d;
+            --glass: rgba(15, 18, 38, 0.85);
+            --neon-gold: #ffd700;
+            --neon-blue: #00f0ff;
+            --neon-purple: #a855f7;
+            --border-glow: rgba(0, 240, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            font-family: 'Orbitron', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 10%, #101026, #030308);
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Home Header Card */
+        .home-card {
+            background: var(--glass);
+            border: 2px solid var(--neon-gold);
+            border-radius: 24px;
+            padding: 25px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.25);
+            backdrop-filter: blur(20px);
+            margin-bottom: 25px;
+        }
+
+        .main-profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--neon-gold);
+            box-shadow: 0 0 25px var(--neon-gold);
+            object-fit: cover;
+            margin-bottom: 12px;
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(180deg, #fff, var(--neon-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .app-icon-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid var(--border-glow);
+        }
+
+        .app-icon-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* App Launcher Grid */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .app-card-btn {
+            background: var(--glass);
+            border: 1px solid var(--border-glow);
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .app-card-btn:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-gold);
+            box-shadow: 0 0 25px var(--neon-gold);
+        }
+
+        .app-card-btn span {
+            font-weight: 900;
+            font-size: 0.95rem;
+            color: var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Profile & App Icon Header -->
+    <div class="home-card">
+        <!-- Main Profile Photo -->
+        <img src="./profile.jpg" alt="Malik Tahir Nazeer" class="main-profile-img">
+        
+        <div class="brand-title">MALIK TAHIR NAZEER</div>
+        <p style="color: var(--neon-blue); font-weight: bold; margin-top: 5px;">TN CREATIVE WORLD | OFFICIAL HUB</p>
+
+        <!-- App Icon Showcase Section -->
+        <div class="app-icon-display">
+            <img src="./tn-game-icon.png" alt="TN Game Icon" class="app-icon-img">
+            <div style="text-align: left;">
+                <div style="font-size: 0.85rem; font-weight: 900; color: var(--neon-gold);">SYSTEM APP ICON</div>
+                <div style="font-size: 0.75rem; color: #ccc;">tn-game-icon.png Configured</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Access Hub Grid -->
+    <div class="apps-grid">
+        <a href="./index.html" class="app-card-btn">
+            <div style="font-size: 2rem;">🚀</div>
+            <span>MAIN PORTAL</span>
+        </a>
+
+        <a href="./music-studio.html" class="app-card-btn">
+            <div style="font-size: 2rem;">🎙️</div>
+            <span>3D AUDIO STUDIO</span>
+        </a>
+
+        <a href="./system-engine.html" class="app-card-btn">
+            <div style="font-size: 2rem;">⚙️</div>
+            <span>SYSTEM ENGINE (F10)</span>
+        </a>
+    </div>
+
+</body>
+</html>

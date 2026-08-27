@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TAHIR NAZEER | MASTER LAUNCHER & CORE ENGINE</title>
+    
+    <!-- Home Screen Icon & Favicon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    <link rel="apple-touch-icon" href="./tn-game-icon.png">
+
+    <!-- Stylesheets Loading -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+    <link rel="stylesheet" href="./splash.css">
+
+    <style>
+        :root {
+            --bg-master: #030308;
+            --glass-bg: rgba(12, 16, 32, 0.88);
+            --gold-glow: #ffd700;
+            --neon-blue: #00f0ff;
+            --neon-pink: #ff0055;
+            --neon-green: #00ff66;
+            --border-glow: rgba(0, 240, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            font-family: 'Orbitron', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 20%, #10122b 0%, #020206 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar Branding */
+        .master-bar {
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-blue), var(--gold-glow));
+            color: #000;
+            text-align: center;
+            padding: 6px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        /* Header with Login & Main Profiles */
+        .launcher-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: var(--glass-bg);
+            border-bottom: 2px solid var(--gold-glow);
+            backdrop-filter: blur(20px);
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .img-login-profile {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 15px var(--neon-pink);
+            object-fit: cover;
+        }
+
+        .img-main-profile {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 2px solid var(--gold-glow);
+            box-shadow: 0 0 20px var(--gold-glow);
+            object-fit: cover;
+        }
+
+        .brand-names {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-names h1 {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--gold-glow);
+            letter-spacing: 1px;
+        }
+
+        .brand-names p {
+            font-size: 0.75rem;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        /* Main Workspace Container */
+        .main-workspace {
+            max-width: 1200px;
+            margin: 20px auto;
+            width: 95%;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            flex: 1;
+        }
+
+        /* Left Engine & Audio Control Panel */
+        .panel-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.1);
+        }
+
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 900;
+            color: var(--gold-glow);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .track-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .track-card {
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .track-card.active {
+            border-color: var(--neon-pink);
+            background: rgba(255, 0, 85, 0.15);
+            color: var(--gold-glow);
+            box-shadow: 0 0 12px var(--neon-pink);
+        }
+
+        /* Right Game Screen Runner Frame */
+        .stage-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 480px;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+        }
+
+        .app-icon-preview {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 14px;
+            border: 1px solid var(--gold-glow);
+        }
+
+        .app-icon-preview img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+        }
+
+        .btn-launch-engine {
+            padding: 15px 30px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--gold-glow));
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--neon-pink);
+            transition: transform 0.2s;
+        }
+
+        .btn-launch-engine:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 800px) {
+            .main-workspace { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Status Bar -->
+    <div class="master-bar">
+        ⚡ ALL JS & CSS FILES INTEGRATED | MASTER LAUNCHER - MALIK TAHIR NAZEER
+    </div>
+
+    <!-- Header Section with Profiles -->
+    <header class="launcher-header">
+        <div class="profile-container">
+            <!-- Login Page Profile Photo -->
+            <img src="./login-profile.jpg" alt="Login Profile" class="img-login-profile" title="Login Profile">
+            
+            <!-- Main Inside Profile Photo -->
+            <img src="./profile.jpg" alt="Main Profile" class="img-main-profile" title="Main Inner Profile">
+            
+            <div class="brand-names">
+                <h1>MALIK TAHIR NAZEER</h1>
+                <p>MALIK TAHIR CREATIVE WORLD</p>
+            </div>
+        </div>
+
+        <!-- App Icon Showcase -->
+        <div class="app-icon-preview">
+            <img src="./tn-game-icon.png" alt="Home Screen App Icon">
+            <span style="font-size: 0.8rem; font-weight: 900; color: var(--gold-glow);">HOME ICON ACTIVE</span>
+        </div>
+    </header>
+
+    <!-- Main Engine Workspace -->
+    <div class="main-workspace">
+        
+        <!-- Audio Engine & Playlist Panel -->
+        <div class="panel-box">
+            <div class="panel-title">🎵 AUTO-PLAY AUDIO ENGINE</div>
+            
+            <div class="track-list">
+                <div class="track-card active" id="t-0">
+                    <span>1. Game Intro Sound</span>
+                    <span style="color: var(--neon-pink);">INTRO</span>
+                </div>
+                <div class="track-card" id="t-1">
+                    <span>2. Malka Di Tour Hai</span>
+                    <span style="color: var(--neon-blue);">KALAM 1</span>
+                </div>
+                <div class="track-card" id="t-2">
+                    <span>3. Mujhe Daru Peeni Hai</span>
+                    <span style="color: var(--neon-green);">KALAM 2</span>
+                </div>
+                <div class="track-card" id="t-3">
+                    <span>4. Velocity Waves</span>
+                    <span style="color: var(--gold-glow);">KALAM 3</span>
+                </div>
+                <div class="track-card" id="t-4">
+                    <span>5. Naacho Saare</span>
+                    <span style="color: var(--neon-blue);">KALAM 4</span>
+                </div>
+                <div class="track-card" id="t-5">
+                    <span>6. Shadow Mission</span>
+                    <span style="color: var(--neon-pink);">KALAM 5</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Game Launcher Display -->
+        <div class="stage-box">
+            <div style="text-align: center;">
+                <h2 style="color: var(--gold-glow); font-size: 1.5rem; margin-bottom: 8px;">TN GAME SYSTEM ENGINE</h2>
+                <p id="engineStatus" style="color: var(--neon-blue); font-weight: bold; font-size: 0.9rem;">STATUS: READY TO START ALL JS SYSTEMS</p>
+            </div>
+
+            <!-- Display Active Profile Image -->
+            <img src="./profile.jpg" alt="Inner Profile" style="width: 140px; height: 140px; border-radius: 50%; border: 3px solid var(--gold-glow); box-shadow: 0 0 30px var(--gold-glow); object-fit: cover;">
+
+            <!-- Master Launch Button -->
+            <button class="btn-launch-engine" onclick="launchMasterEngine()">
+                ▶️ START GAME ENGINE & PLAYLIST
+            </button>
+
+            <div style="font-size: 0.8rem; color: #888;">
+                POWERED BY MR. TAHIR NAZEER | ALL 38 MODULES LOADED
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Hidden Master Audio Player -->
+    <audio id="gameAudioEngine" style="display: none;"></audio>
+
+    <!-- ALL 35 JS FILES LOADED HERE IN CORRECT ORDER -->
+    <script src="./theme.js"></script>
+    <script src="./brand.js"></script>
+    <script src="./iconSystem.js"></script>
+    <script src="./loginSystem.js"></script>
+    <script src="./loginPage.js"></script>
+    <script src="./navigation.js"></script>
+    <script src="./uiButtons.js"></script>
+    <script src="./premiumUI.js"></script>
+    <script src="./splash.js"></script>
+
+    <!-- Core Game & Audio Systems -->
+    <script src="./Voice.js"></script>
+    <script src="./musicSystem.js"></script>
+    <script src="./gameRoom.js"></script>
+    <script src="./game.js"></script>
+    <script src="./app.js"></script>
+
+    <!-- Dashboard & Social Modules -->
+    <script src="./home.js"></script>
+    <script src="./dashboard.js"></script>
+    <script src="./community.js"></script>
+    <script src="./gallery.js"></script>
+    <script src="./profile.js"></script>
+    <script src="./friends.js"></script>
+    <script src="./chatSystem.js"></script>
+    <script src="./avatarSystem.js"></script>
+    
+    <!-- Economy, Store & Engine Modules -->
+    <script src="./store.js"></script>
+    <script src="./achievement.js"></script>
+    <script src="./missionSystem.js"></script>
+    <script src="./creatorBadge.js"></script>
+    <script src="./creativeEngine.js"></script>
+    <script src="./leaderboard.js"></script>
+    <script src="./notification.js"></script>
+    <script src="./settings.js"></script>
+
+    <!-- Auto-Play Audio Chain Script -->
+    <script>
+        // Playlist: Intro mp3 + 5 Kalams
+        const audioChain = [
+            { title: "Tahir Nazeer Intro Sound", src: "./tahir-nazeer-game-intro.mp3" },
+            { title: "Malka Di Tour Hai", src: "./audio/malka-di-tour.mp3" },
+            { title: "Mujhe Daru Peeni Hai", src: "./audio/mujhe-daru-peeni-hai.mp3" },
+            { title: "Velocity Waves", src: "./audio/velocity-waves.mp3" },
+            { title: "Naacho Saare", src: "./audio/naacho-saare.mp3" },
+            { title: "Shadow Mission", src: "./audio/shadow-mission.mp3" }
+        ];
+
+        let currentTrack = 0;
+        const player = document.getElementById('gameAudioEngine');
+
+        function launchMasterEngine() {
+            currentTrack = 0;
+            playAudioChain();
+        }
+
+        function playAudioChain() {
+            if (currentTrack >= audioChain.length) {
+                document.getElementById('engineStatus').innerText = "STATUS: PLAYLIST FINISHED";
+                return;
+            }
+
+            const track = audioChain[currentTrack];
+            player.src = track.src;
+            player.play().catch(e => console.log('Audio autoplay handled'));
+
+            document.getElementById('engineStatus').innerText = `NOW PLAYING: ${track.title.toUpperCase()}`;
+
+            // Highlight active playlist track
+            document.querySelectorAll('.track-card').forEach(card => card.classList.remove('active'));
+            const activeCard = document.getElementById(`t-${currentTrack}`);
+            if (activeCard) activeCard.classList.add('active');
+        }
+
+        // Automatic Auto-Play Next Track on End
+        player.onended = function() {
+            currentTrack++;
+            playAudioChain();
+        };
+    </script>
+</body>
+</html>

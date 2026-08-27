@@ -1,1775 +1,584 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur" dir="ltr">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1.0,
-                   maximum-scale=1.0,
-                   user-scalable=no">
-
-    <meta name="theme-color" content="#ffffff">
-
-    <meta name="description"
-          content="Tahir Nazeer Game - TN Creative World">
-
-    <title>Tahir Nazeer Game</title>
-
-    <!-- Game Icon -->
-    <link rel="icon"
-          type="image/png"
-          href="tn-game-icon.png">
-
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="brand.css">
-    <link rel="stylesheet" href="splash.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TAHIR NAZEER GAME | TN CREATIVE WORLD</title>
+    
+    <!-- Game Icon & Favicon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    
+    <!-- Existing CSS Stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+    <link rel="stylesheet" href="./splash.css">
 
     <style>
+        :root {
+            --bg-dark: #05050b;
+            --card-bg: rgba(15, 15, 30, 0.85);
+            --primary-gold: #ffd700;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8a2be2;
+            --accent-neon: #ff0055;
+            --text-light: #ffffff;
+            --border-glow: rgba(0, 240, 255, 0.4);
+        }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html,
-        body {
-            width: 100%;
-            min-height: 100%;
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-            background:
-                linear-gradient(
-                    145deg,
-                    #ffffff 0%,
-                    #f7f9fc 50%,
-                    #eef3f8 100%
-                );
-            color: #111827;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             overflow-x: hidden;
-        }
-
-        button,
-        input {
-            font: inherit;
-        }
-
-        button {
-            border: 0;
-            cursor: pointer;
-        }
-
-        .tn-app {
-            width: 100%;
             min-height: 100vh;
+            background: radial-gradient(circle at center, #0a0a1a 0%, #020205 100%);
         }
 
-        /* =========================
-           SPLASH SCREEN
-        ========================== */
-
-        #tnSplash {
+        /* Hollywood Cinematic Intro Overlay */
+        #cinematic-intro {
             position: fixed;
-            inset: 0;
-            z-index: 99999;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            background:
-                radial-gradient(
-                    circle at 50% 20%,
-                    #ffffff,
-                    #f1f5f9 70%
-                );
-
-            transition:
-                opacity .5s ease,
-                visibility .5s ease;
-        }
-
-        #tnSplash.hide {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .splash-content {
-            text-align: center;
-            width: 90%;
-            max-width: 380px;
-        }
-
-        .splash-logo {
-            width: 105px;
-            height: 105px;
-
-            object-fit: cover;
-
-            border-radius: 28px;
-
-            box-shadow:
-                0 20px 50px
-                rgba(15, 23, 42, .15);
-
-            margin-bottom: 20px;
-        }
-
-        .splash-title {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: -.7px;
-        }
-
-        .splash-subtitle {
-            margin-top: 8px;
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        .splash-loader {
-            width: 46px;
-            height: 46px;
-            margin: 25px auto 0;
-
-            border-radius: 50%;
-
-            border:
-                4px solid #e5e7eb;
-
-            border-top-color: #111827;
-
-            animation:
-                tnSpin 1s linear infinite;
-        }
-
-        @keyframes tnSpin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* =========================
-           LOGIN
-        ========================== */
-
-        #loginPage {
-            display: none;
-
-            min-height: 100vh;
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 25px;
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 420px;
-
-            padding: 32px 24px;
-
-            background:
-                rgba(255,255,255,.88);
-
-            border:
-                1px solid
-                rgba(15,23,42,.08);
-
-            border-radius: 30px;
-
-            box-shadow:
-                0 25px 80px
-                rgba(15,23,42,.10);
-
-            text-align: center;
-
-            backdrop-filter: blur(20px);
-        }
-
-        .login-photo {
-            width: 105px;
-            height: 105px;
-
-            object-fit: cover;
-
-            border-radius: 50%;
-
-            border:
-                4px solid
-                #ffffff;
-
-            box-shadow:
-                0 12px 35px
-                rgba(15,23,42,.16);
-
-            margin-bottom: 18px;
-        }
-
-        .login-title {
-            font-size: 28px;
-            font-weight: 900;
-        }
-
-        .login-creator {
-            color: #64748b;
-            font-size: 13px;
-            margin-top: 7px;
-            margin-bottom: 26px;
-        }
-
-        .login-input {
-            width: 100%;
-
-            padding: 16px 18px;
-
-            border-radius: 16px;
-
-            border:
-                1px solid
-                #e2e8f0;
-
-            outline: none;
-
-            background: #f8fafc;
-
-            text-align: center;
-
-            transition:
-                .2s ease;
-        }
-
-        .login-input:focus {
-            background: #ffffff;
-
-            border-color:
-                #111827;
-
-            box-shadow:
-                0 0 0 4px
-                rgba(15,23,42,.06);
-        }
-
-        .enter-button {
-            width: 100%;
-
-            margin-top: 14px;
-
-            padding: 16px;
-
-            border-radius: 16px;
-
-            color: #ffffff;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #111827,
-                    #334155
-                );
-
-            font-weight: 800;
-
-            box-shadow:
-                0 12px 28px
-                rgba(15,23,42,.18);
-
-            transition:
-                transform .2s ease,
-                box-shadow .2s ease;
-        }
-
-        .enter-button:active {
-            transform: scale(.97);
-        }
-
-        .login-note {
-            margin-top: 18px;
-            color: #94a3b8;
-            font-size: 11px;
-        }
-
-        /* =========================
-           MAIN APP
-        ========================== */
-
-        #mainApp {
-            display: none;
-
-            min-height: 100vh;
-
-            padding-bottom: 35px;
-        }
-
-        .topbar {
-            position: sticky;
             top: 0;
-            z-index: 1000;
-
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-
-            padding:
-                14px 18px;
-
-            background:
-                rgba(255,255,255,.84);
-
-            border-bottom:
-                1px solid
-                rgba(15,23,42,.06);
-
-            backdrop-filter:
-                blur(18px);
+            text-align: center;
+            cursor: pointer;
+            transition: opacity 1.2s ease, visibility 1.2s ease;
+            box-shadow: inset 0 0 100px rgba(0, 240, 255, 0.2);
         }
 
-        .brand-area {
-            display: flex;
-            align-items: center;
-            gap: 11px;
+        .cinematic-content {
+            animation: zoomGlow 3s ease-in-out infinite alternate;
+            padding: 20px;
         }
 
-        .brand-photo {
-            width: 42px;
-            height: 42px;
-
-            border-radius: 14px;
-
-            object-fit: cover;
-
-            box-shadow:
-                0 6px 18px
-                rgba(15,23,42,.12);
-        }
-
-        .brand-name {
-            font-size: 16px;
-            font-weight: 900;
-        }
-
-        .brand-small {
-            display: block;
-
-            color: #94a3b8;
-
-            font-size: 10px;
-
-            margin-top: 2px;
-        }
-
-        .menu-button {
-            width: 42px;
-            height: 42px;
-
-            border-radius: 14px;
-
-            background: #f1f5f9;
-
-            font-size: 20px;
-        }
-
-        /* =========================
-           HERO
-        ========================== */
-
-        .hero {
-            padding:
-                28px 18px 15px;
-        }
-
-        .hero-card {
-            position: relative;
-            overflow: hidden;
-
-            padding: 27px 23px;
-
+        .intro-icon {
+            width: 140px;
+            height: 140px;
             border-radius: 28px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #111827,
-                    #1e293b 55%,
-                    #475569
-                );
-
-            color: white;
-
-            box-shadow:
-                0 25px 55px
-                rgba(15,23,42,.18);
+            box-shadow: 0 0 40px var(--accent-cyan), 0 0 80px rgba(138, 43, 226, 0.5);
+            margin-bottom: 25px;
+            border: 2px solid var(--accent-cyan);
         }
 
-        .hero-card::before {
-            content: "";
-
-            position: absolute;
-
-            width: 180px;
-            height: 180px;
-
-            border-radius: 50%;
-
-            right: -60px;
-            top: -80px;
-
-            background:
-                rgba(255,255,255,.08);
-        }
-
-        .hero-card::after {
-            content: "";
-
-            position: absolute;
-
-            width: 120px;
-            height: 120px;
-
-            border-radius: 50%;
-
-            left: -50px;
-            bottom: -70px;
-
-            background:
-                rgba(255,255,255,.06);
-        }
-
-        .hero-kicker {
-            position: relative;
-            z-index: 2;
-
-            font-size: 11px;
-
-            letter-spacing: 1.5px;
-
-            text-transform: uppercase;
-
-            opacity: .65;
-        }
-
-        .hero-title {
-            position: relative;
-            z-index: 2;
-
-            margin-top: 8px;
-
-            font-size:
-                clamp(28px, 8vw, 45px);
-
-            line-height: 1.02;
-
-            font-weight: 950;
-
-            letter-spacing: -1.5px;
-        }
-
-        .hero-description {
-            position: relative;
-            z-index: 2;
-
-            margin-top: 13px;
-
-            max-width: 560px;
-
-            color:
-                rgba(255,255,255,.72);
-
-            font-size: 13px;
-
-            line-height: 1.6;
-        }
-
-        .hero-button {
-            position: relative;
-            z-index: 2;
-
-            margin-top: 21px;
-
-            padding:
-                14px 20px;
-
-            border-radius: 15px;
-
-            background: #ffffff;
-
-            color: #111827;
-
+        .intro-title {
+            font-size: 2.8rem;
             font-weight: 900;
-
-            box-shadow:
-                0 10px 25px
-                rgba(0,0,0,.15);
+            letter-spacing: 4px;
+            background: linear-gradient(180deg, #ffffff 0%, var(--primary-gold) 60%, #ff8800 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+            margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
-        /* =========================
-           CREATOR CARD
-        ========================== */
+        .intro-sub {
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-shadow: 0 0 10px var(--accent-cyan);
+        }
 
-        .creator-card {
-            margin:
-                5px 18px 20px;
+        .tap-prompt {
+            padding: 14px 35px;
+            background: linear-gradient(90deg, var(--accent-neon), var(--accent-purple), var(--accent-cyan));
+            border-radius: 40px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 0 25px var(--accent-neon);
+            animation: pulseBtn 1.5s infinite;
+        }
 
-            padding: 16px;
+        /* Hollywood Game Main Dashboard */
+        #main-app {
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            width: 100%;
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
+        /* Header Navbar */
+        .app-header {
             display: flex;
-
+            justify-content: space-between;
             align-items: center;
-
-            gap: 13px;
-
-            border-radius: 22px;
-
-            background:
-                rgba(255,255,255,.8);
-
-            border:
-                1px solid
-                #e8edf3;
-
-            box-shadow:
-                0 12px 35px
-                rgba(15,23,42,.06);
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 20px;
+            border: 1px solid var(--border-glow);
+            backdrop-filter: blur(15px);
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        .creator-image {
-            width: 55px;
-            height: 55px;
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
+        .brand-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+
+        .brand-text h1 {
+            font-size: 1.3rem;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .brand-text span {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        /* Creator Profile Branding Header */
+        .creator-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 215, 0, 0.08);
+            padding: 8px 18px;
+            border-radius: 35px;
+            border: 1px solid var(--primary-gold);
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        .creator-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
             object-fit: cover;
-
-            border-radius: 18px;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 0 10px var(--primary-gold);
         }
 
-        .creator-label {
-            font-size: 10px;
-            color: #94a3b8;
+        .creator-info {
+            text-align: right;
         }
 
         .creator-name {
-            font-size: 16px;
+            font-size: 0.9rem;
             font-weight: 900;
-            margin-top: 3px;
+            color: #fff;
         }
 
-        /* =========================
-           GAME MENU
-        ========================== */
-
-        .section {
-            padding:
-                0 18px 20px;
+        .creator-tag {
+            font-size: 0.7rem;
+            color: var(--primary-gold);
+            font-weight: bold;
         }
 
-        .section-heading {
+        /* Audio Music Hub Container */
+        .music-bar-container {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 18px 25px;
+            border: 1px solid var(--border-glow);
+            margin-bottom: 25px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 25px rgba(0,240,255,0.1);
+        }
+
+        .music-status {
             display: flex;
             justify-content: space-between;
             align-items: center;
-
+            font-size: 0.95rem;
             margin-bottom: 12px;
+            color: var(--accent-cyan);
+            font-weight: bold;
         }
 
-        .section-title {
-            font-size: 19px;
-            font-weight: 900;
-        }
-
-        .section-subtitle {
-            font-size: 11px;
-            color: #94a3b8;
-        }
-
-        .menu-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
+        .music-controls {
+            display: flex;
             gap: 12px;
-        }
-
-        .menu-card {
-            min-height: 125px;
-
-            padding: 18px;
-
-            border-radius: 22px;
-
-            background: #ffffff;
-
-            border:
-                1px solid
-                #e8edf3;
-
-            box-shadow:
-                0 10px 30px
-                rgba(15,23,42,.055);
-
-            text-align: left;
-
-            transition:
-                transform .18s ease,
-                box-shadow .18s ease;
-        }
-
-        .menu-card:active {
-            transform:
-                scale(.97);
-        }
-
-        .menu-icon {
-            width: 43px;
-            height: 43px;
-
-            display: flex;
-
             align-items: center;
-            justify-content: center;
-
-            border-radius: 14px;
-
-            background: #f1f5f9;
-
-            font-size: 21px;
-
-            margin-bottom: 15px;
         }
 
-        .menu-card strong {
-            display: block;
-
-            font-size: 14px;
+        .btn-music {
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 0 10px var(--accent-cyan);
         }
 
-        .menu-card span {
-            display: block;
-
-            margin-top: 5px;
-
-            color: #94a3b8;
-
-            font-size: 10px;
-
-            line-height: 1.4;
+        /* Main Game Grid (Cards with Tahir Nazeer Avatar) */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
-        /* =========================
-           PLAYER
-        ========================== */
-
-        .player-card {
-            margin:
-                0 18px 20px;
-
-            padding: 18px;
-
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f8fafc,
-                    #ffffff
-                );
-
-            border:
-                1px solid
-                #e2e8f0;
-        }
-
-        .player-title {
-            font-size: 14px;
-            font-weight: 900;
-        }
-
-        .player-status {
-            margin-top: 6px;
-
-            font-size: 11px;
-
-            color: #64748b;
-        }
-
-        .player-controls {
-            display: flex;
-
-            gap: 9px;
-
-            margin-top: 14px;
-        }
-
-        .player-controls button {
-            flex: 1;
-
-            padding: 11px;
-
-            border-radius: 13px;
-
-            background: #111827;
-
-            color: white;
-
-            font-size: 12px;
-
-            font-weight: 800;
-        }
-
-        /* =========================
-           FOOTER
-        ========================== */
-
-        .footer {
-            padding:
-                25px 18px;
-
+        .nav-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 22px 12px;
             text-align: center;
-
-            color: #94a3b8;
-
-            font-size: 10px;
+            text-decoration: none;
+            color: var(--text-light);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .footer strong {
-            color: #475569;
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
         }
 
-        /* =========================
-           HIDDEN ROUTES
-        ========================== */
-
-        .tn-page {
-            display: none;
-
-            min-height: 100vh;
-
-            padding: 80px 18px 30px;
+        .nav-card:hover::before {
+            left: 100%;
         }
 
-        .tn-page.active {
-            display: block;
+        .nav-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--primary-gold);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================== */
-
-        @media (min-width: 700px) {
-
-            .menu-grid {
-                grid-template-columns:
-                    repeat(4, 1fr);
-            }
-
-            .hero,
-            .section {
-                max-width: 1100px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .creator-card,
-            .player-card {
-                max-width: 1100px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
+        .card-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
         }
 
+        .nav-icon {
+            font-size: 1.8rem;
+        }
+
+        .nav-title {
+            font-weight: 900;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            color: #fff;
+        }
+
+        /* Footer Branding */
+        .app-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: #888;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .app-footer span {
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes zoomGlow {
+            0% { transform: scale(0.96); }
+            100% { transform: scale(1.03); }
+        }
+        @keyframes pulseBtn {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px var(--accent-neon); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px var(--accent-neon); }
+        }
+
+        @media (max-width: 600px) {
+            .intro-title { font-size: 2rem; }
+            .intro-icon { width: 110px; height: 110px; }
+            .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+            .brand-text h1 { font-size: 1.1rem; }
+        }
     </style>
 </head>
-
 <body>
 
-<div class="tn-app">
-
-    <!-- =========================
-         SPLASH
-    ========================== -->
-
-    <div id="tnSplash">
-
-        <div class="splash-content">
-
-            <img
-                class="splash-logo"
-                src="tn-game-icon.png"
-                alt="Tahir Nazeer Game">
-
-            <div class="splash-title">
-                Tahir Nazeer Game
-            </div>
-
-            <div class="splash-subtitle">
-                TN Creative World
-            </div>
-
-            <div class="splash-loader"></div>
-
+    <!-- 1. HOLLYWOOD CINEMATIC INTRO -->
+    <div id="cinematic-intro" onclick="startCinematicExperience()">
+        <div class="cinematic-content">
+            <img src="./tn-game-icon.png" alt="TN Game Icon" class="intro-icon">
+            <h1 class="intro-title">MALIK TAHIR NAZEER</h1>
+            <p class="intro-sub">TN CREATIVE WORLD</p>
+            <div class="tap-prompt">PRESS / TAP TO START GAME</div>
         </div>
-
     </div>
 
-
-    <!-- =========================
-         LOGIN PAGE
-    ========================== -->
-
-    <section id="loginPage">
-
-        <div class="login-card">
-
-            <img
-                class="login-photo"
-                src="login-profile.jpg"
-                alt="Tahir Nazeer">
-
-            <h1 class="login-title">
-                Welcome
-            </h1>
-
-            <p class="login-creator">
-                TN Creative World<br>
-                Created & Developed by
-                <strong>Tahir Nazeer</strong>
-            </p>
-
-            <input
-                id="playerName"
-                class="login-input"
-                type="text"
-                maxlength="30"
-                autocomplete="name"
-                placeholder="Enter Your Name">
-
-            <button
-                id="enterGameButton"
-                class="enter-button"
-                type="button">
-
-                ENTER GAME
-
-            </button>
-
-            <p class="login-note">
-                Your name will be used for your game profile.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         MAIN HOME
-    ========================== -->
-
-    <main id="mainApp">
-
-        <!-- TOP BAR -->
-
-        <header class="topbar">
-
-            <div class="brand-area">
-
-                <img
-                    class="brand-photo"
-                    src="profile.jpg"
-                    alt="Tahir Nazeer">
-
-                <div>
-
-                    <div class="brand-name">
-                        TN Creative World
-                    </div>
-
-                    <span class="brand-small">
-                        Tahir Nazeer Game
-                    </span>
-
+    <!-- 2. MAIN HOLLYWOOD GAME DASHBOARD -->
+    <div id="main-app">
+        <!-- Top Navigation Bar -->
+        <header class="app-header">
+            <div class="brand-box">
+                <img src="./tn-game-icon.png" alt="TN Icon" class="brand-icon">
+                <div class="brand-text">
+                    <h1>TAHIR NAZEER</h1>
+                    <span>TN CREATIVE WORLD</span>
                 </div>
-
             </div>
-
-            <button
-                class="menu-button"
-                type="button"
-                onclick="openSettings()">
-
-                ☰
-
-            </button>
-
+            
+            <div class="creator-profile" onclick="window.location.href='./profile.html'">
+                <div class="creator-info">
+                    <div class="creator-name" id="displayPlayerName">Malik Tahir Nazeer</div>
+                    <div class="creator-tag">Creator & Director</div>
+                </div>
+                <img src="./profile.jpg" alt="Tahir Nazeer Profile" class="creator-img">
+            </div>
         </header>
 
-
-        <!-- HERO -->
-
-        <section class="hero">
-
-            <div class="hero-card">
-
-                <div class="hero-kicker">
-                    Tahir Nazeer Project
-                </div>
-
-                <h1 class="hero-title">
-                    Create.<br>
-                    Play.<br>
-                    Discover.
-                </h1>
-
-                <p class="hero-description">
-                    Welcome to TN Creative World —
-                    a creative gaming experience
-                    built around imagination,
-                    missions and your own creations.
-                </p>
-
-                <button
-                    class="hero-button"
-                    type="button"
-                    onclick="startMainGame()">
-
-                    🎮 START GAME
-
-                </button>
-
+        <!-- Music & Audio System Hub -->
+        <section class="music-bar-container">
+            <div class="music-status">
+                <span id="currentSongTitle">🎵 Audio Engine Ready...</span>
+                <span id="audioTrackCounter">Track: 1 / 6</span>
             </div>
-
+            <div class="music-controls">
+                <button class="btn-music" onclick="playNextMusic()">Next Song ⏭</button>
+                <button class="btn-music" onclick="toggleAudioMute()" id="muteBtn">Mute 🔊</button>
+            </div>
+            <audio id="localIntroAudio" src="./tahir-nazeer-game-intro.mp3" preload="auto"></audio>
+            <div id="youtubePlayerContainer" style="display:none; margin-top:10px;">
+                <div id="ytplayer"></div>
+            </div>
         </section>
 
-
-        <!-- CREATOR -->
-
-        <section class="creator-card">
-
-            <img
-                class="creator-image"
-                src="profile.jpg"
-                alt="Tahir Nazeer">
-
-            <div>
-
-                <div class="creator-label">
-                    CREATED & DEVELOPED BY
-                </div>
-
-                <div class="creator-name">
-                    Tahir Nazeer
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- GAME MENU -->
-
-        <section class="section">
-
-            <div class="section-heading">
-
-                <div>
-                    <div class="section-title">
-                        Creative World
-                    </div>
-
-                    <div class="section-subtitle">
-                        Choose your experience
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="menu-grid">
-
-                <button
-                    class="menu-card"
-                    onclick="startMainGame()">
-
-                    <div class="menu-icon">
-                        🎮
-                    </div>
-
-                    <strong>
-                        Start Game
-                    </strong>
-
-                    <span>
-                        Enter your creative world.
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="menu-card"
-                    onclick="openCreativeStudio()">
-
-                    <div class="menu-icon">
-                        🎨
-                    </div>
-
-                    <strong>
-                        Creative Studio
-                    </strong>
-
-                    <span>
-                        Create your own designs.
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="menu-card"
-                    onclick="openMissions()">
-
-                    <div class="menu-icon">
-                        🎯
-                    </div>
-
-                    <strong>
-                        Missions
-                    </strong>
-
-                    <span>
-                        Complete missions and earn rewards.
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="menu-card"
-                    onclick="openAchievements()">
-
-                    <div class="menu-icon">
-                        🏆
-                    </div>
-
-                    <strong>
-                        Achievements
-                    </strong>
-
-                    <span>
-                        Track your progress.
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="menu-card"
-                    onclick="openLeaderboard()">
-
-                    <div class="menu-icon">
-                        👑
-                    </div>
-
-                    <strong>
-                        Leaderboard
-                    </strong>
-
-                    <span>
-                        See the top creators.
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="menu-card"
-                    onclick="openCommunity()">
-
-                    <div class="menu-icon">
-                        👥
-                    </div>
-
-                    <strong>
-                        Community
-                    </strong>
-
-                    <span>
-                        Connect with other players.
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="menu-card"
-                    onclick="openGallery()">
-
-                    <div class="menu-icon">
-                        🖼️
-                    </div>
-
-                    <strong>
-                        Gallery
-                    </strong>
-
-                    <span>
-                        Explore creative work.
-                    </span>
-
-                </button>
-
-
-                <button
-                    class="menu-card"
-                    onclick="openStore()">
-
-                    <div class="menu-icon">
-                        💎
-                    </div>
-
-                    <strong>
-                        Creative Store
-                    </strong>
-
-                    <span>
-                        Explore brushes, colors and items.
-                    </span>
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- MUSIC -->
-
-        <section class="player-card">
-
-            <div class="player-title">
-                🎵 Tahir Nazeer Music
-            </div>
-
-            <div
-                id="musicStatus"
-                class="player-status">
-
-                Ready for your journey.
-
-            </div>
-
-            <div class="player-controls">
-
-                <button
-                    type="button"
-                    onclick="startIntroMusic()">
-
-                    ▶ Intro
-
-                </button>
-
-                <button
-                    type="button"
-                    onclick="openMusic()">
-
-                    🎵 Music
-
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- FOOTER -->
-
-        <footer class="footer">
-
-            <strong>
-                TN Creative World
-            </strong>
-
-            <br>
-
-            Created & Developed by
-            <strong>Tahir Nazeer</strong>
-
-            <br><br>
-
-            © 2026 Tahir Nazeer
-
+        <!-- Navigation Cards with Profile Picture branding -->
+        <main class="dashboard-grid">
+            <a href="./game.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">🎮</div>
+                <div class="nav-title">GAME WORLD</div>
+            </a>
+            
+            <a href="./gallery.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">🎨</div>
+                <div class="nav-title">CREATIVE STUDIO</div>
+            </a>
+
+            <a href="./community.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">💬</div>
+                <div class="nav-title">COMMUNITY</div>
+            </a>
+
+            <a href="./dashboard.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">🏆</div>
+                <div class="nav-title">MISSIONS</div>
+            </a>
+
+            <a href="./profile.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">👤</div>
+                <div class="nav-title">PROFILE</div>
+            </a>
+
+            <a href="./store.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">🛒</div>
+                <div class="nav-title">STORE</div>
+            </a>
+
+            <a href="./login.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">🔑</div>
+                <div class="nav-title">LOGIN</div>
+            </a>
+
+            <a href="./settings.html" class="nav-card">
+                <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-title">SETTINGS</div>
+            </a>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            Designed & Developed by <span>MALIK TAHIR NAZEER</span> | <span>TN CREATIVE WORLD</span> &copy; 2026-2027
         </footer>
+    </div>
 
-    </main>
+    <!-- YouTube Iframe API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
-</div>
+    <!-- JS Systems -->
+    <script src="./brand.js"></script>
+    <script src="./theme.js"></script>
+    <script src="./musicSystem.js"></script>
+    <script src="./navigation.js"></script>
 
+    <script>
+        let currentTrackIndex = 0;
+        let ytPlayer = null;
+        let isYtReady = false;
 
-<!-- =====================================================
-     EXISTING PROJECT JAVASCRIPT FILES
-====================================================== -->
+        const ytPlaylist = [
+            'REmRBK6YdSo',
+            'jn0V1JBxNGU',
+            '68ZEOOvEcds',
+            'pThESjSD5TM',
+            'pi_E8CyAWXA'
+        ];
 
-<script src="brand.js"></script>
-<script src="app.js"></script>
-<script src="navigation.js"></script>
-<script src="home.js"></script>
-<script src="game.js"></script>
-<script src="gameRoom.js"></script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedName = localStorage.getItem('tn_player_name') || 'Malik Tahir Nazeer';
+            document.getElementById('displayPlayerName').innerText = savedName;
+        });
 
-<script src="creativeEngine.js"></script>
-<script src="gallery.js"></script>
+        function startCinematicExperience() {
+            const introOverlay = document.getElementById('cinematic-intro');
+            const mainApp = document.getElementById('main-app');
+            const localAudio = document.getElementById('localIntroAudio');
 
-<script src="missionSystem.js"></script>
-<script src="achievement.js"></script>
-<script src="dashboard.js"></script>
+            introOverlay.style.opacity = '0';
+            setTimeout(() => {
+                introOverlay.style.display = 'none';
+                mainApp.style.opacity = '1';
+            }, 1200);
 
-<script src="leaderboard.js"></script>
-<script src="store.js"></script>
+            document.getElementById('currentSongTitle').innerText = '🎵 Intro Song: tahir-nazeer-game-intro.mp3';
+            document.getElementById('audioTrackCounter').innerText = 'Track: 1 / 6';
 
-<script src="profile.js"></script>
-<script src="avatarSystem.js"></script>
-<script src="creatorBadge.js"></script>
-
-<script src="community.js"></script>
-<script src="friends.js"></script>
-<script src="chatSystem.js"></script>
-<script src="notification.js"></script>
-<script src="voice.js"></script>
-
-<script src="theme.js"></script>
-<script src="premiumUI.js"></script>
-<script src="uiButtons.js"></script>
-<script src="settings.js"></script>
-
-<script src="loginSystem.js"></script>
-<script src="loginPage.js"></script>
-
-<script src="iconSystem.js"></script>
-
-<script src="musicSystem.js"></script>
-
-<script src="splash.js"></script>
-
-
-<!-- =====================================================
-     MAIN CONNECTION ENGINE
-====================================================== -->
-
-<script>
-
-(function () {
-
-    "use strict";
-
-
-    const splash =
-        document.getElementById("tnSplash");
-
-    const login =
-        document.getElementById("loginPage");
-
-    const main =
-        document.getElementById("mainApp");
-
-    const nameInput =
-        document.getElementById("playerName");
-
-    const enterButton =
-        document.getElementById("enterGameButton");
-
-
-    /*
-     * Prevent older placeholder loginPage.js
-     * from replacing the complete interface.
-     */
-
-
-    function getPlayer() {
-
-        try {
-
-            const saved =
-                localStorage.getItem("TN_Player");
-
-            return saved
-                ? JSON.parse(saved)
-                : null;
-
-        } catch (error) {
-
-            return null;
-
+            localAudio.play().then(() => {
+                localAudio.onended = () => {
+                    playWelcomeVoice();
+                };
+            }).catch(err => {
+                playWelcomeVoice();
+            });
         }
 
-    }
-
-
-    function savePlayer(name) {
-
-        const player = {
-
-            name: name,
-
-            login: true,
-
-            brand: "TN Creative World",
-
-            creator: "Tahir Nazeer",
-
-            joined:
-                new Date().toISOString()
-
-        };
-
-        localStorage.setItem(
-            "TN_Player",
-            JSON.stringify(player)
-        );
-
-        return player;
-
-    }
-
-
-    function showLogin() {
-
-        splash.classList.add("hide");
-
-        login.style.display =
-            "flex";
-
-        main.style.display =
-            "none";
-
-    }
-
-
-    function showHome(player) {
-
-        splash.classList.add("hide");
-
-        login.style.display =
-            "none";
-
-        main.style.display =
-            "block";
-
-        const status =
-            document.getElementById(
-                "musicStatus"
-            );
-
-        if (status && player) {
-
-            status.textContent =
-                "Welcome " +
-                player.name +
-                " — TN Creative World";
-
-        }
-
-    }
-
-
-    async function startIntro() {
-
-        const audio =
-            new Audio(
-                "tahir-nazeer-game-intro.mp3"
-            );
-
-        audio.preload = "auto";
-
-        try {
-
-            await audio.play();
-
-        } catch (error) {
-
-            /*
-             * Browser autoplay protection:
-             * The login button itself provides
-             * the user interaction required
-             * to start audio.
-             */
-
-        }
-
-
-        audio.onended =
-            function () {
-
-                speakWelcome();
-
-            };
-
-    }
-
-
-    function speakWelcome() {
-
-        if (
-            "speechSynthesis"
-            in window
-        ) {
-
-            window.speechSynthesis.cancel();
-
-            const voice =
-                new SpeechSynthesisUtterance(
-                    "Welcome to TN Creative World. Tahir Nazeer Project."
-                );
-
-            voice.rate = 0.92;
-
-            voice.pitch = 1;
-
-            voice.volume = 1;
-
-            window.speechSynthesis
-                .speak(voice);
-
-        }
-
-    }
-
-
-    function loginPlayer() {
-
-        const name =
-            nameInput.value.trim();
-
-
-        if (!name) {
-
-            nameInput.focus();
-
-            nameInput.placeholder =
-                "Please enter your name";
-
-            return;
-
-        }
-
-
-        const player =
-            savePlayer(name);
-
-
-        showHome(player);
-
-
-        /*
-         * The intro song starts only after
-         * the player's button interaction.
-         */
-
-        startIntro();
-
-    }
-
-
-    enterButton
-        .addEventListener(
-            "click",
-            loginPlayer
-        );
-
-
-    nameInput
-        .addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Enter"
-                ) {
-
-                    loginPlayer();
-
-                }
-
-            }
-        );
-
-
-    window.startMainGame =
-        function () {
-
-            if (
-                typeof window.startGame
-                === "function"
-            ) {
-
-                window.startGame();
-
-                return;
-
-            }
-
-
-            alert(
-                "Game Room is ready to connect."
-            );
-
-        };
-
-
-    window.openCreativeStudio =
-        function () {
-
-            if (
-                typeof window.openGallery
-                === "function"
-            ) {
-
-                window.openGallery();
-
-                return;
-
-            }
-
-
-            alert(
-                "Creative Studio is ready."
-            );
-
-        };
-
-
-    window.openMissions =
-        function () {
-
-            if (
-                typeof window.showMissions
-                === "function"
-            ) {
-
-                window.showMissions();
-
-                return;
-
-            }
-
-
-            alert(
-                "Mission System is ready."
-            );
-
-        };
-
-
-    window.openAchievements =
-        function () {
-
-            if (
-                typeof window.showAchievements
-                === "function"
-            ) {
-
-                window.showAchievements();
-
-                return;
-
-            }
-
-
-            alert(
-                "Achievement System is ready."
-            );
-
-        };
-
-
-    window.openLeaderboard =
-        function () {
-
-            if (
-                typeof window.showLeaderboard
-                === "function"
-            ) {
-
-                window.showLeaderboard();
-
-                return;
-
-            }
-
-
-            alert(
-                "Leaderboard is ready."
-            );
-
-        };
-
-
-    window.openCommunity =
-        function () {
-
-            if (
-                typeof window.openCommunityPage
-                === "function"
-            ) {
-
-                window.openCommunityPage();
-
-                return;
-
-            }
-
-
-            alert(
-                "Community is ready."
-            );
-
-        };
-
-
-    window.openGallery =
-        function () {
-
-            if (
-                typeof window.showGallery
-                === "function"
-            ) {
-
-                window.showGallery();
-
-                return;
-
-            }
-
-
-            alert(
-                "Gallery is ready."
-            );
-
-        };
-
-
-    window.openStore =
-        function () {
-
-            if (
-                typeof window.showStore
-                === "function"
-            ) {
-
-                window.showStore();
-
-                return;
-
-            }
-
-
-            alert(
-                "Creative Store is ready."
-            );
-
-        };
-
-
-    window.openSettings =
-        function () {
-
-            if (
-                typeof window.openSettingsPage
-                === "function"
-            ) {
-
-                window.openSettingsPage();
-
-                return;
-
-            }
-
-
-            alert(
-                "Settings"
-            );
-
-        };
-
-
-    window.startIntroMusic =
-        function () {
-
-            startIntro();
-
-        };
-
-
-    window.openMusic =
-        function () {
-
-            const songs = [
-
-                "https://www.youtube.com/watch?v=REmRBK6YdSo",
-
-                "https://www.youtube.com/watch?v=jn0V1JBxNGU",
-
-                "https://www.youtube.com/watch?v=68ZEOOvEcds",
-
-                "https://www.youtube.com/watch?v=pThESjSD5TM",
-
-                "https://www.youtube.com/watch?v=pi_E8CyAWXA"
-
-            ];
-
-
-            /*
-             * Opening the first video.
-             * Automatic sequential YouTube playback
-             * is controlled by YouTube/browser policies,
-             * so we do not falsely promise autoplay.
-             */
-
-            window.open(
-                songs[0],
-                "_blank"
-            );
-
-        };
-
-
-    /*
-     * INITIAL APP STATE
-     */
-
-    setTimeout(
-        function () {
-
-            const player =
-                getPlayer();
-
-
-            if (player && player.login) {
-
-                showHome(player);
-
+        function playWelcomeVoice() {
+            document.getElementById('currentSongTitle').innerText = '🎙️ Welcome to TN Creative World...';
+            
+            if ('speechSynthesis' in window) {
+                const userName = localStorage.getItem('tn_player_name') || 'Malik Tahir Nazeer';
+                const welcomeMsg = new SpeechSynthesisUtterance(`Welcome to TN Creative World. Created by Malik Tahir Nazeer.`);
+                welcomeMsg.rate = 0.85;
+                welcomeMsg.pitch = 1.0;
+                
+                welcomeMsg.onend = () => {
+                    startYouTubeSequentialPlayer();
+                };
+                
+                window.speechSynthesis.speak(welcomeMsg);
             } else {
+                startYouTubeSequentialPlayer();
+            }
+        }
 
-                showLogin();
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('ytplayer', {
+                height: '0',
+                width: '0',
+                videoId: ytPlaylist[0],
+                events: {
+                    'onReady': () => { isYtReady = true; },
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
 
+        function startYouTubeSequentialPlayer() {
+            document.getElementById('youtubePlayerContainer').style.display = 'block';
+            currentTrackIndex = 0;
+            playYtTrack(currentTrackIndex);
+        }
+
+        function playYtTrack(index) {
+            if (index < ytPlaylist.length && ytPlayer && isYtReady) {
+                document.getElementById('currentSongTitle').innerText = `🎵 YouTube Track ${index + 1} Playing`;
+                document.getElementById('audioTrackCounter').innerText = `Track: ${index + 2} / 6`;
+                ytPlayer.loadVideoById(ytPlaylist[index]);
+                ytPlayer.playVideo();
+            }
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                currentTrackIndex++;
+                if (currentTrackIndex < ytPlaylist.length) {
+                    playYtTrack(currentTrackIndex);
+                } else {
+                    document.getElementById('currentSongTitle').innerText = '🎵 All Tracks Played';
+                }
+            }
+        }
+
+        function playNextMusic() {
+            const localAudio = document.getElementById('localIntroAudio');
+            if (!localAudio.paused) {
+                localAudio.pause();
+                playWelcomeVoice();
+                return;
             }
 
-        },
-        900
-    );
+            if (currentTrackIndex < ytPlaylist.length - 1) {
+                currentTrackIndex++;
+                playYtTrack(currentTrackIndex);
+            } else {
+                currentTrackIndex = 0;
+                playYtTrack(currentTrackIndex);
+            }
+        }
 
-
-})();
-
-</script>
-
+        function toggleAudioMute() {
+            const localAudio = document.getElementById('localIntroAudio');
+            const muteBtn = document.getElementById('muteBtn');
+            
+            if (localAudio.muted || (ytPlayer && ytPlayer.isMuted())) {
+                localAudio.muted = false;
+                if (ytPlayer) ytPlayer.unMute();
+                muteBtn.innerText = 'Mute 🔊';
+            } else {
+                localAudio.muted = true;
+                if (ytPlayer) ytPlayer.mute();
+                muteBtn.innerText = 'Unmute 🔇';
+            }
+        }
+    </script>
 </body>
 </html>

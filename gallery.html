@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CREATIVE STUDIO | TAHIR NAZEER GAME</title>
+    
+    <!-- Game Icon & Favicon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    
+    <!-- Existing CSS System -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+
+    <style>
+        :root {
+            --bg-dark: #05050b;
+            --card-bg: rgba(15, 15, 30, 0.9);
+            --primary-gold: #ffd700;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8a2be2;
+            --accent-neon: #ff0055;
+            --text-light: #ffffff;
+            --border-glow: rgba(0, 240, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at center, #0a0a1a 0%, #020205 100%);
+            overflow-x: hidden;
+        }
+
+        /* Header Navbar */
+        .studio-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-glow);
+            backdrop-filter: blur(15px);
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            border: 1px solid var(--accent-cyan);
+        }
+
+        .brand-text h1 {
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-glow);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-nav:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .creator-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-gold);
+        }
+
+        /* Studio Workplace Container */
+        .studio-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            max-width: 1300px;
+            margin: 0 auto;
+            width: 100%;
+            gap: 15px;
+        }
+
+        /* Control Panel Tools */
+        .tools-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 16px;
+            padding: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+        }
+
+        .tool-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tool-label {
+            font-size: 0.8rem;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+
+        .tool-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glow);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .tool-btn.active, .tool-btn:hover {
+            background: var(--accent-purple);
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 10px var(--accent-purple);
+        }
+
+        .color-picker-input {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: none;
+        }
+
+        .slider-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .slider-control input[type=range] {
+            accent-color: var(--accent-cyan);
+        }
+
+        /* Drawing Canvas Area */
+        .canvas-wrapper {
+            flex: 1;
+            min-height: 450px;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 2px solid var(--border-glow);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+        }
+
+        #drawingCanvas {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            cursor: crosshair;
+            display: block;
+        }
+
+        .canvas-watermark {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            pointer-events: none;
+            opacity: 0.4;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #000;
+            font-weight: 900;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .watermark-img {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
+        /* Action Buttons (Download & Share) */
+        .action-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .btn-action {
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-cyan));
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action.btn-download {
+            background: linear-gradient(45deg, #00b09b, #96c93d);
+            box-shadow: 0 0 15px rgba(150, 201, 61, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .tools-panel { flex-direction: column; align-items: stretch; }
+            .tool-group { justify-content: space-between; }
+            .canvas-wrapper { min-height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header class="studio-header">
+        <div class="brand-box">
+            <img src="./tn-game-icon.png" alt="TN Icon" class="brand-icon">
+            <div class="brand-text">
+                <h1>MALIK TAHIR NAZEER</h1>
+                <span>TN CREATIVE STUDIO</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <a href="./index.html" class="btn-nav">🏠 HOME</a>
+            <img src="./profile.jpg" alt="Tahir Nazeer Profile" class="creator-avatar">
+        </div>
+    </header>
+
+    <!-- Studio Workplace -->
+    <div class="studio-container">
+        
+        <!-- Tools & Color Controls -->
+        <div class="tools-panel">
+            
+            <!-- Brush Types -->
+            <div class="tool-group">
+                <span class="tool-label">BRUSHES:</span>
+                <button class="tool-btn active" onclick="setBrush('pencil')">✏️ Pencil</button>
+                <button class="tool-btn" onclick="setBrush('neon')">🌟 Neon Glow</button>
+                <button class="tool-btn" onclick="setBrush('oil')">🎨 Oil Paint</button>
+                <button class="tool-btn" onclick="setBrush('spray')">💨 Spray</button>
+                <button class="tool-btn" onclick="setBrush('rainbow')">🌈 Rainbow</button>
+                <button class="tool-btn" onclick="setBrush('eraser')">🧹 Eraser</button>
+            </div>
+
+            <!-- Color Palette & Custom RGB Color Picker -->
+            <div class="tool-group">
+                <span class="tool-label">COLORS:</span>
+                <input type="color" id="colorPicker" class="color-picker-input" value="#ff0055" onchange="updateColor(this.value)">
+                <button class="tool-btn" style="background:#ff0055; width:25px; height:25px; padding:0; border-radius:50%;" onclick="updateColor('#ff0055')"></button>
+                <button class="tool-btn" style="background:#00f0ff; width:25px; height:25px; padding:0; border-radius:50%;" onclick="updateColor('#00f0ff')"></button>
+                <button class="tool-btn" style="background:#ffd700; width:25px; height:25px; padding:0; border-radius:50%;" onclick="updateColor('#ffd700')"></button>
+                <button class="tool-btn" style="background:#8a2be2; width:25px; height:25px; padding:0; border-radius:50%;" onclick="updateColor('#8a2be2')"></button>
+                <button class="tool-btn" style="background:#000000; width:25px; height:25px; padding:0; border-radius:50%;" onclick="updateColor('#000000')"></button>
+            </div>
+
+            <!-- Brush Size & Opacity -->
+            <div class="tool-group">
+                <div class="slider-control">
+                    <span class="tool-label">SIZE:</span>
+                    <input type="range" id="brushSize" min="1" max="50" value="5" onchange="updateBrushSize(this.value)">
+                </div>
+                <div class="slider-control">
+                    <span class="tool-label">OPACITY:</span>
+                    <input type="range" id="brushOpacity" min="0.1" max="1" step="0.1" value="1" onchange="updateOpacity(this.value)">
+                </div>
+                <button class="tool-btn" onclick="clearCanvas()">🗑️ Clear</button>
+            </div>
+
+        </div>
+
+        <!-- Interactive Canvas -->
+        <div class="canvas-wrapper" id="canvasWrapper">
+            <canvas id="drawingCanvas"></canvas>
+            
+            <div class="canvas-watermark">
+                <img src="./profile.jpg" class="watermark-img" alt="TN">
+                <span>TAHIR NAZEER CREATIVE WORLD</span>
+            </div>
+        </div>
+
+        <!-- Download & Share Action Bar -->
+        <div class="action-bar">
+            <button class="btn-action btn-download" onclick="downloadDrawing()">
+                📥 Save / Download Drawing
+            </button>
+            <button class="btn-action" onclick="shareDrawing()">
+                📤 Share Art
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Existing JS System Libraries -->
+    <script src="./brand.js"></script>
+    <script src="./theme.js"></script>
+    <script src="./creativeEngine.js"></script>
+    <script src="./premiumUI.js"></script>    <script src="./uiButtons.js"></script>
+    <script src="./iconSystem.js"></script>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        const wrapper = document.getElementById('canvasWrapper');
+
+        let isDrawing = false;
+        let currentMode = 'pencil';
+        let currentColor = '#ff0055';
+        let currentSize = 5;
+        let currentOpacity = 1;
+        let hue = 0;
+
+        // Resize Canvas dynamically to fit container
+        function resizeCanvas() {
+            canvas.width = wrapper.clientWidth;
+            canvas.height = wrapper.clientHeight;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+
+        window.addEventListener('load', () => {
+            resizeCanvas();
+        });
+        window.addEventListener('resize', resizeCanvas);
+
+        // Drawing Event Listeners (Mouse & Mobile Touch Support)
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            startDrawing({ clientX: touch.clientX, clientY: touch.clientY, rect });
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            draw({ clientX: touch.clientX, clientY: touch.clientY });
+        });
+
+        canvas.addEventListener('touchend', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            ctx.beginPath();
+            const rect = canvas.getBoundingClientRect();
+            ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            ctx.globalAlpha = currentOpacity;
+
+            if (currentMode === 'eraser') {
+                ctx.strokeStyle = '#ffffff';
+                ctx.shadowBlur = 0;
+                ctx.lineWidth = currentSize * 2;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            } else if (currentMode === 'pencil') {
+                ctx.strokeStyle = currentColor;
+                ctx.shadowBlur = 0;
+                ctx.lineWidth = currentSize;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            } else if (currentMode === 'neon') {
+                ctx.strokeStyle = currentColor;
+                ctx.shadowColor = currentColor;
+                ctx.shadowBlur = currentSize * 2;
+                ctx.lineWidth = currentSize;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+            } else if (currentMode === 'oil') {
+                ctx.strokeStyle = currentColor;
+                ctx.shadowBlur = 0;
+                ctx.lineWidth = currentSize * 1.5;
+                ctx.lineTo(x + Math.random() * 2, y + Math.random() * 2);
+                ctx.stroke();
+            } else if (currentMode === 'spray') {
+                ctx.fillStyle = currentColor;
+                ctx.shadowBlur = 0;
+                for (let i = 0; i < 20; i++) {
+                    const offsetX = (Math.random() - 0.5) * currentSize * 3;
+                    const offsetY = (Math.random() - 0.5) * currentSize * 3;
+                    ctx.fillRect(x + offsetX, y + offsetY, 2, 2);
+                }
+            } else if (currentMode === 'rainbow') {
+                ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+                ctx.shadowBlur = 0;
+                ctx.lineWidth = currentSize;
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                hue = (hue + 5) % 360;
+            }
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+
+        // Control Panel Handlers
+        function setBrush(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function updateColor(color) {
+            currentColor = color;
+            document.getElementById('colorPicker').value = color;
+        }
+
+        function updateBrushSize(size) {
+            currentSize = size;
+        }
+
+        function updateOpacity(opacity) {
+            currentOpacity = opacity;
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Download Canvas Image Function
+        function downloadDrawing() {
+            // Temporary Canvas to merge Watermark into downloaded image
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = canvas.width;
+            tempCanvas.height = canvas.height;
+            const tempCtx = tempCanvas.getContext('2d');
+
+            // Fill White Background
+            tempCtx.fillStyle = '#ffffff';
+            tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+            tempCtx.drawImage(canvas, 0, 0);
+
+            // Draw Watermark
+            tempCtx.font = 'bold 16px Segoe UI';
+            tempCtx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            tempCtx.fillText('Created in TAHIR NAZEER CREATIVE WORLD', tempCanvas.width - 340, tempCanvas.height - 20);
+
+            const imageLink = document.createElement('a');
+            imageLink.download = `Tahir_Nazeer_Art_${Date.now()}.png`;
+            imageLink.href = tempCanvas.toDataURL('image/png');
+            imageLink.click();
+        }
+
+        // Share Canvas Drawing Function
+        function shareDrawing() {
+            canvas.toBlob((blob) => {
+                const file = new File([blob], 'Tahir_Nazeer_Art.png', { type: 'image/png' });
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                    navigator.share({
+                        title: 'Tahir Nazeer Creative Art',
+                        text: 'میں نے طاہر نذیر کری ایٹو گیم میں یہ آرٹ بنایا ہے!',
+                        files: [file]
+                    }).catch(console.error);
+                } else {
+                    alert('آپ کے براؤزر پر ڈائریکٹ شیئرنگ سپورٹ نہیں ہے۔ تصویر ڈاؤن لوڈ کرکے شیئر کریں!');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

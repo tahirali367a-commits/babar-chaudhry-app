@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>COMMUNITY & REWARDS | TAHIR NAZEER GAME</title>
+    
+    <!-- Game Icon & Favicon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    
+    <!-- Existing CSS System -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+
+    <style>
+        :root {
+            --bg-dark: #030308;
+            --card-bg: rgba(12, 12, 28, 0.9);
+            --primary-gold: #ffd700;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8a2be2;
+            --accent-neon: #ff0055;
+            --text-light: #ffffff;
+            --border-glow: rgba(0, 240, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at center, #0e0e24 0%, #020205 100%);
+            overflow-x: hidden;
+        }
+
+        /* Top Bar Header */
+        .comm-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-glow);
+            backdrop-filter: blur(15px);
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 0 10px var(--primary-gold);
+        }
+
+        .brand-text h1 {
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glow);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn-nav:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        /* Main Hub Layout */
+        .hub-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            width: 100%;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        /* Mr. Tahir Nazeer Rewards Card */
+        .reward-card {
+            background: linear-gradient(135deg, rgba(20, 20, 45, 0.95), rgba(5, 5, 15, 0.98));
+            border: 2px solid var(--primary-gold);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reward-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .boss-photo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-gold);
+            box-shadow: 0 0 20px var(--primary-gold);
+            margin-bottom: 10px;
+        }
+
+        .boss-title {
+            font-size: 1.3rem;
+            color: var(--primary-gold);
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            margin-bottom: 2px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .boss-sub {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .coin-display-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--primary-gold);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .coin-val {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            text-shadow: 0 0 15px var(--primary-gold);
+        }
+
+        .coin-lbl {
+            font-size: 0.8rem;
+            color: #aaa;
+            letter-spacing: 1px;
+        }
+
+        .btn-claim {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, var(--primary-gold), #ff8c00);
+            border: none;
+            border-radius: 12px;
+            color: #000;
+            font-size: 0.95rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-claim:active {
+            transform: scale(0.98);
+        }
+
+        /* Community Chat Box */
+        .chat-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 550px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border-glow);
+            font-weight: bold;
+            color: var(--accent-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .message-bubble {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .message-bubble.my-msg {
+            align-self: flex-end;
+            background: rgba(0, 240, 255, 0.15);
+            border-color: var(--accent-cyan);
+        }
+
+        .msg-user {
+            font-size: 0.75rem;
+            color: var(--primary-gold);
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .msg-text {
+            font-size: 0.9rem;
+            color: #fff;
+        }
+
+        .chat-input-area {
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid var(--border-glow);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glow);
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+        }
+
+        .btn-send {
+            background: var(--accent-cyan);
+            color: #000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .hub-container { grid-template-columns: 1fr; }
+            .chat-section { height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Header -->
+    <header class="comm-header">
+        <div class="brand-box">
+            <img src="./tn-game-icon.png" alt="TN Icon" class="brand-icon">
+            <div class="brand-text">
+                <h1>MALIK TAHIR NAZEER</h1>
+                <span>COMMUNITY & REWARDS</span>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="./index.html" class="btn-nav">🏠 HOME</a>
+            <a href="./gallery.html" class="btn-nav">🎨 STUDIO</a>
+        </div>
+    </header>
+
+    <!-- Hub Main Content -->
+    <div class="hub-container">
+        
+        <!-- Mr. Tahir Nazeer Rewards & Coin Card -->
+        <div class="reward-card">
+            <img src="./profile.jpg" alt="Mr. Tahir Nazeer" class="boss-photo">
+            <div class="boss-title">MR. TAHIR NAZEER</div>
+            <div class="boss-sub">FOUNDER & GAME OWNER</div>
+
+            <div class="coin-display-box">
+                <div class="coin-val" id="tnCoinBalance">1,250</div>
+                <div class="coin-lbl">🪙 TN REWARD COINS</div>
+            </div>
+
+            <button class="btn-claim" onclick="claimDailyReward()">
+                🎁 CLAIM DAILY TN REWARD
+            </button>
+        </div>
+
+        <!-- Community Chat Section -->
+        <div class="chat-section">
+            <div class="chat-header">
+                <span>💬 GAMERS & WORKERS CHAT ROOM</span>
+                <span style="font-size: 0.75rem; color: var(--primary-gold);">🟢 ONLINE</span>
+            </div>
+
+            <div class="chat-messages" id="chatContainer">
+                <div class="message-bubble">
+                    <div class="msg-user">SYSTEM BOT</div>
+                    <div class="msg-text">طاہر نذیر گیم کمیونٹی میں آپ کا ویلکم ہے!</div>
+                </div>
+
+                <div class="message-bubble">
+                    <div class="msg-user">MR. TAHIR NAZEER (OWNER)</div>
+                    <div class="msg-text">تمام ورکرز اور گیمرز کو بہترین کوائنز اور انعامات ملیں گے۔ دل لگا کر کھیلیں۔</div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" class="chat-input" placeholder="پیغام لکھیں..." onkeypress="handleKeyPress(event)">
+                <button class="btn-send" onclick="sendChatMessage()">SEND</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- System JS Files -->
+    <script src="./brand.js"></script>
+    <script src="./communitySystem.js"></script>
+    <script src="./rewardsEngine.js"></script>
+    <script src="./chatEngine.js"></script>
+
+    <script>
+        let coinBalance = parseInt(localStorage.getItem('tn_coins') || '1250');
+        document.getElementById('tnCoinBalance').innerText = coinBalance.toLocaleString();
+
+        function claimDailyReward() {
+            coinBalance += 250;
+            localStorage.setItem('tn_coins', coinBalance);
+            document.getElementById('tnCoinBalance').innerText = coinBalance.toLocaleString();
+            alert('🎉 مبارک ہو! مسٹر طاہر نذیر کی طرف سے آپ کو 250 کوائنز انعام مل گئے ہیں۔');
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            const playerName = localStorage.getItem('tn_player_name') || 'Gamer';
+
+            if (text !== '') {
+                const chatContainer = document.getElementById('chatContainer');
+                
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'message-bubble my-msg';
+                msgDiv.innerHTML = `
+                    <div class="msg-user">${playerName}</div>
+                    <div class="msg-text">${text}</div>
+                `;
+                
+                chatContainer.appendChild(msgDiv);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+                input.value = '';
+            }
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>3D CLASSIC DRINK GAME | TAHIR NAZEER</title>
+    
+    <!-- Game Icon & Favicon -->
+    <link rel="icon" type="image/png" href="./tn-game-icon.png">
+    
+    <!-- Existing CSS System -->
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./brand.css">
+
+    <style>
+        :root {
+            --bg-dark: #020208;
+            --card-glass: rgba(12, 12, 30, 0.75);
+            --primary-gold: #ffd700;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #8a2be2;
+            --accent-neon: #ff0055;
+            --border-glow: rgba(0, 240, 255, 0.6);
+            --liquid-color: #ff0055;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(circle at center, #0d0d26 0%, #010103 100%);
+            overflow-x: hidden;
+        }
+
+        /* 3D Animated Border Header */
+        .drink-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-glass);
+            padding: 14px 24px;
+            border-bottom: 2px solid transparent;
+            border-image: linear-gradient(90deg, var(--accent-neon), var(--primary-gold), var(--accent-cyan)) 1;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-gold);
+            box-shadow: 0 0 15px var(--primary-gold);
+            object-fit: cover;
+        }
+
+        .brand-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: linear-gradient(180deg, #fff, var(--primary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .brand-sub {
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-nav-3d {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glow);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+        }
+
+        .btn-nav-3d:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            box-shadow: 0 0 15px var(--primary-gold);
+        }
+
+        /* Main Game Arena */
+        .drink-container {
+            max-width: 1100px;
+            margin: 20px auto;
+            width: 100%;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 20px;
+            flex: 1;
+        }
+
+        /* Movie-Style Controls Side Panel */
+        .drink-panel {
+            background: var(--card-glass);
+            border: 2px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .panel-heading {
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flavor-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-flavor {
+            padding: 12px 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .btn-flavor:hover, .btn-flavor.active {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 15px var(--border-glow);
+            transform: translateX(5px);
+        }
+
+        .flavor-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        /* 3D Glass Drink Display Area */
+        .glass-stage {
+            background: var(--card-glass);
+            border: 2px solid var(--border-glow);
+            border-radius: 24px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
+            min-height: 480px;
+            overflow: hidden;
+        }
+
+        /* 3D Drink Cup Graphics */
+        .drink-cup-wrapper {
+            position: relative;
+            width: 180px;
+            height: 320px;
+            border: 4px solid rgba(255, 255, 255, 0.4);
+            border-top: none;
+            border-radius: 0 0 40px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .liquid-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60%;
+            background: var(--liquid-color);
+            box-shadow: 0 0 30px var(--liquid-color);
+            transition: height 0.5s ease, background-color 0.5s ease;
+        }
+
+        /* Liquid Wave Motion */
+        .liquid-fill::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: var(--liquid-color);
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: wave 2s infinite ease-in-out;
+        }
+
+        .drink-straw {
+            position: absolute;
+            top: -40px;
+            right: 40px;
+            width: 16px;
+            height: 300px;
+            background: repeating-linear-gradient(45deg, #fff, #fff 10px, var(--accent-neon) 10px, var(--accent-neon) 20px);
+            transform: rotate(12deg);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .drink-watermark {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.7;
+        }
+
+        .drink-watermark img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-gold);
+        }
+
+        .drink-watermark span {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+        }
+
+        .btn-fill-action {
+            margin-top: 20px;
+            padding: 14px 28px;
+            background: linear-gradient(90deg, var(--accent-neon), var(--accent-purple), var(--accent-cyan));
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            box-shadow: 0 0 25px var(--accent-neon);
+            transition: transform 0.2s ease;
+        }
+
+        .btn-fill-action:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0) scaleY(1); }
+            50% { transform: translateY(-5px) scaleY(1.2); }
+        }
+
+        @media (max-width: 768px) {
+            .drink-container { grid-template-columns: 1fr; }
+            .drink-cup-wrapper { width: 140px; height: 260px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Movie-Style Top Header -->
+    <header class="drink-header">
+        <div class="brand-box">
+            <img src="./profile.jpg" alt="Mr. Tahir Nazeer" class="brand-avatar">
+            <div>
+                <div class="brand-title">MALIK TAHIR NAZEER</div>
+                <div class="brand-sub">3D CLASSIC DRINK SIMULATOR</div>
+            </div>
+        </div>
+
+        <div class="nav-btns">
+            <a href="./index.html" class="btn-nav-3d">🏠 HOME</a>
+            <a href="./game.html" class="btn-nav-3d">🎮 ARCADE</a>
+        </div>
+    </header>
+
+    <!-- Main Game Arena -->
+    <div class="drink-container">
+        
+        <!-- Flavor Controls -->
+        <div class="drink-panel">
+            <div class="panel-heading">
+                <span>🍹 SELECT FLAVOR</span>
+            </div>
+
+            <div class="flavor-selector">
+                <button class="btn-flavor active" onclick="changeFlavor('#ff0055', 'Neon Strawberry')">
+                    <span>🍓 Neon Strawberry</span>
+                    <span class="flavor-dot" style="background: #ff0055; color: #ff0055;"></span>
+                </button>
+                <button class="btn-flavor" onclick="changeFlavor('#00f0ff', 'Cyan Blue Blast')">
+                    <span>🧊 Cyan Blue Blast</span>
+                    <span class="flavor-dot" style="background: #00f0ff; color: #00f0ff;"></span>
+                </button>
+                <button class="btn-flavor" onclick="changeFlavor('#ffd700', 'Golden Mango Glow')">
+                    <span>🥭 Golden Mango Glow</span>
+                    <span class="flavor-dot" style="background: #ffd700; color: #ffd700;"></span>
+                </button>
+                <button class="btn-flavor" onclick="changeFlavor('#00ff66', 'Lime Electric')">
+                    <span>🍏 Lime Electric</span>
+                    <span class="flavor-dot" style="background: #00ff66; color: #00ff66;"></span>
+                </button>
+            </div>
+
+            <div class="panel-heading" style="margin-top: 10px;">
+                <span>🧊 ADD ICE & EXTRA</span>
+            </div>
+
+            <button class="btn-flavor" onclick="addIceCubes()">
+                <span>🧊 Add 3D Ice Cubes</span>
+            </button>
+        </div>
+
+        <!-- 3D Drink Cup Canvas Stage -->
+        <div class="glass-stage">
+            
+            <div class="drink-cup-wrapper">
+                <div class="drink-straw"></div>
+                <div class="liquid-fill" id="liquidFill"></div>
+            </div>
+
+            <button class="btn-fill-action" onclick="pourDrink()">
+                🥤 POUR / REFILL DRINK
+            </button>
+
+            <div class="drink-watermark">
+                <img src="./profile.jpg" alt="TN Boss">
+                <span>MR. TAHIR NAZEER DRINK GAME</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Existing System Scripts -->
+    <script src="./brand.js"></script>
+    <script src="./drinkEngine.js"></script>
+    <script src="./liquidPhysics.js"></script>
+
+    <script>
+        let currentFillPercent = 60;
+
+        function changeFlavor(color, name) {
+            const liquid = document.getElementById('liquidFill');
+            liquid.style.backgroundColor = color;
+            liquid.style.boxShadow = `0 0 35px ${color}`;
+            
+            document.querySelectorAll('.btn-flavor').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        function pourDrink() {
+            const liquid = document.getElementById('liquidFill');
+            if (currentFillPercent >= 90) {
+                currentFillPercent = 20;
+            } else {
+                currentFillPercent += 25;
+            }
+            liquid.style.height = `${currentFillPercent}%`;
+        }
+
+        function addIceCubes() {
+            alert('🧊 3D Ice Cubes added into Mr. Tahir Nazeer Drink Cup!');
+        }
+    </script>
+</body>
+</html>
