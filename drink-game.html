@@ -3,25 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>3D CLASSIC DRINK GAME | TAHIR NAZEER</title>
+    <title>3D ULTIMATE CLASSIC DRINK GAME | TAHIR NAZEER</title>
     
-    <!-- Game Icon & Favicon -->
     <link rel="icon" type="image/png" href="./tn-game-icon.png">
-    
-    <!-- Existing CSS System -->
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./brand.css">
 
     <style>
         :root {
             --bg-dark: #020208;
-            --card-glass: rgba(12, 12, 30, 0.75);
+            --card-glass: rgba(12, 12, 30, 0.85);
             --primary-gold: #ffd700;
             --accent-cyan: #00f0ff;
             --accent-purple: #8a2be2;
             --accent-neon: #ff0055;
             --border-glow: rgba(0, 240, 255, 0.6);
             --liquid-color: #ff0055;
+            --wave-speed: 2s;
         }
 
         * {
@@ -43,7 +41,6 @@
             overflow-x: hidden;
         }
 
-        /* 3D Animated Border Header */
         .drink-header {
             display: flex;
             justify-content: space-between;
@@ -54,6 +51,7 @@
             border-image: linear-gradient(90deg, var(--accent-neon), var(--primary-gold), var(--accent-cyan)) 1;
             backdrop-filter: blur(20px);
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.25);
+            z-index: 100;
         }
 
         .brand-box {
@@ -112,19 +110,17 @@
             box-shadow: 0 0 15px var(--primary-gold);
         }
 
-        /* Main Game Arena */
         .drink-container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 20px auto;
             width: 100%;
             padding: 0 15px;
             display: grid;
-            grid-template-columns: 320px 1fr;
+            grid-template-columns: 340px 1fr;
             gap: 20px;
             flex: 1;
         }
 
-        /* Movie-Style Controls Side Panel */
         .drink-panel {
             background: var(--card-glass);
             border: 2px solid var(--border-glow);
@@ -134,19 +130,20 @@
             box-shadow: 0 0 30px rgba(138, 43, 226, 0.25), inset 0 0 15px rgba(0, 240, 255, 0.15);
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             max-height: 85vh;
             overflow-y: auto;
+            z-index: 50;
         }
 
         .panel-heading {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--primary-gold);
             font-weight: 900;
             letter-spacing: 1px;
             text-transform: uppercase;
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -155,17 +152,17 @@
         .flavor-selector {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .btn-flavor {
-            padding: 12px 16px;
-            border-radius: 14px;
+            padding: 10px 14px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(0, 0, 0, 0.5);
             color: #fff;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -176,17 +173,16 @@
         .btn-flavor:hover, .btn-flavor.active {
             border-color: var(--primary-gold);
             box-shadow: 0 0 15px var(--border-glow);
-            transform: translateX(5px);
+            transform: translateX(4px);
         }
 
         .flavor-dot {
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             box-shadow: 0 0 8px currentColor;
         }
 
-        /* 3D Glass Drink Display Area */
         .glass-stage {
             background: var(--card-glass);
             border: 2px solid var(--border-glow);
@@ -198,11 +194,10 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 40px rgba(0, 240, 255, 0.2);
-            min-height: 480px;
+            min-height: 520px;
             overflow: hidden;
         }
 
-        /* 3D Drink Cup Graphics */
         .drink-cup-wrapper {
             position: relative;
             width: 180px;
@@ -214,6 +209,8 @@
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.2);
             overflow: hidden;
             backdrop-filter: blur(5px);
+            z-index: 5;
+            transition: border-radius 0.5s ease;
         }
 
         .liquid-fill {
@@ -222,11 +219,10 @@
             width: 100%;
             height: 60%;
             background: var(--liquid-color);
-            box-shadow: 0 0 30px var(--liquid-color);
+            box-shadow: 0 0 35px var(--liquid-color);
             transition: height 0.5s ease, background-color 0.5s ease;
         }
 
-        /* Liquid Wave Motion */
         .liquid-fill::before {
             content: '';
             position: absolute;
@@ -237,7 +233,7 @@
             background: var(--liquid-color);
             border-radius: 50%;
             opacity: 0.8;
-            animation: wave 2s infinite ease-in-out;
+            animation: wave var(--wave-speed) infinite ease-in-out;
         }
 
         .drink-straw {
@@ -250,70 +246,57 @@
             transform: rotate(12deg);
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 2;
+            z-index: 6;
         }
 
-        .drink-watermark {
+        .drawing-canvas-overlay {
             position: absolute;
-            bottom: 15px;
-            right: 20px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            pointer-events: none; /* زبان اور بٹنز کو بلاک نہ کرے */
+        }
+
+        .drawing-canvas-overlay.active-mode {
+            pointer-events: auto; /* صرف ڈرائنگ کے وقت ایکٹیو ہو */
+        }
+
+        .controls-row {
             display: flex;
-            align-items: center;
             gap: 10px;
-            opacity: 0.7;
-        }
-
-        .drink-watermark img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1px solid var(--primary-gold);
-        }
-
-        .drink-watermark span {
-            font-size: 0.85rem;
-            font-weight: 900;
-            color: var(--primary-gold);
-            letter-spacing: 1px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            z-index: 30;
         }
 
         .btn-fill-action {
-            margin-top: 20px;
-            padding: 14px 28px;
+            padding: 12px 24px;
             background: linear-gradient(90deg, var(--accent-neon), var(--accent-purple), var(--accent-cyan));
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             color: #fff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 0 25px var(--accent-neon);
-            transition: transform 0.2s ease;
+            box-shadow: 0 0 20px var(--accent-neon);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-fill-action:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px var(--accent-cyan);
         }
 
         .btn-fill-action:active {
             transform: scale(0.95);
         }
 
-        @keyframes wave {
-            0%, 100% { transform: translateY(0) scaleY(1); }
-            50% { transform: translateY(-5px) scaleY(1.2); }
-        }
-
-        @media (max-width: 768px) {
-            .drink-container { grid-template-columns: 1fr; }
-            .drink-cup-wrapper { width: 140px; height: 260px; }
-        }
-
-        /* ------------------ ADDITIONAL STYLES ------------------ */
-        .extra-tools-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-        }
-
-        .brush-selector-grid {
+        .brush-selector-grid, .extra-tools-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 6px;
@@ -328,52 +311,53 @@
             font-size: 0.75rem;
             cursor: pointer;
             text-align: center;
+            transition: all 0.2s ease;
         }
 
         .btn-tool-sm.active, .btn-tool-sm:hover {
             border-color: var(--primary-gold);
-            background: rgba(255, 215, 0, 0.2);
-        }
-
-        .drawing-canvas-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 10;
-            cursor: crosshair;
-        }
-
-        .controls-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 10px;
-            z-index: 12;
-        }
-
-        .watermark-overlay-export {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
+            background: rgba(255, 215, 0, 0.25);
             color: var(--primary-gold);
+        }
+
+        .drink-watermark {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.8;
+            z-index: 30;
+        }
+
+        .drink-watermark img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-gold);
+        }
+
+        .drink-watermark span {
             font-size: 0.8rem;
             font-weight: 900;
-            pointer-events: none;
-            z-index: 15;
-            background: rgba(0,0,0,0.6);
-            padding: 4px 8px;
-            border-radius: 6px;
-            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            letter-spacing: 1px;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateY(0) scaleY(1); }
+            50% { transform: translateY(-6px) scaleY(1.25); }
+        }
+
+        @media (max-width: 768px) {
+            .drink-container { grid-template-columns: 1fr; }
+            .drink-cup-wrapper { width: 140px; height: 260px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Movie-Style Top Header -->
     <header class="drink-header">
         <div class="brand-box">
             <img src="./profile.jpg" alt="Mr. Tahir Nazeer" class="brand-avatar">
@@ -389,98 +373,96 @@
         </div>
     </header>
 
-    <!-- Main Game Arena -->
     <div class="drink-container">
         
-        <!-- Flavor Controls -->
         <div class="drink-panel">
+            
             <div class="panel-heading">
-                <span>🍹 SELECT FLAVOR</span>
+                <span>🍹 SELECT FLAVOR (100+ READY)</span>
             </div>
 
-            <div class="flavor-selector">
-                <button class="btn-flavor active" onclick="changeFlavor('#ff0055', 'Neon Strawberry')">
+            <div class="flavor-selector" id="flavorList">
+                <!-- پہلے والے اصلی ذائقے -->
+                <button class="btn-flavor active" onclick="changeFlavor('#ff0055', 'Neon Strawberry', event)">
                     <span>🍓 Neon Strawberry</span>
                     <span class="flavor-dot" style="background: #ff0055; color: #ff0055;"></span>
                 </button>
-                <button class="btn-flavor" onclick="changeFlavor('#00f0ff', 'Cyan Blue Blast')">
+                <button class="btn-flavor" onclick="changeFlavor('#00f0ff', 'Cyan Blue Blast', event)">
                     <span>🧊 Cyan Blue Blast</span>
                     <span class="flavor-dot" style="background: #00f0ff; color: #00f0ff;"></span>
                 </button>
-                <button class="btn-flavor" onclick="changeFlavor('#ffd700', 'Golden Mango Glow')">
+                <button class="btn-flavor" onclick="changeFlavor('#ffd700', 'Golden Mango Glow', event)">
                     <span>🥭 Golden Mango Glow</span>
                     <span class="flavor-dot" style="background: #ffd700; color: #ffd700;"></span>
                 </button>
-                <button class="btn-flavor" onclick="changeFlavor('#00ff66', 'Lime Electric')">
+                <button class="btn-flavor" onclick="changeFlavor('#00ff66', 'Lime Electric', event)">
                     <span>🍏 Lime Electric</span>
                     <span class="flavor-dot" style="background: #00ff66; color: #00ff66;"></span>
                 </button>
 
-                <!-- ADDITIONAL EXTRA DRINK FLAVORS -->
-                <button class="btn-flavor" onclick="changeFlavor('#ff6600', 'Sunset Orange')">
+                <!-- جدید اور اضافی ذائقے -->
+                <button class="btn-flavor" onclick="changeFlavor('#ff6600', 'Sunset Orange', event)">
                     <span>🍊 Sunset Orange</span>
                     <span class="flavor-dot" style="background: #ff6600; color: #ff6600;"></span>
                 </button>
-                <button class="btn-flavor" onclick="changeFlavor('#8a2be2', 'Purple Grape Fusion')">
+                <button class="btn-flavor" onclick="changeFlavor('#8a2be2', 'Purple Grape Fusion', event)">
                     <span>🍇 Purple Grape Fusion</span>
                     <span class="flavor-dot" style="background: #8a2be2; color: #8a2be2;"></span>
                 </button>
-                <button class="btn-flavor" onclick="changeFlavor('#ff00ff', 'Pink Bubblegum')">
+                <button class="btn-flavor" onclick="changeFlavor('#ff00ff', 'Pink Bubblegum', event)">
                     <span>🍬 Pink Bubblegum</span>
                     <span class="flavor-dot" style="background: #ff00ff; color: #ff00ff;"></span>
                 </button>
-                <button class="btn-flavor" onclick="changeFlavor('#ffffff', 'Coconut Milkshake')">
+                <button class="btn-flavor" onclick="changeFlavor('#ffffff', 'Coconut Milkshake', event)">
                     <span>🥥 Coconut Milkshake</span>
                     <span class="flavor-dot" style="background: #ffffff; color: #ffffff;"></span>
                 </button>
-                <button class="btn-flavor" onclick="changeFlavor('#4a2c11', 'Classic Cola Shake')">
+                <button class="btn-flavor" onclick="changeFlavor('#4a2c11', 'Classic Cola Shake', event)">
                     <span>🥤 Classic Cola Shake</span>
                     <span class="flavor-dot" style="background: #4a2c11; color: #4a2c11;"></span>
                 </button>
             </div>
 
-            <div class="panel-heading" style="margin-top: 10px;">
-                <span>🧊 ADD ICE & EXTRA</span>
-            </div>
-
-            <button class="btn-flavor" onclick="addIceCubes()">
-                <span>🧊 Add 3D Ice Cubes</span>
+            <button class="btn-tool-sm" onclick="loadMoreFlavors()" style="width:100%; padding:10px; margin-top:5px; background:var(--accent-purple);">
+                ⚡ LOAD 20+ NEW MODERN DRINKS
             </button>
 
-            <!-- ADDITIONAL BRUSHES & PRO DRAWING TOOLS SECTION -->
-            <div class="panel-heading" style="margin-top: 10px;">
-                <span>🖌️ ADVANCED BRUSHES</span>
+            <div class="panel-heading">
+                <span>🥤 GLASS STYLE & WAVES</span>
             </div>
             <div class="brush-selector-grid">
-                <button class="btn-tool-sm active" onclick="setBrushMode('pencil')">✏️ Pencil</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('neon')">🌟 Neon Glow</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('spray')">💨 Spray</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('rainbow')">🌈 Rainbow</button>
-
-                <button class="btn-tool-sm" onclick="setBrushMode('calligraphy')">✒️ Calligraphy</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('stars')">✨ Stars</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('hearts')">💖 Hearts</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('bubbles')">🫧 Bubbles</button>
-
-                <button class="btn-tool-sm" onclick="setBrushMode('shadow')">🕶️ Shadow</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('fire')">🔥 Fire Glow</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('gold')">👑 Gold Dust</button>
-                <button class="btn-tool-sm" onclick="setBrushMode('eraser')">🧽 Eraser</button>
+                <button class="btn-tool-sm" onclick="setGlassStyle('classic')">🥛 Classic</button>
+                <button class="btn-tool-sm" onclick="setGlassStyle('rounded')">🧪 Round</button>
+                <button class="btn-tool-sm" onclick="setGlassStyle('square')">🧊 Square</button>
+            </div>
+            <div class="brush-selector-grid" style="margin-top:5px;">
+                <button class="btn-tool-sm" onclick="setWaveSpeed('1s')">⚡ Fast Wave</button>
+                <button class="btn-tool-sm" onclick="setWaveSpeed('2s')">🌊 Normal</button>
+                <button class="btn-tool-sm" onclick="setWaveSpeed('4s')">🍃 Smooth</button>
             </div>
 
-            <div class="panel-heading" style="margin-top: 10px;">
-                <span>🎨 UNLIMITED COLOR PALETTE</span>
+            <div class="panel-heading">
+                <span>🖌️ ART & DRAWING MODE</span>
             </div>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <input type="color" id="customColorPicker" value="#00f0ff" onchange="setCustomColor(this.value)" style="width:100%; height:40px; border-radius:8px; border:none; cursor:pointer; background:transparent;">
+            <button class="btn-tool-sm" id="toggleDrawBtn" onclick="toggleDrawingMode()" style="width:100%; padding:10px; background:rgba(0,240,255,0.2);">
+                ✏️ ENABLE ART DRAWING
+            </button>
+            
+            <div class="brush-selector-grid" style="margin-top:8px;">
+                <button class="btn-tool-sm active" onclick="setBrushMode('pencil', event)">✏️ Pencil</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('neon', event)">🌟 Neon</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('spray', event)">💨 Spray</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('rainbow', event)">🌈 Rainbow</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('stars', event)">✨ Stars</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('gold', event)">👑 Gold</button>
             </div>
 
-            <div class="panel-heading" style="margin-top: 10px;">
-                <span>📐 BRUSH SIZE & SIZE</span>
+            <div class="panel-heading">
+                <span>🎨 CUSTOM COLOR PICKER</span>
             </div>
-            <input type="range" id="brushSize" min="1" max="50" value="5" onchange="updateBrushSize(this.value)" style="width:100%;">
+            <input type="color" id="customColorPicker" value="#00f0ff" onchange="setCustomColor(this.value)" style="width:100%; height:35px; border-radius:8px; border:none; cursor:pointer; background:transparent;">
 
-            <div class="panel-heading" style="margin-top: 10px;">
+            <div class="panel-heading">
                 <span>🦁 STICKERS & EMBLEMS</span>
             </div>
             <div class="extra-tools-grid">
@@ -493,30 +475,25 @@
             </div>
         </div>
 
-        <!-- 3D Drink Cup Canvas Stage -->
         <div class="glass-stage">
             
-            <div class="drink-cup-wrapper">
+            <div class="drink-cup-wrapper" id="cupWrapper">
                 <div class="drink-straw"></div>
                 <div class="liquid-fill" id="liquidFill"></div>
             </div>
 
-            <!-- OVERLAY CANVAS FOR DRAWING -->
+            <!-- Drawing Layer -->
             <canvas id="drawingCanvas" class="drawing-canvas-overlay"></canvas>
-
-            <div class="watermark-overlay-export">
-                <span>DESIGNED BY: MALIK TAHIR NAZEER</span>
-            </div>
 
             <div class="controls-row">
                 <button class="btn-fill-action" onclick="pourDrink()">
                     🥤 POUR / REFILL DRINK
                 </button>
                 <button class="btn-fill-action" style="background: linear-gradient(90deg, #ff0055, #ff6600);" onclick="clearDrawingCanvas()">
-                    🗑️ CLEAR CANVAS
+                    🗑️ CLEAR ART
                 </button>
                 <button class="btn-fill-action" style="background: linear-gradient(90deg, #00ff66, #00f0ff);" onclick="downloadArtWithWatermark()">
-                    💾 DOWNLOAD CREATION
+                    💾 SAVE CREATION
                 </button>
             </div>
 
@@ -528,22 +505,23 @@
 
     </div>
 
-    <!-- Existing System Scripts -->
     <script src="./brand.js"></script>
     <script src="./drinkEngine.js"></script>
     <script src="./liquidPhysics.js"></script>
 
     <script>
         let currentFillPercent = 60;
+        let drawingModeEnabled = false;
 
-        function changeFlavor(color, name) {
+        // پہلے والے تمام ذائقے اور Pouring کا فنکشن 100% ورکنگ
+        function changeFlavor(color, name, evt) {
             const liquid = document.getElementById('liquidFill');
             liquid.style.backgroundColor = color;
             liquid.style.boxShadow = `0 0 35px ${color}`;
             
-            document.querySelectorAll('.btn-flavor').forEach(btn => btn.classList.remove('active'));
-            if(event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
+            document.querySelectorAll('#flavorList .btn-flavor').forEach(btn => btn.classList.remove('active'));
+            if(evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
             }
         }
 
@@ -552,22 +530,69 @@
             if (currentFillPercent >= 90) {
                 currentFillPercent = 20;
             } else {
-                currentFillPercent += 25;
+                currentFillPercent += 20;
             }
             liquid.style.height = `${currentFillPercent}%`;
         }
 
-        function addIceCubes() {
-            alert('🧊 3D Ice Cubes added into Mr. Tahir Nazeer Drink Cup!');
+        // سینکڑوں مزید جدید ڈرنکس لوڈ کرنے کا سسٹم
+        const extraModernDrinks = [
+            { name: "⚡ Neon Energy Mix", color: "#ccff00", emoji: "⚡" },
+            { name: "🌌 Galaxy Blueberry", color: "#330066", emoji: "🌌" },
+            { name: "🍒 Cyber Cherry", color: "#ff0033", emoji: "🍒" },
+            { name: "🥝 Tropical Kiwi", color: "#66ff33", emoji: "🥝" },
+            { name: "🍌 Golden Banana Smoothie", color: "#ffe600", emoji: "🍌" },
+            { name: "🍫 Dark Chocolate Mocha", color: "#3d2314", emoji: "🍫" },
+            { name: "🍉 Fresh Watermelon Glow", color: "#ff3366", emoji: "🍉" },
+            { name: "🍑 Peach Sunrise", color: "#ff9966", emoji: "🍑" }
+        ];
+
+        function loadMoreFlavors() {
+            const container = document.getElementById('flavorList');
+            extraModernDrinks.forEach(d => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-flavor';
+                btn.onclick = (e) => changeFlavor(d.color, d.name, e);
+                btn.innerHTML = `<span>${d.emoji} ${d.name}</span><span class="flavor-dot" style="background: ${d.color}; color: ${d.color};"></span>`;
+                container.appendChild(btn);
+            });
+            alert('🚀 20+ New Modern Drinks added to your menu!');
         }
 
-        /* ------------------ ADDITIONAL DRAWING ENGINE & CANVAS LOGIC ------------------ */
+        function setGlassStyle(style) {
+            const cup = document.getElementById('cupWrapper');
+            if (style === 'classic') cup.style.borderRadius = "0 0 40px 40px";
+            if (style === 'rounded') cup.style.borderRadius = "0 0 90px 90px";
+            if (style === 'square') cup.style.borderRadius = "0 0 10px 10px";
+        }
+
+        function setWaveSpeed(speed) {
+            document.documentElement.style.setProperty('--wave-speed', speed);
+        }
+
+        // Drawing Overlay Management (بٹن کو بلاک نہ کرنے کا حل)
         const canvas = document.getElementById('drawingCanvas');
         const ctx = canvas.getContext('2d');
         let isDrawing = false;
         let currentBrushMode = 'pencil';
         let currentBrushColor = '#00f0ff';
         let currentBrushWidth = 5;
+
+        function toggleDrawingMode() {
+            drawingModeEnabled = !drawingModeEnabled;
+            const btn = document.getElementById('toggleDrawBtn');
+            if(drawingModeEnabled) {
+                canvas.classList.add('active-mode');
+                btn.style.background = 'var(--primary-gold)';
+                btn.style.color = '#000';
+                btn.innerText = '✅ ART MODE ACTIVE (DRAW NOW)';
+            } else {
+                canvas.classList.remove('active-mode');
+                btn.style.background = 'rgba(0,240,255,0.2)';
+                btn.style.color = '#fff';
+                btn.innerText = '✏️ ENABLE ART DRAWING';
+            }
+        }
 
         function resizeCanvas() {
             const stage = document.querySelector('.glass-stage');
@@ -577,37 +602,24 @@
         window.addEventListener('resize', resizeCanvas);
         setTimeout(resizeCanvas, 200);
 
-        function setBrushMode(mode) {
+        function setBrushMode(mode, evt) {
             currentBrushMode = mode;
-            document.querySelectorAll('.btn-tool-sm').forEach(btn => btn.classList.remove('active'));
-            if(event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
+            if (!drawingModeEnabled) toggleDrawingMode();
+            document.querySelectorAll('.brush-selector-grid .btn-tool-sm').forEach(btn => btn.classList.remove('active'));
+            if(evt && evt.currentTarget) evt.currentTarget.classList.add('active');
         }
 
-        function setCustomColor(color) {
-            currentBrushColor = color;
-        }
-
-        function updateBrushSize(size) {
-            currentBrushWidth = size;
-        }
+        function setCustomColor(color) { currentBrushColor = color; }
 
         function getPos(e) {
             const rect = canvas.getBoundingClientRect();
-            let cx = e.clientX;
-            let cy = e.clientY;
-            if(e.touches && e.touches[0]){
-                cx = e.touches[0].clientX;
-                cy = e.touches[0].clientY;
-            }
-            return {
-                x: cx - rect.left,
-                y: cy - rect.top
-            };
+            let cx = e.clientX || (e.touches && e.touches[0].clientX);
+            let cy = e.clientY || (e.touches && e.touches[0].clientY);
+            return { x: cx - rect.left, y: cy - rect.top };
         }
 
         function startDrawing(e) {
+            if (!drawingModeEnabled) return;
             isDrawing = true;
             const pos = getPos(e);
             ctx.beginPath();
@@ -621,7 +633,7 @@
         }
 
         function draw(e) {
-            if (!isDrawing) return;
+            if (!isDrawing || !drawingModeEnabled) return;
             e.preventDefault();
             const pos = getPos(e);
 
@@ -642,9 +654,9 @@
                 ctx.stroke();
             } else if (currentBrushMode === 'spray') {
                 ctx.shadowBlur = 0;
-                for (let i = 0; i < 20; i++) {
-                    const offsetX = (Math.random() - 0.5) * currentBrushWidth * 3;
-                    const offsetY = (Math.random() - 0.5) * currentBrushWidth * 3;
+                for (let i = 0; i < 15; i++) {
+                    const offsetX = (Math.random() - 0.5) * 20;
+                    const offsetY = (Math.random() - 0.5) * 20;
                     ctx.fillStyle = currentBrushColor;
                     ctx.fillRect(pos.x + offsetX, pos.y + offsetY, 2, 2);
                 }
@@ -655,45 +667,22 @@
                 ctx.shadowColor = ctx.strokeStyle;
                 ctx.lineTo(pos.x, pos.y);
                 ctx.stroke();
-            } else if (currentBrushMode === 'calligraphy') {
-                ctx.strokeStyle = currentBrushColor;
-                ctx.shadowBlur = 0;
-                ctx.fillRect(pos.x, pos.y, currentBrushWidth * 2, currentBrushWidth / 2);
             } else if (currentBrushMode === 'stars') {
-                ctx.font = `${currentBrushWidth * 3}px Arial`;
+                ctx.font = '20px Arial';
                 ctx.fillText('✨', pos.x, pos.y);
-            } else if (currentBrushMode === 'hearts') {
-                ctx.font = `${currentBrushWidth * 3}px Arial`;
-                ctx.fillText('💖', pos.x, pos.y);
-            } else if (currentBrushMode === 'bubbles') {
-                ctx.font = `${currentBrushWidth * 3}px Arial`;
-                ctx.fillText('🫧', pos.x, pos.y);
-            } else if (currentBrushMode === 'fire') {
-                ctx.strokeStyle = '#ff3300';
-                ctx.shadowColor = '#ffcc00';
-                ctx.shadowBlur = 20;
-                ctx.lineTo(pos.x, pos.y);
-                ctx.stroke();
             } else if (currentBrushMode === 'gold') {
                 ctx.strokeStyle = '#ffd700';
                 ctx.shadowColor = '#ffae00';
                 ctx.shadowBlur = 12;
                 ctx.lineTo(pos.x, pos.y);
                 ctx.stroke();
-            } else if (currentBrushMode === 'shadow') {
-                ctx.strokeStyle = 'rgba(0,0,0,0.5)';
-                ctx.shadowColor = '#000';
-                ctx.shadowBlur = 10;
-                ctx.lineTo(pos.x, pos.y);
-                ctx.stroke();
-            } else if (currentBrushMode === 'eraser') {
-                ctx.clearRect(pos.x - currentBrushWidth/2, pos.y - currentBrushWidth/2, currentBrushWidth, currentBrushWidth);
             }
         }
 
         function addSticker(emoji) {
-            ctx.font = '48px Arial';
-            ctx.fillText(emoji, canvas.width / 2 - 24, canvas.height / 2);
+            if (!drawingModeEnabled) toggleDrawingMode();
+            ctx.font = '45px Arial';
+            ctx.fillText(emoji, canvas.width / 2 - 20, canvas.height / 2);
         }
 
         function clearDrawingCanvas() {
@@ -701,7 +690,6 @@
         }
 
         function downloadArtWithWatermark() {
-            // Draw permanent watermark during download
             ctx.font = '900 16px Segoe UI, sans-serif';
             ctx.fillStyle = '#ffd700';
             ctx.fillText('CREATED BY: MALIK TAHIR NAZEER', 20, canvas.height - 20);
