@@ -30,7 +30,7 @@
             margin: 0;
             padding: 0;
             user-select: none;
-            font-family: 'Orbitron', 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
@@ -155,6 +155,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
         }
 
         .track-card.active {
@@ -220,7 +221,7 @@
 
     <!-- Top Status Bar -->
     <div class="master-bar">
-        ⚡ ALL JS & CSS FILES INTEGRATED | MASTER LAUNCHER - MALIK TAHIR NAZEER
+         ALL JS & CSS FILES INTEGRATED | MASTER LAUNCHER - MALIK TAHIR NAZEER
     </div>
 
     <!-- Header Section with Profiles -->
@@ -250,30 +251,30 @@
         
         <!-- Audio Engine & Playlist Panel -->
         <div class="panel-box">
-            <div class="panel-title">🎵 AUTO-PLAY AUDIO ENGINE</div>
+            <div class="panel-title"> AUTO-PLAY AUDIO ENGINE</div>
             
             <div class="track-list">
-                <div class="track-card active" id="t-0">
+                <div class="track-card active" id="t-0" onclick="playSpecificTrack(0)">
                     <span>1. Game Intro Sound</span>
                     <span style="color: var(--neon-pink);">INTRO</span>
                 </div>
-                <div class="track-card" id="t-1">
+                <div class="track-card" id="t-1" onclick="playSpecificTrack(1)">
                     <span>2. Malka Di Tour Hai</span>
                     <span style="color: var(--neon-blue);">KALAM 1</span>
                 </div>
-                <div class="track-card" id="t-2">
+                <div class="track-card" id="t-2" onclick="playSpecificTrack(2)">
                     <span>3. Mujhe Daru Peeni Hai</span>
                     <span style="color: var(--neon-green);">KALAM 2</span>
                 </div>
-                <div class="track-card" id="t-3">
+                <div class="track-card" id="t-3" onclick="playSpecificTrack(3)">
                     <span>4. Velocity Waves</span>
                     <span style="color: var(--gold-glow);">KALAM 3</span>
                 </div>
-                <div class="track-card" id="t-4">
+                <div class="track-card" id="t-4" onclick="playSpecificTrack(4)">
                     <span>5. Naacho Saare</span>
                     <span style="color: var(--neon-blue);">KALAM 4</span>
                 </div>
-                <div class="track-card" id="t-5">
+                <div class="track-card" id="t-5" onclick="playSpecificTrack(5)">
                     <span>6. Shadow Mission</span>
                     <span style="color: var(--neon-pink);">KALAM 5</span>
                 </div>
@@ -292,11 +293,11 @@
 
             <!-- Master Launch Button -->
             <button class="btn-launch-engine" onclick="launchMasterEngine()">
-                ▶️ START GAME ENGINE & PLAYLIST
+                 START GAME ENGINE & PLAYLIST
             </button>
 
             <div style="font-size: 0.8rem; color: #888;">
-                POWERED BY MR. TAHIR NAZEER | ALL 38 MODULES LOADED
+                POWERED BY MR. TAHIR NAZEER | ALL MODULES LOADED
             </div>
         </div>
 
@@ -305,7 +306,7 @@
     <!-- Hidden Master Audio Player -->
     <audio id="gameAudioEngine" style="display: none;"></audio>
 
-    <!-- ALL 35 JS FILES LOADED HERE IN CORRECT ORDER -->
+    <!-- ALL JS FILES LOADED HERE IN CORRECT ORDER -->
     <script src="./theme.js"></script>
     <script src="./brand.js"></script>
     <script src="./iconSystem.js"></script>
@@ -313,7 +314,6 @@
     <script src="./loginPage.js"></script>
     <script src="./navigation.js"></script>
     <script src="./uiButtons.js"></script>
-    <script src="./premiumUI.js"></script>
     <script src="./splash.js"></script>
 
     <!-- Core Game & Audio Systems -->
@@ -323,29 +323,8 @@
     <script src="./game.js"></script>
     <script src="./app.js"></script>
 
-    <!-- Dashboard & Social Modules -->
-    <script src="./home.js"></script>
-    <script src="./dashboard.js"></script>
-    <script src="./community.js"></script>
-    <script src="./gallery.js"></script>
-    <script src="./profile.js"></script>
-    <script src="./friends.js"></script>
-    <script src="./chatSystem.js"></script>
-    <script src="./avatarSystem.js"></script>
-    
-    <!-- Economy, Store & Engine Modules -->
-    <script src="./store.js"></script>
-    <script src="./achievement.js"></script>
-    <script src="./missionSystem.js"></script>
-    <script src="./creatorBadge.js"></script>
-    <script src="./creativeEngine.js"></script>
-    <script src="./leaderboard.js"></script>
-    <script src="./notification.js"></script>
-    <script src="./settings.js"></script>
-
     <!-- Auto-Play Audio Chain Script -->
     <script>
-        // Playlist: Intro mp3 + 5 Kalams
         const audioChain = [
             { title: "Tahir Nazeer Intro Sound", src: "./tahir-nazeer-game-intro.mp3" },
             { title: "Malka Di Tour Hai", src: "./audio/malka-di-tour.mp3" },
@@ -363,6 +342,11 @@
             playAudioChain();
         }
 
+        function playSpecificTrack(index) {
+            currentTrack = index;
+            playAudioChain();
+        }
+
         function playAudioChain() {
             if (currentTrack >= audioChain.length) {
                 document.getElementById('engineStatus').innerText = "STATUS: PLAYLIST FINISHED";
@@ -371,17 +355,19 @@
 
             const track = audioChain[currentTrack];
             player.src = track.src;
-            player.play().catch(e => console.log('Audio autoplay handled'));
 
-            document.getElementById('engineStatus').innerText = `NOW PLAYING: ${track.title.toUpperCase()}`;
+            player.play().then(() => {
+                document.getElementById('engineStatus').innerText = `NOW PLAYING: ${track.title.toUpperCase()}`;
+            }).catch(e => {
+                console.log('Audio file missing or autoplay restricted:', e);
+                document.getElementById('engineStatus').innerText = `ERROR LOADING: ${track.title.toUpperCase()}`;
+            });
 
-            // Highlight active playlist track
             document.querySelectorAll('.track-card').forEach(card => card.classList.remove('active'));
             const activeCard = document.getElementById(`t-${currentTrack}`);
             if (activeCard) activeCard.classList.add('active');
         }
 
-        // Automatic Auto-Play Next Track on End
         player.onended = function() {
             currentTrack++;
             playAudioChain();

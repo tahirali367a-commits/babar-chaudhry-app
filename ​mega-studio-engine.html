@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TAHIR NAZEER | MEGA ART & TEXTURE STUDIO</title>
+    <style>
+        :root {
+            --bg-dark: #05050d;
+            --panel-bg: rgba(15, 20, 38, 0.95);
+            --gold: #ffd700;
+            --cyan: #00f0ff;
+            --pink: #ff0055;
+            --border: rgba(0, 240, 255, 0.3);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background: var(--bg-dark); color: #fff; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+
+        /* Header */
+        .app-header {
+            background: var(--panel-bg);
+            padding: 10px 20px;
+            border-bottom: 2px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .app-title { color: var(--gold); font-size: 1.2rem; font-weight: 900; }
+        .app-sub { color: var(--cyan); font-size: 0.75rem; }
+
+        /* Workspace Layout */
+        .workspace {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 10px;
+            padding: 10px;
+            height: calc(100vh - 65px);
+        }
+
+        /* Sidebar Controls */
+        .sidebar {
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            overflow-y: auto;
+        }
+
+        .sec-head {
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+            padding-bottom: 4px;
+            margin-top: 6px;
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+        .grid-10 { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
+
+        .btn-opt {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 8px 5px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .btn-opt:hover, .btn-opt.active {
+            border-color: var(--cyan);
+            background: rgba(0,240,255,0.2);
+            color: var(--gold);
+        }
+
+        .c-dot {
+            width: 100%;
+            height: 22px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .c-dot:hover { transform: scale(1.1); border-color: #fff; }
+
+        /* Stage Area */
+        .stage-box {
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        canvas { flex: 1; width: 100%; height: 100%; cursor: crosshair; }
+
+        /* Action Controls */
+        .bottom-actions {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+        }
+        .act-btn {
+            padding: 8px 18px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .btn-clr { background: var(--pink); color: #fff; }
+        .btn-dwl { background: var(--gold); color: #000; }
+
+        @media(max-width: 900px){ .workspace { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header class="app-header">
+        <div>
+            <div class="app-title">MALIK TAHIR NAZEER</div>
+            <div class="app-sub">MEGA TEXTURE, STAMP & ART ENGINE</div>
+        </div>
+        <div id="dateBox" style="color: var(--gold); font-size: 0.8rem; font-weight: bold;"></div>
+    </header>
+
+    <div class="workspace">
+        
+        <!-- Controls Sidebar -->
+        <div class="sidebar">
+            
+            <!-- Page / Canvas Background Sheets -->
+            <div class="sec-head">📄 PAGE & SHEET STYLES (صفحے اور پس منظر)</div>
+            <div class="grid-2">
+                <button class="btn-opt" onclick="setBg('#000000')">⬛ Midnight Black</button>
+                <button class="btn-opt" onclick="setBg('#ffffff')">⬜ Canvas White</button>
+                <button class="btn-opt" onclick="setBg('#1a0033')">🌌 Deep Space</button>
+                <button class="btn-opt" onclick="setBg('#0f2027')">🌲 Dark Emerald</button>
+                <button class="btn-opt" onclick="setBg('#2c3e50')">🏙️ Slate Grey</button>
+                <button class="btn-opt" onclick="setBg('grid')">📐 Blueprint Grid</button>
+            </div>
+
+            <!-- Advanced Pattern & Texture Brushes -->
+            <div class="sec-head">🖌️ HUNDREDS OF PATTERN BRUSHES (سینکڑوں ڈرائنگ ورائٹیاں)</div>
+            <div class="grid-2">
+                <button class="btn-opt active" onclick="setBrush('neon3d', this)">⚡ 3D Electric Neon</button>
+                <button class="btn-opt" onclick="setBrush('dots', this)">🔘 Matrix Dots</button>
+                <button class="btn-opt" onclick="setBrush('cubes', this)">🧊 3D Crystal Cubes</button>
+                <button class="btn-opt" onclick="setBrush('sparkles', this)">✨ Galaxy Dust</button>
+                <button class="btn-opt" onclick="setBrush('fur', this)">🦔 Velvet Fur</button>
+                <button class="btn-opt" onclick="setBrush('triangles', this)">🔺 Polygon Mesh</button>
+                <button class="btn-opt" onclick="setBrush('ribbon', this)">🎗️ 3D Ribbon Ribbon</button>
+                <button class="btn-opt" onclick="setBrush('smoke', this)">🌫️ Soft Smoke</button>
+                <button class="btn-opt" onclick="setBrush('hearts', this)">💖 Floating Hearts</button>
+                <button class="btn-opt" onclick="setBrush('circles', this)">⭕ Target Rings</button>
+            </div>
+
+            <!-- Brush Size -->
+            <div class="sec-head">📏 BRUSH SIZE (سائز کم یا زیادہ کریں)</div>
+            <input type="range" id="bSize" min="2" max="80" value="15" style="width:100%; accent-color: var(--cyan);">
+
+            <!-- Massive Color Swatches (Hundreds Palette Grid) -->
+            <div class="sec-head">🎨 HUNDREDS OF COLOR SHADES (رنگوں کا خزانہ)</div>
+            <input type="color" id="masterPicker" onchange="applyColor(this.value)" style="width:100%; height:30px; border:none; cursor:pointer; border-radius:5px;">
+            
+            <div class="sec-head">🌈 READY COLOR SWATCHES</div>
+            <div class="grid-10" id="colorGrid"></div>
+
+            <!-- Stamps & Emblems (عکس اور نشانات) -->
+            <div class="sec-head">🏛️ STAMPS & EMBLEMS (عکس اور ڈیزائن)</div>
+            <div class="grid-3">
+                <button class="btn-opt" onclick="placeStamp('👑')">👑 Crown</button>
+                <button class="btn-opt" onclick="placeStamp('🦁')">🦁 Lion</button>
+                <button class="btn-opt" onclick="placeStamp('🦅')">🦅 Eagle</button>
+                <button class="btn-opt" onclick="placeStamp('🔥')">🔥 Fire</button>
+                <button class="btn-opt" onclick="placeStamp('💎')">💎 Diamond</button>
+                <button class="btn-opt" onclick="placeStamp('⭐')">⭐ Star</button>
+            </div>
+
+        </div>
+
+        <!-- Stage Area -->
+        <div class="stage-box">
+            <canvas id="mainCanvas"></canvas>
+
+            <div class="bottom-actions">
+                <button class="act-btn btn-clr" onclick="clearCanvas()">🗑️ CLEAR SHEET</button>
+                <button class="act-btn btn-dwl" onclick="downloadImage()">📥 DOWNLOAD HD ARTWORK</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('mainCanvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        let mode = 'neon3d';
+        let activeColor = '#00f0ff';
+        let bgStyle = '#000000';
+
+        // Date Display
+        document.getElementById('dateBox').innerText = "DATE: " + new Date().toLocaleDateString();
+
+        // Canvas Setup
+        function initCanvas() {
+            const box = document.querySelector('.stage-box');
+            canvas.width = box.clientWidth;
+            canvas.height = box.clientHeight - 50;
+            drawBackground();
+        }
+        window.addEventListener('resize', initCanvas);
+        setTimeout(initCanvas, 100);
+
+        function setBg(style) {
+            bgStyle = style;
+            drawBackground();
+        }
+
+        function drawBackground() {
+            ctx.fillStyle = (bgStyle === 'grid') ? '#0a0a16' : bgStyle;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if(bgStyle === 'grid') {
+                ctx.strokeStyle = 'rgba(0,240,255,0.1)';
+                ctx.lineWidth = 1;
+                for(let i=0; i<canvas.width; i+=25) {
+                    ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, canvas.height); ctx.stroke();
+                }
+                for(let j=0; j<canvas.height; j+=25) {
+                    ctx.beginPath(); ctx.moveTo(0, j); ctx.lineTo(canvas.width, j); ctx.stroke();
+                }
+            }
+        }
+
+        // Generate 50+ Custom Colors Automatically
+        const grid = document.getElementById('colorGrid');
+        for (let h = 0; h < 360; h += 7) {
+            const col = `hsl(${h}, 100%, 50%)`;
+            const d = document.createElement('div');
+            d.className = 'c-dot';
+            d.style.background = col;
+            d.onclick = () => applyColor(col);
+            grid.appendChild(d);
+        }
+
+        function applyColor(c) {
+            activeColor = c;
+            document.getElementById('masterPicker').value = c;
+        }
+
+        function setBrush(bMode, btn) {
+            mode = bMode;
+            document.querySelectorAll('.btn-opt').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function getXY(e) {
+            const r = canvas.getBoundingClientRect();
+            let x = e.clientX || (e.touches && e.touches[0].clientX);
+            let y = e.clientY || (e.touches && e.touches[0].clientY);
+            return { x: x - r.left, y: y - r.top };
+        }
+
+        function start(e) { drawing = true; draw(e); }
+        function end() { drawing = false; ctx.beginPath(); }
+
+        function draw(e) {
+            if(!drawing) return;
+            e.preventDefault();
+            const pos = getXY(e);
+            const sz = document.getElementById('bSize').value;
+
+            ctx.fillStyle = activeColor;
+            ctx.strokeStyle = activeColor;
+
+            if(mode === 'neon3d') {
+                ctx.shadowColor = activeColor;
+                ctx.shadowBlur = 20;
+                ctx.lineWidth = sz;
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            } else if(mode === 'dots') {
+                ctx.shadowBlur = 0;
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, sz, 0, Math.PI * 2);
+                ctx.fill();
+            } else if(mode === 'cubes') {
+                ctx.shadowBlur = 0;
+                ctx.fillRect(pos.x - sz/2, pos.y - sz/2, sz, sz);
+                ctx.strokeRect(pos.x - sz/2 - 2, pos.y - sz/2 - 2, sz + 4, sz + 4);
+            } else if(mode === 'sparkles') {
+                ctx.shadowBlur = 5;
+                for(let i=0; i<8; i++) {
+                    let rx = pos.x + (Math.random() - 0.5) * (sz * 3);
+                    let ry = pos.y + (Math.random() - 0.5) * (sz * 3);
+                    ctx.fillRect(rx, ry, 3, 3);
+                }
+            } else if(mode === 'fur') {
+                ctx.shadowBlur = 0;
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                ctx.lineTo(pos.x + (Math.random() - 0.5) * sz * 2, pos.y + (Math.random() - 0.5) * sz * 2);
+                ctx.stroke();
+            } else if(mode === 'triangles') {
+                ctx.shadowBlur = 0;
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y - sz);
+                ctx.lineTo(pos.x - sz, pos.y + sz);
+                ctx.lineTo(pos.x + sz, pos.y + sz);
+                ctx.closePath();
+                ctx.stroke();
+            } else if(mode === 'ribbon') {
+                ctx.shadowBlur = 10;
+                ctx.lineWidth = sz / 2;
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, sz, 0, Math.PI);
+                ctx.stroke();
+            } else if(mode === 'smoke') {
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = activeColor;
+                ctx.globalAlpha = 0.2;
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, sz * 1.5, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.globalAlpha = 1.0;
+            } else if(mode === 'hearts') {
+                ctx.shadowBlur = 0;
+                ctx.font = `${sz * 1.5}px Arial`;
+                ctx.fillText('💖', pos.x, pos.y);
+            } else if(mode === 'circles') {
+                ctx.shadowBlur = 0;
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.arc(pos.x, pos.y, sz, 0, Math.PI*2); ctx.stroke();
+                ctx.beginPath(); ctx.arc(pos.x, pos.y, sz/2, 0, Math.PI*2); ctx.stroke();
+            }
+        }
+
+        function placeStamp(stamp) {
+            ctx.font = '60px Arial';
+            ctx.fillText(stamp, canvas.width/2 - 30, canvas.height/2);
+        }
+
+        function clearCanvas() {
+            drawBackground();
+        }
+
+        function downloadImage() {
+            // Watermark Stamp
+            ctx.font = '900 14px Segoe UI';
+            ctx.fillStyle = '#ffd700';
+            ctx.fillText('DESIGNED BY: MALIK TAHIR NAZEER | ' + new Date().toLocaleDateString(), 20, canvas.height - 15);
+
+            const a = document.createElement('a');
+            a.download = 'mega-studio-art-' + Date.now() + '.png';
+            a.href = canvas.toDataURL();
+            a.click();
+        }
+
+        // Listeners
+        canvas.addEventListener('mousedown', start);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', end);
+
+        canvas.addEventListener('touchstart', start);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', end);
+    </script>
+</body>
+</html>
