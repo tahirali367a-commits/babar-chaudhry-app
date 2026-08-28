@@ -135,6 +135,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            max-height: 85vh;
+            overflow-y: auto;
         }
 
         .panel-heading {
@@ -303,6 +305,70 @@
             .drink-container { grid-template-columns: 1fr; }
             .drink-cup-wrapper { width: 140px; height: 260px; }
         }
+
+        /* ------------------ ADDITIONAL STYLES ------------------ */
+        .extra-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .brush-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .btn-tool-sm {
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-tool-sm.active, .btn-tool-sm:hover {
+            border-color: var(--primary-gold);
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .drawing-canvas-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            cursor: crosshair;
+        }
+
+        .controls-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            z-index: 12;
+        }
+
+        .watermark-overlay-export {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            color: var(--primary-gold);
+            font-size: 0.8rem;
+            font-weight: 900;
+            pointer-events: none;
+            z-index: 15;
+            background: rgba(0,0,0,0.6);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--primary-gold);
+        }
     </style>
 </head>
 <body>
@@ -349,6 +415,28 @@
                     <span>🍏 Lime Electric</span>
                     <span class="flavor-dot" style="background: #00ff66; color: #00ff66;"></span>
                 </button>
+
+                <!-- ADDITIONAL EXTRA DRINK FLAVORS -->
+                <button class="btn-flavor" onclick="changeFlavor('#ff6600', 'Sunset Orange')">
+                    <span>🍊 Sunset Orange</span>
+                    <span class="flavor-dot" style="background: #ff6600; color: #ff6600;"></span>
+                </button>
+                <button class="btn-flavor" onclick="changeFlavor('#8a2be2', 'Purple Grape Fusion')">
+                    <span>🍇 Purple Grape Fusion</span>
+                    <span class="flavor-dot" style="background: #8a2be2; color: #8a2be2;"></span>
+                </button>
+                <button class="btn-flavor" onclick="changeFlavor('#ff00ff', 'Pink Bubblegum')">
+                    <span>🍬 Pink Bubblegum</span>
+                    <span class="flavor-dot" style="background: #ff00ff; color: #ff00ff;"></span>
+                </button>
+                <button class="btn-flavor" onclick="changeFlavor('#ffffff', 'Coconut Milkshake')">
+                    <span>🥥 Coconut Milkshake</span>
+                    <span class="flavor-dot" style="background: #ffffff; color: #ffffff;"></span>
+                </button>
+                <button class="btn-flavor" onclick="changeFlavor('#4a2c11', 'Classic Cola Shake')">
+                    <span>🥤 Classic Cola Shake</span>
+                    <span class="flavor-dot" style="background: #4a2c11; color: #4a2c11;"></span>
+                </button>
             </div>
 
             <div class="panel-heading" style="margin-top: 10px;">
@@ -358,6 +446,51 @@
             <button class="btn-flavor" onclick="addIceCubes()">
                 <span>🧊 Add 3D Ice Cubes</span>
             </button>
+
+            <!-- ADDITIONAL BRUSHES & PRO DRAWING TOOLS SECTION -->
+            <div class="panel-heading" style="margin-top: 10px;">
+                <span>🖌️ ADVANCED BRUSHES</span>
+            </div>
+            <div class="brush-selector-grid">
+                <button class="btn-tool-sm active" onclick="setBrushMode('pencil')">✏️ Pencil</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('neon')">🌟 Neon Glow</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('spray')">💨 Spray</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('rainbow')">🌈 Rainbow</button>
+
+                <button class="btn-tool-sm" onclick="setBrushMode('calligraphy')">✒️ Calligraphy</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('stars')">✨ Stars</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('hearts')">💖 Hearts</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('bubbles')">🫧 Bubbles</button>
+
+                <button class="btn-tool-sm" onclick="setBrushMode('shadow')">🕶️ Shadow</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('fire')">🔥 Fire Glow</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('gold')">👑 Gold Dust</button>
+                <button class="btn-tool-sm" onclick="setBrushMode('eraser')">🧽 Eraser</button>
+            </div>
+
+            <div class="panel-heading" style="margin-top: 10px;">
+                <span>🎨 UNLIMITED COLOR PALETTE</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <input type="color" id="customColorPicker" value="#00f0ff" onchange="setCustomColor(this.value)" style="width:100%; height:40px; border-radius:8px; border:none; cursor:pointer; background:transparent;">
+            </div>
+
+            <div class="panel-heading" style="margin-top: 10px;">
+                <span>📐 BRUSH SIZE & SIZE</span>
+            </div>
+            <input type="range" id="brushSize" min="1" max="50" value="5" onchange="updateBrushSize(this.value)" style="width:100%;">
+
+            <div class="panel-heading" style="margin-top: 10px;">
+                <span>🦁 STICKERS & EMBLEMS</span>
+            </div>
+            <div class="extra-tools-grid">
+                <button class="btn-tool-sm" onclick="addSticker('🦁')">🦁 Lion</button>
+                <button class="btn-tool-sm" onclick="addSticker('👑')">👑 Crown</button>
+                <button class="btn-tool-sm" onclick="addSticker('🦅')">🦅 Eagle</button>
+                <button class="btn-tool-sm" onclick="addSticker('🔥')">🔥 Fire</button>
+                <button class="btn-tool-sm" onclick="addSticker('💎')">💎 Diamond</button>
+                <button class="btn-tool-sm" onclick="addSticker('⚡')">⚡ Lightning</button>
+            </div>
         </div>
 
         <!-- 3D Drink Cup Canvas Stage -->
@@ -368,9 +501,24 @@
                 <div class="liquid-fill" id="liquidFill"></div>
             </div>
 
-            <button class="btn-fill-action" onclick="pourDrink()">
-                🥤 POUR / REFILL DRINK
-            </button>
+            <!-- OVERLAY CANVAS FOR DRAWING -->
+            <canvas id="drawingCanvas" class="drawing-canvas-overlay"></canvas>
+
+            <div class="watermark-overlay-export">
+                <span>DESIGNED BY: MALIK TAHIR NAZEER</span>
+            </div>
+
+            <div class="controls-row">
+                <button class="btn-fill-action" onclick="pourDrink()">
+                    🥤 POUR / REFILL DRINK
+                </button>
+                <button class="btn-fill-action" style="background: linear-gradient(90deg, #ff0055, #ff6600);" onclick="clearDrawingCanvas()">
+                    🗑️ CLEAR CANVAS
+                </button>
+                <button class="btn-fill-action" style="background: linear-gradient(90deg, #00ff66, #00f0ff);" onclick="downloadArtWithWatermark()">
+                    💾 DOWNLOAD CREATION
+                </button>
+            </div>
 
             <div class="drink-watermark">
                 <img src="./profile.jpg" alt="TN Boss">
@@ -394,7 +542,9 @@
             liquid.style.boxShadow = `0 0 35px ${color}`;
             
             document.querySelectorAll('.btn-flavor').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            if(event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
         }
 
         function pourDrink() {
@@ -410,6 +560,166 @@
         function addIceCubes() {
             alert('🧊 3D Ice Cubes added into Mr. Tahir Nazeer Drink Cup!');
         }
+
+        /* ------------------ ADDITIONAL DRAWING ENGINE & CANVAS LOGIC ------------------ */
+        const canvas = document.getElementById('drawingCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let currentBrushMode = 'pencil';
+        let currentBrushColor = '#00f0ff';
+        let currentBrushWidth = 5;
+
+        function resizeCanvas() {
+            const stage = document.querySelector('.glass-stage');
+            canvas.width = stage.clientWidth;
+            canvas.height = stage.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        setTimeout(resizeCanvas, 200);
+
+        function setBrushMode(mode) {
+            currentBrushMode = mode;
+            document.querySelectorAll('.btn-tool-sm').forEach(btn => btn.classList.remove('active'));
+            if(event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        function setCustomColor(color) {
+            currentBrushColor = color;
+        }
+
+        function updateBrushSize(size) {
+            currentBrushWidth = size;
+        }
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            let cx = e.clientX;
+            let cy = e.clientY;
+            if(e.touches && e.touches[0]){
+                cx = e.touches[0].clientX;
+                cy = e.touches[0].clientY;
+            }
+            return {
+                x: cx - rect.left,
+                y: cy - rect.top
+            };
+        }
+
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+            draw(e);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            const pos = getPos(e);
+
+            ctx.lineWidth = currentBrushWidth;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+
+            if (currentBrushMode === 'pencil') {
+                ctx.strokeStyle = currentBrushColor;
+                ctx.shadowBlur = 0;
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            } else if (currentBrushMode === 'neon') {
+                ctx.strokeStyle = currentBrushColor;
+                ctx.shadowColor = currentBrushColor;
+                ctx.shadowBlur = 15;
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            } else if (currentBrushMode === 'spray') {
+                ctx.shadowBlur = 0;
+                for (let i = 0; i < 20; i++) {
+                    const offsetX = (Math.random() - 0.5) * currentBrushWidth * 3;
+                    const offsetY = (Math.random() - 0.5) * currentBrushWidth * 3;
+                    ctx.fillStyle = currentBrushColor;
+                    ctx.fillRect(pos.x + offsetX, pos.y + offsetY, 2, 2);
+                }
+            } else if (currentBrushMode === 'rainbow') {
+                const hue = (Date.now() / 10) % 360;
+                ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = ctx.strokeStyle;
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            } else if (currentBrushMode === 'calligraphy') {
+                ctx.strokeStyle = currentBrushColor;
+                ctx.shadowBlur = 0;
+                ctx.fillRect(pos.x, pos.y, currentBrushWidth * 2, currentBrushWidth / 2);
+            } else if (currentBrushMode === 'stars') {
+                ctx.font = `${currentBrushWidth * 3}px Arial`;
+                ctx.fillText('✨', pos.x, pos.y);
+            } else if (currentBrushMode === 'hearts') {
+                ctx.font = `${currentBrushWidth * 3}px Arial`;
+                ctx.fillText('💖', pos.x, pos.y);
+            } else if (currentBrushMode === 'bubbles') {
+                ctx.font = `${currentBrushWidth * 3}px Arial`;
+                ctx.fillText('🫧', pos.x, pos.y);
+            } else if (currentBrushMode === 'fire') {
+                ctx.strokeStyle = '#ff3300';
+                ctx.shadowColor = '#ffcc00';
+                ctx.shadowBlur = 20;
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            } else if (currentBrushMode === 'gold') {
+                ctx.strokeStyle = '#ffd700';
+                ctx.shadowColor = '#ffae00';
+                ctx.shadowBlur = 12;
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            } else if (currentBrushMode === 'shadow') {
+                ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+                ctx.shadowColor = '#000';
+                ctx.shadowBlur = 10;
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            } else if (currentBrushMode === 'eraser') {
+                ctx.clearRect(pos.x - currentBrushWidth/2, pos.y - currentBrushWidth/2, currentBrushWidth, currentBrushWidth);
+            }
+        }
+
+        function addSticker(emoji) {
+            ctx.font = '48px Arial';
+            ctx.fillText(emoji, canvas.width / 2 - 24, canvas.height / 2);
+        }
+
+        function clearDrawingCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function downloadArtWithWatermark() {
+            // Draw permanent watermark during download
+            ctx.font = '900 16px Segoe UI, sans-serif';
+            ctx.fillStyle = '#ffd700';
+            ctx.fillText('CREATED BY: MALIK TAHIR NAZEER', 20, canvas.height - 20);
+
+            const link = document.createElement('a');
+            link.download = 'tahir-nazeer-drink-art.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDrawing);
     </script>
 </body>
 </html>
