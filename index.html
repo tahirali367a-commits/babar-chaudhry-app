@@ -260,7 +260,6 @@
             gap: 12px;
             position: relative;
             overflow: hidden;
-            cursor: pointer;
         }
 
         .nav-card::before {
@@ -302,74 +301,6 @@
             font-size: 0.95rem;
             letter-spacing: 0.5px;
             color: #fff;
-        }
-
-        /* Interactive Dynamic Modals */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(12px);
-            z-index: 10000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-card {
-            background: var(--card-bg);
-            border: 2px solid var(--primary-gold);
-            border-radius: 25px;
-            padding: 25px;
-            width: 90%;
-            max-width: 480px;
-            box-shadow: 0 0 35px var(--primary-gold);
-            text-align: center;
-            position: relative;
-            animation: zoomGlow 0.3s ease;
-        }
-
-        .modal-title {
-            font-size: 1.4rem;
-            color: var(--primary-gold);
-            font-weight: 900;
-            margin-bottom: 15px;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: var(--accent-neon);
-            color: #fff;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .modal-item {
-            background: rgba(255,255,255,0.05);
-            padding: 12px 15px;
-            border-radius: 12px;
-            margin: 10px 0;
-            border: 1px solid var(--border-glow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: bold;
-        }
-
-        .btn-action {
-            padding: 8px 15px;
-            border-radius: 8px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
         }
 
         /* Footer Branding */
@@ -428,10 +359,10 @@
                 </div>
             </div>
             
-            <div class="creator-profile" onclick="openProfileSystem()">
+            <div class="creator-profile" onclick="window.location.href='./profile.html'">
                 <div class="creator-info">
                     <div class="creator-name" id="displayPlayerName">Malik Tahir Nazeer</div>
-                    <div class="creator-tag" id="displayPlayerCoins">🪙 5,000 TN Coins</div>
+                    <div class="creator-tag">Creator & Director</div>
                 </div>
                 <img src="./profile.jpg" alt="Tahir Nazeer Profile" class="creator-img">
             </div>
@@ -461,7 +392,7 @@
                 <div class="nav-title">GAME WORLD</div>
             </a>
             
-            <a href="./mega-studio-engine.html" class="nav-card">
+            <a href="./gallery.html" class="nav-card">
                 <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
                 <div class="nav-icon">🎨</div>
                 <div class="nav-title">CREATIVE STUDIO</div>
@@ -473,33 +404,29 @@
                 <div class="nav-title">COMMUNITY</div>
             </a>
 
-            <!-- 1. WORKING MISSIONS SYSTEM -->
-            <div class="nav-card" onclick="openMissionsSystem()">
+            <a href="./dashboard.html" class="nav-card">
                 <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
                 <div class="nav-icon">🏆</div>
                 <div class="nav-title">MISSIONS</div>
-            </div>
+            </a>
 
-            <!-- 2. WORKING PROFILE SYSTEM -->
-            <div class="nav-card" onclick="openProfileSystem()">
+            <a href="./profile.html" class="nav-card">
                 <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
                 <div class="nav-icon">👤</div>
                 <div class="nav-title">PROFILE</div>
-            </div>
+            </a>
 
-            <!-- 3. WORKING STORE SYSTEM -->
-            <div class="nav-card" onclick="openStoreSystem()">
+            <a href="./store.html" class="nav-card">
                 <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
                 <div class="nav-icon">🛒</div>
                 <div class="nav-title">STORE</div>
-            </div>
+            </a>
 
-            <!-- 4. WORKING LOGIN SYSTEM -->
-            <div class="nav-card" onclick="openLoginSystem()">
+            <a href="./login.html" class="nav-card">
                 <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
                 <div class="nav-icon">🔑</div>
                 <div class="nav-title">LOGIN</div>
-            </div>
+            </a>
 
             <a href="./settings.html" class="nav-card">
                 <img src="./profile.jpg" class="card-avatar" alt="Tahir Nazeer">
@@ -512,14 +439,6 @@
         <footer class="app-footer">
             Designed & Developed by <span>MALIK TAHIR NAZEER</span> | <span>TN CREATIVE WORLD</span> &copy; 2026-2027
         </footer>
-    </div>
-
-    <!-- DYNAMIC WORKING SYSTEM MODALS -->
-    <div id="appModal" class="modal-overlay">
-        <div class="modal-card">
-            <button class="modal-close" onclick="closeModal()">✕</button>
-            <div id="modalBody"></div>
-        </div>
     </div>
 
     <!-- YouTube Iframe API Script -->
@@ -544,28 +463,10 @@
             'pi_E8CyAWXA'
         ];
 
-        // System State Management (Real Storage)
-        let playerState = {
-            name: localStorage.getItem('tn_player_name') || 'Malik Tahir Nazeer',
-            coins: parseInt(localStorage.getItem('tn_player_coins')) || 5000,
-            missionsCompleted: JSON.parse(localStorage.getItem('tn_missions')) || { m1: false, m2: false },
-            unlockedItems: JSON.parse(localStorage.getItem('tn_unlocked')) || ['brush_basic'],
-            isLoggedIn: localStorage.getItem('tn_logged_in') === 'true'
-        };
-
         window.addEventListener('DOMContentLoaded', () => {
-            updateHeaderUI();
+            const savedName = localStorage.getItem('tn_player_name') || 'Malik Tahir Nazeer';
+            document.getElementById('displayPlayerName').innerText = savedName;
         });
-
-        function updateHeaderUI() {
-            document.getElementById('displayPlayerName').innerText = playerState.name;
-            document.getElementById('displayPlayerCoins').innerText = `🪙 ${playerState.coins} TN Coins`;
-            localStorage.setItem('tn_player_name', playerState.name);
-            localStorage.setItem('tn_player_coins', playerState.coins);
-            localStorage.setItem('tn_missions', JSON.stringify(playerState.missionsCompleted));
-            localStorage.setItem('tn_unlocked', JSON.stringify(playerState.unlockedItems));
-            localStorage.setItem('tn_logged_in', playerState.isLoggedIn);
-        }
 
         function startCinematicExperience() {
             const introOverlay = document.getElementById('cinematic-intro');
@@ -594,6 +495,7 @@
             document.getElementById('currentSongTitle').innerText = '🎙️ Welcome to TN Creative World...';
             
             if ('speechSynthesis' in window) {
+                const userName = localStorage.getItem('tn_player_name') || 'Malik Tahir Nazeer';
                 const welcomeMsg = new SpeechSynthesisUtterance(`Welcome to TN Creative World. Created by Malik Tahir Nazeer.`);
                 welcomeMsg.rate = 0.85;
                 welcomeMsg.pitch = 1.0;
@@ -676,168 +578,6 @@
                 if (ytPlayer) ytPlayer.mute();
                 muteBtn.innerText = 'Unmute 🔇';
             }
-        }
-
-        function closeModal() {
-            document.getElementById('appModal').style.display = 'none';
-        }
-
-        /* --- REAL WORKING FUNCTIONS FOR THE 4 CARDS --- */
-
-        // 1. REAL MISSIONS SYSTEM (کپ / ٹرافی)
-        function openMissionsSystem() {
-            const modal = document.getElementById('appModal');
-            const body = document.getElementById('modalBody');
-            
-            const btn1Html = playerState.missionsCompleted.m1 
-                ? `<span style="color:#00ff88;">✅ Claimed</span>`
-                : `<button class="btn-action" style="background:var(--primary-gold);" onclick="claimReward('m1', 500)">Claim 500 TN</button>`;
-
-            const btn2Html = playerState.missionsCompleted.m2 
-                ? `<span style="color:#00ff88;">✅ Claimed</span>`
-                : `<button class="btn-action" style="background:var(--primary-gold);" onclick="claimReward('m2', 1000)">Claim 1000 TN</button>`;
-
-            body.innerHTML = `
-                <div class="modal-title">🏆 DAILY MISSIONS & TN REWARDS</div>
-                <div class="modal-item">
-                    <span>🎯 Draw 1 Neon Painting</span>
-                    ${btn1Html}
-                </div>
-                <div class="modal-item">
-                    <span>🎨 Open Studio & Save Image</span>
-                    ${btn2Html}
-                </div>
-                <div class="modal-item">
-                    <span>👑 Director Daily Bonus</span>
-                    <span style="color:var(--accent-cyan);">+2000 TN ACTIVE</span>
-                </div>
-            `;
-            modal.style.display = 'flex';
-        }
-
-        function claimReward(missionKey, amount) {
-            playerState.missionsCompleted[missionKey] = true;
-            playerState.coins += amount;
-            updateHeaderUI();
-            alert(`🎉 Success! You earned ${amount} TN Coins!`);
-            openMissionsSystem();
-        }
-
-        // 2. REAL PROFILE SYSTEM (بندے کا عکس / پروفائل)
-        function openProfileSystem() {
-            const modal = document.getElementById('appModal');
-            const body = document.getElementById('modalBody');
-            body.innerHTML = `
-                <div class="modal-title">👤 DIRECTOR PROFILE</div>
-                <img src="./profile.jpg" style="width:90px; height:90px; border-radius:50%; border:3px solid var(--primary-gold); margin-bottom:10px;">
-                <div style="margin-bottom:12px;">
-                    <input type="text" id="newPlayerName" value="${playerState.name}" style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border-glow); background:#000; color:#fff; text-align:center; font-weight:bold;">
-                </div>
-                <div class="modal-item"><span>🪙 Total TN Coins:</span><span style="color:var(--primary-gold);">${playerState.coins}</span></div>
-                <div class="modal-item"><span>⭐ Status:</span><span style="color:var(--accent-cyan);">FOUNDER & DIRECTOR</span></div>
-                <button onclick="saveProfileData()" class="btn-action" style="width:100%; margin-top:10px; background:var(--accent-cyan); color:#000; font-weight:900;">UPDATE PROFILE NAME</button>
-            `;
-            modal.style.display = 'flex';
-        }
-
-        function saveProfileData() {
-            const val = document.getElementById('newPlayerName').value.trim();
-            if(val) {
-                playerState.name = val;
-                updateHeaderUI();
-                alert('✅ Profile Updated Successfully!');
-                closeModal();
-            }
-        }
-
-        // 3. REAL STORE SYSTEM (ٹوکری / سٹور)
-        function openStoreSystem() {
-            const modal = document.getElementById('appModal');
-            const body = document.getElementById('modalBody');
-
-            const hasBrush = playerState.unlockedItems.includes('gold_brush');
-            const hasTheme = playerState.unlockedItems.includes('cyber_theme');
-
-            const brushBtn = hasBrush 
-                ? `<span style="color:#00ff88;">UNLOCKED</span>` 
-                : `<button class="btn-action" style="background:var(--accent-neon); color:#fff;" onclick="buyItem('gold_brush', 2000)">BUY (2000 TN)</button>`;
-
-            const themeBtn = hasTheme 
-                ? `<span style="color:#00ff88;">UNLOCKED</span>` 
-                : `<button class="btn-action" style="background:var(--accent-neon); color:#fff;" onclick="buyItem('cyber_theme', 3000)">BUY (3000 TN)</button>`;
-
-            body.innerHTML = `
-                <div class="modal-title">🛒 VIP CREATIVE STORE</div>
-                <div class="modal-item">
-                    <span>🖌️ 3D Gold Glow Brush</span>
-                    ${brushBtn}
-                </div>
-                <div class="modal-item">
-                    <span>🌆 Cyberpunk Studio Theme</span>
-                    ${themeBtn}
-                </div>
-                <div class="modal-item">
-                    <span>👑 Director VIP Badge</span>
-                    <span style="color:var(--primary-gold);">FREE</span>
-                </div>
-            `;
-            modal.style.display = 'flex';
-        }
-
-        function buyItem(itemId, price) {
-            if (playerState.coins >= price) {
-                playerState.coins -= price;
-                playerState.unlockedItems.push(itemId);
-                updateHeaderUI();
-                alert('🛒 Purchase Successful! Item Unlocked in Studio.');
-                openStoreSystem();
-            } else {
-                alert('❌ Not enough TN Coins! Complete daily missions first.');
-            }
-        }
-
-        // 4. REAL LOGIN SYSTEM (چابی / لاگ ان)
-        function openLoginSystem() {
-            const modal = document.getElementById('appModal');
-            const body = document.getElementById('modalBody');
-
-            if (playerState.isLoggedIn) {
-                body.innerHTML = `
-                    <div class="modal-title">🔑 CREATOR CABINET</div>
-                    <div style="background:rgba(0,255,136,0.1); padding:15px; border-radius:12px; border:1px solid #00ff88; margin-bottom:15px;">
-                        <span style="color:#00ff88; font-weight:bold;">CONNECTED STATUS:</span> ACTIVE
-                        <p style="font-size:0.85rem; color:#ccc; margin-top:5px;">User: <b>${playerState.name}</b></p>
-                    </div>
-                    <p style="color:#aaa; font-size:0.85rem; margin-bottom:15px;">Your game saves and custom drawings are automatically backed up.</p>
-                    <button onclick="toggleLoginState(false)" class="btn-action" style="width:100%; background:var(--accent-neon); color:#fff;">LOGOUT / SWITCH ACCOUNT</button>
-                `;
-            } else {
-                body.innerHTML = `
-                    <div class="modal-title">🔑 CREATOR LOGIN</div>
-                    <p style="color:#aaa; font-size:0.85rem; margin-bottom:15px;">Enter Director Passcode / Key to Sync Progress Across Devices</p>
-                    <input type="password" id="passKey" placeholder="Enter Access Key (e.g. TN2026)" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-glow); background:#000; color:#fff; text-align:center; margin-bottom:12px;">
-                    <button onclick="toggleLoginState(true)" class="btn-action" style="width:100%; background:var(--accent-cyan); color:#000; font-weight:bold;">SIGN IN & SYNC DATA</button>
-                `;
-            }
-            modal.style.display = 'flex';
-        }
-
-        function toggleLoginState(status) {
-            if (status) {
-                const pass = document.getElementById('passKey').value;
-                if (!pass) {
-                    alert('Please enter a valid Passcode!');
-                    return;
-                }
-                playerState.isLoggedIn = true;
-                updateHeaderUI();
-                alert('✅ Account Logged In & Progress Synced Successfully!');
-            } else {
-                playerState.isLoggedIn = false;
-                updateHeaderUI();
-                alert('Logged out safely.');
-            }
-            closeModal();
         }
     </script>
 </body>
